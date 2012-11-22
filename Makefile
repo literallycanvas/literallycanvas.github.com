@@ -1,6 +1,6 @@
 .PHONY: clean serve
 
-index.html:
+index.html: index.jinja2
 	python gen_html.py index.jinja2 -o index.html -s trac
 
 serve:
