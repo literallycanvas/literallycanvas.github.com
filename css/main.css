@@ -8,6 +8,10 @@ h1.title {
   line-height: 60px;
 }
 
+.about h3 {
+  text-align: center;
+}
+
 p {
   text-indent: 4em;
 }

@@ -135,25 +135,65 @@
 
       <hr><a name="about"></a>
       <div class="row">
-        <div class="span6 offset3">
+        <div class="span6 offset3 about">
           <h2>About</h2>
 
           <p>
-            Literally Canvas is an extensible, BSD-licensed, HTML5 drawing
-            widget that currently supports a minimal set of drawing operations.
-            You can draw, erase, set the color with the eyedropper, undo, redo,
-            pan, and zoom. It depends on
+          Literally Canvas is an extensible, <strong>open source</strong>
+            (BSD-licensed), HTML5 drawing widget that currently supports a
+            minimal set of drawing operations. You can draw, erase, set the
+            color with the eyedropper, undo, redo, pan, and zoom. It depends on
             <a href="http://jquery.com/">jQuery</a> and
             <a href="http://underscorejs.org/">Underscore.js</a>.
           </p>
 
           <p>
-          The instance at the top of this page uses the
-          <a href="http://jqueryui.com/resizable/">
-          <tt>resizable</tt> feature of jQjery UI</a> for its resize feature,
-          to demonstrate that you can resize the container element with
-          impunity. Resizing on the right edge of the canvas causes weirdness,
-          but you get the idea.
+            The instance at the top of this page uses the
+            <a href="http://jqueryui.com/resizable/">
+            <tt>resizable</tt> feature of jQjery UI</a> for its resize feature,
+            to demonstrate that you can resize the container element with
+            impunity. Resizing on the right edge of the canvas causes
+            weirdness, but you get the idea.
+          </p>
+
+          <h3>Why?</h3>
+
+          <p>
+            If you look at <a href="#related-projects">Related Projects</a> at
+            the bottom of the page, you can see that this isn't the only HTML5
+            drawing tool on the block. However, it is unique in several ways:
+          </p>
+
+          <ul>
+            <li>
+              <strong>It's open source.</strong> Other drawing tools seem
+              to be almost exclusively provided by businesses whose core
+              feature is their drawing tool or freelancers who want you to
+              pay them to adapt their work to your use case. We have nothing
+              against those people, but it's important that free alternatives
+              exist.
+            </li>
+
+            <li>
+              <strong>It's a widget, not an app.</strong> Literally Canvas is
+              intended to live inside your app in the way that works best for
+              you. It doesn't take over your screen. It doesn't (intentionally) 
+              gobble up events. It tries to keep its UI to a minimum.
+            </li>
+
+            <li>
+              <strong>It wants to be extended.</strong> We've tried to design
+              it with extensibility in mind. There's no formal tool API, but if
+              you have specific needs, we think it's easy enough to read the
+              source and figure out how to add what you want. We hope to
+              improve and expose the tool API in future releases.
+            </li>
+          </ul>
+
+          <p>
+            Literally Canvas was created in part to replace the object drawing
+            tool in <a href="http://www.playbuildy.com">Buildy</a>. We hope
+            you're inspired to use it to make new things of your own!
           </p>
         </div>
       </div>
@@ -229,7 +269,8 @@
 
             <h5><tt>imgurKey</tt></h5>
             Your API key for the Imgur image hosting web site, if you want to
-            enable Imgur uploading.
+            enable Imgur uploading. <strong>This option will go away in
+            v0.2.</strong>
 
             <h5><tt>keyboardShortcuts</tt></h5>
             If <tt>true</tt>, bind keyboard shortcuts. Currently only implements
@@ -263,6 +304,11 @@
 
             The options available are <tt>name</tt>, <tt>title</tt>, and
             <tt>caption</tt>.
+            <br><br>
+
+            <strong>We're removing this function in the next release</strong>
+            and replacing it with a more general export interface. There'll
+            still be an Imgur example.
           </div>
         </div>
       </div>
@@ -284,6 +330,9 @@
             <li>Nicer-looking brushes</li>
             <li>Interactive tools (text, shapes)</li>
           </ul>
+
+          <a href="https://github.com/literallycanvas/literallycanvas/issues/new">
+            Suggest a feature on Github</a>
 
         </div>
       </div>
