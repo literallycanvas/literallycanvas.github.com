@@ -24,3 +24,5 @@ $(document).ready ->
 
   # courtesy of jQuery UI
   $('.literally').resizable();
+
+  console.log 1
