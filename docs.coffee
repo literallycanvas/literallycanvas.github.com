@@ -17,7 +17,7 @@ uploadToImgur = ($lc, imgurKey) ->
     d.promise()
     return d
 
-  img = $lc.canvasForExport().toDataURL().split(',')[1];
+  img = $lc.canvasForExport().toDataURL().split(',')[1]
 
   # upload to imgur using jquery/CORS
   # https://developer.mozilla.org/En/HTTP_access_control
