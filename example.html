@@ -3,8 +3,11 @@
   <head>
     <title>Literally Canvas</title>
     <meta name="viewport" content="width = device-width, initial-scale = 1.0, user-scalable = no">
-    <link href="lib/css/colorpicker.css" rel="stylesheet">
+
     <link href="lib/css/literally.css" rel="stylesheet">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
     <style type="text/css">
       body {
@@ -27,34 +30,6 @@
 
       /* let's make things a bit bigger */
 
-      .literally .button, .literally .zoom-display {
-        line-height: 28px;
-        font-size: 18px;
-      }
-
-      .literally .toolbar-row-right {
-        width: 20em;
-      }
-
-      .literally .button {
-        padding: 5px 15px 5px 15px;
-      }
-
-      .literally .button.color-square {
-        padding-top: 10px;
-        height: 23px;
-      }
-
-      .literally .tools .button {
-        padding: 6px 13px 2px 15px;
-        line-height: 24px;
-      }
-
-      .literally .tools .button img {
-        width: 24px;
-        height: 24px;
-      }
-
       .literally input[type=range] {
         width: 200px;
       }
@@ -66,7 +41,7 @@
       <div class="literally"><canvas></canvas></div>
     </div>
 
-    <script src="lib/js/literallycanvas.fat.js"></script>
+    <script src="lib/js/literallycanvas.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function() {
