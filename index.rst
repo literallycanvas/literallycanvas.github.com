@@ -91,8 +91,7 @@ similar features. If Literally Canvas isn't quite what you're looking for, we
 encourage you to check them out and give them some love. All of them use
 
 * `drawingboard.js <http://leimi.github.io/drawingboard.js/>`_: Very similar
-  project, slightly different feature set. Less of a focus on high-quality
-  drawing algorithms.
+  project, slightly different feature set.
 * `DeviantArt Muro <http://sta.sh/muro/>`_: Sophisticated, comprehensive
   drawing
 * `Bomomo <http://bomomo.com/>`_: Whimsical doodling
