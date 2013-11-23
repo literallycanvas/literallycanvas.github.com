@@ -46,7 +46,7 @@ html_theme_options = {
 html_context = {}
 html_sidebars = {
     '**': ['localtoc.html', 'searchbox.html'],
-    '**': ['globaltoc.html', 'searchbox.html'],
+    'index.rst': ['globaltoc.html', 'searchbox.html'],
 }
 
 html_title = "%(project)s v%(release)s documentation" % {
