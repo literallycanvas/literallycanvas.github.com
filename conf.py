@@ -29,7 +29,6 @@ html_theme_path = [better_theme_path]
 html_static_path = ['_static']
 html_theme = 'better'
 us = "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"
-jqu = '//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js'
 html_theme_options = {
     'cssfiles': [
         'http://fonts.googleapis.com/css?family=Finger+Paint',
@@ -38,15 +37,14 @@ html_theme_options = {
     ],
     'scriptfiles': [
         us,
-        jqu,
         "_static/lib/js/literallycanvas.js",
         '_static/docs.js',
     ]
 }
 html_context = {}
 html_sidebars = {
-    '**': ['localtoc.html', 'searchbox.html'],
-    'index.rst': ['globaltoc.html', 'searchbox.html'],
+    '**': ['localtoc.html', 'sidebarhelp.html', 'searchbox.html'],
+    'index.rst': ['globaltoc.html', 'sidebarhelp.html', 'searchbox.html'],
 }
 
 html_title = "%(project)s v%(release)s documentation" % {

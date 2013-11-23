@@ -82,7 +82,7 @@ your pull requests.
 
 .. _related-projects:
 
-Related Projects
+Related projects
 ================
 
 The web has only recently arrived at the point where this sort of project is
