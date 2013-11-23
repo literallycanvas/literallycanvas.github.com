@@ -1,13 +1,38 @@
-.PHONY: clean serve
+# Makefile for Sphinx documentation
+#
 
-index.html: index.jinja2
-	python gen_html.py index.jinja2 -o index.html -s trac
+# You can set these variables from the command line.
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+PAPER         =
+BUILDDIR      = _build
 
-js/docs.js: docs.coffee
-	coffee -o js -c docs.coffee
+# Internal variables.
+ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
-serve:
-	python -m SimpleHTTPServer 8000 .
+.PHONY: help clean html dirhtml singlehtml livehtml
 
 clean:
-	rm index.html
+	-rm -rf $(BUILDDIR)/*
+
+rm-crud:
+	@find . -name .#* -delete
+	@find . -name ._* -delete
+
+html: rm-crud
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+livehtml: html
+	livereload $(BUILDDIR)/html -p 33233
+
+dirhtml: rm-crud
+	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/dirhtml."
+
+singlehtml: rm-crud
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(BUILDDIR)/singlehtml
+	@echo
+	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
