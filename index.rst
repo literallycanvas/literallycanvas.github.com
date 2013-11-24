@@ -49,13 +49,16 @@ Literally Canvas was created in part to replace the object drawing tool in
 .. toctree::
     :maxdepth: 3
 
+    using.rst
+    extending.rst
+
 Browser compatibility
 =====================
 
 =========== =====================
 Chrome      Awesome
 Safari      Awesome
-iOS         Some zooming glitches
+iOS         Doesn't work zoomed
 Firefox     23+ [#f1]_
 Opera       ??
 Android     ??
