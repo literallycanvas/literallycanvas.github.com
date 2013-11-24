@@ -10,6 +10,19 @@ Installation
 
 .. _open a GitHub ticket: http://github.com/literallycanvas/literallycanvas/issues/new
 
+With Bower
+^^^^^^^^^^
+
+.. code-block:: sh
+
+    bower install https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc1.tar.gz
+
+.. warning::
+
+    Don't just point ``bower`` at the ``master`` branch. It won't work. Point
+    it specifically to a tag, the ``release`` branch (if it ever gains that
+    ability), or the tarball.
+
 Step 1: Include assets
 ^^^^^^^^^^^^^^^^^^^^^^
 
