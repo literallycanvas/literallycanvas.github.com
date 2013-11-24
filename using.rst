@@ -69,7 +69,7 @@ Options
     callback is a convenient place to set up event handlers, programmatically
     add shapes, or otherwise integrate with your application.
 
-    :ref:`saving-and-loading` has examples of how you might use this option.
+    :ref:`saving-and-loading` has an example of how you might use this option.
 
 ``primaryColor``: CSS color string
     Starting stroke color. Defaults to ``'#000'``.
@@ -82,12 +82,6 @@ Options
 
 ``keyboardShortcuts``: boolean
     Enable panning with the arrow keys. Defaults to ``true``.
-
-``loadSnapshot``: :js:class:`Snapshot`
-    Load a snapshot. See :ref:`saving-and-loading`.
-
-``loadSnapshotJSON``: string
-    Load a JSON-encoded snapshot. See :ref:`saving-and-loading`.
 
 ``preserveCanvasContents``: boolean
     If ``true``, preserve the contents of the canvas as part of the drawing.
@@ -145,3 +139,49 @@ Options
 
 Saving and loading
 ------------------
+
+Literally Canvas can serialize the user's drawing as a Javascript object.
+Generally, you probably want to do this in response to events.
+
+Here's a complete example that saves the drawing to ``localStorage`` so that
+when the user refreshes the page, the drawing persists.
+
+.. code-block:: javascript
+
+    $('.literally').literallycanvas({
+        onInit: function(lc) {
+            lc.loadSnapshotJSON(localStorage.getItem('drawing'));
+            lc.on('drawingChange', function() {
+                localStorage.setItem('drawing', lc.getSnapshotJSON());
+            });
+        }
+    });
+
+Exporting images
+----------------
+
+Internally, Literally Canvas uses more than one canvas to draw efficiently. You
+can use :js:func:`LiterallyCanvas.canvasForExport` to get a fully rendered
+canvas object, which you can use as needed to export your image.
+
+For example, if you wanted to open the rendered image in a new window, you'd do
+something like this:
+
+.. code-block:: javascript
+
+    $('.literally').literallycanvas({
+        onInit: function(lc) {
+            $('.save-button').click(function() {
+                window.open(lc.canvasForExport().toDataURL());
+            });
+        }
+    });
+
+.. note::
+
+    Many image uploading services support base64-encoded data. You can get that
+    data this way:
+
+    .. code-block:: javascript
+
+        window.open(lc.canvasForExport().toDataURL().split(',')[1]);
