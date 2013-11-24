@@ -15,7 +15,7 @@ With Bower
 
 .. code-block:: sh
 
-    bower install https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc1.tar.gz
+    bower install https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc2.tar.gz
 
 .. warning::
 

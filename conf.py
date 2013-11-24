@@ -21,7 +21,7 @@ copyright = u'2012-2013 Literally Canvas contributors'
 version = '0.3'
 # The full version, including alpha/beta/rc tags.
 # Can refer to in docs with |release|.
-release = '0.3rc1'
+release = '0.3-rc2'
 #language = None
 
 
