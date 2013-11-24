@@ -14,6 +14,12 @@ user's drawing.
 
     <div class="literally"><canvas></canvas></div>
 
+.. toctree::
+    :maxdepth: 3
+
+    using.rst
+    api.rst
+
 Why?
 ====
 
@@ -45,12 +51,6 @@ Literally Canvas was created in part to replace the object drawing tool in
 `Buildy`_. We hope you're inspired to use it to make new things of your own!
 
 .. _Buildy: http://playbuildy.com
-
-.. toctree::
-    :maxdepth: 3
-
-    using.rst
-    extending.rst
 
 Browser compatibility
 =====================

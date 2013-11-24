@@ -1,5 +1,5 @@
-Using it
-========
+User guide
+==========
 
 Installation
 ------------
@@ -137,8 +137,8 @@ Options
 
 .. _saving-and-loading:
 
-Saving and loading
-------------------
+Saving and loading drawings
+---------------------------
 
 Literally Canvas can serialize the user's drawing as a Javascript object.
 Generally, you probably want to do this in response to events.
@@ -156,6 +156,8 @@ when the user refreshes the page, the drawing persists.
             });
         }
     });
+
+.. _exporting-images:
 
 Exporting images
 ----------------
@@ -185,3 +187,41 @@ something like this:
     .. code-block:: javascript
 
         window.open(lc.canvasForExport().toDataURL().split(',')[1]);
+
+Adding images
+-------------
+
+You can add images to a drawing programmatically. Literally Canvas does not yet
+provide a UI for adding images.
+
+.. code-block:: javascript
+
+    $('.literally').literallycanvas({
+        onInit: function(lc) {
+            var backgroundImage = new Image()
+            backgroundImage.src = '/static/images/background.png';
+            // we'll need to redraw once it loads
+            backgroundImage.onload = function () {lc.repaint(true);}
+            lc.saveShape(new LC.ImageShape(0, 0, backgroundImage));
+        }
+    });
+
+If you also use saving and loading, you'll want to make sure your drawing is
+empty before adding a background to it. Otherwise, you'll end up with a new
+duplicate of your background image each time you load it.
+
+.. code-block:: javascript
+
+    $('.literally').literallycanvas({
+        onInit: function(lc) {
+            if (lc.numShapes() == 0) {  // only if drawing is empty
+                var backgroundImage = new Image()
+                backgroundImage.src = '/static/images/background.png';
+                // we'll need to redraw once it loads
+                backgroundImage.onload = function () {lc.repaint(true);}
+                lc.saveShape(new LC.ImageShape(0, 0, backgroundImage));
+            }
+            // subsequent loads will already have the background
+            lc.loadSnapshotJSON(localStorage.getItem('drawing'));
+        }
+    });
