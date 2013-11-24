@@ -10,18 +10,20 @@ Installation
 
 .. _open a GitHub ticket: http://github.com/literallycanvas/literallycanvas/issues/new
 
-With Bower
-^^^^^^^^^^
+Step 0: Get the assets
+^^^^^^^^^^^^^^^^^^^^^^
+
+`Download the tarball`_, or use Bower:
+
+.. _Download the tarball: ghp-import -p -r lc-bower -m "release" -b master literallycanvas
 
 .. code-block:: sh
 
     bower install https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc2.tar.gz
 
-.. warning::
-
-    Don't just point ``bower`` at the ``master`` branch. It won't work. Point
-    it specifically to a tag, the ``release`` branch (if it ever gains that
-    ability), or the tarball.
+Don't just point ``bower`` at the ``master`` branch. It won't work. Point it
+specifically to a tag, the ``release`` branch (if it ever gains that ability),
+or the tarball.
 
 .. warning::
 
