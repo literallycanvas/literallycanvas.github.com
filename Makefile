@@ -37,5 +37,5 @@ singlehtml: rm-crud
 	@echo
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
 
-deploy: clean make
+deploy: clean html
 	ghp-import -p -r origin -b master $(BUILDDIR)/html
