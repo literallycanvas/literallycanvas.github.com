@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API &mdash; Literally Canvas v0.3rc1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Literally Canvas v0.3rc1 documentation" href="index.html" />
+    <link rel="prev" title="User guide" href="using.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="_static/lib/css/literally.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js" type="text/javascript"></script>
+    <script src="_static/lib/js/literallycanvas.js" type="text/javascript"></script>
+    <script src="_static/docs.js" type="text/javascript"></script>
+  </head>
+  <body>
+  <header id="pageheader"><h1><a href="index.html ">
+    <span class="title-word-1">Literally</span>
+    <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
+  </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="using.html" title="Previous document">User guide</a>
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="literallycanvas">
+<h2><tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt><a class="headerlink" href="#literallycanvas" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="LiterallyCanvas">
+<em class="property">class </em><tt class="descname">LiterallyCanvas</tt><big>(</big><big>)</big><a class="headerlink" href="#LiterallyCanvas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controller object for a canvas. Accessible as the argument to the <tt class="docutils literal"><span class="pre">onInit</span></tt>
+callback option on <tt class="docutils literal"><span class="pre">$('.literally').literallycanvas()</span></tt>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
+    <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// do stuff</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="canvasForExport">
+<tt class="descname">canvasForExport</tt><big>(</big><big>)</big><a class="headerlink" href="#canvasForExport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a canvas object with the fully rendered drawing. This canvas is zoomed
+and cropped to the current view. See <a class="reference internal" href="using.html#exporting-images"><em>Exporting images</em></a> for an
+example.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="loadSnapshotJSON">
+<tt class="descname">loadSnapshotJSON</tt><big>(</big><em>snapshot</em><big>)</big><a class="headerlink" href="#loadSnapshotJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a JSON-encoded drawing.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="getSnapshotJSON">
+<tt class="descname">getSnapshotJSON</tt><big>(</big><big>)</big><a class="headerlink" href="#getSnapshotJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current drawing as JSON. Consider its output opaque and unstable
+except when used as an argument to <a class="reference internal" href="#loadSnapshotJSON" title="loadSnapshotJSON"><tt class="xref js js-func docutils literal"><span class="pre">loadSnapshotJSON()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="on">
+<tt class="descname">on</tt><big>(</big><em>event</em>, <em>callback</em><big>)</big><a class="headerlink" href="#on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach an event handler to <em>event</em>. A common use case is to save the
+drawing when it is changed; see <a class="reference internal" href="using.html#saving-and-loading"><em>Saving and loading drawings</em></a>.</p>
+<p>See <a class="reference internal" href="#events"><em>Events</em></a> for a list of events.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="repaint">
+<tt class="descname">repaint</tt><big>(</big><em>dirty = true</em>, <em>drawBackground = false</em><big>)</big><a class="headerlink" href="#repaint" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dirty</strong> &#8211; If <tt class="docutils literal"><span class="pre">true</span></tt>, redraw all shapes rather than just the topmost.</li>
+<li><strong>drawBackground</strong> &#8211; If <tt class="docutils literal"><span class="pre">true</span></tt>, draw the background as a solid
+rectangle. Otherwise, don&#8217;t draw a background.
+Typically you only need to draw the background when
+exporting the image. Otherwise, the background color
+set by the CSS on the canvas element will be
+visible.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveShape">
+<tt class="descname">saveShape</tt><big>(</big><em>shape</em><big>)</big><a class="headerlink" href="#saveShape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a shape to the drawing. See <a class="reference internal" href="#list-shapes"><em>Shapes</em></a> for a current list of
+shapes.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="numShapes">
+<tt class="descname">numShapes</tt><big>(</big><big>)</big><a class="headerlink" href="#numShapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of shapes in the drawing.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="events">
+<span id="id1"></span><h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="drawing-changes">
+<h3>Drawing changes<a class="headerlink" href="#drawing-changes" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>clear</td>
+<td>The drawing was cleared</td>
+</tr>
+<tr class="row-even"><td>drawingChange</td>
+<td>The drawing was updated in some way</td>
+</tr>
+<tr class="row-odd"><td>redo</td>
+<td>The drawing changed due to a redo</td>
+</tr>
+<tr class="row-even"><td>undo</td>
+<td>The drawing changed due to an undo</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="operations">
+<h3>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h3>
+<p>In the order that they occur:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>drawStart</td>
+<td>A new shape is being drawn</td>
+</tr>
+<tr class="row-even"><td>drawContinue</td>
+<td>The new shape is being modified</td>
+</tr>
+<tr class="row-odd"><td>drawEnd</td>
+<td>The new shape is complete</td>
+</tr>
+<tr class="row-even"><td>shapeSave</td>
+<td>The new shape has been saved to the drawing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="view-changes">
+<h3>View changes<a class="headerlink" href="#view-changes" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>pan</td>
+<td>The canvas was panned</td>
+</tr>
+<tr class="row-even"><td>repaint</td>
+<td>The canvas was repainted</td>
+</tr>
+<tr class="row-odd"><td>toolChange</td>
+<td>A different tool was set</td>
+</tr>
+<tr class="row-even"><td>zoom</td>
+<td>The canvas was zoomed</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="shapes">
+<span id="list-shapes"></span><h2>Shapes<a class="headerlink" href="#shapes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="LC.ImageShape">
+<em class="property">class </em><tt class="descclassname">LC.</tt><tt class="descname">ImageShape</tt><big>(</big><em>x</em>, <em>y</em>, <em>image</em>, <em>locked = false</em><big>)</big><a class="headerlink" href="#LC.ImageShape" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>image</strong> &#8211; <tt class="xref js js-class docutils literal"><span class="pre">Image()</span></tt></li>
+<li><strong>locked</strong> &#8211; Preserve this shape when the drawing is cleared</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="LC.Rectangle">
+<em class="property">class </em><tt class="descclassname">LC.</tt><tt class="descname">Rectangle</tt><big>(</big><em>x</em>, <em>y</em>, <em>strokeWidth</em>, <em>strokeColor</em>, <em>fillColor</em><big>)</big><a class="headerlink" href="#LC.Rectangle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="LC.Line">
+<em class="property">class </em><tt class="descclassname">LC.</tt><tt class="descname">Line</tt><big>(</big><em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em>, <em>strokeWidth</em>, <em>strokeColor</em>, <em>fillColor</em><big>)</big><a class="headerlink" href="#LC.Line" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="LC.LinePathShape">
+<em class="property">class </em><tt class="descclassname">LC.</tt><tt class="descname">LinePathShape</tt><big>(</big><em>points =</em><span class="optional">[</span><span class="optional">]</span>, <em>order = 3</em>, <em>tailSize = 3</em><big>)</big><a class="headerlink" href="#LC.LinePathShape" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>order</strong> &#8211; Order of the bspline applied to the curve. Higher values make
+the curve smoother but are more expensive.</li>
+<li><strong>tailSize</strong> &#8211; The number of segments to use as the tail. In other words,
+when a point is added, how many points you need to go back
+before the slope of the old smoothed curve is the same as
+the slope of the new smoothed curve.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="LC.EraseLinePathShape">
+<em class="property">class </em><tt class="descclassname">LC.</tt><tt class="descname">EraseLinePathShape</tt><big>(</big><em>points =</em><span class="optional">[</span><span class="optional">]</span>, <em>order = 3</em>, <em>tailSize = 3</em><big>)</big><a class="headerlink" href="#LC.EraseLinePathShape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <a class="reference internal" href="#LC.LinePathShape" title="LC.LinePathShape"><tt class="xref js js-class docutils literal"><span class="pre">LC.LinePathShape()</span></tt></a>, but erases when drawn instead of
+drawing a line.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="adding-tools">
+<h2>Adding tools<a class="headerlink" href="#adding-tools" title="Permalink to this headline">¶</a></h2>
+<p>Inspect <tt class="file docutils literal"><span class="pre">coffee/core/tools.coffee</span></tt> and
+<tt class="file docutils literal"><span class="pre">coffee/core/widgets.coffee</span></tt> in the source code.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API</a><ul>
+<li><a class="reference internal" href="#literallycanvas"><tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt></a></li>
+<li><a class="reference internal" href="#events">Events</a><ul>
+<li><a class="reference internal" href="#drawing-changes">Drawing changes</a></li>
+<li><a class="reference internal" href="#operations">Operations</a></li>
+<li><a class="reference internal" href="#view-changes">View changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shapes">Shapes</a></li>
+<li><a class="reference internal" href="#adding-tools">Adding tools</a></li>
+</ul>
+</li>
+</ul>
+<p>
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc1.tar.gz">
+		Download v0.3-rc1
+	</a>
+</p>
+<p>
+  Send a message to
+  <br><a href="mailto:literallycanvas@librelist.com">
+    literallycanvas@librelist.com</a><br>
+  to join our mailing list.
+</p>
+
+<p>
+  Help us improve Literally Canvas on
+	<a href="http://github.com/literallycanvas/literallycanvas">Github</a>.
+</p>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="using.html" title="Previous document">User guide</a>
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.2b3
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

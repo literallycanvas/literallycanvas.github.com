@@ -1,425 +1,272 @@
-<!doctype html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Literally Canvas</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="css/bootstrap-custom.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-
-    <link href="lib/css/literally.css" rel="stylesheet">
-
-    <!-- ew ew ew ew ew but necessary -->
-    <link href="css/jquery-ui.css" rel="stylesheet">
-
-    <link href='http://fonts.googleapis.com/css?family=Finger+Paint'
-      rel='stylesheet' type='text/css'>
-
-    <style type="text/css">.hll { background-color: #ffffcc }
-.c { color: #999988; font-style: italic } /* Comment */
-.err { color: #a61717; background-color: #e3d2d2 } /* Error */
-.k { font-weight: bold } /* Keyword */
-.o { font-weight: bold } /* Operator */
-.cm { color: #999988; font-style: italic } /* Comment.Multiline */
-.cp { color: #999999; font-weight: bold } /* Comment.Preproc */
-.c1 { color: #999988; font-style: italic } /* Comment.Single */
-.cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
-.gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
-.ge { font-style: italic } /* Generic.Emph */
-.gr { color: #aa0000 } /* Generic.Error */
-.gh { color: #999999 } /* Generic.Heading */
-.gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
-.go { color: #888888 } /* Generic.Output */
-.gp { color: #555555 } /* Generic.Prompt */
-.gs { font-weight: bold } /* Generic.Strong */
-.gu { color: #aaaaaa } /* Generic.Subheading */
-.gt { color: #aa0000 } /* Generic.Traceback */
-.kc { font-weight: bold } /* Keyword.Constant */
-.kd { font-weight: bold } /* Keyword.Declaration */
-.kn { font-weight: bold } /* Keyword.Namespace */
-.kp { font-weight: bold } /* Keyword.Pseudo */
-.kr { font-weight: bold } /* Keyword.Reserved */
-.kt { color: #445588; font-weight: bold } /* Keyword.Type */
-.m { color: #009999 } /* Literal.Number */
-.s { color: #bb8844 } /* Literal.String */
-.na { color: #008080 } /* Name.Attribute */
-.nb { color: #999999 } /* Name.Builtin */
-.nc { color: #445588; font-weight: bold } /* Name.Class */
-.no { color: #008080 } /* Name.Constant */
-.ni { color: #800080 } /* Name.Entity */
-.ne { color: #990000; font-weight: bold } /* Name.Exception */
-.nf { color: #990000; font-weight: bold } /* Name.Function */
-.nn { color: #555555 } /* Name.Namespace */
-.nt { color: #000080 } /* Name.Tag */
-.nv { color: #008080 } /* Name.Variable */
-.ow { font-weight: bold } /* Operator.Word */
-.w { color: #bbbbbb } /* Text.Whitespace */
-.mf { color: #009999 } /* Literal.Number.Float */
-.mh { color: #009999 } /* Literal.Number.Hex */
-.mi { color: #009999 } /* Literal.Number.Integer */
-.mo { color: #009999 } /* Literal.Number.Oct */
-.sb { color: #bb8844 } /* Literal.String.Backtick */
-.sc { color: #bb8844 } /* Literal.String.Char */
-.sd { color: #bb8844 } /* Literal.String.Doc */
-.s2 { color: #bb8844 } /* Literal.String.Double */
-.se { color: #bb8844 } /* Literal.String.Escape */
-.sh { color: #bb8844 } /* Literal.String.Heredoc */
-.si { color: #bb8844 } /* Literal.String.Interpol */
-.sx { color: #bb8844 } /* Literal.String.Other */
-.sr { color: #808000 } /* Literal.String.Regex */
-.s1 { color: #bb8844 } /* Literal.String.Single */
-.ss { color: #bb8844 } /* Literal.String.Symbol */
-.bp { color: #999999 } /* Name.Builtin.Pseudo */
-.vc { color: #008080 } /* Name.Variable.Class */
-.vg { color: #008080 } /* Name.Variable.Global */
-.vi { color: #008080 } /* Name.Variable.Instance */
-.il { color: #009999 } /* Literal.Number.Integer.Long */</style>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>About &mdash; Literally Canvas v0.3rc1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-36534121-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
     </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Literally Canvas v0.3rc1 documentation" href="#" />
+    <link rel="next" title="User guide" href="using.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="_static/lib/css/literally.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js" type="text/javascript"></script>
+    <script src="_static/lib/js/literallycanvas.js" type="text/javascript"></script>
+    <script src="_static/docs.js" type="text/javascript"></script>
   </head>
-
   <body>
-    <div class="container">
+  <header id="pageheader"><h1><a href="# ">
+    <span class="title-word-1">Literally</span>
+    <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
+  </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          <a href="using.html" title="Next document">User guide</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="#">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
 
-      <a name="demo"></a>
-      <h1 class="title">
-        <span class="title-literally">Literally</span>
-        <span class="title-canvas">&ldquo;Canvas&rdquo;</span>
-      </h1>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="about">
+<h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
+<p>Literally Canvas is an extensible, open source (BSD-licensed), HTML5 drawing
+widget. It depends on jQuery.</p>
+<p>You can draw, erase, set the color with the eyedropper, undo, redo, pan, and
+zoom. A semi-stable API allows you to add your own tools.</p>
+<p>It&#8217;s easy to get a data URL for upload to a site like Imgur or load/save a
+user&#8217;s drawing.</p>
+<div class="literally"><canvas></canvas></div><div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using.html">User guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="using.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="using.html#with-bower">With Bower</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using.html#step-1-include-assets">Step 1: Include assets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using.html#step-2-write-markup">Step 2: Write markup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using.html#step-3-style-literally">Step 3: Style <tt class="docutils literal"><span class="pre">.literally</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#creating-a-canvas">Creating a canvas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="using.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#saving-and-loading-drawings">Saving and loading drawings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#exporting-images">Exporting images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#adding-images">Adding images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#literallycanvas"><tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#events">Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#drawing-changes">Drawing changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#operations">Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#view-changes">View changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#shapes">Shapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#adding-tools">Adding tools</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="why">
+<h1>Why?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h1>
+<p>If you look at <a class="reference internal" href="#related-projects"><em>Related projects</em></a> at the bottom of the page, you can see
+that this isn&#8217;t the only HTML5 drawing tool on the block. However, it is unique
+in several ways:</p>
+<ul class="simple">
+<li><strong>It&#8217;s open source.</strong> Other drawing tools seem to be almost exclusively
+provided by businesses whose core feature is their drawing tool or
+freelancers who want you to pay them to adapt their work to your use case. We
+have nothing against those people, but it&#8217;s important that free alternatives
+exist.</li>
+<li><strong>It&#8217;s a widget, not an application.</strong> Literally Canvas is intended to live
+inside your application in the way that works best for you. It doesn&#8217;t take
+over your screen. It doesn&#8217;t (intentionally) gobble up events. It tries to
+keep its UI to a minimum.</li>
+<li><strong>It wants to be extended.</strong> We&#8217;ve tried to design it with extensibility in
+mind. There&#8217;s no formal tool API, but if you have specific needs, we think
+it&#8217;s easy enough to read the source and figure out how to add what you want.
+We hope to improve and expose the tool API in future releases.</li>
+<li><strong>It&#8217;s fast and looks good.</strong> Literally Canvas is optimized to work with
+complex drawings, and it smooths lines naturally to avoid the unsightly line
+angles often seen in simplistic drawing programs.</li>
+</ul>
+<p>Literally Canvas was created in part to replace the object drawing tool in
+<a class="reference external" href="http://playbuildy.com">Buildy</a>. We hope you&#8217;re inspired to use it to make new things of your own!</p>
+</div>
+<div class="section" id="browser-compatibility">
+<h1>Browser compatibility<a class="headerlink" href="#browser-compatibility" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Chrome</td>
+<td>Awesome</td>
+</tr>
+<tr class="row-even"><td>Safari</td>
+<td>Awesome</td>
+</tr>
+<tr class="row-odd"><td>iOS</td>
+<td>Doesn&#8217;t work zoomed</td>
+</tr>
+<tr class="row-even"><td>Firefox</td>
+<td>23+ <a class="footnote-reference" href="#f1" id="id1">[1]</a></td>
+</tr>
+<tr class="row-odd"><td>Opera</td>
+<td>??</td>
+</tr>
+<tr class="row-even"><td>Android</td>
+<td>??</td>
+</tr>
+<tr class="row-odd"><td>IE</td>
+<td>10+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Works in previous versions, but the brush size slider will render
+as a text field.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>We would be excited to see contributions of any form. New brushes,
+optimizations, feature requests, use cases, designs, bug reports – you name it,
+we want it! Just head on over to <a class="reference external" href="http://github.com/literallycanvas/literallycanvas">GitHub</a> and get started.</p>
+<p>One particular area where we&#8217;d like some help is in styling the toolbar. If
+glitzy CSS-based UI is your thing, we&#8217;d love to hear your suggestions or merge
+your pull requests.</p>
+</div>
+<div class="section" id="related-projects">
+<span id="id2"></span><h1>Related projects<a class="headerlink" href="#related-projects" title="Permalink to this headline">¶</a></h1>
+<p>The web has only recently arrived at the point where this sort of project is
+feasible to implement without Flash, but there are several other projects with
+similar features. If Literally Canvas isn&#8217;t quite what you&#8217;re looking for, we
+encourage you to check them out and give them some love. All of them use</p>
+<ul class="simple">
+<li><a class="reference external" href="http://leimi.github.io/drawingboard.js/">drawingboard.js</a>: Very similar
+project, slightly different feature set.</li>
+<li><a class="reference external" href="http://sta.sh/muro/">DeviantArt Muro</a>: Sophisticated, comprehensive
+drawing</li>
+<li><a class="reference external" href="http://bomomo.com/">Bomomo</a>: Whimsical doodling</li>
+<li><a class="reference external" href="http://mudcu.be/sketchpad/">SketchPad</a>: Simple drawing</li>
+<li><a class="reference external" href="http://sketchpad.io/">sketchpad.io</a>: Non-destructive, 2.0 version of
+SketchPad</li>
+<li><a class="reference external" href="https://github.com/mudcube/Sketch.js">Sketch.js</a>: Simplistic, open source
+version of <a class="reference external" href="http://sketchpad.io/">sketchpad.io</a></li>
+<li><a class="reference external" href="http://hakim.se/experiments/html5/sketch/">Sketch</a>: Cartoon-style sketches
+with gallery</li>
+<li><a class="reference external" href="http://zwibbler.com/">Zwibbler</a>: Vector graphics</li>
+<li><a class="reference external" href="http://figurepool.com/editor">FigurePool</a>: SVG diagramming</li>
+<li><a class="reference external" href="http://svg-edit.googlecode.com/svn/trunk/editor/svg-editor.html">SVG-edit</a>:
+Open source SVG non-destructive drawing</li>
+<li><a class="reference external" href="http://editor.method.ac/">Method Draw</a>: SVG non-destructive drawing, based
+on SVG-edit</li>
+<li><a class="reference external" href="http://www.williammalone.com/articles/create-html5-canvas-javascript-drawing-app/">Creating a Drawing App with HTML5 Canvas and Javascript</a>:
+Learn a bit about how to do these things yourself!</li>
+</ul>
+</div>
 
-      <div class="row">
-        <div class="span3">
-          <ul class="nav nav-list">
-            <li><a href="#demo">Demo</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#usage">Usage</a></li>
-            <li><a href="#supported-browsers">Supported Browsers</a></li>
-            <li><a href="#api">&ldquo;API&rdquo;</a></li>
-            <li><a href="#future">The Future</a></li>
-            <li><a href="#contributing">Contributing</a></li>
-            <li><a href="#related-projects">Related Projects</a></li>
-          </ul>
-        </div>
 
-        <div class="span6">
-
-          <div class="demo">
-            <div class="literally"><canvas></canvas></div>
-            <button class='get-image'>Open as image</button>
-            <div class="share-to-imgur">
-              <button>Upload to Imgur</button>
-              <span class="imgur-url">&nbsp;</span>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="span3">
-          <div class="example-link">
-            <a href="example.html">Fullscreen demo &gt;&gt;</a>
-          </div>
-
-          <div class="github">
-            <a href="http://github.com/literallycanvas/literallycanvas">
-              Fork me on Github &gt;&gt;
-            </a>
-          </div>
-
-          <div class="downloads">
-            <a href="https://github.com/literallycanvas/literallycanvas/releases/download/v0.2.1/literallycanvas.tar.gz">
-              Download v0.2.1
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <hr><a name="about"></a>
-      <div class="row">
-        <div class="span6 offset3 about">
-          <h2>About</h2>
-
-          <p>
-          Literally Canvas is an extensible, <strong>open source</strong>
-            (BSD-licensed), HTML5 drawing widget that currently supports a
-            minimal set of drawing operations. You can draw, erase, set the
-            color with the eyedropper, undo, redo, pan, and zoom. It depends on
-            <a href="http://jquery.com/">jQuery</a> and
-            <a href="http://underscorejs.org/">Underscore.js</a>.
-          </p>
-
-          <p>
-            The instance at the top of this page uses the
-            <a href="http://jqueryui.com/resizable/">
-            <tt>resizable</tt> feature of jQuery UI</a> for its resize feature,
-            to demonstrate that you can resize the container element with
-            impunity. Resizing on the right edge of the canvas causes
-            weirdness, but you get the idea.
-          </p>
-
-          <h3>Why?</h3>
-
-          <p>
-            If you look at <a href="#related-projects">Related Projects</a> at
-            the bottom of the page, you can see that this isn't the only HTML5
-            drawing tool on the block. However, it is unique in several ways:
-          </p>
-
-          <ul>
-            <li>
-              <strong>It's open source.</strong> Other drawing tools seem
-              to be almost exclusively provided by businesses whose core
-              feature is their drawing tool or freelancers who want you to
-              pay them to adapt their work to your use case. We have nothing
-              against those people, but it's important that free alternatives
-              exist.
-            </li>
-
-            <li>
-              <strong>It's a widget, not an application.</strong> Literally
-              Canvas is intended to live inside your application in the way
-              that works best for you. It doesn't take over your screen. It
-              doesn't (intentionally) gobble up events. It tries to keep its UI
-              to a minimum.
-            </li>
-
-            <li>
-              <strong>It wants to be extended.</strong> We've tried to design
-              it with extensibility in mind. There's no formal tool API, but if
-              you have specific needs, we think it's easy enough to read the
-              source and figure out how to add what you want. We hope to
-              improve and expose the tool API in future releases.
-            </li>
-          </ul>
-
-          <p>
-            Literally Canvas was created in part to replace the object drawing
-            tool in <a href="http://www.playbuildy.com">Buildy</a>. We hope
-            you're inspired to use it to make new things of your own!
-          </p>
-        </div>
-      </div>
-
-      <hr><a name="usage"></a>
-      <div class="row">
-        <div class="span6 offset3">
-          <h2>Usage</h2>
-          <div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
-</pre></div>
-
-          <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">();</span>
-</pre></div>
-
-          <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
-  <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;rgb(255, 0, 0)&#39;</span><span class="p">,</span> <span class="c1">// default rgb(230, 230, 230)</span>
-  <span class="nx">keyboardShortcuts</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>          <span class="c1">// default true</span>
-  <span class="nx">sizeToContainer</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>            <span class="c1">// default true</span>
-  <span class="nx">toolClasses</span><span class="o">:</span> <span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">Pencil</span><span class="p">]</span>           <span class="c1">// see coffee/tools.coffee</span>
-<span class="p">});</span>
-</pre></div>
-
-        </div>
-      </div>
-
-      <hr><a name="supported-browsers"></a>
-      <div class="row">
-        <div class="span6 offset3">
-          <h2>Supported Browsers</h2>
-          <table class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>Browser</th>
-                <th>Support</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Chrome</td><td>Awesome (this is where we test)</td></tr>
-              <tr><td>Safari</td><td>Awesome</td></tr>
-              <tr><td>iOS</td><td>Awesome</td></tr>
-              <tr>
-                <td>Firefox</td>
-                <td>
-                  Requires a shim for <tt>&lt;input type="range"&gt;</tt>
-                  which we don't provide. Falls back to a normal input field,
-                  which works but isn't as nice.
-                </td>
-              </tr>
-
-              <tr><td>Opera</td><td>???</td></tr>
-              <tr><td>Android</td><td>???</td></tr>
-              <tr><td>IE 10</td><td>???</td></tr>
-              <tr><td>IE 9</td><td>Nope</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <hr><a name="api"></a>
-      <div class="row">
-        <div class="span6 offset3">
-          <h2>&ldquo;API&rdquo;</h2>
-
-          <div class="alert"><strong>It's in quotes for a reason.</strong></div>
-
-          <div class="well">
-            <h4><tt>$('.literally').literallycanvas(options)</tt></h4>
-
-            <h5><tt>backgroundColor</tt></h5>
-            CSS color value of the initial background. Default <tt>rgb(230,
-              230, 230)</tt>.
-
-            <h5><tt>imageURLPrefix</tt></h5>
-            URL you're serving the contents of <tt>lib/img</tt> from. Default
-            <tt>lib/img</tt>.
-
-            <h5><tt>keyboardShortcuts</tt></h5>
-            If <tt>true</tt>, bind keyboard shortcuts. Currently only implements
-            panning with the arrow keys. Default <tt>true</tt>.
-
-            <h5><tt>sizeToContainer</tt></h5>
-            If <tt>true</tt>, resize the <tt>&lt;canvas&gt;</tt> element to fit
-            the height of its containing <tt>&lt;div class="literally"&gt;</tt>
-            element. The alternative is <tt>false</tt>, which will not resize the 
-            <tt>&lt;canvas&gt;</tt> element at all. Default <tt>true</tt>.
-
-            <h5><tt>toolClasses</tt></h5>
-            List of tool classes to use. Unless you're writing your own tool, you
-            probably don't need to change this setting. Includes all tools by
-            default.
-          </div>
-
-          <div class="well">
-            <h4><tt>$('.literally').canvasForExport()</tt></h4>
-            Canvas object containing the user's complete drawing. (Currently
-            just the visible canvas area, will probably change to include all
-            paths.)
           </div>
         </div>
       </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="#">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+<p>
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc1.tar.gz">
+		Download v0.3-rc1
+	</a>
+</p>
+<p>
+  Send a message to
+  <br><a href="mailto:literallycanvas@librelist.com">
+    literallycanvas@librelist.com</a><br>
+  to join our mailing list.
+</p>
 
-      <hr><a name="future"></a>
-      <div class="row">
-        <div class="span6 offset3">
-
-          <h2>The Future</h2>
-          <ul>
-            <li>A better, smaller color picker</li>
-            <li>Brush API</li>
-            <li>Nicer-looking brushes</li>
-            <li>Interactive tools (text, shapes)</li>
-          </ul>
-
-          <a href="https://github.com/literallycanvas/literallycanvas/issues/new">
-            Suggest a feature on Github</a>
-
+<p>
+  Help us improve Literally Canvas on
+	<a href="http://github.com/literallycanvas/literallycanvas">Github</a>.
+</p>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-
-      <hr><a name="contributing"></a>
-      <div class="row">
-        <div class="span6 offset3">
-
-          <h2>Contributing</h2>
-          <p>
-            We would be excited to see contributions of any form. New brushes,
-            optimizations, feature requests, use cases, designs, bug reports
-            &ndash; you name it, we want it! Just head on over to <a
-              href="http://github.com/literallycanvas/literallycanvas">
-              github.com/literallycanvas/literallycanvas</a> and get started.
-          </p>
-
-          <p>
-            One particular area where we'd like some help is in styling the
-            toolbar. If glitzy CSS-based UI is your thing, we'd love to hear
-            your suggestions or merge your pull requests.
-          </p>
-
-        </div>
-      </div>
-
-      <hr><a name="related-projects"></a>
-      <div class="row">
-        <div class="span6 offset3">
-
-          <h2>Related Projects</h2>
-          <p>
-            The web has only recently arrived at the point where this sort of
-            project is feasible to implement without Flash, but there are
-            several other projects with similar features. If Literally Canvas
-            isn't quite what you're looking for, we encourage you to check them
-            out and give them some love. All of them use Canvas unless
-            otherwise specified.
-          </p>
-
-          <ul>
-            <li>
-              <a href="http://sta.sh/muro/">DeviantArt Muro</a>:
-              Sophisticated, comprehensive drawing
-            </li>
-            <li>
-              <a href="http://bomomo.com/">Bomomo</a>:
-              Whimsical doodling
-            </li>
-            <li>
-              <a href="http://mudcu.be/sketchpad/">SketchPad</a>:
-              Simple drawing
-            </li>
-            <li>
-              <a href="http://sketchpad.io/">sketchpad.io</a>:
-              Non-destructive, 2.0 version of SketchPad
-            </li>
-            <li>
-              <a href="https://github.com/mudcube/Sketch.js">Sketch.js</a>:
-              Simplistic, open source version of
-              <a href="http://sketchpad.io/">sketchpad.io</a>
-            </li>
-            <li>
-              <a href="http://hakim.se/experiments/html5/sketch/">Sketch</a>:
-              Cartoon-style sketches with gallery
-            </li>
-            <li>
-              <a href="http://zwibbler.com/">Zwibbler</a>:
-              Vector graphics
-            </li>
-            <li>
-              <a href="http://figurepool.com/editor">FigurePool</a>:
-              SVG diagramming
-            </li>
-            <li>
-              <a href="http://svg-edit.googlecode.com/svn/trunk/editor/svg-editor.html">
-                SVG-edit</a>:
-              Open source SVG non-destructive drawing
-            </li>
-            <li>
-              <a href="http://editor.method.ac/">Method Draw</a>:
-              SVG non-destructive drawing, based on SVG-edit
-            </li>
-            <li>
-              <a href="http://www.williammalone.com/articles/create-html5-canvas-javascript-drawing-app/">
-                Creating a Drawing App with HTML5 Canvas and Javascript</a>:
-              Learn a bit about how to do these things yourself!
-            </li>
-          </ul>
-        </div>
-      </div>
-
+      <div class="clearer"></div>
     </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          <a href="using.html" title="Next document">User guide</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="#">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.2b3
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
 
-    <script src="lib/js/literallycanvas.js"></script>
-    <script src="js/jquery-ui-just-resizable.js"></script>
-    <script src="js/docs.js"></script>
+  </footer>
+
+  
   </body>
 </html>
