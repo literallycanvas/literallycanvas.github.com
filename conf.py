@@ -37,10 +37,11 @@ html_theme_options = {
     ],
     'scriptfiles': [
         us,
-        "_static/lib/js/literallycanvas.js",
+        "_static/lib/js/literallycanvas.jquery.js",
         '_static/docs.js',
     ]
 }
+
 html_context = {}
 html_sidebars = {
     '**': ['localtoc.html', 'sidebarhelp.html', 'searchbox.html'],
