@@ -23,6 +23,10 @@ With Bower
     it specifically to a tag, the ``release`` branch (if it ever gains that
     ability), or the tarball.
 
+.. warning::
+
+    ``bower install literallycanvas`` is currently broken.
+
 Step 1: Include assets
 ^^^^^^^^^^^^^^^^^^^^^^
 
