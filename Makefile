@@ -36,3 +36,6 @@ singlehtml: rm-crud
 	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(BUILDDIR)/singlehtml
 	@echo
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
+
+deploy: clean make
+	ghp-import -p -r origin -b master $(BUILDDIR)/html
