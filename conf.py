@@ -52,10 +52,8 @@ html_title = "%(project)s v%(release)s documentation" % {
     'project': project, 'release': release}
 html_short_title = "Home"
 
-"""
-html_theme_options['ga_ua'] = 'UA-42793220-2'
-html_theme_options['ga_domain'] = 'pythonhosted.org'
-"""
+html_theme_options['ga_ua'] = 'UA-36534121-1'
+html_theme_options['ga_domain'] = 'literallycanvas.com'
 
 # Necessary for best search results
 html_show_sourcelink = True
