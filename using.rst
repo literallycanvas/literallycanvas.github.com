@@ -70,88 +70,79 @@ Otherwise your canvas will have a height of zero.
 Creating a canvas
 -----------------
 
-.. code-block:: javascript
+.. js:function:: $('.literally').literallycanvas(options);
 
-    $('.literally').literallycanvas(options);
+    :param imageURLPrefix: Location of Literally Canvas's ``img/`` folder.
 
-Options
-^^^^^^^
+                           .. note:: You probably need to set this.
 
-``imageURLPrefix``: string
-    Location of Literally Canvas's ``img/`` folder.
+    :param onInit: This callback is a convenient place to set up event
+                   handlers, programmatically add shapes, or otherwise
+                   integrate with your application.
 
-    .. note:: You probably need to set this.
+                   :ref:`saving-and-loading` has an example of how you might
+                   use this option.
+    :type onInit: function(:js:class:`LiterallyCanvas`)
 
-``onInit``: callback
-    A function that takes a single :js:class:`LiterallyCanvas` object. This
-    callback is a convenient place to set up event handlers, programmatically
-    add shapes, or otherwise integrate with your application.
+    :param primaryColor: Starting stroke color. Defaults to ``'#000'``.
+    :param secondaryColor: Starting fill color. Defaults to ``'#fff'``.
+    :param backgroundColor: Starting background color. Defaults to
+                            ``'transparent'``.
+    :param keyboardShortcuts: Enable panning with the arrow keys. Defaults to
+                              ``true``.
 
-    :ref:`saving-and-loading` has an example of how you might use this option.
+    :param preserveCanvasContents:
+        If ``true``, preserve the contents of the canvas as part of the
+        drawing.
 
-``primaryColor``: CSS color string
-    Starting stroke color. Defaults to ``'#000'``.
+        .. code-block:: javascript
 
-``secondaryColor``: CSS color string
-    Starting fill color. Defaults to ``'#fff'``.
+            var ctx = $('canvas').get(0).getContext('2d');
+            ctx.fillStyle = 'rgb(255,255,0)';
+            ctx.fillRect(0, 0, 300, 300);
+            $('.literally').literallycanvas({preserveCanvasContents: true});
 
-``backgroundColor``: CSS color string
-    Starting background color. Defaults to ``'transparent'``.
+        .. note::
 
-``keyboardShortcuts``: boolean
-    Enable panning with the arrow keys. Defaults to ``true``.
+            This feature is somewhat experimental. It doesn't attempt to preserve
+            the original image's scale. Suggestions and patches are welcome.
 
-``preserveCanvasContents``: boolean
-    If ``true``, preserve the contents of the canvas as part of the drawing.
+    :param toolClasses:
+        A list of tools to enable. The default value is:
 
-    .. code-block:: javascript
+        .. code-block:: javascript
 
-        var ctx = $('canvas').get(0).getContext('2d');
-        ctx.fillStyle = 'rgb(255,255,0)';
-        ctx.fillRect(0, 0, 300, 300);
-        $('.literally').literallycanvas({preserveCanvasContents: true});
+            [LC.PencilWidget, LC.EraserWidget, LC.LineWidget,
+             LC.RectangleWidget, LC.PanWidget, LC.EyeDropperWidget]
 
-    .. note::
+        If you need to disable a tool (such as pan), you can remove it from the
+        above list and pass the remainder as ``toolClasses``.
 
-        This feature is somewhat experimental. It doesn't attempt to preserve
-        the original image's scale. Suggestions and patches are welcome.
+        .. code-block:: javascript
 
-``toolClasses``: list
-    A list of tools to enable. The default value is:
+            var img = new Image()
+            img.src = '/static/img/watermark.png'
+            $('.literally').literallycanvas({
+                // disable panning
+                keyboardShortcuts: false,
+                toolClass: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget,
+                            LC.RectangleWidget, LC.EyeDropperWidget]
+            });
 
-    .. code-block:: javascript
+        .. note::
 
-        [LC.PencilWidget, LC.EraserWidget, LC.LineWidget, LC.RectangleWidget,
-         LC.PanWidget, LC.EyeDropperWidget]
+            This simplistic API will likely change in favor of one that doesn't
+            expose so much internal information.
 
-    If you need to disable a tool (such as pan), you can remove it from the
-    above list and pass the remainder as ``toolClasses``.
+    :param watermarkImage:
+        An image to display behind the drawing. The image will be centered and
+        not scaled. It will pan with the drawing.
 
-    .. code-block:: javascript
+        .. code-block:: javascript
 
-        var img = new Image()
-        img.src = '/static/img/watermark.png'
-        $('.literally').literallycanvas({
-            // disable panning
-            keyboardShortcuts: false,
-            toolClass: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget,
-                        LC.RectangleWidget, LC.EyeDropperWidget]
-        });
-
-    .. note::
-
-        This simplistic API will likely change in favor of one that doesn't
-        expose so much internal information.
-
-``watermarkImage``: :js:class:`Image`
-    An image to display behind the drawing. The image will be centered and not
-    scaled. It will pan with the drawing.
-
-    .. code-block:: javascript
-
-        var img = new Image()
-        img.src = '/static/img/watermark.png'
-        $('.literally').literallycanvas({watermarkImage: img});
+            var img = new Image()
+            img.src = '/static/img/watermark.png'
+            $('.literally').literallycanvas({watermarkImage: img});
 
 .. _saving-and-loading:
 
