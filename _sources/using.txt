@@ -134,7 +134,7 @@ Creating a canvas
 
     :param watermarkImage:
         An image to display behind the drawing. The image will be centered and
-        not scaled. It will pan with the drawing.
+        not scaled. It will not pan with the drawing.
 
         .. code-block:: javascript
 
