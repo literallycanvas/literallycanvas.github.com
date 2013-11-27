@@ -120,8 +120,6 @@ Creating a canvas
 
         .. code-block:: javascript
 
-            var img = new Image()
-            img.src = '/static/img/watermark.png'
             $('.literally').literallycanvas({
                 // disable panning
                 keyboardShortcuts: false,

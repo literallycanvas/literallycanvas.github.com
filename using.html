@@ -168,9 +168,7 @@ the original image&#8217;s scale. Suggestions and patches are welcome.</p>
 </div>
 <p>If you need to disable a tool (such as pan), you can remove it from the
 above list and pass the remainder as <tt class="docutils literal"><span class="pre">toolClasses</span></tt>.</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
-<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/static/img/watermark.png&#39;</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
     <span class="c1">// disable panning</span>
     <span class="nx">keyboardShortcuts</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">toolClass</span><span class="o">:</span> <span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">PencilWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EraserWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">LineWidget</span><span class="p">,</span>
