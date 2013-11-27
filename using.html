@@ -121,51 +121,49 @@ Otherwise your canvas will have a height of zero.</p>
 </div>
 <div class="section" id="creating-a-canvas">
 <h2>Creating a canvas<a class="headerlink" href="#creating-a-canvas" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
-</pre></div>
-</div>
-<div class="section" id="options">
-<h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt>: string</dt>
-<dd><p class="first">Location of Literally Canvas&#8217;s <tt class="docutils literal"><span class="pre">img/</span></tt> folder.</p>
-<div class="last admonition note">
+<dl class="function">
+<dt id="_S_('.literally').literallycanvas(options);">
+<tt class="descclassname">$('.literally').</tt><tt class="descname">literallycanvas(options);</tt><big>(</big><big>)</big><a class="headerlink" href="#_S_('.literally').literallycanvas(options);" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>imageURLPrefix</strong> &#8211; <p>Location of Literally Canvas&#8217;s <tt class="docutils literal"><span class="pre">img/</span></tt> folder.</p>
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">You probably need to set this.</p>
 </div>
-</dd>
-<dt><tt class="docutils literal"><span class="pre">onInit</span></tt>: callback</dt>
-<dd><p class="first">A function that takes a single <a class="reference internal" href="api.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> object. This
-callback is a convenient place to set up event handlers, programmatically
-add shapes, or otherwise integrate with your application.</p>
-<p class="last"><a class="reference internal" href="#saving-and-loading"><em>Saving and loading drawings</em></a> has an example of how you might use this option.</p>
-</dd>
-<dt><tt class="docutils literal"><span class="pre">primaryColor</span></tt>: CSS color string</dt>
-<dd>Starting stroke color. Defaults to <tt class="docutils literal"><span class="pre">'#000'</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">secondaryColor</span></tt>: CSS color string</dt>
-<dd>Starting fill color. Defaults to <tt class="docutils literal"><span class="pre">'#fff'</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">backgroundColor</span></tt>: CSS color string</dt>
-<dd>Starting background color. Defaults to <tt class="docutils literal"><span class="pre">'transparent'</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">keyboardShortcuts</span></tt>: boolean</dt>
-<dd>Enable panning with the arrow keys. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">preserveCanvasContents</span></tt>: boolean</dt>
-<dd><p class="first">If <tt class="docutils literal"><span class="pre">true</span></tt>, preserve the contents of the canvas as part of the drawing.</p>
+</li>
+<li><strong>onInit</strong> (function(<a class="reference internal" href="api.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a>)) &#8211; <p>This callback is a convenient place to set up event
+handlers, programmatically add shapes, or otherwise
+integrate with your application.</p>
+<p><a class="reference internal" href="#saving-and-loading"><em>Saving and loading drawings</em></a> has an example of how you might
+use this option.</p>
+</li>
+<li><strong>primaryColor</strong> &#8211; Starting stroke color. Defaults to <tt class="docutils literal"><span class="pre">'#000'</span></tt>.</li>
+<li><strong>secondaryColor</strong> &#8211; Starting fill color. Defaults to <tt class="docutils literal"><span class="pre">'#fff'</span></tt>.</li>
+<li><strong>backgroundColor</strong> &#8211; Starting background color. Defaults to
+<tt class="docutils literal"><span class="pre">'transparent'</span></tt>.</li>
+<li><strong>keyboardShortcuts</strong> &#8211; Enable panning with the arrow keys. Defaults to
+<tt class="docutils literal"><span class="pre">true</span></tt>.</li>
+<li><strong>preserveCanvasContents</strong> &#8211; <p>If <tt class="docutils literal"><span class="pre">true</span></tt>, preserve the contents of the canvas as part of the
+drawing.</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
 <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s1">&#39;rgb(255,255,0)&#39;</span><span class="p">;</span>
 <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">preserveCanvasContents</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
 </pre></div>
 </div>
-<div class="last admonition note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This feature is somewhat experimental. It doesn&#8217;t attempt to preserve
 the original image&#8217;s scale. Suggestions and patches are welcome.</p>
 </div>
-</dd>
-<dt><tt class="docutils literal"><span class="pre">toolClasses</span></tt>: list</dt>
-<dd><p class="first">A list of tools to enable. The default value is:</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">PencilWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EraserWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">LineWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">RectangleWidget</span><span class="p">,</span>
- <span class="nx">LC</span><span class="p">.</span><span class="nx">PanWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EyeDropperWidget</span><span class="p">]</span>
+</li>
+<li><strong>toolClasses</strong> &#8211; <p>A list of tools to enable. The default value is:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">PencilWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EraserWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">LineWidget</span><span class="p">,</span>
+ <span class="nx">LC</span><span class="p">.</span><span class="nx">RectangleWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">PanWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EyeDropperWidget</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>If you need to disable a tool (such as pan), you can remove it from the
@@ -180,23 +178,27 @@ above list and pass the remainder as <tt class="docutils literal"><span class="p
 <span class="p">});</span>
 </pre></div>
 </div>
-<div class="last admonition note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This simplistic API will likely change in favor of one that doesn&#8217;t
 expose so much internal information.</p>
 </div>
-</dd>
-<dt><tt class="docutils literal"><span class="pre">watermarkImage</span></tt>: <tt class="xref js js-class docutils literal"><span class="pre">Image()</span></tt></dt>
-<dd><p class="first">An image to display behind the drawing. The image will be centered and not
-scaled. It will pan with the drawing.</p>
-<div class="last highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
+</li>
+<li><strong>watermarkImage</strong> &#8211; <p>An image to display behind the drawing. The image will be centered and
+not scaled. It will pan with the drawing.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
 <span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/static/img/watermark.png&#39;</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">watermarkImage</span><span class="o">:</span> <span class="nx">img</span><span class="p">});</span>
 </pre></div>
 </div>
-</dd>
-</dl>
-</div>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="saving-and-loading-drawings">
 <span id="saving-and-loading"></span><h2>Saving and loading drawings<a class="headerlink" href="#saving-and-loading-drawings" title="Permalink to this headline">¶</a></h2>
@@ -291,10 +293,7 @@ duplicate of your background image each time you load it.</p>
 <li><a class="reference internal" href="#step-3-write-markup-and-css">Step 3: Write markup and CSS</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#creating-a-canvas">Creating a canvas</a><ul>
-<li><a class="reference internal" href="#options">Options</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#creating-a-canvas">Creating a canvas</a></li>
 <li><a class="reference internal" href="#saving-and-loading-drawings">Saving and loading drawings</a></li>
 <li><a class="reference internal" href="#exporting-images">Exporting images</a></li>
 <li><a class="reference internal" href="#adding-images">Adding images</a></li>
