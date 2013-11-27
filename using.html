@@ -72,8 +72,8 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Please <a class="reference external" href="http://github.com/literallycanvas/literallycanvas/issues/new">open a GitHub ticket</a> if we can improve this process.</p>
 </div>
-<div class="section" id="step-0-get-the-assets">
-<h3>Step 0: Get the assets<a class="headerlink" href="#step-0-get-the-assets" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-1-get-the-assets">
+<h3>Step 1: Get the assets<a class="headerlink" href="#step-1-get-the-assets" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="ghp-import-p-rlc-bower-m&quot;release&quot;-bmasterliterallycanvas">Download the tarball</a>, or use Bower:</p>
 <div class="highlight-sh"><div class="highlight"><pre>bower install https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc2.tar.gz
 </pre></div>
@@ -83,11 +83,13 @@ specifically to a tag, the <tt class="docutils literal"><span class="pre">releas
 or the tarball.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last"><tt class="docutils literal"><span class="pre">bower</span> <span class="pre">install</span> <span class="pre">literallycanvas</span></tt> is currently broken.</p>
+<p class="last"><tt class="docutils literal"><span class="pre">bower</span> <span class="pre">install</span> <span class="pre">literallycanvas</span></tt> is currently broken. The Bower
+maintainers need to update our repo URL in the registry; there is no
+automated way to do this.</p>
 </div>
 </div>
-<div class="section" id="step-1-include-assets">
-<h3>Step 1: Include assets<a class="headerlink" href="#step-1-include-assets" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-2-include-the-assets">
+<h3>Step 2: Include the assets<a class="headerlink" href="#step-2-include-the-assets" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/static/lib/css/literally.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
 
 <span class="c">&lt;!-- jQuery should already be available --&gt;</span>
@@ -95,17 +97,14 @@ or the tarball.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="step-2-write-markup">
-<h3>Step 2: Write markup<a class="headerlink" href="#step-2-write-markup" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-3-write-markup-and-css">
+<h3>Step 3: Write markup and CSS<a class="headerlink" href="#step-3-write-markup-and-css" title="Permalink to this headline">¶</a></h3>
 <p>Here is the suggested markup:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
 </pre></div>
 </div>
 <p>Literally Canvas will create the <tt class="docutils literal"><span class="pre">&lt;canvas&gt;</span></tt> if it doesn&#8217;t exist, but you can
 see why we prefer the above markup.</p>
-</div>
-<div class="section" id="step-3-style-literally">
-<h3>Step 3: Style <tt class="docutils literal"><span class="pre">.literally</span></tt><a class="headerlink" href="#step-3-style-literally" title="Permalink to this headline">¶</a></h3>
 <p>You need to give the container <tt class="docutils literal"><span class="pre">&lt;div&gt;</span></tt> a size by styling it with CSS.
 Otherwise your canvas will have a height of zero.</p>
 <div class="highlight-css"><div class="highlight"><pre><span class="nc">.literally</span> <span class="p">{</span>
@@ -287,10 +286,9 @@ duplicate of your background image each time you load it.</p>
   <ul>
 <li><a class="reference internal" href="#">User guide</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
-<li><a class="reference internal" href="#step-0-get-the-assets">Step 0: Get the assets</a></li>
-<li><a class="reference internal" href="#step-1-include-assets">Step 1: Include assets</a></li>
-<li><a class="reference internal" href="#step-2-write-markup">Step 2: Write markup</a></li>
-<li><a class="reference internal" href="#step-3-style-literally">Step 3: Style <tt class="docutils literal"><span class="pre">.literally</span></tt></a></li>
+<li><a class="reference internal" href="#step-1-get-the-assets">Step 1: Get the assets</a></li>
+<li><a class="reference internal" href="#step-2-include-the-assets">Step 2: Include the assets</a></li>
+<li><a class="reference internal" href="#step-3-write-markup-and-css">Step 3: Write markup and CSS</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#creating-a-canvas">Creating a canvas</a><ul>

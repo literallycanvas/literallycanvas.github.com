@@ -10,7 +10,7 @@ Installation
 
 .. _open a GitHub ticket: http://github.com/literallycanvas/literallycanvas/issues/new
 
-Step 0: Get the assets
+Step 1: Get the assets
 ^^^^^^^^^^^^^^^^^^^^^^
 
 `Download the tarball`_, or use Bower:
@@ -27,10 +27,12 @@ or the tarball.
 
 .. warning::
 
-    ``bower install literallycanvas`` is currently broken.
+    ``bower install literallycanvas`` is currently broken. The Bower
+    maintainers need to update our repo URL in the registry; there is no
+    automated way to do this.
 
-Step 1: Include assets
-^^^^^^^^^^^^^^^^^^^^^^
+Step 2: Include the assets
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: html
 
@@ -39,8 +41,8 @@ Step 1: Include assets
     <!-- jQuery should already be available -->
     <script src="/static/lib/js/literallycanvas.jquery.js"></script>
 
-Step 2: Write markup
-^^^^^^^^^^^^^^^^^^^^
+Step 3: Write markup and CSS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Here is the suggested markup:
 
@@ -50,9 +52,6 @@ Here is the suggested markup:
 
 Literally Canvas will create the ``<canvas>`` if it doesn't exist, but you can
 see why we prefer the above markup.
-
-Step 3: Style ``.literally``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You need to give the container ``<div>`` a size by styling it with CSS.
 Otherwise your canvas will have a height of zero.
