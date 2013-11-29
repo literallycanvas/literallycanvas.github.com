@@ -1,3 +1,5 @@
+var imgurClientId = 'f32c6385c66b037';
+
 /* front page */
 (function() {
   $(document).ready(function() {
@@ -16,35 +18,27 @@
       imageURLPrefix: '/_static/lib/img',
       onInit: function(lc) {
 
-        $('a[data-action=upload-to-imgur]').click(function(e) {
-          localStorage.doUpload = true;
-          localStorage.imageBase64 = lc.canvasForExport().toDataURL().split(',')[1];
-        })
-
-        var extractToken = function(hash) {
-          var match = hash.match(/access_token=(\w+)/);
-          return !!match && match[1];
-        };
-
-        var token = extractToken(document.location.hash);
-        console.log(token, localStorage.doUpload);
-        if (token && JSON.parse(localStorage.doUpload)) {
-          localStorage.doUpload = false;
-          console.log("do upload");
+        $('[data-action=upload-to-imgur]').click(function(e) {
+          e.preventDefault();
+          // this is all bog standard Imgur API; only LC-specific thing is the
+          // image data argument
           $.ajax({
             url: 'https://api.imgur.com/3/image',
-            method: 'POST',
+            type: 'POST',
             headers: {
-              Authorization: 'Bearer ' + token,
+              Authorization: 'Client-ID ' + imgurClientId,
               Accept: 'application/json'
             },
-            data: {image: localStorage.imageBase64, type: 'base64'},
+            data: {
+              image:  lc.canvasForExport().toDataURL().split(',')[1],
+              type: 'base64'
+            },
             success: function(result) {
-              var id = result.data.id;
-              window.location = 'https://imgur.com/gallery/' + id;
-            }
+              window.location = 'https://imgur.com/gallery/' + result.data.id;
+            },
           });
-        }
+        })
+
       }
     });
   });
