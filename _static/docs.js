@@ -20,6 +20,7 @@ var imgurClientId = 'f32c6385c66b037';
 
         $('[data-action=upload-to-imgur]').click(function(e) {
           e.preventDefault();
+          $('.imgur-submit').html('Uploading...')
           // this is all bog standard Imgur API; only LC-specific thing is the
           // image data argument
           $.ajax({
