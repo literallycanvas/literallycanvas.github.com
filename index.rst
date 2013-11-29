@@ -13,13 +13,14 @@ user's drawing.
 
 .. raw:: html
 
-    <div class="literally"><canvas></canvas></div>
+    <div class="literally index"><canvas></canvas></div>
 
 .. toctree::
     :maxdepth: 3
 
     using.rst
     api.rst
+    examples/index.rst
 
 Why?
 ====
