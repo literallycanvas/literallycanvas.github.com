@@ -157,7 +157,9 @@ when the user refreshes the page, the drawing persists.
 
     $('.literally').literallycanvas({
         onInit: function(lc) {
-            lc.loadSnapshotJSON(localStorage.getItem('drawing'));
+            if (localStorage.getItem('drawing')) {
+              lc.loadSnapshotJSON(localStorage.getItem('drawing'));
+            }
             lc.on('drawingChange', function() {
                 localStorage.setItem('drawing', lc.getSnapshotJSON());
             });

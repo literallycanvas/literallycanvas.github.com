@@ -206,7 +206,9 @@ Generally, you probably want to do this in response to events.</p>
 when the user refreshes the page, the drawing persists.</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
     <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">lc</span><span class="p">.</span><span class="nx">loadSnapshotJSON</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;drawing&#39;</span><span class="p">));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;drawing&#39;</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nx">lc</span><span class="p">.</span><span class="nx">loadSnapshotJSON</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;drawing&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
         <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
             <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;drawing&#39;</span><span class="p">,</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getSnapshotJSON</span><span class="p">());</span>
         <span class="p">});</span>
