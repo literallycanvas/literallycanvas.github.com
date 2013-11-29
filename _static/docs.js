@@ -62,3 +62,20 @@ var imgurClientId = 'f32c6385c66b037';
     });
   });
 }).call(this);
+
+/* imgur */
+(function() {
+  $(document).ready(function() {
+    $('.literally.export').literallycanvas({
+      backgroundColor: 'whiteSmoke',
+      imageURLPrefix: '/_static/lib/img',
+      onInit: function(lc) {
+        $('[data-action=export-as-png]').click(function(e) {
+          e.preventDefault();
+          window.open(lc.canvasForExport().toDataURL());
+        })
+
+      }
+    });
+  });
+}).call(this);
