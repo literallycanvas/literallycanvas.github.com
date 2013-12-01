@@ -15,6 +15,15 @@ user's drawing.
 
     <div class="literally index"><canvas></canvas></div>
 
+    <script>
+      $(document).ready(function() {
+        $('.literally.index').literallycanvas({
+          backgroundColor: 'whiteSmoke',
+          imageURLPrefix: '/_static/lib/img'
+        });
+      });
+    </script>
+
 .. toctree::
     :maxdepth: 3
 

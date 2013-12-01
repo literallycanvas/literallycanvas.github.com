@@ -11,3 +11,19 @@ window.
     <form class="export">
       <input type="submit" data-action="export-as-png" value="Export as PNG">
     </form>
+
+    <script>
+      $(document).ready(function() {
+        $('.literally.export').literallycanvas({
+          backgroundColor: 'whiteSmoke',
+          imageURLPrefix: '/_static/lib/img',
+          onInit: function(lc) {
+            $('[data-action=export-as-png]').click(function(e) {
+              e.preventDefault();
+              window.open(lc.canvasForExport().toDataURL());
+            })
+
+          }
+        });
+      });
+    </script>

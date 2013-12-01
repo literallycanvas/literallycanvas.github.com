@@ -44,8 +44,10 @@ html_theme_options = {
 
 html_context = {}
 html_sidebars = {
-    '**': ['localtoc.html', 'sidebarhelp.html', 'searchbox.html'],
-    'index': ['globaltoc.html', 'sidebarhelp.html', 'searchbox.html'],
+    '**': [
+        'localtoc.html', 'sidebarhelp.html', 'searchbox.html', 'sourcelink.html'],
+    'index': [
+        'globaltoc.html', 'sidebarhelp.html', 'searchbox.html', 'sourcelink.html'],
 }
 
 html_title = "%(project)s v%(release)s documentation" % {
