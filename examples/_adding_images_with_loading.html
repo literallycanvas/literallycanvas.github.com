@@ -1,0 +1,27 @@
+<div class="literally images-with-loading"><canvas></canvas></div>
+
+<script>
+  $(document).ready(function() {
+    $('.literally.images-with-loading').literallycanvas({
+      backgroundColor: 'whiteSmoke',
+      imageURLPrefix: '/_static/lib/img',
+      onInit: function(lc) {
+        var localStorageKey = 'drawing-with-background'
+        if (localStorage.getItem(localStorageKey)) {
+          lc.loadSnapshotJSON(localStorage.getItem(localStorageKey));
+        }
+        lc.on('drawingChange', function() {
+          localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
+        });
+
+        if (lc.numShapes() == 0) {
+          var backgroundImage = new Image()
+          backgroundImage.src = '/_static/sample_image.png';
+          // last argument is 'locked' - prevent image from being removed by
+          // clear or undo
+          lc.saveShape(new LC.ImageShape(0, 0, backgroundImage, true));
+        }
+      }
+    });
+  });
+</script>

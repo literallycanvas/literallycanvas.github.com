@@ -27,7 +27,7 @@ user's drawing.
 .. toctree::
     :maxdepth: 3
 
-    using.rst
+    installing.rst
     api.rst
     examples/index.rst
 

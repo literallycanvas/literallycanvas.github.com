@@ -1,0 +1,15 @@
+<div class="literally images"><canvas></canvas></div>
+
+<script>
+  $(document).ready(function() {
+    $('.literally.images').literallycanvas({
+      backgroundColor: 'whiteSmoke',
+      imageURLPrefix: '/_static/lib/img',
+      onInit: function(lc) {
+        var backgroundImage = new Image()
+        backgroundImage.src = '/_static/sample_image.png';
+        lc.saveShape(new LC.ImageShape(0, 0, backgroundImage));
+      }
+    });
+  });
+</script>

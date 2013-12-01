@@ -1,7 +1,13 @@
+.. _saving-and-loading:
+
 Saving to Local Storage
 =======================
 
-Draw a picture, then reload the page. Your drawing is saved!
+Literally Canvas can serialize the user's drawing as a Javascript object.
+Generally, you probably want to do this in response to events.
+
+Here's a complete example that saves the drawing to ``localStorage`` so that
+when the user refreshes the page, the drawing persists.
 
 .. raw:: html
     :file: _localstorage.html
