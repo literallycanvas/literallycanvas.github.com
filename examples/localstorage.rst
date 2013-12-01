@@ -14,4 +14,4 @@ when the user refreshes the page, the drawing persists.
 
 .. literalinclude:: _localstorage.html
     :language: html
-    :emphasize-lines: 9-14
+    :emphasize-lines: 9-15
