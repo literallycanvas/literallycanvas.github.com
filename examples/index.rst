@@ -7,3 +7,4 @@ Examples
     export.rst
     imgur.rst
     localstorage.rst
+    watermark.rst
