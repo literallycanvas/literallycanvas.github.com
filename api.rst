@@ -214,5 +214,5 @@ Shapes
 Adding tools
 ------------
 
-Inspect :file:`coffee/core/tools.coffee` and
-:file:`coffee/core/widgets.coffee` in the source code.
+Inspect :file:`coffee/core/tools.coffee` and :file:`coffee/core/widgets.coffee`
+in the source code. We haven't had time to write this section of the docs yet.
