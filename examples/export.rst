@@ -5,25 +5,7 @@ Clicking "Export as PNG" below will open the image on the canvas in a new
 window.
 
 .. raw:: html
+    :file: _export.html
 
-    <div class="literally export"><canvas></canvas></div>
-
-    <form class="export">
-      <input type="submit" data-action="export-as-png" value="Export as PNG">
-    </form>
-
-    <script>
-      $(document).ready(function() {
-        $('.literally.export').literallycanvas({
-          backgroundColor: 'whiteSmoke',
-          imageURLPrefix: '/_static/lib/img',
-          onInit: function(lc) {
-            $('[data-action=export-as-png]').click(function(e) {
-              e.preventDefault();
-              window.open(lc.canvasForExport().toDataURL());
-            })
-
-          }
-        });
-      });
-    </script>
+.. literalinclude:: _export.html
+    :language: html
