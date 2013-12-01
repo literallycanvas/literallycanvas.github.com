@@ -8,3 +8,4 @@ Draw a picture, then reload the page. Your drawing is saved!
 
 .. literalinclude:: _localstorage.html
     :language: html
+    :emphasize-lines: 9-14

@@ -9,3 +9,4 @@ to Imgur and redirect you to its page.
 
 .. literalinclude:: _imgur.html
     :language: html
+    :emphasize-lines: 18-33
