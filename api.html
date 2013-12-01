@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Literally Canvas v0.3-rc2 documentation" href="index.html" />
     <link rel="next" title="Examples" href="examples/index.html" />
-    <link rel="prev" title="User guide" href="using.html" />
+    <link rel="prev" title="Installing" href="installing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
@@ -44,7 +44,7 @@
     <ul>
         <li>
           &larr;
-          <a href="using.html" title="Previous document">User guide</a>
+          <a href="installing.html" title="Previous document">Installing</a>
         </li>
         <li>
           <a href="examples/index.html" title="Next document">Examples</a>
@@ -66,6 +66,88 @@
             
   <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-a-canvas">
+<h2>Creating a canvas<a class="headerlink" href="#creating-a-canvas" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">options</span><span class="p">});</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="_S_.literallycanvas">
+<tt class="descclassname">$.</tt><tt class="descname">literallycanvas</tt><big>(</big><em>options</em><big>)</big><a class="headerlink" href="#_S_.literallycanvas" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>imageURLPrefix</strong> &#8211; <p>Location of Literally Canvas&#8217;s <tt class="docutils literal"><span class="pre">img/</span></tt> folder.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You probably need to set this.</p>
+</div>
+</li>
+<li><strong>onInit</strong> (function(<a class="reference internal" href="#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a>)) &#8211; <p>This callback is a convenient place to set up event
+handlers, programmatically add shapes, or otherwise
+integrate with your application.</p>
+<p><a class="reference internal" href="examples/localstorage.html#saving-and-loading"><em>Saving to Local Storage</em></a> has an example of how you might
+use this option.</p>
+</li>
+<li><strong>primaryColor</strong> &#8211; Starting stroke color. Defaults to <tt class="docutils literal"><span class="pre">'#000'</span></tt>.</li>
+<li><strong>secondaryColor</strong> &#8211; Starting fill color. Defaults to <tt class="docutils literal"><span class="pre">'#fff'</span></tt>.</li>
+<li><strong>backgroundColor</strong> &#8211; Starting background color. Defaults to
+<tt class="docutils literal"><span class="pre">'transparent'</span></tt>.</li>
+<li><strong>keyboardShortcuts</strong> &#8211; Enable panning with the arrow keys. Defaults to
+<tt class="docutils literal"><span class="pre">true</span></tt>.</li>
+<li><strong>preserveCanvasContents</strong> &#8211; <p>If <tt class="docutils literal"><span class="pre">true</span></tt>, preserve the contents of the canvas as part of the
+drawing.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+<span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s1">&#39;rgb(255,255,0)&#39;</span><span class="p">;</span>
+<span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">preserveCanvasContents</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This feature is somewhat experimental. It doesn&#8217;t attempt to preserve
+the original image&#8217;s scale. Suggestions and patches are welcome.</p>
+</div>
+</li>
+<li><strong>toolClasses</strong> &#8211; <p>A list of tools to enable. The default value is:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">PencilWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EraserWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">LineWidget</span><span class="p">,</span>
+ <span class="nx">LC</span><span class="p">.</span><span class="nx">RectangleWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">PanWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EyeDropperWidget</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If you need to disable a tool (such as pan), you can remove it from the
+above list and pass the remainder as <tt class="docutils literal"><span class="pre">toolClasses</span></tt>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
+    <span class="c1">// disable panning</span>
+    <span class="nx">keyboardShortcuts</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">toolClass</span><span class="o">:</span> <span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">PencilWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EraserWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">LineWidget</span><span class="p">,</span>
+                <span class="nx">LC</span><span class="p">.</span><span class="nx">RectangleWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EyeDropperWidget</span><span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This simplistic API will likely change in favor of one that doesn&#8217;t
+expose so much internal information.</p>
+</div>
+</li>
+<li><strong>watermarkImage</strong> &#8211; <p>An image to display behind the drawing. The image will be centered and
+not scaled. It will not pan with the drawing.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/static/img/watermark.png&#39;</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">watermarkImage</span><span class="o">:</span> <span class="nx">img</span><span class="p">});</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <div class="section" id="literallycanvas">
 <h2><tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt><a class="headerlink" href="#literallycanvas" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -84,8 +166,16 @@ callback option on <tt class="docutils literal"><span class="pre">$('.literally'
 <dt id="canvasForExport">
 <tt class="descname">canvasForExport</tt><big>(</big><big>)</big><a class="headerlink" href="#canvasForExport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a canvas object with the fully rendered drawing. This canvas is zoomed
-and cropped to the current view. See <a class="reference internal" href="using.html#exporting-images"><em>Exporting images</em></a> for an
+and cropped to the current view. See <a class="reference internal" href="examples/export.html#exporting-images"><em>Exporting to PNG</em></a> for an
 example.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Many image uploading services support base64-encoded data. You can get that
+data this way:</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="nx">lc</span><span class="p">.</span><span class="nx">canvasForExport</span><span class="p">().</span><span class="nx">toDataURL</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -105,7 +195,7 @@ except when used as an argument to <a class="reference internal" href="#loadSnap
 <dt id="on">
 <tt class="descname">on</tt><big>(</big><em>event</em>, <em>callback</em><big>)</big><a class="headerlink" href="#on" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attach an event handler to <em>event</em>. A common use case is to save the
-drawing when it is changed; see <a class="reference internal" href="using.html#saving-and-loading"><em>Saving and loading drawings</em></a>.</p>
+drawing when it is changed; see <a class="reference internal" href="examples/localstorage.html#saving-and-loading"><em>Saving to Local Storage</em></a>.</p>
 <p>See <a class="reference internal" href="#events"><em>Events</em></a> for a list of events.</p>
 </dd></dl>
 
@@ -280,8 +370,8 @@ drawing a line.</p>
 </div>
 <div class="section" id="adding-tools">
 <h2>Adding tools<a class="headerlink" href="#adding-tools" title="Permalink to this headline">¶</a></h2>
-<p>Inspect <tt class="file docutils literal"><span class="pre">coffee/core/tools.coffee</span></tt> and
-<tt class="file docutils literal"><span class="pre">coffee/core/widgets.coffee</span></tt> in the source code.</p>
+<p>Inspect <tt class="file docutils literal"><span class="pre">coffee/core/tools.coffee</span></tt> and <tt class="file docutils literal"><span class="pre">coffee/core/widgets.coffee</span></tt>
+in the source code. We haven&#8217;t had time to write this section of the docs yet.</p>
 </div>
 </div>
 
@@ -294,6 +384,7 @@ drawing a line.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">API</a><ul>
+<li><a class="reference internal" href="#creating-a-canvas">Creating a canvas</a></li>
 <li><a class="reference internal" href="#literallycanvas"><tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt></a></li>
 <li><a class="reference internal" href="#events">Events</a><ul>
 <li><a class="reference internal" href="#drawing-changes">Drawing changes</a></li>
@@ -338,7 +429,7 @@ drawing a line.</p>
     <ul>
         <li>
           &larr;
-          <a href="using.html" title="Previous document">User guide</a>
+          <a href="installing.html" title="Previous document">Installing</a>
         </li>
         <li>
           <a href="examples/index.html" title="Next document">Examples</a>

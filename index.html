@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Literally Canvas v0.3-rc2 documentation" href="#" />
-    <link rel="next" title="User guide" href="using.html" />
+    <link rel="next" title="Installing" href="installing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
@@ -42,7 +42,7 @@
   <nav id="rellinks">
     <ul>
         <li>
-          <a href="using.html" title="Next document">User guide</a>
+          <a href="installing.html" title="Next document">Installing</a>
           &rarr;
         </li>
     </ul>
@@ -68,22 +68,25 @@ zoom. A semi-stable API allows you to add your own tools. It works great on
 mobile devices.</p>
 <p>It&#8217;s easy to get a data URL for upload to a site like Imgur or load/save a
 user&#8217;s drawing.</p>
-<div class="literally index"><canvas></canvas></div><div class="toctree-wrapper compound">
+<div class="literally index"><canvas></canvas></div>
+
+<script>
+  $(document).ready(function() {
+    $('.literally.index').literallycanvas({
+      backgroundColor: 'whiteSmoke',
+      imageURLPrefix: '/_static/lib/img'
+    });
+  });
+</script><div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="using.html">User guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="using.html#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="using.html#step-1-get-the-assets">Step 1: Get the assets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="using.html#step-2-include-the-assets">Step 2: Include the assets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="using.html#step-3-write-markup-and-css">Step 3: Write markup and CSS</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="using.html#creating-a-canvas">Creating a canvas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="using.html#saving-and-loading-drawings">Saving and loading drawings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="using.html#exporting-images">Exporting images</a></li>
-<li class="toctree-l2"><a class="reference internal" href="using.html#adding-images">Adding images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#get-the-assets">Get the assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#include-the-assets">Include the assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#write-code">Write code</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#creating-a-canvas">Creating a canvas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#literallycanvas"><tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#events">Events</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#drawing-changes">Drawing changes</a></li>
@@ -96,9 +99,14 @@ user&#8217;s drawing.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/localstorage.html">Saving to Local Storage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/export.html">Exporting to PNG</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/imgur.html">Uploading to Imgur</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/localstorage.html">Saving to Local Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/adding_images.html">Adding images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/adding_images.html#with-saving-and-loading">With saving and loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/watermark.html">Using a watermark</a></li>
 </ul>
 </li>
 </ul>
@@ -213,7 +221,7 @@ Learn a bit about how to do these things yourself!</li>
         <div class="sphinxsidebarwrapper">
 <h3><a href="#">Table Of Contents</a></h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="using.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 </ul>
@@ -248,7 +256,7 @@ Learn a bit about how to do these things yourself!</li>
   <nav id="rellinks">
     <ul>
         <li>
-          <a href="using.html" title="Next document">User guide</a>
+          <a href="installing.html" title="Next document">Installing</a>
           &rarr;
         </li>
     </ul>

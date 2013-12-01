@@ -26,7 +26,7 @@
     <link rel="top" title="Literally Canvas v0.3-rc2 documentation" href="../index.html" />
     <link rel="up" title="Examples" href="index.html" />
     <link rel="next" title="Uploading to Imgur" href="imgur.html" />
-    <link rel="prev" title="Examples" href="index.html" />
+    <link rel="prev" title="Saving to Local Storage" href="localstorage.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
@@ -45,7 +45,7 @@
     <ul>
         <li>
           &larr;
-          <a href="index.html" title="Previous document">Examples</a>
+          <a href="localstorage.html" title="Previous document">Saving to Local Storage</a>
         </li>
         <li>
           <a href="imgur.html" title="Next document">Uploading to Imgur</a>
@@ -69,14 +69,56 @@
           <div class="body">
             
   <div class="section" id="exporting-to-png">
-<h1>Exporting to PNG<a class="headerlink" href="#exporting-to-png" title="Permalink to this headline">¶</a></h1>
-<p>Clicking &#8220;Export as PNG&#8221; below will open the image on the canvas in a new
-window.</p>
+<span id="exporting-images"></span><h1>Exporting to PNG<a class="headerlink" href="#exporting-to-png" title="Permalink to this headline">¶</a></h1>
+<p>Internally, Literally Canvas uses more than one canvas to draw efficiently. You
+can use <tt class="xref js js-func docutils literal"><span class="pre">LiterallyCanvas.canvasForExport()</span></tt> to get a fully rendered
+canvas object, which you can use as needed to export your image. This example
+exports your drawing as a PNG in a new window.</p>
 <div class="literally export"><canvas></canvas></div>
 
 <form class="export">
   <input type="submit" data-action="export-as-png" value="Export as PNG">
-</form></div>
+</form>
+
+<script>
+  $(document).ready(function() {
+    $('.literally.export').literallycanvas({
+      backgroundColor: 'whiteSmoke',
+      imageURLPrefix: '/_static/lib/img',
+      onInit: function(lc) {
+        $('[data-action=export-as-png]').click(function(e) {
+          e.preventDefault();
+          window.open(lc.canvasForExport().toDataURL());
+        })
+
+      }
+    });
+  });
+</script>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally export&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;export&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">data-action=</span><span class="s">&quot;export-as-png&quot;</span> <span class="na">value=</span><span class="s">&quot;Export as PNG&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally.export&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
+      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;whiteSmoke&#39;</span><span class="p">,</span>
+      <span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/_static/lib/img&#39;</span><span class="p">,</span>
+      <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-action=export-as-png]&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="hll">          <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">lc</span><span class="p">.</span><span class="nx">canvasForExport</span><span class="p">().</span><span class="nx">toDataURL</span><span class="p">());</span>
+</span>        <span class="p">})</span>
+
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</div>
+</div>
 
 
           </div>
@@ -115,7 +157,7 @@ window.</p>
     <ul>
         <li>
           &larr;
-          <a href="index.html" title="Previous document">Examples</a>
+          <a href="localstorage.html" title="Previous document">Saving to Local Storage</a>
         </li>
         <li>
           <a href="imgur.html" title="Next document">Uploading to Imgur</a>
