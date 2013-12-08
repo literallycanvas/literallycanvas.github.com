@@ -65,11 +65,6 @@ Creating a canvas
                             LC.RectangleWidget, LC.EyeDropperWidget]
             });
 
-        .. note::
-
-            This simplistic API will likely change in favor of one that doesn't
-            expose so much internal information.
-
     :param watermarkImage:
         An image to display behind the drawing. The image will be centered and
         not scaled. It will not pan with the drawing.
