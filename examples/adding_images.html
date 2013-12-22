@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Literally Canvas v0.3-rc2 documentation" href="../index.html" />
     <link rel="up" title="Examples" href="index.html" />
-    <link rel="next" title="Using a watermark" href="watermark.html" />
+    <link rel="next" title="Backgrounds" href="background.html" />
     <link rel="prev" title="Uploading to Imgur" href="imgur.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
@@ -48,7 +48,7 @@
           <a href="imgur.html" title="Previous document">Uploading to Imgur</a>
         </li>
         <li>
-          <a href="watermark.html" title="Next document">Using a watermark</a>
+          <a href="background.html" title="Next document">Backgrounds</a>
           &rarr;
         </li>
     </ul>
@@ -104,75 +104,6 @@ provide a UI for adding images.</p>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
 </div>
-<div class="section" id="with-saving-and-loading">
-<h2>With saving and loading<a class="headerlink" href="#with-saving-and-loading" title="Permalink to this headline">¶</a></h2>
-<p>If you also use saving and loading, you&#8217;ll want to make sure your drawing is
-empty before adding a background to it. Otherwise, you&#8217;ll end up with a new
-duplicate of your background image each time you load it. The example below
-saves to <tt class="docutils literal"><span class="pre">localStorage</span></tt> and includes a background image.</p>
-<div class="section" id="preventing-the-image-from-being-deleted">
-<h3>Preventing the image from being deleted<a class="headerlink" href="#preventing-the-image-from-being-deleted" title="Permalink to this headline">¶</a></h3>
-<p>If you play with the previous example, you may notice that you can delete the
-image using Clear or Undo. To prevent that from happening, pass <tt class="docutils literal"><span class="pre">locked=true</span></tt>
-to <tt class="docutils literal"><span class="pre">ImageShape()</span></tt>.</p>
-<div class="literally images-with-loading"><canvas></canvas></div>
-
-<script>
-  $(document).ready(function() {
-    $('.literally.images-with-loading').literallycanvas({
-      backgroundColor: 'whiteSmoke',
-      imageURLPrefix: '/_static/lib/img',
-      onInit: function(lc) {
-        var localStorageKey = 'drawing-with-background'
-        if (localStorage.getItem(localStorageKey)) {
-          lc.loadSnapshotJSON(localStorage.getItem(localStorageKey));
-        }
-        lc.on('drawingChange', function() {
-          localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
-        });
-
-        if (lc.numShapes() == 0) {
-          var backgroundImage = new Image()
-          backgroundImage.src = '/_static/sample_image.png';
-          // last argument is 'locked' - prevent image from being removed by
-          // clear or undo
-          lc.saveShape(new LC.ImageShape(0, 0, backgroundImage, true));
-        }
-      }
-    });
-  });
-</script>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally images-with-loading&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
-
-<span class="nt">&lt;script&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally.images-with-loading&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
-      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;whiteSmoke&#39;</span><span class="p">,</span>
-      <span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/_static/lib/img&#39;</span><span class="p">,</span>
-      <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">localStorageKey</span> <span class="o">=</span> <span class="s1">&#39;drawing-with-background&#39;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">))</span> <span class="p">{</span>
-          <span class="nx">lc</span><span class="p">.</span><span class="nx">loadSnapshotJSON</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">));</span>
-        <span class="p">}</span>
-        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-          <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">,</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getSnapshotJSON</span><span class="p">());</span>
-        <span class="p">});</span>
-<span class="hll">
-</span><span class="hll">        <span class="k">if</span> <span class="p">(</span><span class="nx">lc</span><span class="p">.</span><span class="nx">numShapes</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="hll">          <span class="kd">var</span> <span class="nx">backgroundImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
-</span><span class="hll">          <span class="nx">backgroundImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/_static/sample_image.png&#39;</span><span class="p">;</span>
-</span><span class="hll">          <span class="c1">// last argument is &#39;locked&#39; - prevent image from being removed by</span>
-</span><span class="hll">          <span class="c1">// clear or undo</span>
-</span><span class="hll">          <span class="nx">lc</span><span class="p">.</span><span class="nx">saveShape</span><span class="p">(</span><span class="k">new</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">ImageShape</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">backgroundImage</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
-</span>        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
-  <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 
 
@@ -180,20 +111,9 @@ to <tt class="docutils literal"><span class="pre">ImageShape()</span></tt>.</p>
         </div>
       </div>
       <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Adding images</a><ul>
-<li><a class="reference internal" href="#with-saving-and-loading">With saving and loading</a><ul>
-<li><a class="reference internal" href="#preventing-the-image-from-being-deleted">Preventing the image from being deleted</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc2.tar.gz">
-		Download v0.3-rc2
+        <div class="sphinxsidebarwrapper"><p>
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc3.tar.gz">
+		Download v0.3-rc3
 	</a>
 </p>
 <p>
@@ -226,7 +146,7 @@ to <tt class="docutils literal"><span class="pre">ImageShape()</span></tt>.</p>
           <a href="imgur.html" title="Previous document">Uploading to Imgur</a>
         </li>
         <li>
-          <a href="watermark.html" title="Next document">Using a watermark</a>
+          <a href="background.html" title="Next document">Backgrounds</a>
           &rarr;
         </li>
     </ul>

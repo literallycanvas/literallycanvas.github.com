@@ -95,6 +95,16 @@ use this option.</p>
 <li><strong>secondaryColor</strong> &#8211; Starting fill color. Defaults to <tt class="docutils literal"><span class="pre">'#fff'</span></tt>.</li>
 <li><strong>backgroundColor</strong> &#8211; Starting background color. Defaults to
 <tt class="docutils literal"><span class="pre">'transparent'</span></tt>.</li>
+<li><strong>backgroundShapes</strong> &#8211; <p>List of shapes to display under all other shapes.
+They will not be affected by the Clear button or
+by <a class="reference internal" href="#loadSnapshotJSON" title="loadSnapshotJSON"><tt class="xref js js-func docutils literal"><span class="pre">loadSnapshotJSON()</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The eraser will erase the background. This
+problem will be fixed in future versions of
+Literally Canvas.</p>
+</div>
+</li>
 <li><strong>keyboardShortcuts</strong> &#8211; Enable panning with the arrow keys. Defaults to
 <tt class="docutils literal"><span class="pre">true</span></tt>.</li>
 <li><strong>preserveCanvasContents</strong> &#8211; <p>If <tt class="docutils literal"><span class="pre">true</span></tt>, preserve the contents of the canvas as part of the
@@ -113,7 +123,8 @@ the original image&#8217;s scale. Suggestions and patches are welcome.</p>
 </li>
 <li><strong>toolClasses</strong> &#8211; <p>A list of tools to enable. The default value is:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">PencilWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EraserWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">LineWidget</span><span class="p">,</span>
- <span class="nx">LC</span><span class="p">.</span><span class="nx">RectangleWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">PanWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EyeDropperWidget</span><span class="p">]</span>
+ <span class="nx">LC</span><span class="p">.</span><span class="nx">RectangleWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">TextWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">PanWidget</span><span class="p">,</span>
+ <span class="nx">LC</span><span class="p">.</span><span class="nx">EyeDropperWidget</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>If you need to disable a tool (such as pan), you can remove it from the
@@ -125,11 +136,6 @@ above list and pass the remainder as <tt class="docutils literal"><span class="p
                 <span class="nx">LC</span><span class="p">.</span><span class="nx">RectangleWidget</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">EyeDropperWidget</span><span class="p">]</span>
 <span class="p">});</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This simplistic API will likely change in favor of one that doesn&#8217;t
-expose so much internal information.</p>
 </div>
 </li>
 <li><strong>watermarkImage</strong> &#8211; <p>An image to display behind the drawing. The image will be centered and
@@ -398,8 +404,8 @@ in the source code. We haven&#8217;t had time to write this section of the docs 
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc2.tar.gz">
-		Download v0.3-rc2
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc3.tar.gz">
+		Download v0.3-rc3
 	</a>
 </p>
 <p>

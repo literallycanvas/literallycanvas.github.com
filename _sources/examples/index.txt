@@ -8,4 +8,5 @@ Examples
     export.rst
     imgur.rst
     adding_images.rst
+    background.rst
     watermark.rst
