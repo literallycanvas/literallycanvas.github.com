@@ -18,7 +18,7 @@ You could also use Bower with the tarball:
 
 .. code-block:: sh
 
-    bower install https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc2.tar.gz
+    bower install https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc3.tar.gz
 
 or use the Git repository that is set up for Bower:
 

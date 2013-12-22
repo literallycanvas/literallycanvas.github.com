@@ -1,10 +1,17 @@
-<div class="literally images-with-loading"><canvas></canvas></div>
+<div class="literally backgrounds"><canvas></canvas></div>
 
 <script>
   $(document).ready(function() {
-    $('.literally.images-with-loading').literallycanvas({
+    var backgroundImage = new Image()
+    backgroundImage.src = '/_static/sample_image.png';
+
+    $('.literally.backgrounds').literallycanvas({
       backgroundColor: 'whiteSmoke',
       imageURLPrefix: '/_static/lib/img',
+      backgroundShapes: [
+        new LC.ImageShape(0, 0, backgroundImage),
+        new LC.TextShape(300, 100, "I am in the background", 'blue')
+      ],
       onInit: function(lc) {
         var localStorageKey = 'drawing-with-background'
         if (localStorage.getItem(localStorageKey)) {
@@ -13,14 +20,6 @@
         lc.on('drawingChange', function() {
           localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
         });
-
-        if (lc.numShapes() == 0) {
-          var backgroundImage = new Image()
-          backgroundImage.src = '/_static/sample_image.png';
-          // last argument is 'locked' - prevent image from being removed by
-          // clear or undo
-          lc.saveShape(new LC.ImageShape(0, 0, backgroundImage, true));
-        }
       }
     });
   });

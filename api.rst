@@ -26,6 +26,17 @@ Creating a canvas
     :param secondaryColor: Starting fill color. Defaults to ``'#fff'``.
     :param backgroundColor: Starting background color. Defaults to
                             ``'transparent'``.
+
+    :param backgroundShapes: List of shapes to display under all other shapes.
+                             They will not be affected by the Clear button or
+                             by :js:func:`loadSnapshotJSON`.
+
+                             .. note::
+
+                                The eraser will erase the background. This
+                                problem will be fixed in future versions of
+                                Literally Canvas.
+
     :param keyboardShortcuts: Enable panning with the arrow keys. Defaults to
                               ``true``.
 
@@ -51,7 +62,8 @@ Creating a canvas
         .. code-block:: javascript
 
             [LC.PencilWidget, LC.EraserWidget, LC.LineWidget,
-             LC.RectangleWidget, LC.PanWidget, LC.EyeDropperWidget]
+             LC.RectangleWidget, LC.TextWidget, LC.PanWidget,
+             LC.EyeDropperWidget]
 
         If you need to disable a tool (such as pan), you can remove it from the
         above list and pass the remainder as ``toolClasses``.
