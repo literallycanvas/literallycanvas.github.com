@@ -21,14 +21,13 @@ copyright = u'2012-2013 Literally Canvas contributors'
 version = '0.3'
 # The full version, including alpha/beta/rc tags.
 # Can refer to in docs with |release|.
-release = '0.3-rc2'
+release = '0.3-rc4'
 #language = None
 
 
 html_theme_path = [better_theme_path]
 html_static_path = ['_static']
 html_theme = 'better'
-us = "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"
 html_theme_options = {
     'cssfiles': [
         'http://fonts.googleapis.com/css?family=Finger+Paint',
@@ -36,7 +35,7 @@ html_theme_options = {
         '_static/lib/css/literally.css',
     ],
     'scriptfiles': [
-        us,
+        "_static/lib/js/literallycanvas.js",
         "_static/lib/js/literallycanvas.jquery.js",
         '_static/docs.js',
     ]
