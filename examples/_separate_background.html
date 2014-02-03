@@ -1,0 +1,39 @@
+<style>
+  .separate-backgrounds {
+    width: 100%;
+    position: relative;
+    height: 240px;
+  }
+
+  img, .literally.separate-backgrounds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+  }
+</style>
+
+<div class="separate-backgrounds">
+  <img class="separate-background-image" src="/_static/sample_image.png">
+  <div class="literally separate-backgrounds"><canvas></canvas></div>
+</div>
+<br>
+<button class="export-with-separate-background">
+  Export with background
+</button>
+
+<script>
+  $(document).ready(function() {
+    $('.literally.separate-backgrounds').literallycanvas({
+      backgroundColor: 'transparent',
+      imageURLPrefix: '/_static/lib/img',
+      onInit: function(lc) {
+        $('.export-with-separate-background').on('click', function() {
+          window.open(
+            lc.canvasWithBackground($('.separate-background-image').get(0))
+              .toDataURL());
+        })
+      }
+    });
+  });
+</script>

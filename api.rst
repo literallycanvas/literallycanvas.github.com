@@ -118,6 +118,10 @@ Creating a canvas
 
             lc.canvasForExport().toDataURL().split(',')[1]
 
+  .. js:function:: canvasWithBackground(canvasOrImage)
+
+    Get a canvas object with the fully rendered drawing on top of the given image. The resulting canvas completely fits both images.
+
   .. js:function:: loadSnapshotJSON(snapshot)
 
     Load a JSON-encoded drawing.
