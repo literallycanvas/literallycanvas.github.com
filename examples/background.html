@@ -70,13 +70,14 @@
             
   <div class="section" id="backgrounds">
 <h1>Backgrounds<a class="headerlink" href="#backgrounds" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="affected-by-eraser">
+<h2>Affected by eraser<a class="headerlink" href="#affected-by-eraser" title="Permalink to this headline">¶</a></h2>
 <p>You can specify a list of <em>background shapes</em> when you initialize Literally
 Canvas. Background shapes are not affected by <a class="reference internal" href="../api.html#loadSnapshotJSON" title="loadSnapshotJSON"><tt class="xref js js-func docutils literal"><span class="pre">loadSnapshotJSON()</span></tt></a> or
 clearing the canvas. They scroll with the canvas (in contrast to watermarks).</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The eraser will erase the background. This problem will be fixed in future
-versions of Literally Canvas.</p>
+<p class="last">The eraser will erase the background. The second example on this page demonstrates how to have a background that isn&#8217;t affected by the eraser.</p>
 </div>
 <div class="literally backgrounds"><canvas></canvas></div>
 
@@ -133,13 +134,107 @@ versions of Literally Canvas.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="not-affected-by-eraser">
+<h2>Not affected by eraser<a class="headerlink" href="#not-affected-by-eraser" title="Permalink to this headline">¶</a></h2>
+<p>Since Literally Canvas doesn&#8217;t have internal support for backgrounds that are unaffected by the eraser tool, you&#8217;ll have to render your background into another DOM element to achieve that effect. You&#8217;ll then have to combine the background and LC canvases into one when you want to export the image.</p>
+<style>
+  .separate-backgrounds {
+    width: 100%;
+    position: relative;
+    height: 240px;
+  }
+
+  img, .literally.separate-backgrounds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+  }
+</style>
+
+<div class="separate-backgrounds">
+  <img class="separate-background-image" src="/_static/sample_image.png">
+  <div class="literally separate-backgrounds"><canvas></canvas></div>
+</div>
+<br>
+<button class="export-with-separate-background">
+  Export with background
+</button>
+
+<script>
+  $(document).ready(function() {
+    $('.literally.separate-backgrounds').literallycanvas({
+      backgroundColor: 'transparent',
+      imageURLPrefix: '/_static/lib/img',
+      onInit: function(lc) {
+        $('.export-with-separate-background').on('click', function() {
+          window.open(
+            lc.canvasWithBackground($('.separate-background-image').get(0))
+              .toDataURL());
+        })
+      }
+    });
+  });
+</script>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;style&gt;</span>
+  <span class="nc">.separate-backgrounds</span> <span class="p">{</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+    <span class="k">height</span><span class="o">:</span> <span class="m">240px</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nt">img</span><span class="o">,</span> <span class="nc">.literally.separate-backgrounds</span> <span class="p">{</span>
+    <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
+    <span class="k">top</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="k">left</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="o">:</span> <span class="k">transparent</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;separate-backgrounds&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">class=</span><span class="s">&quot;separate-background-image&quot;</span> <span class="na">src=</span><span class="s">&quot;/_static/sample_image.png&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally separate-backgrounds&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;export-with-separate-background&quot;</span><span class="nt">&gt;</span>
+  Export with background
+<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally.separate-backgrounds&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
+      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;transparent&#39;</span><span class="p">,</span>
+      <span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/_static/lib/img&#39;</span><span class="p">,</span>
+      <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.export-with-separate-background&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span>
+            <span class="nx">lc</span><span class="p">.</span><span class="nx">canvasWithBackground</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.separate-background-image&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+              <span class="p">.</span><span class="nx">toDataURL</span><span class="p">());</span>
+        <span class="p">})</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
 
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper"><p>
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Backgrounds</a><ul>
+<li><a class="reference internal" href="#affected-by-eraser">Affected by eraser</a></li>
+<li><a class="reference internal" href="#not-affected-by-eraser">Not affected by eraser</a></li>
+</ul>
+</li>
+</ul>
+<p>
 	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc4.tar.gz">
 		Download v0.3-rc4
 	</a>
