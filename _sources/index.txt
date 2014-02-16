@@ -69,7 +69,7 @@ Browser compatibility
 =========== ========================
 Chrome      Awesome
 Safari      Awesome
-iOS         Doesn't work zoomed
+iOS         Zoom is buggy
 Firefox     23+ [#f1]_
 Opera       ??
 Android     ??
