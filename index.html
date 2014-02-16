@@ -144,8 +144,8 @@ angles often seen in simplistic drawing programs.</li>
 <h1>Browser compatibility<a class="headerlink" href="#browser-compatibility" title="Permalink to this headline">¶</a></h1>
 <table border="1" class="docutils">
 <colgroup>
-<col width="34%" />
-<col width="66%" />
+<col width="31%" />
+<col width="69%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>Chrome</td>
@@ -167,7 +167,7 @@ angles often seen in simplistic drawing programs.</li>
 <td>??</td>
 </tr>
 <tr class="row-odd"><td>IE</td>
-<td>Doesn&#8217;t work <a class="footnote-reference" href="#f2" id="id2">[2]</a></td>
+<td>Requires polyfill <a class="footnote-reference" href="#f2" id="id2">[2]</a></td>
 </tr>
 </tbody>
 </table>
@@ -182,9 +182,8 @@ as a text field.</td></tr>
 <table class="docutils footnote" frame="void" id="f2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>IE doesn&#8217;t support <tt class="docutils literal"><span class="pre">CustomEvent</span></tt>. We will fix the problem in the
-short term. (In the meantime, contributions of any kind are
-welcome.)</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>IE doesn&#8217;t support the <tt class="docutils literal"><span class="pre">CustomEvent</span></tt> constructor.. Use
+[Mozilla&#8217;s polyfill]_ to get Literally Canvas to run in IE.</td></tr>
 </tbody>
 </table>
 </div>
