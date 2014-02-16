@@ -73,26 +73,29 @@ iOS         Doesn't work zoomed
 Firefox     23+ [#f1]_
 Opera       ??
 Android     ??
-IE          10+
+IE          Doesn't work [#f2]_
 =========== =====================
 
 .. rubric:: Footnotes
 
 .. [#f1] Works in previous versions, but the brush size slider will render
          as a text field.
+.. [#f2] IE doesn't support ``CustomEvent``. We will fix the problem in the
+         short term. (In the meantime, contributions of any kind are
+         welcome.)
 
 Contributing
 ============
 
-We would be excited to see contributions of any form. New brushes,
-optimizations, feature requests, use cases, designs, bug reports – you name it,
-we want it! Just head on over to `GitHub`_ and get started.
+We are excited to see contributions of any form. New brushes, optimizations,
+feature requests, use cases, designs, bug reports – you name it, we want it!
+Just head on over to `GitHub`_ and get started.
 
 .. _GitHub: http://github.com/literallycanvas/literallycanvas
 
-One particular area where we'd like some help is in styling the toolbar. If
-glitzy CSS-based UI is your thing, we'd love to hear your suggestions or merge
-your pull requests.
+Literally Canvas is developed by volunteers for fun. If missing features or
+compatibility are serious issues for you, consider that the solution to your
+problem might be to help us write the code.
 
 .. _related-projects:
 
