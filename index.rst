@@ -24,6 +24,10 @@ user's drawing.
       });
     </script>
 
+If you would like to support Literally Canvas's development or provide extra
+incentive to implement your favorite feature request, consider donating at
+`gittip.com/irskep <https://www.gittip.com/irskep/>`_.
+
 .. toctree::
     :maxdepth: 3
 
