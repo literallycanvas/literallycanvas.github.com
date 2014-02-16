@@ -16,17 +16,6 @@ user's drawing.
     <div class="literally index"><canvas></canvas></div>
 
     <script>
-      (function () {
-        function CustomEvent ( event, params ) {
-          params = params || { bubbles: false, cancelable: false, detail: undefined };
-          var evt = document.createEvent( 'CustomEvent' );
-          evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
-          return evt;
-         };
-         CustomEvent.prototype = window.CustomEvent.prototype;
-
-        window.CustomEvent = CustomEvent;
-      })();
       $(document).ready(function() {
         $('.literally.index').literallycanvas({
           backgroundColor: 'whiteSmoke',
