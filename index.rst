@@ -66,23 +66,24 @@ Literally Canvas was created in part to replace the object drawing tool in
 Browser compatibility
 =====================
 
-=========== =====================
+=========== ========================
 Chrome      Awesome
 Safari      Awesome
 iOS         Doesn't work zoomed
 Firefox     23+ [#f1]_
 Opera       ??
 Android     ??
-IE          Doesn't work [#f2]_
-=========== =====================
+IE          Requires polyfill [#f2]_
+=========== ========================
 
 .. rubric:: Footnotes
 
 .. [#f1] Works in previous versions, but the brush size slider will render
          as a text field.
-.. [#f2] IE doesn't support ``CustomEvent``. We will fix the problem in the
-         short term. (In the meantime, contributions of any kind are
-         welcome.)
+.. [#f2] IE doesn't support the ``CustomEvent`` constructor.. Use
+         [Mozilla's polyfill]_ to get Literally Canvas to run in IE.
+
+.. _Mozilla's Polyfill: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
 
 Contributing
 ============
