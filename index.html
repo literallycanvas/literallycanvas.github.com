@@ -29,6 +29,7 @@
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
       <link rel="stylesheet" href="_static/lib/css/literally.css" type="text/css" />
+    <script src="_static/lib/js/ie_customevent.js" type="text/javascript"></script>
     <script src="_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="_static/lib/js/literallycanvas.jquery.js" type="text/javascript"></script>
     <script src="_static/docs.js" type="text/javascript"></script>
@@ -71,17 +72,6 @@ user&#8217;s drawing.</p>
 <div class="literally index"><canvas></canvas></div>
 
 <script>
-  (function () {
-    function CustomEvent ( event, params ) {
-      params = params || { bubbles: false, cancelable: false, detail: undefined };
-      var evt = document.createEvent( 'CustomEvent' );
-      evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
-      return evt;
-     };
-     CustomEvent.prototype = window.CustomEvent.prototype;
-
-    window.CustomEvent = CustomEvent;
-  })();
   $(document).ready(function() {
     $('.literally.index').literallycanvas({
       backgroundColor: 'whiteSmoke',
