@@ -35,6 +35,7 @@ html_theme_options = {
         '_static/lib/css/literally.css',
     ],
     'scriptfiles': [
+        "_static/lib/js/ie_customevent.js",
         "_static/lib/js/literallycanvas.js",
         "_static/lib/js/literallycanvas.jquery.js",
         '_static/docs.js',
