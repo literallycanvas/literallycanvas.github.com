@@ -80,7 +80,7 @@ IE          Requires polyfill [#f2]_
 
 .. [#f1] Works in previous versions, but the brush size slider will render
          as a text field.
-.. [#f2] IE doesn't support the ``CustomEvent`` constructor.. Use
+.. [#f2] IE doesn't support the ``CustomEvent`` constructor. Use
          `Mozilla's polyfill`_ to get Literally Canvas to run in IE.
 
 .. _Mozilla's Polyfill: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
