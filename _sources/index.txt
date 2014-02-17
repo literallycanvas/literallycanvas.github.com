@@ -66,15 +66,15 @@ Literally Canvas was created in part to replace the object drawing tool in
 Browser compatibility
 =====================
 
-=========== ========================
+=========== ==============================
 Chrome      Awesome
 Safari      Awesome
 iOS         Zoom is buggy
 Firefox     23+ [#f1]_
 Opera       ??
 Android     ??
-IE          Requires polyfill [#f2]_
-=========== ========================
+IE          10+ (Requires polyfill [#f2]_)
+=========== ==============================
 
 .. rubric:: Footnotes
 
