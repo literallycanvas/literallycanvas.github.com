@@ -25,7 +25,7 @@ html: rm-crud
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 livehtml: html
-	livereload $(BUILDDIR)/html -p 33233
+	livereload $(BUILDDIR)/html -p 33234
 
 dirhtml: rm-crud
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
