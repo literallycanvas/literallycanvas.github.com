@@ -12,6 +12,8 @@ Get the assets
 
 You can just `download the tarball`_. Or use Bower:
 
+.. code-block:: sh
+
     bower install literallycanvas
 
 Don't try to use ``bower`` with the ``literallycanvas/master`` branch. It won't
