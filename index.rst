@@ -66,6 +66,12 @@ Literally Canvas was created in part to replace the object drawing tool in
 Browser compatibility
 =====================
 
+`Browserstack`_ has generously donated resources to ensure that Literally
+Canvas works in as many environments as possible. If you care about your app's
+compatibility, you should check it out.
+
+.. _Browserstack: http://browserstack.com
+
 =========== ==============================
 Chrome      Awesome
 Safari      Awesome
