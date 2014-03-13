@@ -10,30 +10,12 @@ Installing
 Get the assets
 --------------
 
-You can just `download the tarball`_.
+You can just `download the tarball`_. Or use Bower:
 
-You could also use Bower with the tarball:
-
-.. _Download the tarball: ghp-import -p -r lc-bower -m "release" -b master literallycanvas
-
-.. code-block:: sh
-
-    bower install https://github.com/literallycanvas/literallycanvas/archive/v0.3-rc3.tar.gz
-
-or use the Git repository that is set up for Bower:
-
-.. code-block:: sh
-
-    bower install https://github.com/literallycanvas/literallycanvas-bower.git
+    bower install literallycanvas
 
 Don't try to use ``bower`` with the ``literallycanvas/master`` branch. It won't
-work.
-
-.. warning::
-
-    ``bower install literallycanvas`` is currently broken. The Bower
-    maintainers need to update our repo URL in the registry; there is no
-    automated way to do this.
+work. The repo used by the registry is up to date.
 
 Include the assets
 ------------------
