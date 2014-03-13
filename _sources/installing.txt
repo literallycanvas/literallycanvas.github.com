@@ -19,7 +19,7 @@ You can just `download the tarball`_. Or use Bower:
 Don't try to use ``bower`` with the ``literallycanvas/master`` branch. It won't
 work. The repo used by the registry is up to date.
 
-.. _download the tarball: https://github.com/literallycanvas/literallycanvas/archive/release.tar.gz
+.. _download the tarball: https://github.com/literallycanvas/literallycanvas/archive/master.tar.gz
 
 Include the assets
 ------------------
