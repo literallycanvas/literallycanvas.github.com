@@ -66,12 +66,6 @@ Literally Canvas was created in part to replace the object drawing tool in
 Browser compatibility
 =====================
 
-`Browserstack`_ has generously donated resources to ensure that Literally
-Canvas works in as many environments as possible. If you care about your app's
-compatibility, you should check it out.
-
-.. _Browserstack: http://browserstack.com
-
 =========== ==============================
 Chrome      Awesome
 Safari      Awesome
@@ -90,6 +84,18 @@ IE          10+ (Requires polyfill [#f2]_)
          `Mozilla's polyfill`_ to get Literally Canvas to run in IE.
 
 .. _Mozilla's Polyfill: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
+
+.. raw:: html
+
+  <br>
+
+.. image:: _static/browserstack.png
+
+`Browserstack`_ has generously donated resources to ensure that Literally
+Canvas works in as many environments as possible. If you care about your app's
+compatibility, you should check it out.
+
+.. _Browserstack: http://browserstack.com
 
 Contributing
 ============
