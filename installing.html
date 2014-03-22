@@ -83,17 +83,17 @@ work. The repo used by the registry is up to date.</p>
 <div class="section" id="include-the-assets">
 <h2>Include the assets<a class="headerlink" href="#include-the-assets" title="Permalink to this headline">¶</a></h2>
 <p>The Literally Canvas distribution includes several files.</p>
-<p><tt class="docutils literal"><span class="pre">lib/css/literally.css</span></tt> includes styles necessary to render the canvas and
+<p><tt class="docutils literal"><span class="pre">css/literally.css</span></tt> includes styles necessary to render the canvas and
 toolbar.</p>
-<p><tt class="docutils literal"><span class="pre">lib/img</span></tt> contains the toolbar images.</p>
-<p><tt class="docutils literal"><span class="pre">lib/js/literally.jquery[.min].js</span></tt> is the Javascript file you need to use
+<p><tt class="docutils literal"><span class="pre">img</span></tt> contains the toolbar images.</p>
+<p><tt class="docutils literal"><span class="pre">js/literally.jquery[.min].js</span></tt> is the Javascript file you need to use
 the jQuery plugin. The other Javascript files only contain the code for the
 internals.</p>
 <p>Ultimately, you just need to do this:</p>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/static/lib/css/literally.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/static/css/literally.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
 
 <span class="c">&lt;!-- jQuery should already be available --&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/static/lib/js/literallycanvas.jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/static/js/literallycanvas.jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 </div>
 <p>and pass a value for the <tt class="docutils literal"><span class="pre">imageUrlPrefix</span></tt> parameter to
@@ -120,7 +120,7 @@ Otherwise your canvas will have a height of zero.</p>
 <p class="last">You should <strong>not</strong> set the size by styling <tt class="docutils literal"><span class="pre">&lt;canvas&gt;</span></tt>.</p>
 </div>
 <p>Finally, instantiate Literally Canvas:</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">imageUrlPrefix</span><span class="o">:</span> <span class="s1">&#39;/static/lib/img&#39;</span><span class="p">});</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">imageUrlPrefix</span><span class="o">:</span> <span class="s1">&#39;/static/img&#39;</span><span class="p">});</span>
 </pre></div>
 </div>
 </div>

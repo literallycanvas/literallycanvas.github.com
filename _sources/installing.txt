@@ -26,12 +26,12 @@ Include the assets
 
 The Literally Canvas distribution includes several files.
 
-``lib/css/literally.css`` includes styles necessary to render the canvas and
+``css/literally.css`` includes styles necessary to render the canvas and
 toolbar.
 
-``lib/img`` contains the toolbar images.
+``img`` contains the toolbar images.
 
-``lib/js/literally.jquery[.min].js`` is the Javascript file you need to use
+``js/literally.jquery[.min].js`` is the Javascript file you need to use
 the jQuery plugin. The other Javascript files only contain the code for the
 internals.
 
@@ -39,10 +39,10 @@ Ultimately, you just need to do this:
 
 .. code-block:: html
 
-    <link href="/static/lib/css/literally.css" rel="stylesheet">
+    <link href="/static/css/literally.css" rel="stylesheet">
 
     <!-- jQuery should already be available -->
-    <script src="/static/lib/js/literallycanvas.jquery.js"></script>
+    <script src="/static/js/literallycanvas.jquery.js"></script>
 
 and pass a value for the ``imageUrlPrefix`` parameter to
 :js:func:`$.literallycanvas`.
@@ -77,4 +77,4 @@ Finally, instantiate Literally Canvas:
 
 .. code-block:: javascript
 
-    $('.literally').literallycanvas({imageUrlPrefix: '/static/lib/img'});
+    $('.literally').literallycanvas({imageUrlPrefix: '/static/img'});
