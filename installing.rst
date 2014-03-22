@@ -29,7 +29,7 @@ The Literally Canvas distribution includes several files.
 ``css/literally.css`` includes styles necessary to render the canvas and
 toolbar.
 
-``img`` contains the toolbar images.
+``img/`` contains the toolbar images.
 
 ``js/literally.jquery[.min].js`` is the Javascript file you need to use
 the jQuery plugin. The other Javascript files only contain the code for the
