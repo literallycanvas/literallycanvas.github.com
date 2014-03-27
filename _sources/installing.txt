@@ -44,7 +44,7 @@ Ultimately, you just need to do this:
     <!-- jQuery should already be available -->
     <script src="/static/js/literallycanvas.jquery.js"></script>
 
-and pass a value for the ``imageUrlPrefix`` parameter to
+and pass a value for the ``imageURLPrefix`` parameter to
 :js:func:`$.literallycanvas`.
 
 Write code
@@ -77,4 +77,4 @@ Finally, instantiate Literally Canvas:
 
 .. code-block:: javascript
 
-    $('.literally').literallycanvas({imageUrlPrefix: '/static/img'});
+    $('.literally').literallycanvas({imageURLPrefix: '/static/img'});
