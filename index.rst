@@ -2,7 +2,11 @@ About
 =====
 
 Literally Canvas is an extensible, open source (BSD-licensed), HTML5 drawing
-widget. It depends on jQuery.
+widget. It depends on `React.js`_.
+
+.. _React.js: http://facebook.github.io/react/
+
+
 
 You can draw, erase, set the color with the eyedropper, undo, redo, pan, and
 zoom. A semi-stable API allows you to add your own tools. It works great on
@@ -19,7 +23,8 @@ user's drawing.
       $(document).ready(function() {
         $('.literally.index').literallycanvas({
           backgroundColor: 'whiteSmoke',
-          imageURLPrefix: '/_static/lib/img'
+          imageURLPrefix: '/_static/lib/img',
+          onInit: function(lc) { console.log(lc); }
         });
       });
     </script>
@@ -42,17 +47,14 @@ If you look at :ref:`related-projects` at the bottom of the page, you can see
 that this isn't the only HTML5 drawing tool on the block. However, it is unique
 in several ways:
 
-* **It's open source.** Other drawing tools seem to be almost exclusively
-  provided by businesses whose core feature is their drawing tool or
-  freelancers who want you to pay them to adapt their work to your use case.
+* **It's open source.** It's developed by the community for many purposes and
+  is free to use and extend.
 
 * **It's a widget, not an application.** Literally Canvas is intended to live
-  inside your application in the way that works best for you. It doesn't take
-  over your screen. It doesn't (intentionally) gobble up events. It tries to
-  keep its UI to a minimum.
+  inside your application in the way that works best for you.
 
-* **It wants to be extended.** We've tried to design it with extensibility in
-  mind. We hope to improve the tool API in future releases.
+* **It wants to be extended.** There is a public API for adding new shapes and
+  tools.
 
 * **It's fast and looks good.** Literally Canvas is optimized to work with
   complex drawings, and it smooths lines naturally to avoid the unsightly line

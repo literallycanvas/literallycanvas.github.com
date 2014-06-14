@@ -35,9 +35,10 @@ html_theme_options = {
     'cssfiles': [
         'http://fonts.googleapis.com/css?family=Finger+Paint',
         '_static/style.css',
-        '_static/lib/css/literally.css',
+        '_static/lib/css/literallycanvas.css',
     ],
     'scriptfiles': [
+        "//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js",
         "_static/lib/js/ie_customevent.js",
         "_static/lib/js/literallycanvas.js",
         "_static/lib/js/literallycanvas.jquery.js",
