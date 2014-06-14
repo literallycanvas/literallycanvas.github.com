@@ -74,7 +74,7 @@ Browser compatibility
 Chrome      Awesome
 Safari      Awesome
 iOS         Zoom is buggy
-Firefox     23+ [#f1]_
+Firefox     4+
 Opera       ??
 Android     ??
 IE          10+ (Requires polyfill [#f2]_)
@@ -82,24 +82,10 @@ IE          10+ (Requires polyfill [#f2]_)
 
 .. rubric:: Footnotes
 
-.. [#f1] Works in previous versions, but the brush size slider will render
-         as a text field.
 .. [#f2] IE doesn't support the ``CustomEvent`` constructor. Use
          `Mozilla's polyfill`_ to get Literally Canvas to run in IE.
 
 .. _Mozilla's Polyfill: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
-
-.. raw:: html
-
-  <br>
-
-.. image:: _static/browserstack.png
-
-`Browserstack`_ has generously donated resources to ensure that Literally
-Canvas works in as many environments as possible. If you care about your app's
-compatibility, you should check it out.
-
-.. _Browserstack: http://browserstack.com
 
 Contributing
 ============
@@ -113,6 +99,18 @@ Just head on over to `GitHub`_ and get started.
 Literally Canvas is developed by volunteers for fun. If missing features or
 compatibility are serious issues for you, consider that the solution to your
 problem might be to help us write the code.
+
+
+Thanks to BrowserStack
+======================
+
+.. image:: _static/browserstack.png
+
+`BrowserStack`_ has generously donated resources to ensure that Literally
+Canvas works in as many environments as possible. If you care about your app's
+compatibility, you should check it out.
+
+.. _Browserstack: http://browserstack.com
 
 .. _related-projects:
 
