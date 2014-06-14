@@ -22,3 +22,14 @@ a, a:visited {
   margin-bottom: 1em;
   position: relative;
 }
+
+.field-list p {
+  margin: 1rem 0;
+}
+
+.field-list p:first-child {
+  margin-top: 0;
+}
+.field-list p:last-child {
+  margin-bottom: 0;
+}

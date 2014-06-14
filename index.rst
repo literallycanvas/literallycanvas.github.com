@@ -38,7 +38,7 @@ incentive to implement your favorite feature request, consider donating at
     :maxdepth: 3
 
     installing.rst
-    api.rst
+    api/index.rst
     examples/index.rst
 
 Why?
