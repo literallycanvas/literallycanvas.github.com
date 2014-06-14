@@ -453,7 +453,7 @@
     window.LC = (_ref = window.LC) != null ? _ref : {};
     LC.LiterallyCanvas = function() {
         function LiterallyCanvas(canvas, opts) {
-            var backgroundImage, _this = this;
+            var backgroundImage;
             this.canvas = canvas;
             this.opts = opts;
             this.updateSize = __bind(this.updateSize, this);
@@ -466,9 +466,11 @@
             this.canvas.style.backgroundColor = this.colors.background;
             this.watermarkImage = this.opts.watermarkImage;
             if (this.watermarkImage && !this.watermarkImage.complete) {
-                this.watermarkImage.onload = function() {
-                    return _this.repaint(true, false);
-                };
+                this.watermarkImage.onload = function(_this) {
+                    return function() {
+                        return _this.repaint(true, false);
+                    };
+                }(this);
             }
             this.buffer = document.createElement("canvas");
             this.ctx = this.canvas.getContext("2d");
@@ -483,20 +485,24 @@
                 y: 0
             };
             this.scale = 1;
-            this.tool = void 0;
+            this.tool = new LC.Pencil();
             if (this.opts.preserveCanvasContents) {
                 backgroundImage = new Image();
                 backgroundImage.src = this.canvas.toDataURL();
-                backgroundImage.onload = function() {
-                    return _this.repaint();
-                };
+                backgroundImage.onload = function(_this) {
+                    return function() {
+                        return _this.repaint();
+                    };
+                }(this);
                 this.backgroundShapes.push(new LC.ImageShape(0, 0, backgroundImage));
             }
             this.backgroundShapes = this.backgroundShapes.concat(this.opts.backgroundShapes || []);
             if (this.opts.sizeToContainer) {
-                LC.util.sizeToContainer(this.canvas, function() {
-                    return _this.repaint();
-                });
+                LC.util.sizeToContainer(this.canvas, function(_this) {
+                    return function() {
+                        return _this.repaint();
+                    };
+                }(this));
             }
             this.repaint();
         }
@@ -514,6 +520,9 @@
             return this.canvas.addEventListener(name, function(e) {
                 return fn(e.detail);
             });
+        };
+        LiterallyCanvas.prototype.removeEventListener = function(name, fn) {
+            return this.canvas.removeEventListener(name, fn);
         };
         LiterallyCanvas.prototype.clientCoordsToDrawingCoords = function(x, y) {
             return {
@@ -608,16 +617,18 @@
             });
         };
         LiterallyCanvas.prototype.repaint = function(dirty, drawBackground) {
-            var retryCallback, _this = this;
+            var retryCallback;
             if (dirty == null) {
                 dirty = true;
             }
             if (drawBackground == null) {
                 drawBackground = false;
             }
-            retryCallback = function() {
-                return _this.repaint(true);
-            };
+            retryCallback = function(_this) {
+                return function() {
+                    return _this.repaint(true);
+                };
+            }(this);
             if (dirty) {
                 this.buffer.width = this.canvas.width;
                 this.buffer.height = this.canvas.height;
@@ -639,26 +650,29 @@
             return this.trigger("repaint", null);
         };
         LiterallyCanvas.prototype.update = function(shape) {
-            var _this = this;
             this.repaint(false);
-            return this.transformed(function() {
-                return shape.update(_this.ctx);
-            }, this.ctx);
+            return this.transformed(function(_this) {
+                return function() {
+                    return shape.update(_this.ctx);
+                };
+            }(this), this.ctx);
         };
         LiterallyCanvas.prototype.draw = function(shapes, ctx, retryCallback) {
-            var drawShapes, _this = this;
+            var drawShapes;
             if (!shapes.length) {
                 return;
             }
-            drawShapes = function() {
-                var shape, _i, _len, _results;
-                _results = [];
-                for (_i = 0, _len = shapes.length; _i < _len; _i++) {
-                    shape = shapes[_i];
-                    _results.push(shape.draw(ctx, retryCallback));
-                }
-                return _results;
-            };
+            drawShapes = function(_this) {
+                return function() {
+                    var shape, _i, _len, _results;
+                    _results = [];
+                    for (_i = 0, _len = shapes.length; _i < _len; _i++) {
+                        shape = shapes[_i];
+                        _results.push(shape.draw(ctx, retryCallback));
+                    }
+                    return _results;
+                };
+            }(this);
             return this.transformed(drawShapes, ctx);
         };
         LiterallyCanvas.prototype.transformed = function(fn, ctx) {
@@ -772,11 +786,11 @@
                     }
                 }
             }
-            return this.repaint(true);
+            this.repaint(true);
+            return this.trigger("drawingChange", {});
         };
         LiterallyCanvas.prototype.loadSnapshotJSON = function(str) {
-            this.loadSnapshot(JSON.parse(str));
-            return this.repaint(true);
+            return this.loadSnapshot(JSON.parse(str));
         };
         return LiterallyCanvas;
     }();
@@ -846,48 +860,58 @@
         }
     };
     LC.bindEvents = function(lc, canvas, panWithKeyboard) {
-        var $c, _this = this;
+        var $c;
         if (panWithKeyboard == null) {
             panWithKeyboard = false;
         }
         $c = $(canvas);
-        $c.mousedown(function(e) {
-            var down, p;
-            down = true;
-            e.originalEvent.preventDefault();
-            document.onselectstart = function() {
-                return false;
-            };
-            p = position(e);
-            return lc.begin(p.left, p.top);
-        });
-        $c.mousemove(function(e) {
-            var p;
-            e.originalEvent.preventDefault();
-            p = position(e);
-            return lc["continue"](p.left, p.top);
-        });
-        $c.mouseup(function(e) {
-            var p;
-            e.originalEvent.preventDefault();
-            document.onselectstart = function() {
-                return true;
-            };
-            p = position(e);
-            return lc.end(p.left, p.top);
-        });
-        $c.mouseenter(function(e) {
-            var p;
-            p = position(e);
-            if (buttonIsDown(e)) {
+        $c.mousedown(function(_this) {
+            return function(e) {
+                var down, p;
+                down = true;
+                e.originalEvent.preventDefault();
+                document.onselectstart = function() {
+                    return false;
+                };
+                p = position(e);
                 return lc.begin(p.left, p.top);
-            }
-        });
-        $c.mouseout(function(e) {
-            var p;
-            p = position(e);
-            return lc.end(p.left, p.top);
-        });
+            };
+        }(this));
+        $c.mousemove(function(_this) {
+            return function(e) {
+                var p;
+                e.originalEvent.preventDefault();
+                p = position(e);
+                return lc["continue"](p.left, p.top);
+            };
+        }(this));
+        $c.mouseup(function(_this) {
+            return function(e) {
+                var p;
+                e.originalEvent.preventDefault();
+                document.onselectstart = function() {
+                    return true;
+                };
+                p = position(e);
+                return lc.end(p.left, p.top);
+            };
+        }(this));
+        $c.mouseenter(function(_this) {
+            return function(e) {
+                var p;
+                p = position(e);
+                if (buttonIsDown(e)) {
+                    return lc.begin(p.left, p.top);
+                }
+            };
+        }(this));
+        $c.mouseout(function(_this) {
+            return function(e) {
+                var p;
+                p = position(e);
+                return lc.end(p.left, p.top);
+            };
+        }(this));
         $c.bind("touchstart", function(e) {
             e.preventDefault();
             if (e.originalEvent.touches.length === 1) {
@@ -1049,7 +1073,7 @@
 }).call(this);
 
 (function() {
-    var _ref, _ref1, __hasProp = {}.hasOwnProperty, __extends = function(child, parent) {
+    var _ref, __hasProp = {}.hasOwnProperty, __extends = function(child, parent) {
         for (var key in parent) {
             if (__hasProp.call(parent, key)) child[key] = parent[key];
         }
@@ -1152,6 +1176,53 @@
             return shape;
         };
         return Rectangle;
+    }(LC.Shape);
+    LC.Circle = function(_super) {
+        __extends(Circle, _super);
+        Circle.prototype.className = "Circle";
+        function Circle(x, y, strokeWidth, strokeColor, fillColor, width, height) {
+            this.x = x;
+            this.y = y;
+            this.strokeWidth = strokeWidth;
+            this.strokeColor = strokeColor;
+            this.fillColor = fillColor;
+            this.width = width != null ? width : 0;
+            this.height = height != null ? height : 0;
+        }
+        Circle.prototype.draw = function(ctx) {
+            var centerX, centerY, halfHeight, halfWidth;
+            ctx.save();
+            halfWidth = Math.floor(this.width / 2);
+            halfHeight = Math.floor(this.height / 2);
+            centerX = this.x + halfWidth;
+            centerY = this.y + halfHeight;
+            ctx.translate(centerX, centerY);
+            ctx.scale(1, Math.abs(this.height / this.width));
+            ctx.beginPath();
+            ctx.arc(0, 0, Math.abs(halfWidth), 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.restore();
+            ctx.fillStyle = this.fillColor;
+            ctx.fill();
+            ctx.lineWidth = this.strokeWidth;
+            ctx.strokeStyle = this.strokeColor;
+            return ctx.stroke();
+        };
+        Circle.prototype.jsonContent = function() {
+            return {
+                x: this.x,
+                y: this.y,
+                width: this.width,
+                height: this.height,
+                strokeWidth: this.strokeWidth,
+                strokeColor: this.strokeColor,
+                fillColor: this.fillColor
+            };
+        };
+        Circle.fromJSON = function(lc, data) {
+            return new LC.Circle(data.x, data.y, data.strokeWidth, data.strokeColor, data.fillColor, data.width, data.height);
+        };
+        return Circle;
     }(LC.Shape);
     LC.Line = function(_super) {
         __extends(Line, _super);
@@ -1261,8 +1332,7 @@
     LC.EraseLinePathShape = function(_super) {
         __extends(EraseLinePathShape, _super);
         function EraseLinePathShape() {
-            _ref1 = EraseLinePathShape.__super__.constructor.apply(this, arguments);
-            return _ref1;
+            return EraseLinePathShape.__super__.constructor.apply(this, arguments);
         }
         EraseLinePathShape.prototype.className = "EraseLinePathShape";
         EraseLinePathShape.prototype.draw = function(ctx) {
@@ -1280,11 +1350,11 @@
         EraseLinePathShape.fromJSON = function(lc, data) {
             var pointData, points;
             points = function() {
-                var _i, _len, _ref2, _results;
-                _ref2 = data.points;
+                var _i, _len, _ref1, _results;
+                _ref1 = data.points;
                 _results = [];
-                for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-                    pointData = _ref2[_i];
+                for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+                    pointData = _ref1[_i];
                     _results.push(new LC.Point.fromJSON(lc, pointData));
                 }
                 return _results;
@@ -1354,7 +1424,7 @@
 (function() {
     var _ref;
     window.LC = (_ref = window.LC) != null ? _ref : {};
-    LC.toolbarHTML = '  <div class="toolbar-row">    <div class="toolbar-row-left">      <div class="tools button-group"></div>      &nbsp;&nbsp;&nbsp;&nbsp;Background:      <div class="color-square background-picker">&nbsp;</div>    </div>    <div class="toolbar-row-right">      <div class="action-buttons">        <div class="button clear-button danger">Clear</div>        <div class="button-group">          <div class="button btn-warning undo-button">&larr;</div><div class="button btn-warning redo-button">&rarr;</div>        </div>        <div class="button-group">          <div class="button btn-inverse zoom-out-button">&ndash;</div><div class="button btn-inverse zoom-in-button">+</div>        </div>        <div class="zoom-display">1</div>      </div>    </div>    <div class="clearfix"></div>  </div>  <div class="toolbar-row">    <div class="toolbar-row-left">      <div class="color-square primary-picker"></div>      <div class="color-square secondary-picker"></div>      <div class="tool-options-container"></div>    </div>    <div class="clearfix"></div>  </div>';
+    LC.toolbarHTML = '<div class="toolbar-row"> <div class="toolbar-row-left"> <div class="tools button-group"></div> &nbsp;&nbsp;&nbsp;&nbsp;Background: <div class="color-square background-picker">&nbsp;</div> </div> <div class="toolbar-row-right"> <div class="action-buttons"> <div class="button clear-button danger">Clear</div> <div class="button-group"> <div class="button btn-warning undo-button">&larr;</div><div class="button btn-warning redo-button">&rarr;</div> </div> <div class="button-group"> <div class="button btn-inverse zoom-out-button">&ndash;</div><div class="button btn-inverse zoom-in-button">+</div> </div> <div class="zoom-display">1</div> </div> </div> <div class="clearfix"></div> </div> <div class="toolbar-row"> <div class="toolbar-row-left"> <div class="color-square primary-picker"></div> <div class="color-square secondary-picker"></div> <div class="tool-options-container"></div> </div> <div class="clearfix"></div> </div>';
     LC.makeColorPicker = function($el, title, callback) {
         var cp;
         $el.data("color", "rgb(0, 0, 0)");
@@ -1395,17 +1465,21 @@
             this.initZoom();
         }
         Toolbar.prototype._bindColorPicker = function(name, title) {
-            var $el, _this = this;
+            var $el;
             $el = this.$el.find("." + name + "-picker");
             $el.css("background-color", this.lc.getColor(name));
             $el.css("background-position", "0% 0%");
-            this.lc.on("" + name + "ColorChange", function(color) {
-                return $el.css("background-color", color);
-            });
-            return LC.makeColorPicker($el, "" + title + " color", function(c) {
-                _this.lc.setColor(name, "rgba(" + c.r + ", " + c.g + ", " + c.b + ", " + c.a + ")");
-                return $el.css("background-position", "0% " + (1 - c.a) * 100 + "%");
-            });
+            this.lc.on("" + name + "ColorChange", function(_this) {
+                return function(color) {
+                    return $el.css("background-color", color);
+                };
+            }(this));
+            return LC.makeColorPicker($el, "" + title + " color", function(_this) {
+                return function(c) {
+                    _this.lc.setColor(name, "rgba(" + c.r + ", " + c.g + ", " + c.b + ", " + c.a + ")");
+                    return $el.css("background-position", "0% " + (1 - c.a) * 100 + "%");
+                };
+            }(this));
         };
         Toolbar.prototype.initColors = function() {
             var pickers;
@@ -1423,16 +1497,21 @@
             });
         };
         Toolbar.prototype.initButtons = function() {
-            var _this = this;
-            this.$el.find(".clear-button").click(function(e) {
-                return _this.lc.clear();
-            });
-            this.$el.find(".undo-button").click(function(e) {
-                return _this.lc.undo();
-            });
-            return this.$el.find(".redo-button").click(function(e) {
-                return _this.lc.redo();
-            });
+            this.$el.find(".clear-button").click(function(_this) {
+                return function(e) {
+                    return _this.lc.clear();
+                };
+            }(this));
+            this.$el.find(".undo-button").click(function(_this) {
+                return function(e) {
+                    return _this.lc.undo();
+                };
+            }(this));
+            return this.$el.find(".redo-button").click(function(_this) {
+                return function(e) {
+                    return _this.lc.redo();
+                };
+            }(this));
         };
         Toolbar.prototype.initTools = function() {
             var ToolClass, t, _i, _len, _ref1, _results;
@@ -1448,28 +1527,33 @@
             return _results;
         };
         Toolbar.prototype.addTool = function(t) {
-            var buttonEl, optsEl, _this = this;
+            var buttonEl, optsEl;
             optsEl = $("<div class='tool-options tool-options-" + t.cssSuffix + "'></div>");
             optsEl.html(t.options());
             optsEl.hide();
             t.$el = optsEl;
             this.$el.find(".tool-options-container").append(optsEl);
-            buttonEl = $("<div class='button tool-" + t.cssSuffix + "'>        <div class='tool-image-wrapper'></div></div>").appendTo(this.$el.find(".tools")).find(".tool-image-wrapper").html(t.button());
-            buttonEl.click(function(e) {
-                return _this.selectTool(t);
-            });
+            buttonEl = $("<div class='button tool-" + t.cssSuffix + "'> <div class='tool-image-wrapper'></div></div>").appendTo(this.$el.find(".tools")).find(".tool-image-wrapper").html(t.button());
+            buttonEl.click(function(_this) {
+                return function(e) {
+                    return _this.selectTool(t);
+                };
+            }(this));
             return null;
         };
         Toolbar.prototype.initZoom = function() {
-            var _this = this;
-            this.$el.find(".zoom-in-button").click(function(e) {
-                _this.lc.zoom(.2);
-                return _this.$el.find(".zoom-display").html(_this.lc.scale);
-            });
-            return this.$el.find(".zoom-out-button").click(function(e) {
-                _this.lc.zoom(-.2);
-                return _this.$el.find(".zoom-display").html(_this.lc.scale);
-            });
+            this.$el.find(".zoom-in-button").click(function(_this) {
+                return function(e) {
+                    _this.lc.zoom(.2);
+                    return _this.$el.find(".zoom-display").html(_this.lc.scale);
+                };
+            }(this));
+            return this.$el.find(".zoom-out-button").click(function(_this) {
+                return function(e) {
+                    _this.lc.zoom(-.2);
+                    return _this.$el.find(".zoom-display").html(_this.lc.scale);
+                };
+            }(this));
         };
         Toolbar.prototype.selectTool = function(t) {
             this.$el.find(".tools .active").removeClass("active");
@@ -1485,7 +1569,7 @@
 }).call(this);
 
 (function() {
-    var _ref, _ref1, _ref2, _ref3, _ref4, __hasProp = {}.hasOwnProperty, __extends = function(child, parent) {
+    var __hasProp = {}.hasOwnProperty, __extends = function(child, parent) {
         for (var key in parent) {
             if (__hasProp.call(parent, key)) child[key] = parent[key];
         }
@@ -1502,6 +1586,7 @@
         Tool.prototype.begin = function(x, y, lc) {};
         Tool.prototype["continue"] = function(x, y, lc) {};
         Tool.prototype.end = function(x, y, lc) {};
+        Tool.prototype.optionsStyle = null;
         return Tool;
     }();
     LC.StrokeTool = function(_super) {
@@ -1509,13 +1594,13 @@
         function StrokeTool() {
             this.strokeWidth = 5;
         }
+        StrokeTool.prototype.optionsStyle = "stroke-width";
         return StrokeTool;
     }(LC.Tool);
     LC.RectangleTool = function(_super) {
         __extends(RectangleTool, _super);
         function RectangleTool() {
-            _ref = RectangleTool.__super__.constructor.apply(this, arguments);
-            return _ref;
+            return RectangleTool.__super__.constructor.apply(this, arguments);
         }
         RectangleTool.prototype.begin = function(x, y, lc) {
             return this.currentShape = new LC.Rectangle(x, y, this.strokeWidth, lc.getColor("primary"), lc.getColor("secondary"));
@@ -1530,11 +1615,28 @@
         };
         return RectangleTool;
     }(LC.StrokeTool);
+    LC.CircleTool = function(_super) {
+        __extends(CircleTool, _super);
+        function CircleTool() {
+            return CircleTool.__super__.constructor.apply(this, arguments);
+        }
+        CircleTool.prototype.begin = function(x, y, lc) {
+            return this.currentShape = new LC.Circle(x, y, this.strokeWidth, lc.getColor("primary"), lc.getColor("secondary"));
+        };
+        CircleTool.prototype["continue"] = function(x, y, lc) {
+            this.currentShape.width = x - this.currentShape.x;
+            this.currentShape.height = y - this.currentShape.y;
+            return lc.update(this.currentShape);
+        };
+        CircleTool.prototype.end = function(x, y, lc) {
+            return lc.saveShape(this.currentShape);
+        };
+        return CircleTool;
+    }(LC.StrokeTool);
     LC.LineTool = function(_super) {
         __extends(LineTool, _super);
         function LineTool() {
-            _ref1 = LineTool.__super__.constructor.apply(this, arguments);
-            return _ref1;
+            return LineTool.__super__.constructor.apply(this, arguments);
         }
         LineTool.prototype.begin = function(x, y, lc) {
             return this.currentShape = new LC.Line(x, y, x, y, this.strokeWidth, lc.getColor("primary"));
@@ -1552,8 +1654,7 @@
     LC.Pencil = function(_super) {
         __extends(Pencil, _super);
         function Pencil() {
-            _ref2 = Pencil.__super__.constructor.apply(this, arguments);
-            return _ref2;
+            return Pencil.__super__.constructor.apply(this, arguments);
         }
         Pencil.prototype.begin = function(x, y, lc) {
             this.color = lc.getColor("primary");
@@ -1592,8 +1693,7 @@
     LC.Pan = function(_super) {
         __extends(Pan, _super);
         function Pan() {
-            _ref3 = Pan.__super__.constructor.apply(this, arguments);
-            return _ref3;
+            return Pan.__super__.constructor.apply(this, arguments);
         }
         Pan.prototype.begin = function(x, y, lc) {
             return this.start = {
@@ -1613,8 +1713,7 @@
     LC.EyeDropper = function(_super) {
         __extends(EyeDropper, _super);
         function EyeDropper() {
-            _ref4 = EyeDropper.__super__.constructor.apply(this, arguments);
-            return _ref4;
+            return EyeDropper.__super__.constructor.apply(this, arguments);
         }
         EyeDropper.prototype.readColor = function(x, y, lc) {
             var newColor;
@@ -1650,6 +1749,7 @@
         TextTool.prototype.end = function(x, y, lc) {
             return lc.saveShape(this.currentShape);
         };
+        TextTool.prototype.optionsStyle = "font";
         return TextTool;
     }(LC.Tool);
 }).call(this);
@@ -1670,19 +1770,21 @@
             }
         },
         sizeToContainer: function(canvas, callback) {
-            var $canvas, $container, resize, _this = this;
+            var $canvas, $container, resize;
             if (callback == null) {
                 callback = function() {};
             }
             $canvas = $(canvas);
             $container = $canvas.parent();
-            resize = function() {
-                canvas.style.width = "" + $container.width() + "px";
-                canvas.style.height = "" + $container.height() + "px";
-                canvas.setAttribute("width", $canvas.width());
-                canvas.setAttribute("height", $canvas.height());
-                return callback();
-            };
+            resize = function(_this) {
+                return function() {
+                    canvas.style.width = "" + $container.width() + "px";
+                    canvas.style.height = "" + $container.height() + "px";
+                    canvas.setAttribute("width", $canvas.width());
+                    canvas.setAttribute("height", $canvas.height());
+                    return callback();
+                };
+            }(this);
             $container.resize(resize);
             $(window).bind("orientationchange resize", resize);
             return resize();
@@ -1701,7 +1803,7 @@
 }).call(this);
 
 (function() {
-    var _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, __hasProp = {}.hasOwnProperty, __extends = function(child, parent) {
+    var __hasProp = {}.hasOwnProperty, __extends = function(child, parent) {
         for (var key in parent) {
             if (__hasProp.call(parent, key)) child[key] = parent[key];
         }
@@ -1745,11 +1847,10 @@
     LC.StrokeWidget = function(_super) {
         __extends(StrokeWidget, _super);
         function StrokeWidget() {
-            _ref = StrokeWidget.__super__.constructor.apply(this, arguments);
-            return _ref;
+            return StrokeWidget.__super__.constructor.apply(this, arguments);
         }
         StrokeWidget.prototype.options = function() {
-            var $brushWidthVal, $el, $input, _this = this;
+            var $brushWidthVal, $el, $input;
             $el = $("<span class='brush-width-min'>1 px</span><input type='range' min='1' max='50' step='1' value='" + this.tool.strokeWidth + "'><span class='brush-width-max'>50 px</span><span class='brush-width-val'>(5 px)</span>");
             $input = $el.filter("input");
             if ($input.size() === 0) {
@@ -1759,10 +1860,12 @@
             if ($brushWidthVal.size() === 0) {
                 $brushWidthVal = $el.find(".brush-width-val");
             }
-            $input.change(function(e) {
-                _this.tool.strokeWidth = parseInt($(e.currentTarget).val(), 10);
-                return $brushWidthVal.html("(" + _this.tool.strokeWidth + " px)");
-            });
+            $input.change(function(_this) {
+                return function(e) {
+                    _this.tool.strokeWidth = parseInt($(e.currentTarget).val(), 10);
+                    return $brushWidthVal.html("(" + _this.tool.strokeWidth + " px)");
+                };
+            }(this));
             return $el;
         };
         return StrokeWidget;
@@ -1770,8 +1873,7 @@
     LC.RectangleWidget = function(_super) {
         __extends(RectangleWidget, _super);
         function RectangleWidget() {
-            _ref1 = RectangleWidget.__super__.constructor.apply(this, arguments);
-            return _ref1;
+            return RectangleWidget.__super__.constructor.apply(this, arguments);
         }
         RectangleWidget.prototype.title = "Rectangle";
         RectangleWidget.prototype.cssSuffix = "rectangle";
@@ -1786,8 +1888,7 @@
     LC.LineWidget = function(_super) {
         __extends(LineWidget, _super);
         function LineWidget() {
-            _ref2 = LineWidget.__super__.constructor.apply(this, arguments);
-            return _ref2;
+            return LineWidget.__super__.constructor.apply(this, arguments);
         }
         LineWidget.prototype.title = "Line";
         LineWidget.prototype.cssSuffix = "line";
@@ -1802,8 +1903,7 @@
     LC.PencilWidget = function(_super) {
         __extends(PencilWidget, _super);
         function PencilWidget() {
-            _ref3 = PencilWidget.__super__.constructor.apply(this, arguments);
-            return _ref3;
+            return PencilWidget.__super__.constructor.apply(this, arguments);
         }
         PencilWidget.prototype.title = "Pencil";
         PencilWidget.prototype.cssSuffix = "pencil";
@@ -1818,8 +1918,7 @@
     LC.EraserWidget = function(_super) {
         __extends(EraserWidget, _super);
         function EraserWidget() {
-            _ref4 = EraserWidget.__super__.constructor.apply(this, arguments);
-            return _ref4;
+            return EraserWidget.__super__.constructor.apply(this, arguments);
         }
         EraserWidget.prototype.title = "Eraser";
         EraserWidget.prototype.cssSuffix = "eraser";
@@ -1834,8 +1933,7 @@
     LC.PanWidget = function(_super) {
         __extends(PanWidget, _super);
         function PanWidget() {
-            _ref5 = PanWidget.__super__.constructor.apply(this, arguments);
-            return _ref5;
+            return PanWidget.__super__.constructor.apply(this, arguments);
         }
         PanWidget.prototype.title = "Pan";
         PanWidget.prototype.cssSuffix = "pan";
@@ -1850,8 +1948,7 @@
     LC.EyeDropperWidget = function(_super) {
         __extends(EyeDropperWidget, _super);
         function EyeDropperWidget() {
-            _ref6 = EyeDropperWidget.__super__.constructor.apply(this, arguments);
-            return _ref6;
+            return EyeDropperWidget.__super__.constructor.apply(this, arguments);
         }
         EyeDropperWidget.prototype.title = "Eyedropper";
         EyeDropperWidget.prototype.cssSuffix = "eye-dropper";
@@ -1888,43 +1985,50 @@
             return "<img src='" + this.opts.imageURLPrefix + "/text.png'>";
         };
         TextWidget.prototype.select = function(lc) {
-            var _this = this;
             this.updateTool();
             lc.setTool(this.tool);
-            return setTimeout(function() {
-                _this.$input.focus();
-                return _this.$input.select();
-            }, 0);
+            return setTimeout(function(_this) {
+                return function() {
+                    _this.$input.focus();
+                    return _this.$input.select();
+                };
+            }(this), 0);
         };
         TextWidget.prototype.makeTool = function() {
             return new LC.TextTool();
         };
         TextWidget.prototype.options = function() {
-            var $fontSize, family, familyOptions, i, updateAndFocus, _i, _len, _ref7, _this = this;
+            var $fontSize, family, familyOptions, i, updateAndFocus, _i, _len, _ref;
             if (this.$el) {
                 return this.$el;
             }
             familyOptions = [];
             i = 0;
-            _ref7 = this.getFamilies();
-            for (_i = 0, _len = _ref7.length; _i < _len; _i++) {
-                family = _ref7[_i];
+            _ref = this.getFamilies();
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                family = _ref[_i];
                 familyOptions.push("<option value=" + i + ">" + family.name + "</option>");
                 i += 1;
             }
-            this.$el = $("<div>       <input type='text' id='text' placeholder='Enter text here'        value='" + this.tool.text + "'>       <input type='text' id='font-size' value='18'>       <select id='family'>" + familyOptions.join("") + "</select>       <label for='italic'><input type='checkbox' id='italic'>italic</label>       <label for='bold'><input type='checkbox' id='bold'>bold</label>       <span class='instructions'>Click and hold to place text.</span>       </div>");
+            this.$el = $("<div> <input type='text' id='text' placeholder='Enter text here' value='" + this.tool.text + "'> <input type='text' id='font-size' value='18'> <select id='family'>" + familyOptions.join("") + "</select> <label for='italic'><input type='checkbox' id='italic'>italic</label> <label for='bold'><input type='checkbox' id='bold'>bold</label> <span class='instructions'>Click and hold to place text.</span> </div>");
             this.$input = this.$el.find("input#text");
             $fontSize = this.$el.find("input#font-size");
-            updateAndFocus = function() {
-                _this.updateTool();
-                return _this.$input.focus();
-            };
-            this.$input.keyup(function() {
-                return _this.updateTool();
-            });
-            $fontSize.keyup(function() {
-                return _this.updateTool();
-            });
+            updateAndFocus = function(_this) {
+                return function() {
+                    _this.updateTool();
+                    return _this.$input.focus();
+                };
+            }(this);
+            this.$input.keyup(function(_this) {
+                return function() {
+                    return _this.updateTool();
+                };
+            }(this));
+            $fontSize.keyup(function(_this) {
+                return function() {
+                    return _this.updateTool();
+                };
+            }(this));
             this.$input.change(updateAndFocus);
             $fontSize.change(updateAndFocus);
             this.$el.find("input#italic").change(updateAndFocus);
@@ -1952,10 +2056,779 @@
 }).call(this);
 
 (function() {
+    var RedoButton, UndoButton, ZoomInButton, ZoomOutButton, createToolComponent, createUndoRedoButtonComponent, createZoomButtonComponent;
+    window.LC = LC || {};
+    LC.React = LC.React || {};
+    createToolComponent = function(_arg) {
+        var displayName, getTool, imageName, tool;
+        displayName = _arg.displayName, getTool = _arg.getTool, imageName = _arg.imageName;
+        tool = getTool();
+        return React.createClass({
+            displayName: displayName,
+            getDefaultProps: function() {
+                return {
+                    isSelected: false,
+                    lc: null
+                };
+            },
+            componentWillMount: function() {
+                if (this.props.isSelected) {
+                    return this.props.lc.setTool(tool);
+                }
+            },
+            render: function() {
+                var className, div, imageURLPrefix, img, isSelected, onSelect, _ref, _ref1;
+                _ref = React.DOM, div = _ref.div, img = _ref.img;
+                _ref1 = this.props, imageURLPrefix = _ref1.imageURLPrefix, isSelected = _ref1.isSelected, 
+                onSelect = _ref1.onSelect;
+                className = React.addons.classSet({
+                    "lc-pick-tool": true,
+                    "toolbar-button": true,
+                    "thin-button": true,
+                    selected: isSelected
+                });
+                return div({
+                    className: className,
+                    onClick: function() {
+                        return onSelect(tool);
+                    }
+                }, img({
+                    className: "lc-tool-icon",
+                    src: "" + imageURLPrefix + "/" + imageName + ".png"
+                }));
+            }
+        });
+    };
+    LC.React.ToolButtons = {
+        Pencil: createToolComponent({
+            displayName: "Pencil",
+            imageName: "pencil",
+            getTool: function() {
+                return new LC.Pencil();
+            }
+        }),
+        Eraser: createToolComponent({
+            displayName: "Eraser",
+            imageName: "eraser",
+            getTool: function() {
+                return new LC.Eraser();
+            }
+        }),
+        Line: createToolComponent({
+            displayName: "Line",
+            imageName: "line",
+            getTool: function() {
+                return new LC.LineTool();
+            }
+        }),
+        Rectangle: createToolComponent({
+            displayName: "Rectangle",
+            imageName: "rectangle",
+            getTool: function() {
+                return new LC.RectangleTool();
+            }
+        }),
+        Circle: createToolComponent({
+            displayName: "Circle",
+            imageName: "circle",
+            getTool: function() {
+                return new LC.CircleTool();
+            }
+        }),
+        Text: createToolComponent({
+            displayName: "Text",
+            imageName: "text",
+            getTool: function() {
+                return new LC.TextTool();
+            }
+        }),
+        Pan: createToolComponent({
+            displayName: "Pan",
+            imageName: "pan",
+            getTool: function() {
+                return new LC.Pan();
+            }
+        }),
+        Eyedropper: createToolComponent({
+            displayName: "Eyedropper",
+            imageName: "eyedropper",
+            getTool: function() {
+                return new LC.EyeDropper();
+            }
+        })
+    };
+    LC.React.Mixins = {
+        UpdateOnDrawingChangeMixin: {
+            componentDidMount: function() {
+                this.subscriber = function(_this) {
+                    return function() {
+                        return _this.setState(_this.getState());
+                    };
+                }(this);
+                return this.props.lc.on("drawingChange", this.subscriber);
+            },
+            componentWillUnmount: function() {
+                return this.props.lc.removeEventListener("drawingChange", this.subscriber);
+            }
+        },
+        UpdateOnToolChangeMixin: {
+            componentDidMount: function() {
+                this.subscriber = function(_this) {
+                    return function() {
+                        return _this.setState(_this.getState());
+                    };
+                }(this);
+                return this.props.lc.on("toolChange", this.subscriber);
+            },
+            componentWillUnmount: function() {
+                return this.props.lc.removeEventListener("toolChange", this.subscriber);
+            }
+        }
+    };
+    LC.React.Picker = React.createClass({
+        displayName: "Picker",
+        getInitialState: function() {
+            return {
+                selectedToolIndex: 0
+            };
+        },
+        render: function() {
+            var div, imageURLPrefix, lc, toolNames, _ref;
+            div = React.DOM.div;
+            _ref = this.props, toolNames = _ref.toolNames, lc = _ref.lc, imageURLPrefix = _ref.imageURLPrefix;
+            return div({
+                className: "lc-picker-contents"
+            }, toolNames.map(function(_this) {
+                return function(name, ix) {
+                    return LC.React.ToolButtons[name]({
+                        lc: lc,
+                        imageURLPrefix: imageURLPrefix,
+                        key: ix,
+                        isSelected: ix === _this.state.selectedToolIndex,
+                        onSelect: function(tool) {
+                            lc.setTool(tool);
+                            return _this.setState({
+                                selectedToolIndex: ix
+                            });
+                        }
+                    });
+                };
+            }(this)), toolNames.length % 2 !== 0 ? div({
+                className: "toolbar-button thin-button disabled"
+            }) : void 0, LC.React.UndoRedo({
+                lc: lc,
+                imageURLPrefix: imageURLPrefix
+            }), LC.React.ZoomButtons({
+                lc: lc
+            }), LC.React.ClearButton({
+                lc: lc
+            }), LC.React.ColorPickers({
+                lc: lc
+            }));
+        }
+    });
+    createUndoRedoButtonComponent = function(undoOrRedo) {
+        return React.createClass({
+            displayName: undoOrRedo === "undo" ? "UndoButton" : "RedoButton",
+            getState: function() {
+                return {
+                    isEnabled: function() {
+                        switch (false) {
+                          case undoOrRedo !== "undo":
+                            return this.props.lc.canUndo();
+
+                          case undoOrRedo !== "redo":
+                            return this.props.lc.canRedo();
+                        }
+                    }.call(this)
+                };
+            },
+            getInitialState: function() {
+                return this.getState();
+            },
+            mixins: [ LC.React.Mixins.UpdateOnDrawingChangeMixin ],
+            render: function() {
+                var className, div, lc, onClick;
+                div = React.DOM.div;
+                lc = this.props.lc;
+                className = "lc-" + undoOrRedo + " " + React.addons.classSet({
+                    "toolbar-button": true,
+                    "thin-button": true,
+                    disabled: !this.state.isEnabled
+                });
+                onClick = function() {
+                    switch (false) {
+                      case !!this.state.isEnabled:
+                        return function() {};
+
+                      case undoOrRedo !== "undo":
+                        return function() {
+                            return lc.undo();
+                        };
+
+                      case undoOrRedo !== "redo":
+                        return function() {
+                            return lc.redo();
+                        };
+                    }
+                }.call(this);
+                return div({
+                    className: className,
+                    onClick: onClick,
+                    dangerouslySetInnerHTML: {
+                        __html: undoOrRedo === "undo" ? "&larr;" : "&rarr;"
+                    }
+                });
+            }
+        });
+    };
+    UndoButton = createUndoRedoButtonComponent("undo");
+    RedoButton = createUndoRedoButtonComponent("redo");
+    LC.React.UndoRedo = React.createClass({
+        displayName: "UndoRedo",
+        render: function() {
+            var div, lc;
+            div = React.DOM.div;
+            lc = this.props.lc;
+            return div({
+                className: "lc-undo-redo"
+            }, UndoButton({
+                lc: lc
+            }), RedoButton({
+                lc: lc
+            }));
+        }
+    });
+    createZoomButtonComponent = function(inOrOut) {
+        return React.createClass({
+            displayName: inOrOut === "in" ? "ZoomInButton" : "ZoomOutButton",
+            getState: function() {
+                return {
+                    isEnabled: function() {
+                        switch (false) {
+                          case inOrOut !== "in":
+                            return this.props.lc.scale < 4;
+
+                          case inOrOut !== "out":
+                            return this.props.lc.scale > .6;
+                        }
+                    }.call(this)
+                };
+            },
+            getInitialState: function() {
+                return this.getState();
+            },
+            componentDidMount: function() {
+                this.subscriber = function(_this) {
+                    return function() {
+                        return _this.setState(_this.getState());
+                    };
+                }(this);
+                return this.props.lc.on("zoom", this.subscriber);
+            },
+            componentWillUnmount: function() {
+                return this.props.lc.removeEventListener("zoom", this.subscriber);
+            },
+            render: function() {
+                var className, div, lc, onClick;
+                div = React.DOM.div;
+                lc = this.props.lc;
+                className = "lc-zoom-" + inOrOut + " " + React.addons.classSet({
+                    "toolbar-button": true,
+                    "thin-button": true,
+                    disabled: !this.state.isEnabled
+                });
+                onClick = function() {
+                    switch (false) {
+                      case !!this.state.isEnabled:
+                        return function() {};
+
+                      case inOrOut !== "in":
+                        return function() {
+                            return lc.zoom(.2);
+                        };
+
+                      case inOrOut !== "out":
+                        return function() {
+                            return lc.zoom(-.2);
+                        };
+                    }
+                }.call(this);
+                return div({
+                    className: className,
+                    onClick: onClick
+                }, function() {
+                    switch (false) {
+                      case inOrOut !== "in":
+                        return "+";
+
+                      case inOrOut !== "out":
+                        return "-";
+                    }
+                }());
+            }
+        });
+    };
+    ZoomOutButton = createZoomButtonComponent("out");
+    ZoomInButton = createZoomButtonComponent("in");
+    LC.React.ZoomButtons = React.createClass({
+        displayName: "ZoomButtons",
+        render: function() {
+            var div, lc;
+            div = React.DOM.div;
+            lc = this.props.lc;
+            return div({
+                className: "lc-zoom"
+            }, ZoomOutButton({
+                lc: lc
+            }), ZoomInButton({
+                lc: lc
+            }));
+        }
+    });
+    LC.React.ClearButton = React.createClass({
+        displayName: "ClearButton",
+        getState: function() {
+            return {
+                isEnabled: this.props.lc.canUndo()
+            };
+        },
+        getInitialState: function() {
+            return this.getState();
+        },
+        mixins: [ LC.React.Mixins.UpdateOnDrawingChangeMixin ],
+        render: function() {
+            var className, div, lc, onClick;
+            div = React.DOM.div;
+            lc = this.props.lc;
+            className = React.addons.classSet({
+                "lc-clear": true,
+                "toolbar-button": true,
+                "fat-button": true,
+                disabled: !this.state.isEnabled
+            });
+            onClick = lc.canUndo() ? function(_this) {
+                return function() {
+                    return lc.clear();
+                };
+            }(this) : function() {};
+            return div({
+                className: className,
+                onClick: onClick
+            }, "Clear");
+        }
+    });
+    LC.React.ColorPickers = React.createClass({
+        displayName: "ColorPickers",
+        render: function() {
+            var div, lc;
+            lc = this.props.lc;
+            div = React.DOM.div;
+            return div({
+                className: "lc-color-pickers"
+            }, LC.React.ColorWell({
+                lc: lc,
+                colorName: "background",
+                label: "background"
+            }), LC.React.ColorWell({
+                lc: lc,
+                colorName: "primary",
+                label: "stroke"
+            }), LC.React.ColorWell({
+                lc: lc,
+                colorName: "secondary",
+                label: "fill"
+            }));
+        }
+    });
+    LC.React.ColorWell = React.createClass({
+        displayName: "ColorWell",
+        getState: function() {
+            return {
+                color: this.props.lc.colors[this.props.colorName],
+                isPickerVisible: false
+            };
+        },
+        getInitialState: function() {
+            return this.getState();
+        },
+        togglePicker: function() {
+            return this.setState({
+                isPickerVisible: !this.state.isPickerVisible
+            });
+        },
+        closePicker: function() {
+            return this.setState({
+                isPickerVisible: false
+            });
+        },
+        setColor: function(c) {
+            this.props.lc.setColor(this.props.colorName, c);
+            return this.setState(this.getState());
+        },
+        render: function() {
+            var div, label, _ref;
+            _ref = React.DOM, div = _ref.div, label = _ref.label;
+            return div({
+                className: "toolbar-button color-well-label",
+                onMouseLeave: this.closePicker
+            }, label({
+                style: {
+                    display: "block",
+                    clear: "both"
+                }
+            }, this.props.label), div({
+                className: React.addons.classSet({
+                    "color-well-container": true,
+                    selected: this.state.isPickerVisible
+                }),
+                onClick: this.togglePicker,
+                style: {
+                    backgroundColor: "white",
+                    position: "relative"
+                }
+            }, div({
+                className: "color-well-checker"
+            }), div({
+                className: "color-well-checker",
+                style: {
+                    left: "50%",
+                    top: "50%"
+                }
+            }), div({
+                className: "color-well-color",
+                style: {
+                    backgroundColor: this.state.color
+                }
+            }, " "), this.renderPicker()));
+        },
+        renderPicker: function() {
+            var div, hue, i, rows, _i, _len, _ref;
+            div = React.DOM.div;
+            if (!this.state.isPickerVisible) {
+                return null;
+            }
+            rows = [ function() {
+                var _i, _results;
+                _results = [];
+                for (i = _i = 0; _i <= 100; i = _i += 10) {
+                    _results.push("hsl(0, 0%, " + i + "%)");
+                }
+                return _results;
+            }() ];
+            _ref = [ 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 ];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                hue = _ref[_i];
+                rows.push(function() {
+                    var _j, _results;
+                    _results = [];
+                    for (i = _j = 10; _j <= 90; i = _j += 8) {
+                        _results.push("hsl(" + hue + ", 100%, " + i + "%)");
+                    }
+                    return _results;
+                }());
+            }
+            return div({
+                className: "color-picker-popup"
+            }, rows.map(function(_this) {
+                return function(row, ix) {
+                    return div({
+                        className: "color-row",
+                        key: ix,
+                        style: {
+                            width: 20 * row.length
+                        }
+                    }, row.map(function(cellColor, ix2) {
+                        var className;
+                        className = React.addons.classSet({
+                            "color-cell": true,
+                            selected: _this.state.color === cellColor
+                        });
+                        return div({
+                            className: className,
+                            onClick: function() {
+                                return _this.setColor(cellColor);
+                            },
+                            style: {
+                                backgroundColor: cellColor
+                            },
+                            key: ix2
+                        });
+                    }));
+                };
+            }(this)));
+        }
+    });
+}).call(this);
+
+(function() {
+    window.LC = LC || {};
+    LC.React = LC.React || {};
+    LC.React.Options = React.createClass({
+        displayName: "Options",
+        getState: function() {
+            var _ref;
+            return {
+                style: (_ref = this.props.lc.tool) != null ? _ref.optionsStyle : void 0,
+                tool: this.props.lc.tool
+            };
+        },
+        getInitialState: function() {
+            return this.getState();
+        },
+        mixins: [ LC.React.Mixins.UpdateOnToolChangeMixin ],
+        render: function() {
+            var style;
+            style = "" + this.state.style;
+            return LC.React.OptionsStyles[style]({
+                lc: this.props.lc,
+                tool: this.state.tool
+            });
+        }
+    });
+    LC.React.OptionsStyles = {
+        font: React.createClass({
+            displayName: "FontOptions",
+            getText: function() {
+                var _ref;
+                return (_ref = this.props.lc.tool) != null ? _ref.text : void 0;
+            },
+            getInitialState: function() {
+                return {
+                    text: this.getText(),
+                    isItalic: false,
+                    isBold: false,
+                    fontFamilyIndex: 0,
+                    fontSizeIndex: 4
+                };
+            },
+            getFontSizes: function() {
+                return [ 9, 10, 12, 14, 18, 24, 36, 48, 64, 72, 96, 144, 288 ];
+            },
+            getFamilies: function() {
+                return [ {
+                    name: "Sans-serif",
+                    value: '"Helvetica Neue",Helvetica,Arial,sans-serif'
+                }, {
+                    name: "Serif",
+                    value: ('Garamond,Baskerville,"Baskerville Old Face",', '"Hoefler Text","Times New Roman",serif')
+                }, {
+                    name: "Typewriter",
+                    value: ('"Courier New",Courier,"Lucida Sans Typewriter",', '"Lucida Typewriter",monospace')
+                } ];
+            },
+            updateTool: function(newState) {
+                var fontSize, items, k;
+                if (newState == null) {
+                    newState = {};
+                }
+                for (k in this.state) {
+                    if (!(k in newState)) {
+                        newState[k] = this.state[k];
+                    }
+                }
+                fontSize = this.getFontSizes()[newState.fontSizeIndex];
+                items = [];
+                if (newState.isItalic) {
+                    items.push("italic");
+                }
+                if (newState.isBold) {
+                    items.push("bold");
+                }
+                items.push("" + fontSize + "px");
+                items.push(this.getFamilies()[newState.fontFamilyIndex].value);
+                return this.props.lc.tool.font = items.join(" ");
+            },
+            handleText: function(event) {
+                this.props.lc.tool.text = event.target.value;
+                return this.setState({
+                    text: this.getText()
+                });
+            },
+            handleFontSize: function(event) {
+                var newState;
+                newState = {
+                    fontSizeIndex: event.target.value
+                };
+                this.setState(newState);
+                return this.updateTool(newState);
+            },
+            handleFontFamily: function(event) {
+                var newState;
+                newState = {
+                    fontFamilyIndex: event.target.value
+                };
+                this.setState(newState);
+                return this.updateTool(newState);
+            },
+            handleItalic: function(event) {
+                var newState;
+                newState = {
+                    isItalic: !this.state.isItalic
+                };
+                this.setState(newState);
+                return this.updateTool(newState);
+            },
+            handleBold: function(event) {
+                var newState;
+                newState = {
+                    isBold: !this.state.isBold
+                };
+                this.setState(newState);
+                return this.updateTool(newState);
+            },
+            componentDidMount: function() {
+                return this.updateTool();
+            },
+            render: function() {
+                var br, div, input, label, option, select, span, _ref;
+                _ref = React.DOM, div = _ref.div, input = _ref.input, select = _ref.select, option = _ref.option, 
+                br = _ref.br, label = _ref.label, span = _ref.span;
+                return div({
+                    className: "lc-font-settings"
+                }, input({
+                    type: "text",
+                    placeholder: "Enter text here",
+                    value: this.state.text,
+                    onChange: this.handleText
+                }), span({
+                    className: "instructions"
+                }, "Click and hold to place text."), br(), "Size: ", select({
+                    value: this.state.fontSizeIndex,
+                    onChange: this.handleFontSize
+                }, this.getFontSizes().map(function(_this) {
+                    return function(size, ix) {
+                        return option({
+                            value: ix,
+                            key: ix
+                        }, size);
+                    };
+                }(this))), select({
+                    value: this.state.fontFamilyIndex,
+                    onChange: this.handleFontFamily
+                }, this.getFamilies().map(function(_this) {
+                    return function(family, ix) {
+                        return option({
+                            value: ix,
+                            key: ix
+                        }, family.name);
+                    };
+                }(this))), label({
+                    htmlFor: "italic"
+                }, input({
+                    type: "checkbox",
+                    id: "italic",
+                    checked: this.state.isItalic,
+                    onChange: this.handleItalic
+                }, "italic")), label({
+                    htmlFor: "bold"
+                }, input({
+                    type: "checkbox",
+                    id: "bold",
+                    checked: this.state.isBold,
+                    onChange: this.handleBold
+                }, "bold")));
+            }
+        }),
+        "stroke-width": React.createClass({
+            displayName: "StrokeWidths",
+            getState: function() {
+                var _ref;
+                return {
+                    strokeWidth: (_ref = this.props.lc.tool) != null ? _ref.strokeWidth : void 0
+                };
+            },
+            getInitialState: function() {
+                return this.getState();
+            },
+            mixins: [ LC.React.Mixins.UpdateOnToolChangeMixin ],
+            render: function() {
+                var buttonSize, circle, getItem, li, strokeWidths, svg, ul, _ref;
+                _ref = React.DOM, ul = _ref.ul, li = _ref.li, svg = _ref.svg, circle = _ref.circle;
+                strokeWidths = [ 1, 2, 5, 10, 20, 40 ];
+                buttonSize = Math.max.apply(Math, strokeWidths);
+                getItem = function(_this) {
+                    return function(strokeWidth) {};
+                }(this);
+                return ul({
+                    className: "lc-stroke-widths"
+                }, strokeWidths.map(function(_this) {
+                    return function(strokeWidth, ix) {
+                        var className;
+                        className = React.addons.classSet({
+                            "lc-stroke-width": true,
+                            selected: strokeWidth === _this.state.strokeWidth
+                        });
+                        return li({
+                            className: className,
+                            key: strokeWidth,
+                            onClick: function() {
+                                _this.props.tool.strokeWidth = strokeWidth;
+                                return _this.setState(_this.getState());
+                            }
+                        }, svg({
+                            width: buttonSize,
+                            height: buttonSize,
+                            viewPort: "0 0 " + buttonSize + " " + buttonSize,
+                            version: "1.1",
+                            xmlns: "http://www.w3.org/2000/svg"
+                        }, circle({
+                            cx: buttonSize / 2,
+                            cy: buttonSize / 2,
+                            r: strokeWidth / 2
+                        })));
+                    };
+                }(this)));
+            }
+        }),
+        "null": React.createClass({
+            displayName: "NoOptions",
+            render: function() {
+                return React.DOM.div();
+            }
+        })
+    };
+}).call(this);
+
+(function() {
+    window.LC = LC || {};
+    LC.React = LC.React || {};
+    LC.React.init = function(root, lc, toolNames, imageURLPrefix) {
+        var canvasElement, child, optionsElement, pickerElement, _i, _len, _ref;
+        canvasElement = null;
+        _ref = root.children;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            child = _ref[_i];
+            if (child.tagName.toLocaleLowerCase() === "canvas") {
+                canvasElement = child;
+            }
+        }
+        if (!canvasElement) {
+            canvasElement = document.createElement("canvas");
+            root.appendChild(canvasElement);
+        }
+        pickerElement = document.createElement("div");
+        pickerElement.className = "lc-picker";
+        root.insertBefore(pickerElement, canvasElement);
+        optionsElement = document.createElement("div");
+        optionsElement.className = "lc-options";
+        root.appendChild(optionsElement);
+        React.renderComponent(LC.React.Picker({
+            lc: lc,
+            toolNames: toolNames,
+            imageURLPrefix: imageURLPrefix
+        }), pickerElement);
+        return React.renderComponent(LC.React.Options({
+            lc: lc
+        }), optionsElement);
+    };
+}).call(this);
+
+(function() {
     var _ref;
     window.LC = (_ref = window.LC) != null ? _ref : {};
     LC.init = function(el, opts) {
-        var $el, $tbEl, lc, tb;
+        var $el, lc;
         if (opts == null) {
             opts = {};
         }
@@ -1986,34 +2859,30 @@
         if (opts.watermarkImage == null) {
             opts.watermarkImage = null;
         }
-        if (!("toolClasses" in opts)) {
-            opts.toolClasses = [ LC.PencilWidget, LC.EraserWidget, LC.LineWidget, LC.RectangleWidget, LC.TextWidget, LC.PanWidget, LC.EyeDropperWidget ];
+        if (!("tools" in opts)) {
+            opts.tools = [ "Pencil", "Eraser", "Line", "Rectangle", "Circle", "Text", "Pan", "Eyedropper" ];
         }
         $el = $(el);
         $el.addClass("literally");
-        $tbEl = $('<div class="toolbar">');
-        $el.append($tbEl);
         if (!$el.find("canvas").length) {
             $el.append("<canvas>");
         }
         lc = new LC.LiterallyCanvas($el.find("canvas").get(0), opts);
-        tb = new LC.Toolbar(lc, $tbEl, opts);
-        tb.selectTool(tb.tools[0]);
+        LC.React.init(el, lc, opts.tools, opts.imageURLPrefix);
         if ("onInit" in opts) {
             opts.onInit(lc);
         }
-        return [ lc, tb ];
+        return lc;
     };
     $.fn.literallycanvas = function(opts) {
-        var _this = this;
         if (opts == null) {
             opts = {};
         }
-        this.each(function(ix, el) {
-            var _ref1;
-            return _ref1 = LC.init(el, opts), el.literallycanvas = _ref1[0], el.literallycanvasToolbar = _ref1[1], 
-            _ref1;
-        });
+        this.each(function(_this) {
+            return function(ix, el) {
+                return el.literallycanvas = LC.init(el, opts);
+            };
+        }(this));
         return this;
     };
 }).call(this);

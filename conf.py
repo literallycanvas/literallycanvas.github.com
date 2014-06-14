@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+import os
 from better import better_theme_path
+
+READ_THE_DOCS = os.environ.get('READTHEDOCS', None) == 'True'
 
 needs_sphinx = '1.0'
 
