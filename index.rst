@@ -1,19 +1,10 @@
-About
-=====
+Literally Canvas
+================
 
 Literally Canvas is an extensible, open source (BSD-licensed), HTML5 drawing
-widget. It depends on `React.js`_.
+widget. Its only dependency is `React.js`_.
 
 .. _React.js: http://facebook.github.io/react/
-
-
-
-You can draw, erase, set the color with the eyedropper, undo, redo, pan, and
-zoom. A semi-stable API allows you to add your own tools. It works great on
-mobile devices.
-
-It's easy to get a data URL for upload to a site like Imgur or load/save a
-user's drawing.
 
 .. raw:: html
 
@@ -23,11 +14,22 @@ user's drawing.
       $(document).ready(function() {
         $('.literally.index').literallycanvas({
           backgroundColor: 'whiteSmoke',
-          imageURLPrefix: '/_static/lib/img',
-          onInit: function(lc) { console.log(lc); }
+          imageURLPrefix: '/_static/lib/img'
         });
       });
     </script>
+
+Literally Canvas's major features include:
+
+* Basic drawing tools
+* An API to add more drawing tools
+* Panning and zooming
+* Constant-size or infinite canvases
+* Background images/shapes and watermarks
+* Retina support
+* Saving and loading JSON
+* Events
+* Exporting drawings to PNG
 
 If you would like to support Literally Canvas's development or provide extra
 incentive to implement your favorite feature request, consider donating at
