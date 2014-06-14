@@ -58,6 +58,10 @@ Here's a basic working setup. Each part is required.
                 document.getElementsByClassName('literally')[0],
                 {imageURLPrefix: '/static/img'}
             );
+
+            /* or if you just love jQuery,
+                $('.literally').literallycanvas({imageURLPrefix: '/static/img'})
+            */
         </script>
       </body>
     </html>
