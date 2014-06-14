@@ -108,36 +108,48 @@ module.exports = LiterallyCanvas = (function() {
   };
 
   LiterallyCanvas.prototype.begin = function(x, y) {
-    var newPos;
-    newPos = this.clientCoordsToDrawingCoords(x, y);
-    this.tool.begin(newPos.x, newPos.y, this);
-    this.isDragging = true;
-    return this.trigger("drawStart", {
-      tool: this.tool
-    });
+    return util.requestAnimationFrame((function(_this) {
+      return function() {
+        var newPos;
+        newPos = _this.clientCoordsToDrawingCoords(x, y);
+        _this.tool.begin(newPos.x, newPos.y, _this);
+        _this.isDragging = true;
+        return _this.trigger("drawStart", {
+          tool: _this.tool
+        });
+      };
+    })(this));
   };
 
   LiterallyCanvas.prototype["continue"] = function(x, y) {
-    var newPos;
-    newPos = this.clientCoordsToDrawingCoords(x, y);
-    if (this.isDragging) {
-      this.tool["continue"](newPos.x, newPos.y, this);
-      return this.trigger("drawContinue", {
-        tool: this.tool
-      });
-    }
+    return util.requestAnimationFrame((function(_this) {
+      return function() {
+        var newPos;
+        newPos = _this.clientCoordsToDrawingCoords(x, y);
+        if (_this.isDragging) {
+          _this.tool["continue"](newPos.x, newPos.y, _this);
+          return _this.trigger("drawContinue", {
+            tool: _this.tool
+          });
+        }
+      };
+    })(this));
   };
 
   LiterallyCanvas.prototype.end = function(x, y) {
-    var newPos;
-    newPos = this.clientCoordsToDrawingCoords(x, y);
-    if (this.isDragging) {
-      this.tool.end(newPos.x, newPos.y, this);
-      this.isDragging = false;
-      return this.trigger("drawEnd", {
-        tool: this.tool
-      });
-    }
+    return util.requestAnimationFrame((function(_this) {
+      return function() {
+        var newPos;
+        newPos = _this.clientCoordsToDrawingCoords(x, y);
+        if (_this.isDragging) {
+          _this.tool.end(newPos.x, newPos.y, _this);
+          _this.isDragging = false;
+          return _this.trigger("drawEnd", {
+            tool: _this.tool
+          });
+        }
+      };
+    })(this));
   };
 
   LiterallyCanvas.prototype.setColor = function(name, color) {
@@ -1335,14 +1347,15 @@ util = {
       return 1;
     }
     return window.devicePixelRatio;
-  }
+  },
+  requestAnimationFrame: (window.requestAnimationFrame || window.setTimeout).bind(window)
 };
 
 module.exports = util;
 
 
 },{}],8:[function(_dereq_,module,exports){
-var LiterallyCanvas, baseTools, defineOptionsStyle, init, initReact, registerJQueryPlugin, shapes, tools, util;
+var LiterallyCanvas, baseTools, defaultImageURLPrefix, defineOptionsStyle, init, initReact, registerJQueryPlugin, setDefaultImageURLPrefix, shapes, tools, util;
 
 LiterallyCanvas = _dereq_('./core/LiterallyCanvas');
 
@@ -1374,13 +1387,19 @@ tools = {
   ToolWithStroke: baseTools.ToolWithStroke
 };
 
+defaultImageURLPrefix = 'lib/img';
+
+setDefaultImageURLPrefix = function(newDefault) {
+  return defaultImageURLPrefix = newDefault;
+};
+
 init = function(el, opts) {
   var backgroundImage, canvases, child, drawingViewElement, lc, oldCanvas, optionsElement, pickerElement, _i, _len, _ref;
   if (opts == null) {
     opts = {};
   }
   if (opts.imageURLPrefix == null) {
-    opts.imageURLPrefix = 'lib/img';
+    opts.imageURLPrefix = defaultImageURLPrefix;
   }
   if (opts.primaryColor == null) {
     opts.primaryColor = '#000';
@@ -1490,6 +1509,7 @@ module.exports = {
   util: util,
   tools: tools,
   defineOptionsStyle: defineOptionsStyle,
+  setDefaultImageURLPrefix: setDefaultImageURLPrefix,
   defineShape: shapes.defineShape,
   createShape: shapes.createShape,
   JSONToShape: shapes.JSONToShape,

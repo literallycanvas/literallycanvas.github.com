@@ -13,8 +13,7 @@ widget. Its only dependency is `React.js`_.
     <script>
       $(document).ready(function() {
         $('.literally.index').literallycanvas({
-          backgroundColor: 'whiteSmoke',
-          imageURLPrefix: '/_static/lib/img'
+          backgroundColor: 'whiteSmoke'
         });
       });
     </script>
