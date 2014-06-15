@@ -67,8 +67,8 @@ Creating shapes
   :param color: Color of the point
 
   ``Point`` is primarily an internal data structure for
-  :ref:`LinePath <_shape-LinePath>` and
-  :ref:`ErasedLinePath <_shape-ErasedLinePath>`. It can't currently be
+  :ref:`LinePath <shape-LinePath>` and
+  :ref:`ErasedLinePath <shape-ErasedLinePath>`. It can't currently be
   drawn.
 
 Defining shapes
