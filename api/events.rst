@@ -22,6 +22,7 @@ Drawing changes
 ---------------
 
 .. _event_drawingChange:
+
 ``drawingChange`` *()*
   The drawing just changed in some way. This is a catch-all event that is fired
   after each of the other events in this section except for
@@ -29,34 +30,42 @@ Drawing changes
   change the drawing.
 
 .. _event_shapeSave:
+
 ``shapeSave`` *({shape, afterShapeId})*
   A new shape was just added to the drawing above *afterShapeId*.
 
 .. _event_snapshotLoad:
+
 ``snapshotLoad`` *()*
   A snapshot was just loaded.
 
 .. _event_clear:
+
 ``clear`` *()*
   The drawing was just cleared.
 
 .. _event_undo:
+
 ``undo`` *()*
   The last action was undone.
 
 .. _event_redo:
+
 ``redo`` *()*
   An undone action was reapplied.
 
 .. _event_primaryColorChange:
+
 ``primaryColorChange`` *(newColor)*
   The primary color was just changed.
 
 .. _event_secondaryColorChange:
+
 ``secondaryColorChange`` *(newColor)*
   The secondary color was just changed.
 
-.. _event_secondaryColorChange:
+.. _event_backgroundColorChange:
+
 ``backgroundColorChange`` *(newColor)*
   The background color was just changed.
 

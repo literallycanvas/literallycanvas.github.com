@@ -82,7 +82,7 @@ Exporting images
 Event subscription
 ^^^^^^^^^^^^^^^^^^
 
-.. code-bock:: javascript
+.. code-block:: javascript
 
   var subscriber = lc.on('drawingChange', function() {
     localStorage.setItem('drawing', lc.getSnapshotJSON());
