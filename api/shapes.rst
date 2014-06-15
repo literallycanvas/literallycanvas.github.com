@@ -66,7 +66,7 @@ Creating shapes
   :param size: Size of the rectangle
   :param color: Color of the point
 
-  ``Point`` is primarily an internal data structure for
+  :ref:`Point <shape-Point>` is primarily an internal data structure for
   :ref:`LinePath <shape-LinePath>` and
   :ref:`ErasedLinePath <shape-ErasedLinePath>`. It can't currently be
   drawn.
