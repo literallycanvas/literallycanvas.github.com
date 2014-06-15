@@ -137,3 +137,17 @@ information. Instead, you can use these functions to save and load shapes:
 .. js:function:: LC.JSONToShape(jsonEncodedString)
 
   :returns: Shape instance constructed from *jsonEncodedString*
+
+Adding shapes to drawings programmatically
+------------------------------------------
+
+You can add a shape to the drawing with the
+:js:func:`LiterallyCanvas.saveShape() <saveShape>` method, like this:
+
+.. code-block:: javascript
+
+  // let's put a kitten in our drawing
+  var lc = LC.init(element, options);
+  var img = new Image();
+  img.src = 'http://placekitten.com/200/300';
+  lc.saveShape(LC.createShape('Image', {x: 100, y: 100, image: img}))
