@@ -109,3 +109,11 @@ it using the :js:func:`LC.createShape` function.
       return LC.createShape('MyAwesomeShape', data);
     }
   });
+
+  /* use it as a background */
+  var lc = LC.init(element, {
+    backgroundShapes: [LC.createShape('MyAwesomeShape', {x: 0, y: 0})]
+  });
+
+  /* add it as part of the drawing */
+  lc.saveShape(LC.createShape('MyAwesomeShape', {x: 100, y: 100}))
