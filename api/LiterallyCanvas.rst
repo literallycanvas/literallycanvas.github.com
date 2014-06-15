@@ -19,14 +19,20 @@ Saving and loading
 
 .. js:function:: loadSnapshotJSON(snapshot)
 
-  Load a JSON-encoded drawing.
+  :param snapshot: a JSON-encoded string
+
+  Load a drawing.
 
 .. js:function:: getSnapshotJSON()
 
-  Get the current drawing as JSON. Consider its output opaque and unstable
-  except when used as an argument to :js:func:`loadSnapshotJSON`.
+  :returns: a JSON-encoded string
 
-  If you need the serialization format to be stable, file an issue on GitHub.
+  Get the current drawing as JSON. Consider its output opaque except when used
+  as an argument to :js:func:`loadSnapshotJSON`. You may assume that drawings
+  saved with an older version of Literally Canvas will work with a newer one.
+
+  If you need the serialization format to be public, file an issue on GitHub
+  and explain your use case.
 
 Exporting images
 ^^^^^^^^^^^^^^^^
@@ -71,42 +77,81 @@ Exporting images
   Returns a canvas object with the current view composited over a background
   image.
 
-Events
-^^^^^^
+.. _event_subscription:
+
+Event subscription
+^^^^^^^^^^^^^^^^^^
+
+.. code-bock:: javascript
+
+  var subscriber = lc.on('drawingChange', function() {
+    localStorage.setItem('drawing', lc.getSnapshotJSON());
+  })
+  lc.removeEventListener(subscriber); // never mind
 
 .. js:function:: on(event, callback)
+
+  :returns: A "subscriber" object that can be used to unsubscribe from the
+            event
 
   Attach an event handler to *event*. A common use case is to save the
   drawing when it is changed; see :ref:`saving-and-loading`.
 
-  See :ref:`events` for a list of events.
+  See :doc:`events` for a list of events.
 
-.. TODO: document unsubscribe
+.. js:function:: removeEventListener(subscriber)
+
+  .. warning:: this API sucks, fix it
+
+  Stop listening to the event.
 
 
 Controlling the view
 ^^^^^^^^^^^^^^^^^^^^
 
-.. TODO: document [set]pan, [set]zoom
+.. js:function:: setPan(x, y)
 
-Implementing tools
-^^^^^^^^^^^^^^^^^^
+  Move the view's upper left corner to the given position in drawing space.
 
-.. js:function:: repaint(dirty = true, drawBackground = false)
+.. js:function:: setZoom(zoom)
 
-  :param dirty: If ``true``, redraw all shapes rather than just the topmost.
-  :param drawBackground: If ``true``, draw the background as a solid
-                         rectangle. Otherwise, don't draw a background.
-                         Typically you only need to draw the background when
-                         exporting the image. Otherwise, the background color
-                         set by the CSS on the canvas element will be
-                         visible.
+  Set the view zoom to the given value.
+
+.. js:function:: pan(x, y)
+
+  Move the view by the given amount relative to its current position in drawing
+  space.
+
+.. js:function:: zoom(amount)
+
+  Add the given amount to the zoom level.
+
+Changing the drawing
+^^^^^^^^^^^^^^^^^^^^
 
 .. js:function:: saveShape(shape)
 
-  Add a shape to the drawing. See :ref:`list-shapes` for a current list of
-  shapes.
+  Add a shape to the drawing. See :doc:`shapes` for more information.
 
-.. js:function:: numShapes()
+.. js:function:: setColor(colorName, colorValue)
 
-  The number of shapes in the drawing.
+  :param colorName: ``'background'``, ``'primary'``, or ``'secondary'``
+  :param colorValue: Any CSS color
+
+.. js:function:: update(shape)
+
+  Render *shape* on top of the current drawing without permanently adding it
+  to the drawing. This method is used by tools to show a shape while the user
+  is still creating it.
+
+.. js:function:: clear()
+
+  Remove all shapes from the drawing.
+
+.. js:function:: undo()
+
+  Undo the last drawing action.
+
+.. js:function:: redo()
+
+  Redo the last thing to be undone.
