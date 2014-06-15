@@ -85,7 +85,11 @@ it using the :js:func:`LC.createShape` function.
     constructor: function(args) {
       this.x = args.x;
       this.y = args.y;
+      this.doStuff();
     },
+
+    /* you can add arbitrary methods */
+    doStuff: function() {},
 
     /* use ctx to draw stuff */
     draw: function(ctx) {
@@ -94,13 +98,13 @@ it using the :js:func:`LC.createShape` function.
     /* provide a bounding rectangle so getImage() can figure out the image
        bounds (semi-optional) */
     getBoundingRect: function() {
-      return {x: x, y: y, width: 0, height: 0};
+      return {x: this.x, y: this.y, width: 0, height: 0};
     },
 
     /* return a dictionary representation of the shape from which this instance
        can be reconstructed */
     toJSON: function() {
-      return {x: x, y: y};
+      return {x: this.x, y: this.y};
     },
 
     /* reconstruct the MyAwesomeShape from the representation given by
