@@ -23,6 +23,17 @@ a, a:visited {
   position: relative;
 }
 
+/* roll these back into sphinx-better-theme plz */
+
+@media(max-width: 75rem) {
+  header#pageheader, footer#pagefooter, .related, .document {
+    margin: 0 1rem;
+    width: calc(100% - 2rem);
+    width: -moz-calc(100% - 2rem);
+    width: -webkit-calc(100% - 2rem);
+  }
+}
+
 .field-list p {
   margin: 1rem 0;
 }
@@ -32,4 +43,11 @@ a, a:visited {
 }
 .field-list p:last-child {
   margin-bottom: 0;
+}
+
+.deprecated p {
+  margin: 10px 0;
+  padding: 7px;
+  background-color: #ffe4e4;
+  border: 1px solid #f66;
 }
