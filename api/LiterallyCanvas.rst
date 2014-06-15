@@ -167,3 +167,15 @@ Changing the drawing
 .. js:function:: redo()
 
   Redo the last thing to be undone.
+
+Getting information
+^^^^^^^^^^^^^^^^^^^
+
+.. js:function:: getColor(colorName)
+
+  Get the value of the ``'primary'``, ``'secondary'``, or ``'background'``
+  color.
+
+.. js:function:: getPixel(x, y)
+
+  Get the color of the given drawing-space pixel as a CSS color string.
