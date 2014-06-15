@@ -7,9 +7,6 @@ programmatically. All shapes are created through the
 
 A "color" is a CSS color string.
 
-Creating shapes
----------------
-
 .. _shape-Image:
 
 .. js:function:: LC.createShape('Image', {x, y, image})
