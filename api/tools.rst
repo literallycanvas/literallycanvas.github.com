@@ -61,3 +61,7 @@ and get back something that works.
     LC.tools.Pan,
     LC.tools.Eyedropper
   ]})
+
+Tools can call any method on the given :js:class:`LiterallyCanvas`. Usually
+you'll be drawing and adding shapes, but you can also set colors, pan, zoom,
+trigger events, and more.
