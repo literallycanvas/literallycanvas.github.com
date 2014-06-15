@@ -6,9 +6,10 @@ events. Here's how:
 
 .. code-block:: javascript
 
-  var subscriber = lc.on('eventName', function(arguments) {
+  var unsubscribe = lc.on('eventName', function(arguments) {
     // do stuff
-  })
+  });
+  unsubscribe();  // stop listening
 
 See :ref:`event_subscription` for details.
 

@@ -90,26 +90,19 @@ Event subscription
 
 .. code-block:: javascript
 
-  var subscriber = lc.on('drawingChange', function() {
+  var unsubscribe = lc.on('drawingChange', function() {
     localStorage.setItem('drawing', lc.getSnapshotJSON());
-  })
-  lc.removeEventListener(subscriber); // never mind
+  });
+  unsubscribe();  // stop listening
 
 .. js:function:: on(event, callback)
 
-  :returns: A "subscriber" object that can be used to unsubscribe from the
-            event
+  :returns: a function that unsubscribes from the event
 
   Attach an event handler to *event*. A common use case is to save the
   drawing when it is changed; see :ref:`saving-and-loading`.
 
   See :doc:`events` for a list of events.
-
-.. js:function:: removeEventListener(subscriber)
-
-  .. warning:: this API sucks, fix it
-
-  Stop listening to the event.
 
 
 Controlling the view
