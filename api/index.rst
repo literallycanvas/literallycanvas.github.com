@@ -11,43 +11,6 @@ API
     tools.rst
     util.rst
 
-.. _events:
-
-Events
-------
-
-Drawing changes
-^^^^^^^^^^^^^^^
-
-=============== ===================================
-clear           The drawing was cleared
-drawingChange   The drawing was updated in some way
-redo            The drawing changed due to a redo
-undo            The drawing changed due to an undo
-=============== ===================================
-
-Operations
-^^^^^^^^^^
-
-In the order that they occur:
-
-=============== ===========================================
-drawStart       A new shape is being drawn
-drawContinue    The new shape is being modified
-drawEnd         The new shape is complete
-shapeSave       The new shape has been saved to the drawing
-=============== ===========================================
-
-View changes
-^^^^^^^^^^^^
-
-=============== ========================
-pan             The canvas was panned
-repaint         The canvas was repainted
-toolChange      A different tool was set
-zoom            The canvas was zoomed
-=============== ========================
-
 .. _list-shapes:
 
 Shapes
