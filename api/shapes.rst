@@ -7,6 +7,9 @@ programmatically. All shapes are created through the
 
 A "color" is a CSS color string.
 
+Creating shapes
+---------------
+
 .. _shape-Image:
 
 .. js:function:: LC.createShape('Image', {x, y, image})
@@ -67,3 +70,42 @@ A "color" is a CSS color string.
   :ref:`LinePath <_shape-LinePath>` and
   :ref:`ErasedLinePath <_shape-ErasedLinePath>`. It can't currently be
   drawn.
+
+Defining shapes
+---------------
+
+If you want to make your own tool, or do some custom canvas rendering as the
+background of your drawing, you'll need to define a shape. Then you can create
+it using the :js:func:`LC.createShape` function.
+
+.. code-block:: javascript
+
+  LC.defineShape('MyAwesomeShape', {
+    /* initialize using the args passed to LC.createShape() */
+    constructor: function(args) {
+      this.x = args.x;
+      this.y = args.y;
+    },
+
+    /* use ctx to draw stuff */
+    draw: function(ctx) {
+    },
+
+    /* provide a bounding rectangle so getImage() can figure out the image
+       bounds (semi-optional) */
+    getBoundingRect: function() {
+      return {x: x, y: y, width: 0, height: 0};
+    },
+
+    /* return a dictionary representation of the shape from which this instance
+       can be reconstructed */
+    toJSON: function() {
+      return {x: x, y: y};
+    },
+
+    /* reconstruct the MyAwesomeShape from the representation given by
+       toJSON */
+    fromJSON: function(data) {
+      return LC.createShape('MyAwesomeShape', data);
+    }
+  });
