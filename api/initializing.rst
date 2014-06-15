@@ -24,36 +24,39 @@ Initializing normally
 
 .. code-block:: javascript
 
-  var lc = LC.init(element, options)
+  var lc = LC.init(element, {option: value})
 
 .. js:function:: LC.init(element, options)
 
-    :param imageURLPrefix:
-      Location of Literally Canvas's ``img/`` folder.
+    **Options**
 
-      .. note::
+    ``imageURLPrefix``
+        Location of Literally Canvas's ``img`` folder, without a trailing
+        slash. Defaults to ``lib/img``.
 
-        You probably need to set this, either by passing it as an option, or
-        by calling :js:func:`LC.setDefaultImageURLPrefix`.
+        .. note::
 
-    :param primaryColor:
-      Starting stroke color. Defaults to ``'#000'``.
+          You probably need to set this, either by passing it as an option, or
+          by calling :js:func:`LC.setDefaultImageURLPrefix`.
 
-    :param secondaryColor:
-      Starting fill color. Defaults to ``'#fff'``.
+    ``primaryColor``
+        Starting stroke color. Defaults to ``'#000'``.
 
-    :param backgroundColor:
-      Starting background color. Defaults to ``'transparent'``.
+    ``secondaryColor``
+        Starting fill color. Defaults to ``'#fff'``.
 
-    :param backgroundShapes:
-      List of shapes to display under all other shapes. They will not be
-      affected by the Clear button, :js:func:`loadSnapshot`,
-      or the eraser tool.
+    ``backgroundColor``
+        Starting background color. Defaults to ``'transparent'``.
 
-    :param keyboardShortcuts:
-      Enable panning with the arrow keys. Defaults to ``true``.
+    ``backgroundShapes``
+        List of shapes to display under all other shapes. They will not be
+        affected by the Clear button, :js:func:`loadSnapshot`,
+        or the eraser tool.
 
-    :param tools:
+    ``keyboardShortcuts``
+        Enable panning with the arrow keys. Defaults to ``true``.
+
+    ``tools``
         A list of tools to enable. The default value is:
 
         .. code-block:: javascript
@@ -68,8 +71,11 @@ Initializing normally
               LC.tools.Eyedropper
             ]
 
+        If you write your own tool, you can append it to the list above and
+        pass the whole list as the value of ``tools``.
+
         If you need to disable a tool (such as pan), you can remove it from the
-        above list and pass the remainder as ``toolClasses``.
+        list above and pass the remainder as the value of ``tools``.
 
         .. code-block:: javascript
 
@@ -80,7 +86,7 @@ Initializing normally
                   LC.tools.Rectangle, LC.tools.Text, LC.tools.Eyedropper]
             });
 
-    :param watermarkImage:
+    ``watermarkImage``
         An image to display behind the drawing. The image will be centered.
         It will not pan with the drawing.
 
@@ -90,7 +96,7 @@ Initializing normally
             img.src = '/static/img/watermark.png'
             $('.literally').literallycanvas({watermarkImage: img});
 
-    :param watermarkScale:
+    ``watermarkScale``
         Scale at which to render the watermark.
 
         If you want to support retina displays, you should use a double-size
@@ -110,10 +116,6 @@ returns the list of matched elements instead of a
 handlers or otherwise use the functionality of
 :js:class:`LiterallyCanvas`, you need to use the *onInit* callback.
 
-**How to translate the examples**
-
-TODO
-
 .. js:function:: $.literallycanvas(options)
 
     :returns: jQuery element list
@@ -127,12 +129,49 @@ TODO
 
       .. code-block:: javascript
 
-        LC.init(element, {
+        $(element).literallycanvas({
           onInit: function(lc) {
             lc.on('drawingChange', function() {
               console.log("The drawing was changed.");
             })
           }
-        })
+        });
 
     :type onInit: function(:js:class:`LiterallyCanvas`)
+
+Translating the examples to jQuery form
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Examples will often use the return value of :js:func:`LC.init`, a
+:js:class:`LiterallyCanvas` object.
+
+.. code-block:: javascript
+
+  var lc = LC.init(element, options);
+  lc.on('drawingChange', function() {
+    console.log("The drawing was changed.");
+  });
+
+If you initialize Literally Canvas with the jQuery plugin, you won't get the
+``lc`` value back. Instead, you need to use the *onInit* callback,
+which gets that same value as its argument:
+
+.. code-block:: javascript
+
+  $(element).literallycanvas({
+    onInit: function(lc) {
+      lc.on('drawingChange', function() {
+        console.log("The drawing was changed.");
+      })
+    }
+  });
+
+Alternatively, you can just use jQuery to get the first argument to
+:js:func:`LC.init`, like this:
+
+.. code-block:: javascript
+
+  var lc = LC.init($('selector').get(0), options);
+  lc.on('drawingChange', function() {
+    console.log("The drawing was changed.");
+  });
