@@ -24,6 +24,7 @@
             Accept: 'application/json'
           },
           data: {
+            // convert the image data to base64
             image:  lc.canvasForExport().toDataURL().split(',')[1],
             type: 'base64'
           },
