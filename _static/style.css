@@ -25,6 +25,10 @@ a, a:visited {
 
 /* roll these back into sphinx-better-theme plz */
 
+body {
+  line-height: 145%;
+}
+
 @media(max-width: 75rem) {
   header#pageheader, footer#pagefooter, .related, .document {
     margin: 0 1rem;
@@ -32,6 +36,11 @@ a, a:visited {
     width: -moz-calc(100% - 2rem);
     width: -webkit-calc(100% - 2rem);
   }
+}
+
+.admonition, .deprecated p {
+  -webkit-border-radius: 5px;
+  border-radius: 5px
 }
 
 .field-list p {
