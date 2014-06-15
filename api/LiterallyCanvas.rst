@@ -11,6 +11,12 @@ about getting a reference to this object.
   :param options: Dictionary of options. See :doc:`initializing` for possible
                   values.
 
+Changes since v0.3
+------------------
+
+The :js:class:`LiterallyCanvas` object no longer uses a single canvas to
+render. Instead, it keeps multiple canvases inside a container element.
+
 Methods
 -------
 

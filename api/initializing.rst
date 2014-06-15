@@ -30,6 +30,8 @@ Initializing normally
 
     **Options**
 
+    .. _opt-imageURLPrefix:
+
     ``imageURLPrefix``
         Location of Literally Canvas's ``img`` folder, without a trailing
         slash. Defaults to ``lib/img``.

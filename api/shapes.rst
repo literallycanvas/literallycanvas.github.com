@@ -121,3 +121,19 @@ it using the :js:func:`LC.createShape` function.
 
   /* add it as part of the drawing */
   lc.saveShape(LC.createShape('MyAwesomeShape', {x: 100, y: 100}))
+
+Shapes and JSON
+---------------
+
+Each shape has a JSON representation so that you can save and load drawings.
+But just calling :js:func:`shape.toJSON` won't give you a value that you can
+decode later; Literally Canvas wraps these values in containers with additional
+information. Instead, you can use these functions to save and load shapes:
+
+.. js:function:: LC.shapeToJSON(shape)
+
+  :returns: JSON-encoded string representing *shape*
+
+.. js:function:: LC.JSONToShape(jsonEncodedString)
+
+  :returns: Shape instance constructed from *jsonEncodedString*
