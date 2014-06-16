@@ -57,9 +57,6 @@ Exporting images
     Amount by which to scale the image output. Shapes will be rendered at
     full resolution. Defaults to ``1``.
 
-  ``includeWatermark``
-    If ``true``, render the watermark behind everything. Defaults to ``false``.
-
   ``scaleDownRetina``
     If ``true``, compensate for ``window.devicePixelRatio`` by adjusting the
     scale before rendering. This is probably what you want, since the image
