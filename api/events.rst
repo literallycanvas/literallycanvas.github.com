@@ -32,8 +32,8 @@ Drawing changes
 
 .. _event_shapeSave:
 
-``shapeSave`` *({shape, afterShapeId})*
-  A new shape was just added to the drawing above *afterShapeId*.
+``shapeSave`` *({shape, previousShapeId})*
+  A new shape was just added to the drawing above *previousShapeId*.
 
 .. _event_snapshotLoad:
 

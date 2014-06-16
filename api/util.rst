@@ -58,3 +58,7 @@ Utilities
 
   :returns: ``window.devicePixelRatio`` if it exists and is greater than 1;
             otherwise, returns 1.
+
+.. js:function:: LC.util.getGUID()
+
+  :returns: a globally unique ID string

@@ -125,15 +125,16 @@ Controlling the view
 Changing the drawing
 ^^^^^^^^^^^^^^^^^^^^
 
-.. js:function:: saveShape(shape, triggerSaveShapeEvent, afterShapeId)
+.. js:function:: saveShape(shape, triggerSaveShapeEvent, previousShapeId)
 
   :param shape: Shape to be added
   :param triggerSaveShapeEvent:
     If ``true``, trigger the :ref:`shapeSave <event_shapeSave>` event.
     Defaults to ``true``. You may want to set this to ``false`` if you're
     sending and receiving shapes to/from a remote drawing.
-  :param afterShapeId:
-    ID of the shape to insert after. Defaults to the most recently added shape.
+  :param previousShapeId:
+    ID of the shape just below the new one. Defaults to the most recently
+    added shape.
 
   Add a shape to the drawing. If you're writing a single-user application,
   you should only need to pass the first argument. See :doc:`shapes` for more
