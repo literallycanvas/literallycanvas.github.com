@@ -73,7 +73,7 @@ Creating a canvas
             $('.literally').literallycanvas({
                 // disable panning
                 keyboardShortcuts: false,
-                toolClass: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget,
+                toolClasses: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget,
                             LC.RectangleWidget, LC.EyeDropperWidget]
             });
 
