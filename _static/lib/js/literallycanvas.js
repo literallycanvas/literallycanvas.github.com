@@ -1,7 +1,7 @@
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.LC=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
 },{}],2:[function(_dereq_,module,exports){
-var JSONToShape, LiterallyCanvas, Pencil, actions, bindEvents, createShape, math, shapeToJSON, util, _ref,
+var INFINITE, JSONToShape, LiterallyCanvas, Pencil, actions, bindEvents, createShape, math, shapeToJSON, util, _ref,
   __slice = [].slice;
 
 actions = _dereq_('./actions');
@@ -15,6 +15,8 @@ _ref = _dereq_('./shapes'), createShape = _ref.createShape, shapeToJSON = _ref.s
 Pencil = _dereq_('../tools/Pencil');
 
 util = _dereq_('./util');
+
+INFINITE = 'infinite';
 
 module.exports = LiterallyCanvas = (function() {
   function LiterallyCanvas(containerEl, opts) {
@@ -49,18 +51,14 @@ module.exports = LiterallyCanvas = (function() {
     };
     this.scale = 1.0;
     this.tool = new Pencil();
-    util.matchElementSize(this.containerEl, [this.backgroundCanvas], this.backingScale, (function(_this) {
+    this.width = opts.imageSize.width || INFINITE;
+    this.height = opts.imageSize.height || INFINITE;
+    this.setZoom(this.scale);
+    util.matchElementSize(this.containerEl, [this.backgroundCanvas, this.canvas], this.backingScale, (function(_this) {
       return function() {
-        return _this.repaintLayer('background');
+        return _this.repaintAllLayers();
       };
     })(this));
-    util.matchElementSize(this.containerEl, [this.canvas], this.backingScale, (function(_this) {
-      return function() {
-        return _this.repaintLayer('main');
-      };
-    })(this));
-    this.repaintLayer('background');
-    this.repaintLayer('main');
   }
 
   LiterallyCanvas.prototype.trigger = function(name, data) {
@@ -75,11 +73,11 @@ module.exports = LiterallyCanvas = (function() {
       return fn(e.detail);
     };
     this.canvas.addEventListener(name, wrapper);
-    return wrapper;
-  };
-
-  LiterallyCanvas.prototype.removeEventListener = function(name, wrapper) {
-    return this.canvas.removeEventListener(name, wrapper);
+    return (function(_this) {
+      return function() {
+        return _this.canvas.removeEventListener(name, wrapper);
+      };
+    })(this);
   };
 
   LiterallyCanvas.prototype.getRenderScale = function() {
@@ -154,7 +152,6 @@ module.exports = LiterallyCanvas = (function() {
 
   LiterallyCanvas.prototype.setColor = function(name, color) {
     this.colors[name] = color;
-    this.trigger("" + name + "ColorChange", this.colors[name]);
     switch (name) {
       case 'background':
         this.containerEl.style.backgroundColor = this.colors.background;
@@ -166,6 +163,7 @@ module.exports = LiterallyCanvas = (function() {
       case 'secondary':
         this.repaintLayer('main');
     }
+    this.trigger("" + name + "ColorChange", this.colors[name]);
     if (name === 'background') {
       return this.trigger("drawingChange");
     }
@@ -175,18 +173,24 @@ module.exports = LiterallyCanvas = (function() {
     return this.colors[name];
   };
 
-  LiterallyCanvas.prototype.saveShape = function(shape) {
-    this.execute(new actions.AddShapeAction(this, shape));
-    this.trigger('shapeSave', {
-      shape: shape
-    });
-    return this.trigger('drawingChange', {
-      shape: shape
-    });
-  };
-
-  LiterallyCanvas.prototype.numShapes = function() {
-    return this.shapes.length;
+  LiterallyCanvas.prototype.saveShape = function(shape, triggerShapeSaveEvent, previousShapeId) {
+    if (triggerShapeSaveEvent == null) {
+      triggerShapeSaveEvent = true;
+    }
+    if (previousShapeId == null) {
+      previousShapeId = null;
+    }
+    if (!previousShapeId) {
+      previousShapeId = this.shapes.length ? this.shapes[this.shapes.length - 1].id : null;
+    }
+    this.execute(new actions.AddShapeAction(this, shape, previousShapeId));
+    if (triggerShapeSaveEvent) {
+      this.trigger('shapeSave', {
+        shape: shape,
+        previousShapeId: previousShapeId
+      });
+    }
+    return this.trigger('drawingChange');
   };
 
   LiterallyCanvas.prototype.pan = function(x, y) {
@@ -194,6 +198,22 @@ module.exports = LiterallyCanvas = (function() {
   };
 
   LiterallyCanvas.prototype.setPan = function(x, y) {
+    var renderScale;
+    renderScale = this.getRenderScale();
+    if (this.width !== INFINITE) {
+      if (this.canvas.width > this.width * renderScale) {
+        x = (this.canvas.width - this.width * renderScale) / 2;
+      } else {
+        x = Math.max(Math.min(0, x), this.canvas.width - this.width * renderScale);
+      }
+    }
+    if (this.height !== INFINITE) {
+      if (this.canvas.height > this.height * renderScale) {
+        y = (this.canvas.height - this.height * renderScale) / 2;
+      } else {
+        y = Math.max(Math.min(0, y), this.canvas.height - this.height * renderScale);
+      }
+    }
     this.position = {
       x: x,
       y: y
@@ -241,6 +261,7 @@ module.exports = LiterallyCanvas = (function() {
     if (dirty == null) {
       dirty = repaintLayerKey === 'main';
     }
+    this.setPan(this.position.x, this.position.y);
     switch (repaintLayerKey) {
       case 'background':
         this.backgroundCtx.clearRect(0, 0, this.backgroundCanvas.width, this.backgroundCanvas.height);
@@ -268,7 +289,14 @@ module.exports = LiterallyCanvas = (function() {
         }
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         if (this.canvas.width > 0 && this.canvas.height > 0) {
-          this.ctx.drawImage(this.buffer, 0, 0);
+          this.ctx.fillStyle = '#ccc';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+          this.clipped(((function(_this) {
+            return function() {
+              _this.ctx.clearRect(0, 0, _this.canvas.width, _this.canvas.height);
+              return _this.ctx.drawImage(_this.buffer, 0, 0);
+            };
+          })(this)), this.ctx);
         }
     }
     return this.trigger('repaint', {
@@ -286,9 +314,11 @@ module.exports = LiterallyCanvas = (function() {
 
   LiterallyCanvas.prototype.update = function(shape) {
     this.repaintLayer('main', false);
-    return this.transformed(((function(_this) {
+    return this.clipped(((function(_this) {
       return function() {
-        return shape.update(_this.ctx, _this.bufferCtx);
+        return _this.transformed((function() {
+          return shape.update(_this.ctx, _this.bufferCtx);
+        }), _this.ctx, _this.bufferCtx);
       };
     })(this)), this.ctx, this.bufferCtx);
   };
@@ -309,7 +339,48 @@ module.exports = LiterallyCanvas = (function() {
         return _results;
       };
     })(this);
-    return this.transformed(drawShapes, ctx);
+    return this.clipped(((function(_this) {
+      return function() {
+        return _this.transformed(drawShapes, ctx);
+      };
+    })(this)), ctx);
+  };
+
+  LiterallyCanvas.prototype.clipped = function() {
+    var contexts, ctx, fn, height, width, x, y, _i, _j, _len, _len1, _results;
+    fn = arguments[0], contexts = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+    x = this.width === INFINITE ? 0 : this.position.x;
+    y = this.height === INFINITE ? 0 : this.position.y;
+    width = (function() {
+      switch (this.width) {
+        case INFINITE:
+          return this.canvas.width;
+        default:
+          return this.width * this.getRenderScale();
+      }
+    }).call(this);
+    height = (function() {
+      switch (this.height) {
+        case INFINITE:
+          return this.canvas.height;
+        default:
+          return this.height * this.getRenderScale();
+      }
+    }).call(this);
+    for (_i = 0, _len = contexts.length; _i < _len; _i++) {
+      ctx = contexts[_i];
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(x, y, width, height);
+      ctx.clip();
+    }
+    fn();
+    _results = [];
+    for (_j = 0, _len1 = contexts.length; _j < _len1; _j++) {
+      ctx = contexts[_j];
+      _results.push(ctx.restore());
+    }
+    return _results;
   };
 
   LiterallyCanvas.prototype.transformed = function() {
@@ -397,7 +468,7 @@ module.exports = LiterallyCanvas = (function() {
   LiterallyCanvas.prototype.getContentBounds = function() {
     return util.getBoundingRect(this.shapes.map(function(s) {
       return s.getBoundingRect();
-    }));
+    }), this.width === INFINITE ? 0 : this.width, this.height === INFINITE ? 0 : this.height);
   };
 
   LiterallyCanvas.prototype.getImage = function(opts) {
@@ -410,9 +481,6 @@ module.exports = LiterallyCanvas = (function() {
     }
     if (opts.scale == null) {
       opts.scale = 1;
-    }
-    if (opts.includeWatermark == null) {
-      opts.includeWatermark = false;
     }
     if (opts.scaleDownRetina == null) {
       opts.scaleDownRetina = true;
@@ -483,6 +551,7 @@ module.exports = LiterallyCanvas = (function() {
       }
     }
     this.repaintAllLayers();
+    this.trigger('snapshotLoad');
     return this.trigger('drawingChange', {});
   };
 
@@ -520,19 +589,51 @@ ClearAction = (function() {
 })();
 
 AddShapeAction = (function() {
-  function AddShapeAction(lc, shape) {
+  function AddShapeAction(lc, shape, previousShapeId) {
     this.lc = lc;
     this.shape = shape;
+    this.previousShapeId = previousShapeId != null ? previousShapeId : null;
   }
 
   AddShapeAction.prototype["do"] = function() {
-    this.ix = this.lc.shapes.length;
-    this.lc.shapes.push(this.shape);
+    var found, newShapes, shape, _i, _len, _ref;
+    if (!this.lc.shapes.length || this.lc.shapes[this.lc.shapes.length - 1].id === this.previousShapeId || this.previousShapeId === null) {
+      this.lc.shapes.push(this.shape);
+    } else {
+      newShapes = [];
+      found = false;
+      _ref = this.lc.shapes;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        shape = _ref[_i];
+        newShapes.push(shape);
+        if (shape.id === this.previousShapeId) {
+          newShapes.push(this.shape);
+          found = true;
+        }
+      }
+      if (!found) {
+        newShapes.push(this.shape);
+      }
+      this.lc.shapes = newShapes;
+    }
     return this.lc.repaintLayer('main');
   };
 
   AddShapeAction.prototype.undo = function() {
-    this.lc.shapes.pop(this.ix);
+    var newShapes, shape, _i, _len, _ref;
+    if (this.lc.shapes[this.lc.shapes.length - 1].id === this.shape.id) {
+      this.lc.shapes.pop();
+    } else {
+      newShapes = [];
+      _ref = this.lc.shapes;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        shape = _ref[_i];
+        if (shape.id !== this.shape.id) {
+          newShapes.push(shape);
+        }
+      }
+      lc.shapes = newShapes;
+    }
     return this.lc.repaintLayer('main');
   };
 
@@ -769,7 +870,7 @@ module.exports = math;
 
 
 },{"./shapes":6,"./util":7}],6:[function(_dereq_,module,exports){
-var JSONToShape, LinePath, bspline, createShape, defineShape, linePathFuncs, shapeToJSON, shapes, util, _dual, _mid, _refine,
+var JSONToShape, LinePath, bspline, createShape, defineShape, linePathFuncs, shapeToJSON, shapes, util, _createLinePathFromData, _doAllPointsShareStyle, _dual, _mid, _refine,
   __slice = [].slice;
 
 util = _dereq_('./util');
@@ -799,21 +900,26 @@ defineShape = function(name, props) {
 };
 
 createShape = function() {
-  var args, name;
+  var args, name, s;
   name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-  return (function(func, args, ctor) {
+  s = (function(func, args, ctor) {
     ctor.prototype = func.prototype;
     var child = new ctor, result = func.apply(child, args);
     return Object(result) === result ? result : child;
   })(shapes[name], args, function(){});
+  s.id = util.getGUID();
+  return s;
 };
 
 JSONToShape = function(_arg) {
-  var className, data, shape;
-  className = _arg.className, data = _arg.data;
+  var className, data, id, shape;
+  className = _arg.className, data = _arg.data, id = _arg.id;
   if (className in shapes) {
     shape = shapes[className].fromJSON(data);
     if (shape) {
+      if (id) {
+        shape.id = id;
+      }
       return shape;
     } else {
       console.log('Unreadable shape:', className, data);
@@ -828,7 +934,8 @@ JSONToShape = function(_arg) {
 shapeToJSON = function(shape) {
   return {
     className: shape.className,
-    data: shape.toJSON()
+    data: shape.toJSON(),
+    id: shape.id
   };
 };
 
@@ -1009,6 +1116,66 @@ defineShape('Line', {
   }
 });
 
+_doAllPointsShareStyle = function(points) {
+  var color, point, size, _i, _len;
+  if (!points.length) {
+    return false;
+  }
+  size = points[0].size;
+  color = points[0].color;
+  for (_i = 0, _len = points.length; _i < _len; _i++) {
+    point = points[_i];
+    if (!(point.size === size && point.color === color)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+_createLinePathFromData = function(shapeName, data) {
+  var pointData, points, x, y;
+  points = null;
+  if (data.points) {
+    points = (function() {
+      var _i, _len, _ref, _results;
+      _ref = data.points;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        pointData = _ref[_i];
+        _results.push(JSONToShape(pointData));
+      }
+      return _results;
+    })();
+  } else if (data.pointCoordinatePairs) {
+    points = (function() {
+      var _i, _len, _ref, _ref1, _results;
+      _ref = data.pointCoordinatePairs;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        _ref1 = _ref[_i], x = _ref1[0], y = _ref1[1];
+        _results.push(JSONToShape({
+          className: 'Point',
+          data: {
+            x: x,
+            y: y,
+            size: data.pointSize,
+            color: data.pointColor
+          }
+        }));
+      }
+      return _results;
+    })();
+  }
+  if (!points[0]) {
+    return null;
+  }
+  return createShape(shapeName, {
+    points: points,
+    order: data.order,
+    tailSize: data.tailSize
+  });
+};
+
 linePathFuncs = {
   constructor: function(args) {
     var point, points, _i, _len, _results;
@@ -1039,42 +1206,43 @@ linePathFuncs = {
     }));
   },
   toJSON: function() {
-    var p;
-    return {
-      order: this.order,
-      tailSize: this.tailSize,
-      points: (function() {
-        var _i, _len, _ref, _results;
-        _ref = this.points;
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          p = _ref[_i];
-          _results.push(shapeToJSON(p));
-        }
-        return _results;
-      }).call(this)
-    };
+    var p, point;
+    if (_doAllPointsShareStyle(this.points)) {
+      return {
+        order: this.order,
+        tailSize: this.tailSize,
+        pointCoordinatePairs: (function() {
+          var _i, _len, _ref, _results;
+          _ref = this.points;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            point = _ref[_i];
+            _results.push([point.x, point.y]);
+          }
+          return _results;
+        }).call(this),
+        pointSize: this.points[0].size,
+        pointColor: this.points[0].color
+      };
+    } else {
+      return {
+        order: this.order,
+        tailSize: this.tailSize,
+        points: (function() {
+          var _i, _len, _ref, _results;
+          _ref = this.points;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            p = _ref[_i];
+            _results.push(shapeToJSON(p));
+          }
+          return _results;
+        }).call(this)
+      };
+    }
   },
   fromJSON: function(data) {
-    var pointData, points;
-    points = (function() {
-      var _i, _len, _ref, _results;
-      _ref = data.points;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        pointData = _ref[_i];
-        _results.push(JSONToShape(pointData));
-      }
-      return _results;
-    })();
-    if (!points[0]) {
-      return null;
-    }
-    return createShape('LinePath', {
-      points: points,
-      order: data.order,
-      tailSize: data.tailSize
-    });
+    return _createLinePathFromData('LinePath', data);
   },
   draw: function(ctx) {
     return this.drawPoints(ctx, this.smoothedPoints);
@@ -1141,25 +1309,7 @@ defineShape('ErasedLinePath', {
     return bufferCtx.restore();
   },
   fromJSON: function(data) {
-    var pointData, points;
-    points = (function() {
-      var _i, _len, _ref, _results;
-      _ref = data.points;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        pointData = _ref[_i];
-        _results.push(JSONToShape(pointData));
-      }
-      return _results;
-    })();
-    if (!points[0]) {
-      return null;
-    }
-    return createShape('ErasedLinePath', {
-      points: points,
-      order: data.order,
-      tailSize: data.tailSize
-    });
+    return _createLinePathFromData('ErasedLinePath', data);
   }
 });
 
@@ -1201,8 +1351,7 @@ defineShape('Text', {
     this.y = args.y || 0;
     this.text = args.text || '';
     this.color = args.color || 'black';
-    this.font = args.font || '18px sans-serif';
-    return this.boundingBoxHeight = 0;
+    return this.font = args.font || '18px sans-serif';
   },
   draw: function(ctx) {
     ctx.font = this.font;
@@ -1311,14 +1460,14 @@ util = {
     }
     return canvas;
   },
-  getBoundingRect: function(rects) {
+  getBoundingRect: function(rects, width, height) {
     var maxX, maxY, minX, minY, rect, _i, _len;
     if (!rects.length) {
       return {
         x: 0,
         y: 0,
-        width: 0,
-        height: 0
+        width: 0 || width,
+        height: 0 || height
       };
     }
     minX = rects[0].x;
@@ -1332,6 +1481,10 @@ util = {
       maxX = Math.ceil(Math.max(maxX, rect.x + rect.width));
       maxY = Math.ceil(Math.max(maxY, rect.y + rect.height));
     }
+    minX = width ? 0 : minX;
+    minY = height ? 0 : minY;
+    maxX = width || maxX;
+    maxY = height || maxY;
     return {
       x: minX,
       y: minY,
@@ -1348,7 +1501,16 @@ util = {
     }
     return window.devicePixelRatio;
   },
-  requestAnimationFrame: (window.requestAnimationFrame || window.setTimeout).bind(window)
+  requestAnimationFrame: (window.requestAnimationFrame || window.setTimeout).bind(window),
+  getGUID: (function() {
+    var s4;
+    s4 = function() {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    };
+    return function() {
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+    };
+  })()
 };
 
 module.exports = util;
@@ -1394,7 +1556,7 @@ setDefaultImageURLPrefix = function(newDefault) {
 };
 
 init = function(el, opts) {
-  var backgroundImage, canvases, child, drawingViewElement, lc, oldCanvas, optionsElement, pickerElement, _i, _len, _ref;
+  var child, drawingViewElement, lc, optionsElement, pickerElement, _i, _len, _ref;
   if (opts == null) {
     opts = {};
   }
@@ -1413,8 +1575,11 @@ init = function(el, opts) {
   if (opts.keyboardShortcuts == null) {
     opts.keyboardShortcuts = true;
   }
-  if (opts.preserveCanvasContents == null) {
-    opts.preserveCanvasContents = false;
+  if (opts.imageSize == null) {
+    opts.imageSize = {
+      width: 'infinite',
+      height: 'infinite'
+    };
   }
   if (opts.backgroundShapes == null) {
     opts.backgroundShapes = [];
@@ -1427,21 +1592,6 @@ init = function(el, opts) {
   }
   if (!('tools' in opts)) {
     opts.tools = [tools.Pencil, tools.Eraser, tools.Line, tools.Rectangle, tools.Text, tools.Pan, tools.Eyedropper];
-  }
-  canvases = el.getElementsByTagName('canvas');
-  backgroundImage = null;
-  if (opts.preserveCanvasContents) {
-    oldCanvas = canvases.length ? canvases[0] : null;
-    if (!oldCanvas) {
-      throw "Can't preserve old canvas if there isn't one";
-    }
-    backgroundImage = new Image();
-    backgroundImage.src = oldCanvas.toDataURL();
-    opts.backgroundShapes.unshift(shapes.createShape('Image', {
-      x: 0,
-      y: 0,
-      image: backgroundImage
-    }));
   }
 
   /* henceforth, all pre-existing DOM children shall be destroyed */
@@ -1467,13 +1617,6 @@ init = function(el, opts) {
 
   /* and get to work */
   lc = new LiterallyCanvas(drawingViewElement, opts);
-  if (backgroundImage) {
-    backgroundImage.onload = (function(_this) {
-      return function() {
-        return lc.repaintLayer('background');
-      };
-    })(this);
-  }
   initReact(pickerElement, optionsElement, lc, opts.tools, opts.imageURLPrefix);
   if ('onInit' in opts) {
     opts.onInit(lc);
@@ -1720,10 +1863,9 @@ defineOptionsStyle('stroke-width', React.createClass({
   },
   mixins: [createSetStateOnEventMixin('toolChange')],
   render: function() {
-    var buttonSize, circle, getItem, li, strokeWidths, svg, ul, _ref;
-    _ref = React.DOM, ul = _ref.ul, li = _ref.li, svg = _ref.svg, circle = _ref.circle;
-    strokeWidths = [1, 2, 5, 10, 20, 40];
-    buttonSize = Math.max.apply(Math, strokeWidths);
+    var circle, div, getItem, li, strokeWidths, svg, ul, _ref;
+    _ref = React.DOM, ul = _ref.ul, li = _ref.li, svg = _ref.svg, circle = _ref.circle, div = _ref.div;
+    strokeWidths = [1, 2, 5, 10, 20, 30];
     getItem = (function(_this) {
       return function(strokeWidth) {};
     })(this);
@@ -1731,14 +1873,17 @@ defineOptionsStyle('stroke-width', React.createClass({
       className: 'lc-stroke-widths'
     }, strokeWidths.map((function(_this) {
       return function(strokeWidth, ix) {
-        var className;
-        className = React.addons.classSet({
-          'lc-stroke-width': true,
+        var buttonClassName, buttonSize;
+        buttonClassName = React.addons.classSet({
+          'stroke-width-button': true,
           'selected': strokeWidth === _this.state.strokeWidth
         });
+        buttonSize = 40;
         return li({
-          className: className,
-          key: strokeWidth,
+          className: 'lc-stroke-width',
+          key: strokeWidth
+        }, div({
+          className: buttonClassName,
           onClick: function() {
             _this.props.tool.strokeWidth = strokeWidth;
             return _this.setState(_this.getState());
@@ -1746,14 +1891,14 @@ defineOptionsStyle('stroke-width', React.createClass({
         }, svg({
           width: buttonSize,
           height: buttonSize,
-          viewPort: "0 0 " + buttonSize + " " + buttonSize,
+          viewPort: "0 0 " + strokeWidth + " " + strokeWidth,
           version: "1.1",
           xmlns: "http://www.w3.org/2000/svg"
         }, circle({
-          cx: buttonSize / 2,
-          cy: buttonSize / 2,
+          cx: Math.ceil(buttonSize / 2),
+          cy: Math.ceil(buttonSize / 2),
           r: strokeWidth / 2
-        })));
+        }))));
       };
     })(this)));
   }
@@ -1822,7 +1967,7 @@ ColorWell = React.createClass({
     return this.getState();
   },
   componentDidMount: function() {
-    return this.subscriber = this.props.lc.on("" + this.props.colorName + "ColorChange", (function(_this) {
+    return this.unsubscribe = this.props.lc.on("" + this.props.colorName + "ColorChange", (function(_this) {
       return function() {
         return _this.setState({
           color: _this.props.lc.colors[_this.props.colorName]
@@ -1831,7 +1976,7 @@ ColorWell = React.createClass({
     })(this));
   },
   componentWillUnmount: function() {
-    return this.props.lc.removeEventListener("" + this.props.colorName + "ColorChange", this.subscriber);
+    return this.unsubscribe();
   },
   togglePicker: function() {
     return this.setState({
@@ -2257,14 +2402,14 @@ React = _dereq_('./React-shim');
 module.exports = createSetStateOnEventMixin = function(eventName) {
   return {
     componentDidMount: function() {
-      return this.subscriber = this.props.lc.on(eventName, (function(_this) {
+      return this.unsubscribe = this.props.lc.on(eventName, (function(_this) {
         return function() {
           return _this.setState(_this.getState());
         };
       })(this));
     },
     componentWillUnmount: function() {
-      return this.props.lc.removeEventListener(eventName, this.subscriber);
+      return this.unsubscribe();
     }
   };
 };
