@@ -41,6 +41,15 @@ Initializing normally
           You probably need to set this, either by passing it as an option, or
           by calling :js:func:`LC.setDefaultImageURLPrefix`.
 
+    ``imageSize``
+      An object with keys ``width`` and ``height``. If either value is falsey,
+      that dimension will be infinite. For example:
+
+      .. code-block:: javascript
+
+        // 500 pixels wide, infinitely tall canvas
+        LC.init(element, {imageSize: {width: 500, height: null}})
+
     ``primaryColor``
         Starting stroke color. Defaults to ``'#000'``.
 
