@@ -8,7 +8,7 @@ widget. Its only dependency is `React.js`_.
 
 .. raw:: html
 
-    <div class="literally index"><canvas></canvas></div>
+    <div class="literally index"></div>
 
     <script>
       $(document).ready(function() {

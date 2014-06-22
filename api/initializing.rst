@@ -26,7 +26,7 @@ Initializing normally
 
   var lc = LC.init(element, {option: value})
 
-.. js:function:: LC.init(element, options)
+.. js:function:: LC.init(element, options={})
 
     **Options**
 
@@ -111,7 +111,8 @@ Initializing normally
         Scale at which to render the watermark.
 
         If you want to support retina displays, you should use a double-size
-        watermark image and set *watermarkScale* to 0.5.
+        watermark image and set *watermarkScale* to
+        ``1/window.devicePixelRatio``.
 
 
 Initializing with jQuery

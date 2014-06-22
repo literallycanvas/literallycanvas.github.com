@@ -45,7 +45,7 @@ Utilities
   Keep *elementsToResize* the same size as *elementToMatch*. If one of
   *elementsToResize* is a ``<canvas>``, set its ``width`` and ``height``
   properties to the element's size multiplied by *scale*. (This is necessary
-  for environments with ``devicePixelWidth != 1``.)
+  for environments with ``devicePixelRatio != 1``.)
 
 .. js:function:: LC.util.renderShapes(shapes, bounds, scale=1, canvas=null)
 
