@@ -3,11 +3,12 @@
 <script>
   $(document).ready(function() {
     var watermarkImage = new Image();
-    watermarkImage.src = '/_static/sample_image.png';
-    $('.literally.watermark').literallycanvas({
-      backgroundColor: 'whiteSmoke',
-      imageURLPrefix: '/_static/lib/img',
-      watermarkImage: watermarkImage
-    });
+    watermarkImage.src = '/_static/watermark.png';
+    LC.init(
+      document.getElementsByClassName('literally watermark')[0],
+      {
+        watermarkImage: watermarkImage,
+        watermarkScale: 0.5  // you can scale it
+      });
   });
 </script>

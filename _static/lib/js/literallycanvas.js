@@ -56,6 +56,7 @@ module.exports = LiterallyCanvas = (function() {
     this.setZoom(this.scale);
     util.matchElementSize(this.containerEl, [this.backgroundCanvas, this.canvas], this.backingScale, (function(_this) {
       return function() {
+        _this.keepPanInImageBounds();
         return _this.repaintAllLayers();
       };
     })(this));
@@ -197,9 +198,10 @@ module.exports = LiterallyCanvas = (function() {
     return this.setPan(this.position.x - x, this.position.y - y);
   };
 
-  LiterallyCanvas.prototype.setPan = function(x, y) {
-    var renderScale;
+  LiterallyCanvas.prototype.keepPanInImageBounds = function() {
+    var renderScale, x, y, _ref1;
     renderScale = this.getRenderScale();
+    _ref1 = this.position, x = _ref1.x, y = _ref1.y;
     if (this.width !== INFINITE) {
       if (this.canvas.width > this.width * renderScale) {
         x = (this.canvas.width - this.width * renderScale) / 2;
@@ -214,10 +216,19 @@ module.exports = LiterallyCanvas = (function() {
         y = Math.max(Math.min(0, y), this.canvas.height - this.height * renderScale);
       }
     }
+    return this.position = {
+      x: x,
+      y: y
+    };
+  };
+
+  LiterallyCanvas.prototype.setPan = function(x, y) {
     this.position = {
       x: x,
       y: y
     };
+    this.keepPanInImageBounds();
+    this.repaintAllLayers();
     return this.trigger('pan', {
       x: this.position.x,
       y: this.position.y
@@ -239,6 +250,7 @@ module.exports = LiterallyCanvas = (function() {
     this.scale = scale;
     this.position.x = math.scalePositionScalar(this.position.x, this.canvas.width, oldScale, this.scale);
     this.position.y = math.scalePositionScalar(this.position.y, this.canvas.height, oldScale, this.scale);
+    this.keepPanInImageBounds();
     this.repaintAllLayers();
     return this.trigger('zoom', {
       oldScale: oldScale,
@@ -261,7 +273,6 @@ module.exports = LiterallyCanvas = (function() {
     if (dirty == null) {
       dirty = repaintLayerKey === 'main';
     }
-    this.setPan(this.position.x, this.position.y);
     switch (repaintLayerKey) {
       case 'background':
         this.backgroundCtx.clearRect(0, 0, this.backgroundCanvas.width, this.backgroundCanvas.height);
@@ -312,12 +323,12 @@ module.exports = LiterallyCanvas = (function() {
     return this.backgroundCtx.restore();
   };
 
-  LiterallyCanvas.prototype.update = function(shape) {
+  LiterallyCanvas.prototype.drawShapeInProgress = function(shape) {
     this.repaintLayer('main', false);
     return this.clipped(((function(_this) {
       return function() {
         return _this.transformed((function() {
-          return shape.update(_this.ctx, _this.bufferCtx);
+          return shape.drawLatest(_this.ctx, _this.bufferCtx);
         }), _this.ctx, _this.bufferCtx);
       };
     })(this)), this.ctx, this.bufferCtx);
@@ -668,8 +679,8 @@ position = function(e) {
   } else {
     p = e.target.getBoundingClientRect();
     return {
-      left: e.pageX - p.left,
-      top: e.pageY - p.top
+      left: e.clientX - p.left,
+      top: e.clientY - p.top
     };
   }
 };
@@ -887,7 +898,7 @@ defineShape = function(name, props) {
   };
   Shape.prototype.className = name;
   Shape.fromJSON = props.fromJSON;
-  Shape.prototype.update = function(ctx, bufferCtx) {
+  Shape.prototype.drawLatest = function(ctx, bufferCtx) {
     return this.draw(ctx, bufferCtx);
   };
   for (k in props) {
@@ -1247,7 +1258,7 @@ linePathFuncs = {
   draw: function(ctx) {
     return this.drawPoints(ctx, this.smoothedPoints);
   },
-  update: function(ctx, bufferCtx) {
+  drawLatest: function(ctx, bufferCtx) {
     var drawEnd, drawStart, segmentStart;
     this.drawPoints(ctx, this.tail ? this.tail : this.smoothedPoints);
     if (this.tail) {
@@ -1299,12 +1310,12 @@ defineShape('ErasedLinePath', {
     linePathFuncs.draw.call(this, ctx);
     return ctx.restore();
   },
-  update: function(ctx, bufferCtx) {
+  drawLatest: function(ctx, bufferCtx) {
     ctx.save();
     ctx.globalCompositeOperation = "destination-out";
     bufferCtx.save();
     bufferCtx.globalCompositeOperation = "destination-out";
-    linePathFuncs.update.call(this, ctx, bufferCtx);
+    linePathFuncs.drawLatest.call(this, ctx, bufferCtx);
     ctx.restore();
     return bufferCtx.restore();
   },
@@ -1996,7 +2007,8 @@ ColorWell = React.createClass({
     _ref = React.DOM, div = _ref.div, label = _ref.label;
     return div({
       className: 'toolbar-button color-well-label',
-      onMouseLeave: this.closePicker
+      onMouseLeave: this.closePicker,
+      onClick: this.togglePicker
     }, label({
       style: {
         display: 'block',
@@ -2007,10 +2019,8 @@ ColorWell = React.createClass({
         'color-well-container': true,
         'selected': this.state.isPickerVisible
       }),
-      onClick: this.togglePicker,
       style: {
-        backgroundColor: 'white',
-        position: 'relative'
+        backgroundColor: 'white'
       }
     }, div({
       className: 'color-well-checker'
@@ -2028,21 +2038,42 @@ ColorWell = React.createClass({
     }, " "), this.renderPicker()));
   },
   renderPicker: function() {
-    var div, hue, i, rows, _i, _len, _ref;
+    var div, hue, i, renderTransparentCell, rows, _i, _len, _ref;
     div = React.DOM.div;
     if (!this.state.isPickerVisible) {
       return null;
     }
-    rows = [
-      (function() {
-        var _i, _results;
-        _results = [];
-        for (i = _i = 0; _i <= 100; i = _i += 10) {
-          _results.push("hsl(0, 0%, " + i + "%)");
-        }
-        return _results;
-      })()
-    ];
+    renderTransparentCell = (function(_this) {
+      return function() {
+        return div({
+          className: 'color-row',
+          key: 0,
+          style: {
+            height: 20
+          }
+        }, div({
+          className: React.addons.classSet({
+            'color-cell transparent-cell': true,
+            'selected': _this.state.color === 'transparent'
+          }),
+          onClick: function() {
+            return _this.setColor('transparent');
+          }
+        }, 'transparent'));
+      };
+    })(this);
+    rows = [];
+    if (this.props.colorName === 'background') {
+      rows.push('transparent');
+    }
+    rows.push((function() {
+      var _i, _results;
+      _results = [];
+      for (i = _i = 0; _i <= 100; i = _i += 10) {
+        _results.push("hsl(0, 0%, " + i + "%)");
+      }
+      return _results;
+    })());
     _ref = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       hue = _ref[_i];
@@ -2059,6 +2090,9 @@ ColorWell = React.createClass({
       className: 'color-picker-popup'
     }, rows.map((function(_this) {
       return function(row, ix) {
+        if (row === 'transparent') {
+          return renderTransparentCell();
+        }
         return div({
           className: 'color-row',
           key: ix,
@@ -2611,7 +2645,7 @@ module.exports = Line = (function(_super) {
   Line.prototype["continue"] = function(x, y, lc) {
     this.currentShape.x2 = x;
     this.currentShape.y2 = y;
-    return lc.update(this.currentShape);
+    return lc.drawShapeInProgress(this.currentShape);
   };
 
   Line.prototype.end = function(x, y, lc) {
@@ -2684,15 +2718,23 @@ module.exports = Pencil = (function(_super) {
 
   Pencil.prototype.iconName = 'pencil';
 
+  Pencil.prototype.eventTimeThreshold = 10;
+
   Pencil.prototype.begin = function(x, y, lc) {
     this.color = lc.getColor('primary');
     this.currentShape = this.makeShape();
-    return this.currentShape.addPoint(this.makePoint(x, y, lc));
+    this.currentShape.addPoint(this.makePoint(x, y, lc));
+    return this.lastEventTime = Date.now();
   };
 
   Pencil.prototype["continue"] = function(x, y, lc) {
-    this.currentShape.addPoint(this.makePoint(x, y, lc));
-    return lc.update(this.currentShape);
+    var timeDiff;
+    timeDiff = Date.now() - this.lastEventTime;
+    if (timeDiff > this.eventTimeThreshold) {
+      this.lastEventTime += timeDiff;
+      this.currentShape.addPoint(this.makePoint(x, y, lc));
+      return lc.drawShapeInProgress(this.currentShape);
+    }
   };
 
   Pencil.prototype.end = function(x, y, lc) {
@@ -2751,7 +2793,7 @@ module.exports = Rectangle = (function(_super) {
   Rectangle.prototype["continue"] = function(x, y, lc) {
     this.currentShape.width = x - this.currentShape.x;
     this.currentShape.height = y - this.currentShape.y;
-    return lc.update(this.currentShape);
+    return lc.drawShapeInProgress(this.currentShape);
   };
 
   Rectangle.prototype.end = function(x, y, lc) {
@@ -2802,7 +2844,7 @@ module.exports = Text = (function(_super) {
   Text.prototype["continue"] = function(x, y, lc) {
     this.currentShape.x = x;
     this.currentShape.y = y;
-    return lc.update(this.currentShape);
+    return lc.drawShapeInProgress(this.currentShape);
   };
 
   Text.prototype.end = function(x, y, lc) {

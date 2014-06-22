@@ -4,9 +4,8 @@ Examples
 .. toctree::
     :maxdepth: 2
 
+    images.rst
     localstorage.rst
     export.rst
     imgur.rst
-    adding_images.rst
-    background.rst
     watermark.rst
