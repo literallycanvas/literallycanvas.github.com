@@ -490,6 +490,9 @@ module.exports = LiterallyCanvas = (function() {
     if (opts.rect == null) {
       opts.rect = this.getContentBounds();
     }
+    if (!(opts.rect.width && opts.rect.height)) {
+      return;
+    }
     if (opts.scale == null) {
       opts.scale = 1;
     }
@@ -575,7 +578,7 @@ module.exports = LiterallyCanvas = (function() {
 })();
 
 
-},{"../tools/Pencil":27,"./actions":3,"./bindEvents":4,"./math":5,"./shapes":6,"./util":7}],3:[function(_dereq_,module,exports){
+},{"../tools/Pencil":28,"./actions":3,"./bindEvents":4,"./math":6,"./shapes":7,"./util":8}],3:[function(_dereq_,module,exports){
 var AddShapeAction, ClearAction;
 
 ClearAction = (function() {
@@ -663,8 +666,8 @@ var bindEvents, buttonIsDown, coordsForTouchEvent, position;
 
 coordsForTouchEvent = function(el, e) {
   var p, tx, ty;
-  tx = e.changedTouches[0].pageX;
-  ty = e.changedTouches[0].pageY;
+  tx = e.changedTouches[0].clientX;
+  ty = e.changedTouches[0].clientY;
   p = el.getBoundingClientRect();
   return [tx - p.left, ty - p.top];
 };
@@ -758,14 +761,14 @@ module.exports = bindEvents = function(lc, canvas, panWithKeyboard) {
   });
   canvas.addEventListener('touchend', function(e) {
     e.preventDefault();
-    if (e.originalEvent.touches.length !== 0) {
+    if (e.touches.length !== 0) {
       return;
     }
     return lc.end.apply(lc, coordsForTouchEvent(canvas, e));
   });
   canvas.addEventListener('touchcancel', function(e) {
     e.preventDefault();
-    if (e.originalEvent.touches.length !== 0) {
+    if (e.touches.length !== 0) {
       return;
     }
     return lc.end.apply(lc, coordsForTouchEvent(canvas, e));
@@ -792,6 +795,27 @@ module.exports = bindEvents = function(lc, canvas, panWithKeyboard) {
 
 
 },{}],5:[function(_dereq_,module,exports){
+var localize, strings, _;
+
+strings = {};
+
+localize = function(localStrings) {
+  return strings = localStrings;
+};
+
+_ = function(string) {
+  var translation;
+  translation = strings[string];
+  return translation || string;
+};
+
+module.exports = {
+  localize: localize,
+  _: _
+};
+
+
+},{}],6:[function(_dereq_,module,exports){
 var Point, math, normals, unit, util, _slope;
 
 Point = _dereq_('./shapes').Point;
@@ -880,7 +904,7 @@ math.scalePositionScalar = function(val, viewportSize, oldScale, newScale) {
 module.exports = math;
 
 
-},{"./shapes":6,"./util":7}],6:[function(_dereq_,module,exports){
+},{"./shapes":7,"./util":8}],7:[function(_dereq_,module,exports){
 var JSONToShape, LinePath, bspline, createShape, defineShape, linePathFuncs, shapeToJSON, shapes, util, _createLinePathFromData, _doAllPointsShareStyle, _dual, _mid, _refine,
   __slice = [].slice;
 
@@ -1400,7 +1424,7 @@ module.exports = {
 };
 
 
-},{"./util":7}],7:[function(_dereq_,module,exports){
+},{"./util":8}],8:[function(_dereq_,module,exports){
 var slice, util;
 
 slice = Array.prototype.slice;
@@ -1527,8 +1551,8 @@ util = {
 module.exports = util;
 
 
-},{}],8:[function(_dereq_,module,exports){
-var LiterallyCanvas, baseTools, defaultImageURLPrefix, defineOptionsStyle, init, initReact, registerJQueryPlugin, setDefaultImageURLPrefix, shapes, tools, util;
+},{}],9:[function(_dereq_,module,exports){
+var LiterallyCanvas, baseTools, defaultImageURLPrefix, defineOptionsStyle, init, initReact, localize, registerJQueryPlugin, setDefaultImageURLPrefix, shapes, tools, util;
 
 LiterallyCanvas = _dereq_('./core/LiterallyCanvas');
 
@@ -1537,6 +1561,8 @@ initReact = _dereq_('./reactGUI/init');
 shapes = _dereq_('./core/shapes');
 
 util = _dereq_('./core/util');
+
+localize = _dereq_('./core/localization').localize;
 
 _dereq_('./optionsStyles/font');
 
@@ -1667,14 +1693,17 @@ module.exports = {
   defineShape: shapes.defineShape,
   createShape: shapes.createShape,
   JSONToShape: shapes.JSONToShape,
-  shapeToJSON: shapes.shapeToJSON
+  shapeToJSON: shapes.shapeToJSON,
+  localize: localize
 };
 
 
-},{"./core/LiterallyCanvas":2,"./core/shapes":6,"./core/util":7,"./optionsStyles/font":9,"./optionsStyles/null":10,"./optionsStyles/optionsStyles":11,"./optionsStyles/stroke-width":12,"./reactGUI/init":22,"./tools/Eraser":23,"./tools/Eyedropper":24,"./tools/Line":25,"./tools/Pan":26,"./tools/Pencil":27,"./tools/Rectangle":28,"./tools/Text":29,"./tools/base":30}],9:[function(_dereq_,module,exports){
-var defineOptionsStyle;
+},{"./core/LiterallyCanvas":2,"./core/localization":5,"./core/shapes":7,"./core/util":8,"./optionsStyles/font":10,"./optionsStyles/null":11,"./optionsStyles/optionsStyles":12,"./optionsStyles/stroke-width":13,"./reactGUI/init":23,"./tools/Eraser":24,"./tools/Eyedropper":25,"./tools/Line":26,"./tools/Pan":27,"./tools/Pencil":28,"./tools/Rectangle":29,"./tools/Text":30,"./tools/base":31}],10:[function(_dereq_,module,exports){
+var defineOptionsStyle, _;
 
 defineOptionsStyle = _dereq_('./optionsStyles').defineOptionsStyle;
+
+_ = _dereq_('../core/localization')._;
 
 defineOptionsStyle('font', React.createClass({
   displayName: 'FontOptions',
@@ -1695,15 +1724,17 @@ defineOptionsStyle('font', React.createClass({
     return [9, 10, 12, 14, 18, 24, 36, 48, 64, 72, 96, 144, 288];
   },
   getFamilies: function() {
+    var lc;
+    lc = this.props.lc;
     return [
       {
-        name: 'Sans-serif',
+        name: _('Sans-serif'),
         value: '"Helvetica Neue",Helvetica,Arial,sans-serif'
       }, {
-        name: 'Serif',
+        name: _('Serif'),
         value: ('Garamond,Baskerville,"Baskerville Old Face",', '"Hoefler Text","Times New Roman",serif')
       }, {
-        name: 'Typewriter',
+        name: _('Typewriter'),
         value: ('"Courier New",Courier,"Lucida Sans Typewriter",', '"Lucida Typewriter",monospace')
       }
     ];
@@ -1772,18 +1803,19 @@ defineOptionsStyle('font', React.createClass({
     return this.updateTool();
   },
   render: function() {
-    var br, div, input, label, option, select, span, _ref;
+    var br, div, input, label, lc, option, select, span, _ref;
+    lc = this.props.lc;
     _ref = React.DOM, div = _ref.div, input = _ref.input, select = _ref.select, option = _ref.option, br = _ref.br, label = _ref.label, span = _ref.span;
     return div({
       className: 'lc-font-settings'
     }, input({
       type: 'text',
-      placeholder: 'Enter text here',
+      placeholder: _('Enter text here'),
       value: this.state.text,
       onChange: this.handleText
     }), span({
       className: 'instructions'
-    }, "Click and hold to place text."), br(), "Size: ", select({
+    }, _("Click and hold to place text.")), br(), _("Size: "), select({
       value: this.state.fontSizeIndex,
       onChange: this.handleFontSize
     }, this.getFontSizes().map((function(_this) {
@@ -1810,21 +1842,21 @@ defineOptionsStyle('font', React.createClass({
       id: 'italic',
       checked: this.state.isItalic,
       onChange: this.handleItalic
-    }, "italic")), label({
+    }, _("italic"))), label({
       htmlFor: 'bold'
     }, input({
       type: 'checkbox',
       id: 'bold',
       checked: this.state.isBold,
       onChange: this.handleBold
-    }, "bold")));
+    }, _("bold"))));
   }
 }));
 
 module.exports = {};
 
 
-},{"./optionsStyles":11}],10:[function(_dereq_,module,exports){
+},{"../core/localization":5,"./optionsStyles":12}],11:[function(_dereq_,module,exports){
 var defineOptionsStyle;
 
 defineOptionsStyle = _dereq_('./optionsStyles').defineOptionsStyle;
@@ -1839,7 +1871,7 @@ defineOptionsStyle('null', React.createClass({
 module.exports = {};
 
 
-},{"./optionsStyles":11}],11:[function(_dereq_,module,exports){
+},{"./optionsStyles":12}],12:[function(_dereq_,module,exports){
 var defineOptionsStyle, optionsStyles;
 
 optionsStyles = {};
@@ -1854,7 +1886,7 @@ module.exports = {
 };
 
 
-},{}],12:[function(_dereq_,module,exports){
+},{}],13:[function(_dereq_,module,exports){
 var createSetStateOnEventMixin, defineOptionsStyle;
 
 createSetStateOnEventMixin = _dereq_('../reactGUI/createSetStateOnEventMixin');
@@ -1918,12 +1950,14 @@ defineOptionsStyle('stroke-width', React.createClass({
 module.exports = {};
 
 
-},{"../reactGUI/createSetStateOnEventMixin":20,"./optionsStyles":11}],13:[function(_dereq_,module,exports){
-var ClearButton, React, createSetStateOnEventMixin;
+},{"../reactGUI/createSetStateOnEventMixin":21,"./optionsStyles":12}],14:[function(_dereq_,module,exports){
+var ClearButton, React, createSetStateOnEventMixin, _;
 
 React = _dereq_('./React-shim');
 
 createSetStateOnEventMixin = _dereq_('./createSetStateOnEventMixin');
+
+_ = _dereq_('../core/localization')._;
 
 ClearButton = React.createClass({
   displayName: 'ClearButton',
@@ -1954,14 +1988,14 @@ ClearButton = React.createClass({
     return div({
       className: className,
       onClick: onClick
-    }, 'Clear');
+    }, _('Clear'));
   }
 });
 
 module.exports = ClearButton;
 
 
-},{"./React-shim":17,"./createSetStateOnEventMixin":20}],14:[function(_dereq_,module,exports){
+},{"../core/localization":5,"./React-shim":18,"./createSetStateOnEventMixin":21}],15:[function(_dereq_,module,exports){
 var ColorWell, React;
 
 React = _dereq_('./React-shim');
@@ -2124,7 +2158,7 @@ ColorWell = React.createClass({
 module.exports = ColorWell;
 
 
-},{"./React-shim":17}],15:[function(_dereq_,module,exports){
+},{"./React-shim":18}],16:[function(_dereq_,module,exports){
 var Options, React, createSetStateOnEventMixin, optionsStyles;
 
 React = _dereq_('./React-shim');
@@ -2159,8 +2193,8 @@ Options = React.createClass({
 module.exports = Options;
 
 
-},{"../optionsStyles/optionsStyles":11,"./React-shim":17,"./createSetStateOnEventMixin":20}],16:[function(_dereq_,module,exports){
-var ClearButton, ColorPickers, ColorWell, Picker, React, UndoRedoButtons, ZoomButtons;
+},{"../optionsStyles/optionsStyles":12,"./React-shim":18,"./createSetStateOnEventMixin":21}],17:[function(_dereq_,module,exports){
+var ClearButton, ColorPickers, ColorWell, Picker, React, UndoRedoButtons, ZoomButtons, _;
 
 React = _dereq_('./React-shim');
 
@@ -2171,6 +2205,8 @@ ColorWell = _dereq_('./ColorWell');
 UndoRedoButtons = _dereq_('./UndoRedoButtons');
 
 ZoomButtons = _dereq_('./ZoomButtons');
+
+_ = _dereq_('../core/localization')._;
 
 ColorPickers = React.createClass({
   displayName: 'ColorPickers',
@@ -2183,15 +2219,15 @@ ColorPickers = React.createClass({
     }, ColorWell({
       lc: lc,
       colorName: 'background',
-      label: 'background'
+      label: _('background')
     }), ColorWell({
       lc: lc,
       colorName: 'primary',
-      label: 'stroke'
+      label: _('stroke')
     }), ColorWell({
       lc: lc,
       colorName: 'secondary',
-      label: 'fill'
+      label: _('fill')
     }));
   }
 });
@@ -2242,7 +2278,7 @@ Picker = React.createClass({
 module.exports = Picker;
 
 
-},{"./ClearButton":13,"./ColorWell":14,"./React-shim":17,"./UndoRedoButtons":18,"./ZoomButtons":19}],17:[function(_dereq_,module,exports){
+},{"../core/localization":5,"./ClearButton":14,"./ColorWell":15,"./React-shim":18,"./UndoRedoButtons":19,"./ZoomButtons":20}],18:[function(_dereq_,module,exports){
 var React;
 
 try {
@@ -2258,7 +2294,7 @@ if ((React != null ? React.addons : void 0) == null) {
 module.exports = React;
 
 
-},{}],18:[function(_dereq_,module,exports){
+},{}],19:[function(_dereq_,module,exports){
 var React, RedoButton, UndoButton, UndoRedoButtons, createSetStateOnEventMixin, createUndoRedoButtonComponent;
 
 React = _dereq_('./React-shim');
@@ -2341,7 +2377,7 @@ UndoRedoButtons = React.createClass({
 module.exports = UndoRedoButtons;
 
 
-},{"./React-shim":17,"./createSetStateOnEventMixin":20}],19:[function(_dereq_,module,exports){
+},{"./React-shim":18,"./createSetStateOnEventMixin":21}],20:[function(_dereq_,module,exports){
 var React, ZoomButtons, ZoomInButton, ZoomOutButton, createSetStateOnEventMixin, createZoomButtonComponent;
 
 React = _dereq_('./React-shim');
@@ -2428,7 +2464,7 @@ ZoomButtons = React.createClass({
 module.exports = ZoomButtons;
 
 
-},{"./React-shim":17,"./createSetStateOnEventMixin":20}],20:[function(_dereq_,module,exports){
+},{"./React-shim":18,"./createSetStateOnEventMixin":21}],21:[function(_dereq_,module,exports){
 var React, createSetStateOnEventMixin;
 
 React = _dereq_('./React-shim');
@@ -2449,7 +2485,7 @@ module.exports = createSetStateOnEventMixin = function(eventName) {
 };
 
 
-},{"./React-shim":17}],21:[function(_dereq_,module,exports){
+},{"./React-shim":18}],22:[function(_dereq_,module,exports){
 var React, createToolButton;
 
 React = _dereq_('./React-shim');
@@ -2497,7 +2533,7 @@ createToolButton = function(_arg) {
 module.exports = createToolButton;
 
 
-},{"./React-shim":17}],22:[function(_dereq_,module,exports){
+},{"./React-shim":18}],23:[function(_dereq_,module,exports){
 var Options, Picker, React, createToolButton, init;
 
 React = _dereq_('./React-shim');
@@ -2534,7 +2570,7 @@ init = function(pickerElement, optionsElement, lc, tools, imageURLPrefix) {
 module.exports = init;
 
 
-},{"./Options":15,"./Picker":16,"./React-shim":17,"./createToolButton":21}],23:[function(_dereq_,module,exports){
+},{"./Options":16,"./Picker":17,"./React-shim":18,"./createToolButton":22}],24:[function(_dereq_,module,exports){
 var Eraser, Pencil, createShape,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2572,7 +2608,7 @@ module.exports = Eraser = (function(_super) {
 })(Pencil);
 
 
-},{"../core/shapes":6,"./Pencil":27}],24:[function(_dereq_,module,exports){
+},{"../core/shapes":7,"./Pencil":28}],25:[function(_dereq_,module,exports){
 var Eyedropper, Tool, createShape,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2611,7 +2647,7 @@ module.exports = Eyedropper = (function(_super) {
 })(Tool);
 
 
-},{"../core/shapes":6,"./base":30}],25:[function(_dereq_,module,exports){
+},{"../core/shapes":7,"./base":31}],26:[function(_dereq_,module,exports){
 var Line, ToolWithStroke, createShape,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2657,7 +2693,7 @@ module.exports = Line = (function(_super) {
 })(ToolWithStroke);
 
 
-},{"../core/shapes":6,"./base":30}],26:[function(_dereq_,module,exports){
+},{"../core/shapes":7,"./base":31}],27:[function(_dereq_,module,exports){
 var Pan, Tool, createShape,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2698,7 +2734,7 @@ module.exports = Pan = (function(_super) {
 })(Tool);
 
 
-},{"../core/shapes":6,"./base":30}],27:[function(_dereq_,module,exports){
+},{"../core/shapes":7,"./base":31}],28:[function(_dereq_,module,exports){
 var Pencil, ToolWithStroke, createShape,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2760,7 +2796,7 @@ module.exports = Pencil = (function(_super) {
 })(ToolWithStroke);
 
 
-},{"../core/shapes":6,"./base":30}],28:[function(_dereq_,module,exports){
+},{"../core/shapes":7,"./base":31}],29:[function(_dereq_,module,exports){
 var Rectangle, ToolWithStroke, createShape,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2805,7 +2841,7 @@ module.exports = Rectangle = (function(_super) {
 })(ToolWithStroke);
 
 
-},{"../core/shapes":6,"./base":30}],29:[function(_dereq_,module,exports){
+},{"../core/shapes":7,"./base":31}],30:[function(_dereq_,module,exports){
 var Text, Tool, createShape,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2858,7 +2894,7 @@ module.exports = Text = (function(_super) {
 })(Tool);
 
 
-},{"../core/shapes":6,"./base":30}],30:[function(_dereq_,module,exports){
+},{"../core/shapes":7,"./base":31}],31:[function(_dereq_,module,exports){
 var Tool, ToolWithStroke, tools,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2900,6 +2936,6 @@ tools.ToolWithStroke = ToolWithStroke = (function(_super) {
 module.exports = tools;
 
 
-},{}]},{},[8])
-(8)
+},{}]},{},[9])
+(9)
 });

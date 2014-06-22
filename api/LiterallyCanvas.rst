@@ -51,7 +51,8 @@ Exporting images
   ``rect``
     A dict ``{x, y, width, height}`` specifying which part of the image to
     draw, in drawing coordinates (before scaling). Defaults to the bounding
-    box of all shapes.
+    box of all shapes. If you don't specify a ``rect`` and there are no
+    shapes in the drawing, :js:func:`getImage` will return ``undefined``.
 
   ``scale``
     Amount by which to scale the image output. Shapes will be rendered at
