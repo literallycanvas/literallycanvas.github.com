@@ -39,6 +39,7 @@ html_theme_options = {
     ],
     'scriptfiles': [
         "//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js",
+        "_static/lib/js/fastclick.js",
         "_static/lib/js/ie_customevent.js",
         "_static/lib/js/literallycanvas.js",
         "_static/lib/js/literallycanvas.jquery.js",

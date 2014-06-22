@@ -72,7 +72,7 @@ Browser compatibility
 =========== ==============================
 Chrome      Awesome
 Safari      Awesome
-iOS         Zoom is buggy
+iOS         Awesome (FastClick helps [#f1]_)
 Firefox     4+
 Opera       ??
 Android     ??
@@ -81,10 +81,15 @@ IE          10+ (Requires polyfill [#f2]_)
 
 .. rubric:: Footnotes
 
+.. [#f1] iOS delays click events so that it can detect gestures. To disable
+         this behavior and get those events immediately, use `FastClick`_.
+
 .. [#f2] IE doesn't support the ``CustomEvent`` constructor. Use
          `Mozilla's polyfill`_ to get Literally Canvas to run in IE.
 
 .. _Mozilla's Polyfill: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
+
+.. _FastClick: https://github.com/ftlabs/fastclick
 
 Contributing
 ============
