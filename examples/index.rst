@@ -16,4 +16,3 @@ below them.
     localstorage.rst
     export.rst
     imgur.rst
-    watermark.rst
