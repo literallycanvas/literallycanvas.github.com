@@ -2,18 +2,14 @@
 
 <script>
   $(document).ready(function() {
-    $('.literally.localstorage').literallycanvas({
-      backgroundColor: 'whiteSmoke',
-      imageURLPrefix: '/_static/lib/img',
-      onInit: function(lc) {
-        var localStorageKey = 'drawing'
-        if (localStorage.getItem(localStorageKey)) {
-          lc.loadSnapshotJSON(localStorage.getItem(localStorageKey));
-        }
-        lc.on('drawingChange', function() {
-          localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
-        });
-      }
+    var lc = LC.init(
+      document.getElementsByClassName('literally localstorage')[0]);
+    var localStorageKey = 'drawing'
+    if (localStorage.getItem(localStorageKey)) {
+      lc.loadSnapshotJSON(localStorage.getItem(localStorageKey));
+    }
+    lc.on('drawingChange', function() {
+      localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
     });
   });
 </script>

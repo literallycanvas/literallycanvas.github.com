@@ -4,7 +4,10 @@ Exporting images
 Regardless of what's displayed in the viewport, you can export the complete
 drawing, or any subset of the drawing, using :js:func:`getImage`.
 
-These examples export your drawing as a PNG in a new window.
+These examples export your drawing as a PNG in a new window. The conversion
+to PNG is handled by the built-in canvas function :js:func:`toDataURL`.
+To learn more about what image formats are available, refer to
+`Mozilla's canvas element reference <https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement>`_.
 
 Exporting the bounding rect of all shapes
 -----------------------------------------
