@@ -10,6 +10,7 @@ API
   shapes.rst
   tools.rst
   util.rst
+  localization.rst
 
 Uncategorized functions
 -----------------------
@@ -44,3 +45,4 @@ Summary
 * :js:func:`LC.registerJQueryPlugin`
 * :js:func:`LC.setDefaultImageURLPrefix`
 * :doc:`LC.util <util>`
+* :js:func:`LC.localize`
