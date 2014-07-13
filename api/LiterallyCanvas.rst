@@ -123,6 +123,11 @@ Controlling the view
 
   Add the given amount to the zoom level.
 
+.. js:function:: setImageSize(width, height)
+
+  Change the size of the image away from what was passed to :js:func:`LC.init`
+  as :ref:`imageSize <opt-imageSize>`.
+
 Changing the drawing
 ^^^^^^^^^^^^^^^^^^^^
 

@@ -41,6 +41,8 @@ Initializing normally
           You probably need to set this, either by passing it as an option, or
           by calling :js:func:`LC.setDefaultImageURLPrefix`.
 
+    .. _opt-imageSize:
+
     ``imageSize``
       An object with keys ``width`` and ``height``. If either value is falsey,
       that dimension will be infinite. For example:
