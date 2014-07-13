@@ -1,0 +1,15 @@
+<div class="literally export"></div>
+
+<form class="controls export">
+  <input type="submit" data-action="export-as-png" value="Export as PNG">
+</form>
+
+<script>
+  $(document).ready(function() {
+    var lc = LC.init(document.getElementsByClassName('literally export')[0]);
+    $('.controls.export [data-action=export-as-png]').click(function(e) {
+      e.preventDefault();
+      window.open(lc.getImage().toDataURL());
+    });
+  });
+</script>

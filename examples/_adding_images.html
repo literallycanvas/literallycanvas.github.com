@@ -1,0 +1,11 @@
+<div class="literally images-in-drawing"></div>
+
+<script>
+  $(document).ready(function() {
+    var lc = LC.init(
+      document.getElementsByClassName('literally images-in-drawing')[0]);
+    var newImage = new Image()
+    newImage.src = '/_static/sample_image.png';
+    lc.saveShape(LC.createShape('Image', {x: 10, y: 10, image: newImage}));
+  });
+</script>
