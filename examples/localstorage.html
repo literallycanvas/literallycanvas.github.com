@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Saving to Local Storage &mdash; Literally Canvas v0.3 documentation</title>
+    <title>Saving to Local Storage &mdash; Literally Canvas v0.4.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,14 +23,16 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.3 documentation" href="../index.html" />
+    <link rel="top" title="Literally Canvas v0.4.0 documentation" href="../index.html" />
     <link rel="up" title="Examples" href="index.html" />
-    <link rel="next" title="Exporting to PNG" href="export.html" />
-    <link rel="prev" title="Examples" href="index.html" />
+    <link rel="next" title="Exporting images" href="export.html" />
+    <link rel="prev" title="Images" href="images.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/lib/css/literally.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/ie_customevent.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.jquery.js" type="text/javascript"></script>
@@ -46,10 +48,10 @@
     <ul>
         <li>
           &larr;
-          <a href="index.html" title="Previous document">Examples</a>
+          <a href="images.html" title="Previous document">Images</a>
         </li>
         <li>
-          <a href="export.html" title="Next document">Exporting to PNG</a>
+          <a href="export.html" title="Next document">Exporting images</a>
           &rarr;
         </li>
     </ul>
@@ -72,46 +74,39 @@
   <div class="section" id="saving-to-local-storage">
 <span id="saving-and-loading"></span><h1>Saving to Local Storage<a class="headerlink" href="#saving-to-local-storage" title="Permalink to this headline">¶</a></h1>
 <p>Literally Canvas can serialize the user&#8217;s drawing as a Javascript object.
-Generally, you probably want to do this in response to events.</p>
+Generally, you probably want to do this in response to
+<a class="reference internal" href="../api/events.html#event-drawingchange"><em>the drawingChange event</em></a>.</p>
 <p>Here&#8217;s a complete example that saves the drawing to <tt class="docutils literal"><span class="pre">localStorage</span></tt> so that
 when the user refreshes the page, the drawing persists.</p>
-<div class="literally localstorage"><canvas></canvas></div>
+<div class="literally localstorage"></div>
 
 <script>
   $(document).ready(function() {
-    $('.literally.localstorage').literallycanvas({
-      backgroundColor: 'whiteSmoke',
-      imageURLPrefix: '/_static/lib/img',
-      onInit: function(lc) {
-        var localStorageKey = 'drawing'
-        if (localStorage.getItem(localStorageKey)) {
-          lc.loadSnapshotJSON(localStorage.getItem(localStorageKey));
-        }
-        lc.on('drawingChange', function() {
-          localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
-        });
-      }
+    var lc = LC.init(
+      document.getElementsByClassName('literally localstorage')[0]);
+    var localStorageKey = 'drawing'
+    if (localStorage.getItem(localStorageKey)) {
+      lc.loadSnapshotJSON(localStorage.getItem(localStorageKey));
+    }
+    lc.on('drawingChange', function() {
+      localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
     });
   });
 </script>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally localstorage&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally localstorage&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally.localstorage&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
-      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;whiteSmoke&#39;</span><span class="p">,</span>
-      <span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/_static/lib/img&#39;</span><span class="p">,</span>
-      <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
-<span class="hll">        <span class="kd">var</span> <span class="nx">localStorageKey</span> <span class="o">=</span> <span class="s1">&#39;drawing&#39;</span>
-</span><span class="hll">        <span class="k">if</span> <span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">))</span> <span class="p">{</span>
-</span><span class="hll">          <span class="nx">lc</span><span class="p">.</span><span class="nx">loadSnapshotJSON</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">));</span>
-</span><span class="hll">        <span class="p">}</span>
-</span><span class="hll">        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class="hll">          <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">,</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getSnapshotJSON</span><span class="p">());</span>
-</span><span class="hll">        <span class="p">});</span>
-</span>      <span class="p">}</span>
-    <span class="p">});</span>
-  <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;literally localstorage&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="hll">    <span class="kd">var</span> <span class="nx">localStorageKey</span> <span class="o">=</span> <span class="s1">&#39;drawing&#39;</span>
+</span><span class="hll">    <span class="k">if</span> <span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">))</span> <span class="p">{</span>
+</span><span class="hll">      <span class="nx">lc</span><span class="p">.</span><span class="nx">loadSnapshotJSON</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">));</span>
+</span><span class="hll">    <span class="p">}</span>
+</span><span class="hll">    <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="hll">      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">,</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getSnapshotJSON</span><span class="p">());</span>
+</span><span class="hll">    <span class="p">});</span>
+</span>  <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
 </div>
@@ -123,8 +118,8 @@ when the user refreshes the page, the drawing persists.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper"><p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3.tar.gz">
-		Download v0.3
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0.tar.gz">
+		Download v0.4.0
 	</a>
 </p>
 <p>
@@ -136,7 +131,7 @@ when the user refreshes the page, the drawing persists.</p>
 
 <p>
   Help us improve Literally Canvas on
-	<a href="http://github.com/literallycanvas/literallycanvas">Github</a>.
+	<a href="http://github.com/literallycanvas/literallycanvas">GitHub</a>.
 </p>
 <form class="search" action="../search.html" method="get">
   <input type="text" name="q"
@@ -154,10 +149,10 @@ when the user refreshes the page, the drawing persists.</p>
     <ul>
         <li>
           &larr;
-          <a href="index.html" title="Previous document">Examples</a>
+          <a href="images.html" title="Previous document">Images</a>
         </li>
         <li>
-          <a href="export.html" title="Next document">Exporting to PNG</a>
+          <a href="export.html" title="Next document">Exporting images</a>
           &rarr;
         </li>
     </ul>
@@ -171,7 +166,7 @@ when the user refreshes the page, the drawing persists.</p>
     </ul>
   </nav>
   </div>
-  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+  <footer id="pagefooter">&copy; 2012-2014 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
       1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">

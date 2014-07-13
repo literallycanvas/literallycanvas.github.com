@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Events &mdash; Literally Canvas v0.4.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Literally Canvas v0.4.0 documentation" href="../index.html" />
+    <link rel="up" title="API" href="index.html" />
+    <link rel="next" title="Shapes" href="shapes.html" />
+    <link rel="prev" title="The LiterallyCanvas object" href="LiterallyCanvas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/ie_customevent.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/literallycanvas.jquery.js" type="text/javascript"></script>
+    <script src="../_static/docs.js" type="text/javascript"></script>
+  </head>
+  <body>
+  <header id="pageheader"><h1><a href="../index.html ">
+    <span class="title-word-1">Literally</span>
+    <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
+  </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="LiterallyCanvas.html" title="Previous document">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a>
+        </li>
+        <li>
+          <a href="shapes.html" title="Next document">Shapes</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li>
+        <a href="index.html">API</a>
+      </li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="events">
+<h1>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> object allows you to subscribe to several
+events. Here&#8217;s how:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventName&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// do stuff</span>
+<span class="p">});</span>
+<span class="nx">unsubscribe</span><span class="p">();</span>  <span class="c1">// stop listening</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="LiterallyCanvas.html#event-subscription"><em>Event subscription</em></a> for details.</p>
+<div class="section" id="definition-format">
+<h2>Definition format<a class="headerlink" href="#definition-format" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">eventName</span></tt> <em>(function signature)</em></dt>
+<dd>Description</dd>
+</dl>
+</div>
+<div class="section" id="drawing-changes">
+<h2>Drawing changes<a class="headerlink" href="#drawing-changes" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils" id="event-drawingchange">
+<dt><tt class="docutils literal"><span class="pre">drawingChange</span></tt> <em>()</em></dt>
+<dd>The drawing just changed in some way. This is a catch-all event that is fired
+after each of the other events in this section except for
+<tt class="docutils literal"><span class="pre">primaryColorChange</span></tt> and <tt class="docutils literal"><span class="pre">secondaryColorChange</span></tt>, which don&#8217;t actually
+change the drawing.</dd>
+</dl>
+<dl class="docutils" id="event-shapesave">
+<dt><tt class="docutils literal"><span class="pre">shapeSave</span></tt> <em>({shape, previousShapeId})</em></dt>
+<dd>A new shape was just added to the drawing above <em>previousShapeId</em>.</dd>
+</dl>
+<dl class="docutils" id="event-snapshotload">
+<dt><tt class="docutils literal"><span class="pre">snapshotLoad</span></tt> <em>()</em></dt>
+<dd>A snapshot was just loaded.</dd>
+</dl>
+<dl class="docutils" id="event-clear">
+<dt><tt class="docutils literal"><span class="pre">clear</span></tt> <em>()</em></dt>
+<dd>The drawing was just cleared.</dd>
+</dl>
+<dl class="docutils" id="event-undo">
+<dt><tt class="docutils literal"><span class="pre">undo</span></tt> <em>()</em></dt>
+<dd>The last action was undone.</dd>
+</dl>
+<dl class="docutils" id="event-redo">
+<dt><tt class="docutils literal"><span class="pre">redo</span></tt> <em>()</em></dt>
+<dd>An undone action was reapplied.</dd>
+</dl>
+<dl class="docutils" id="event-primarycolorchange">
+<dt><tt class="docutils literal"><span class="pre">primaryColorChange</span></tt> <em>(newColor)</em></dt>
+<dd>The primary color was just changed.</dd>
+</dl>
+<dl class="docutils" id="event-secondarycolorchange">
+<dt><tt class="docutils literal"><span class="pre">secondaryColorChange</span></tt> <em>(newColor)</em></dt>
+<dd>The secondary color was just changed.</dd>
+</dl>
+<dl class="docutils" id="event-backgroundcolorchange">
+<dt><tt class="docutils literal"><span class="pre">backgroundColorChange</span></tt> <em>(newColor)</em></dt>
+<dd>The background color was just changed.</dd>
+</dl>
+</div>
+<div class="section" id="tool-state">
+<h2>Tool state<a class="headerlink" href="#tool-state" title="Permalink to this headline">¶</a></h2>
+<p>Three types events are fired during the lifecycle of a tool operation. Each
+tool has a different set of properties, but the tools are passed as arguments
+to the event handler.</p>
+<p><tt class="docutils literal"><span class="pre">drawStart</span></tt> <em>({tool})</em></p>
+<p><tt class="docutils literal"><span class="pre">drawContinue</span></tt> <em>({tool})</em></p>
+<p><tt class="docutils literal"><span class="pre">drawEnd</span></tt> <em>({tool})</em></p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">toolChange</span></tt> <em>({tool})</em></dt>
+<dd>The given tool has just been made active.</dd>
+</dl>
+</div>
+<div class="section" id="view-changes">
+<h2>View changes<a class="headerlink" href="#view-changes" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">pan</span></tt> <em>({x, y})</em></dt>
+<dd>The view has been panned to the given coordinates.</dd>
+<dt><tt class="docutils literal"><span class="pre">zoom</span></tt> <em>({oldScale, newScale})</em></dt>
+<dd>The view has been zoomed from <em>oldScale</em> to <em>newScale</em>.</dd>
+<dt><tt class="docutils literal"><span class="pre">repaint</span></tt> <em>({layerKey})</em></dt>
+<dd>The <em>layerKey</em> layer has just been repainted. The actual value of <em>layerKey</em>
+is not stable, but interpreting it won&#8217;t kill you.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Events</a><ul>
+<li><a class="reference internal" href="#definition-format">Definition format</a></li>
+<li><a class="reference internal" href="#drawing-changes">Drawing changes</a></li>
+<li><a class="reference internal" href="#tool-state">Tool state</a></li>
+<li><a class="reference internal" href="#view-changes">View changes</a></li>
+</ul>
+</li>
+</ul>
+<p>
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0.tar.gz">
+		Download v0.4.0
+	</a>
+</p>
+<p>
+  Send a message to
+  <br><a href="mailto:literallycanvas@librelist.com">
+    literallycanvas@librelist.com</a><br>
+  to join our mailing list.
+</p>
+
+<p>
+  Help us improve Literally Canvas on
+	<a href="http://github.com/literallycanvas/literallycanvas">GitHub</a>.
+</p>
+<form class="search" action="../search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="LiterallyCanvas.html" title="Previous document">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a>
+        </li>
+        <li>
+          <a href="shapes.html" title="Next document">Shapes</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li>
+        <a href="index.html">API</a>
+      </li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2012-2014 Literally Canvas contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.2b3
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36534121-1', 'literallycanvas.com');
+      ga('send', 'pageview');
+    </script>
+  
+  </body>
+</html>

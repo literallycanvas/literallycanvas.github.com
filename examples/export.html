@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Exporting to PNG &mdash; Literally Canvas v0.3 documentation</title>
+    <title>Exporting images &mdash; Literally Canvas v0.4.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,14 +23,16 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.3 documentation" href="../index.html" />
+    <link rel="top" title="Literally Canvas v0.4.0 documentation" href="../index.html" />
     <link rel="up" title="Examples" href="index.html" />
     <link rel="next" title="Uploading to Imgur" href="imgur.html" />
     <link rel="prev" title="Saving to Local Storage" href="localstorage.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/lib/css/literally.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/ie_customevent.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.jquery.js" type="text/javascript"></script>
@@ -69,55 +71,100 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="exporting-to-png">
-<span id="exporting-images"></span><h1>Exporting to PNG<a class="headerlink" href="#exporting-to-png" title="Permalink to this headline">¶</a></h1>
-<p>Internally, Literally Canvas uses more than one canvas to draw efficiently. You
-can use <tt class="xref js js-func docutils literal"><span class="pre">LiterallyCanvas.canvasForExport()</span></tt> to get a fully rendered
-canvas object, which you can use as needed to export your image. This example
-exports your drawing as a PNG in a new window.</p>
-<div class="literally export"><canvas></canvas></div>
+  <div class="section" id="exporting-images">
+<h1>Exporting images<a class="headerlink" href="#exporting-images" title="Permalink to this headline">¶</a></h1>
+<p>Regardless of what&#8217;s displayed in the viewport, you can export the complete
+drawing, or any subset of the drawing, using <a class="reference internal" href="../api/LiterallyCanvas.html#getImage" title="getImage"><tt class="xref js js-func docutils literal"><span class="pre">getImage()</span></tt></a>.</p>
+<p>These examples export your drawing as a PNG in a new window. The conversion
+to PNG is handled by the built-in canvas function <tt class="xref js js-func docutils literal"><span class="pre">toDataURL()</span></tt>.
+To learn more about what image formats are available, refer to
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement">Mozilla&#8217;s canvas element reference</a>.</p>
+<div class="section" id="exporting-the-bounding-rect-of-all-shapes">
+<h2>Exporting the bounding rect of all shapes<a class="headerlink" href="#exporting-the-bounding-rect-of-all-shapes" title="Permalink to this headline">¶</a></h2>
+<div class="literally export"></div>
 
-<form class="export">
+<form class="controls export">
   <input type="submit" data-action="export-as-png" value="Export as PNG">
 </form>
 
 <script>
   $(document).ready(function() {
-    $('.literally.export').literallycanvas({
-      backgroundColor: 'whiteSmoke',
-      imageURLPrefix: '/_static/lib/img',
-      onInit: function(lc) {
-        $('[data-action=export-as-png]').click(function(e) {
-          e.preventDefault();
-          window.open(lc.canvasForExport().toDataURL());
-        })
-
-      }
+    var lc = LC.init(document.getElementsByClassName('literally export')[0]);
+    $('.controls.export [data-action=export-as-png]').click(function(e) {
+      e.preventDefault();
+      window.open(lc.getImage().toDataURL());
     });
   });
 </script>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally export&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally export&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
 
-<span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;export&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;controls export&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">data-action=</span><span class="s">&quot;export-as-png&quot;</span> <span class="na">value=</span><span class="s">&quot;Export as PNG&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/form&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally.export&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
-      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;whiteSmoke&#39;</span><span class="p">,</span>
-      <span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/_static/lib/img&#39;</span><span class="p">,</span>
-      <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-action=export-as-png]&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-<span class="hll">          <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">lc</span><span class="p">.</span><span class="nx">canvasForExport</span><span class="p">().</span><span class="nx">toDataURL</span><span class="p">());</span>
-</span>        <span class="p">})</span>
-
-      <span class="p">}</span>
-    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;literally export&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.controls.export [data-action=export-as-png]&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="hll">      <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">lc</span><span class="p">.</span><span class="nx">getImage</span><span class="p">().</span><span class="nx">toDataURL</span><span class="p">());</span>
+</span>    <span class="p">});</span>
   <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="exporting-a-specific-rectangle">
+<h2>Exporting a specific rectangle<a class="headerlink" href="#exporting-a-specific-rectangle" title="Permalink to this headline">¶</a></h2>
+<p>This is probably what you want to do if your image bounds are not infinite.</p>
+<div class="literally export-bounded"></div>
+
+<form class="controls export-bounded">
+  <input type="submit" data-action="export-as-png" value="Export as PNG">
+</form>
+
+<script>
+  $(document).ready(function() {
+    var imageSize = {width: 200, height: 200};
+    var imageBounds = {
+      x: 0, y: 0, width: imageSize.width, height: imageSize.height
+    };
+    var lc = LC.init(
+      document.getElementsByClassName('literally export-bounded')[0],
+      {imageSize: imageSize}
+    );
+    $('.controls.export-bounded [data-action=export-as-png]')
+      .click(function(e) {
+        e.preventDefault();
+        window.open(lc.getImage({rect: imageBounds}).toDataURL());
+      });
+  });
+</script>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally export-bounded&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;controls export-bounded&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">data-action=</span><span class="s">&quot;export-as-png&quot;</span> <span class="na">value=</span><span class="s">&quot;Export as PNG&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="hll">    <span class="kd">var</span> <span class="nx">imageSize</span> <span class="o">=</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">};</span>
+</span><span class="hll">    <span class="kd">var</span> <span class="nx">imageBounds</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="hll">      <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="nx">imageSize</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="nx">imageSize</span><span class="p">.</span><span class="nx">height</span>
+</span><span class="hll">    <span class="p">};</span>
+</span>    <span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;literally export-bounded&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+<span class="hll">      <span class="p">{</span><span class="nx">imageSize</span><span class="o">:</span> <span class="nx">imageSize</span><span class="p">}</span>
+</span>    <span class="p">);</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.controls.export-bounded [data-action=export-as-png]&#39;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="hll">        <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">lc</span><span class="p">.</span><span class="nx">getImage</span><span class="p">({</span><span class="nx">rect</span><span class="o">:</span> <span class="nx">imageBounds</span><span class="p">}).</span><span class="nx">toDataURL</span><span class="p">());</span>
+</span>      <span class="p">});</span>
+  <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -126,9 +173,18 @@ exports your drawing as a PNG in a new window.</p>
         </div>
       </div>
       <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper"><p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3.tar.gz">
-		Download v0.3
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exporting images</a><ul>
+<li><a class="reference internal" href="#exporting-the-bounding-rect-of-all-shapes">Exporting the bounding rect of all shapes</a></li>
+<li><a class="reference internal" href="#exporting-a-specific-rectangle">Exporting a specific rectangle</a></li>
+</ul>
+</li>
+</ul>
+<p>
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0.tar.gz">
+		Download v0.4.0
 	</a>
 </p>
 <p>
@@ -140,7 +196,7 @@ exports your drawing as a PNG in a new window.</p>
 
 <p>
   Help us improve Literally Canvas on
-	<a href="http://github.com/literallycanvas/literallycanvas">Github</a>.
+	<a href="http://github.com/literallycanvas/literallycanvas">GitHub</a>.
 </p>
 <form class="search" action="../search.html" method="get">
   <input type="text" name="q"
@@ -175,7 +231,7 @@ exports your drawing as a PNG in a new window.</p>
     </ul>
   </nav>
   </div>
-  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+  <footer id="pagefooter">&copy; 2012-2014 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
       1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">

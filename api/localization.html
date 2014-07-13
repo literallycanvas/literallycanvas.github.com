@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using a watermark &mdash; Literally Canvas v0.3 documentation</title>
+    <title>Localization &mdash; Literally Canvas v0.4.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,13 +23,16 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.3 documentation" href="../index.html" />
-    <link rel="up" title="Examples" href="index.html" />
-    <link rel="prev" title="Backgrounds" href="background.html" />
+    <link rel="top" title="Literally Canvas v0.4.0 documentation" href="../index.html" />
+    <link rel="up" title="API" href="index.html" />
+    <link rel="next" title="Examples" href="../examples/index.html" />
+    <link rel="prev" title="Utilities" href="util.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/lib/css/literally.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/ie_customevent.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.jquery.js" type="text/javascript"></script>
@@ -45,7 +48,11 @@
     <ul>
         <li>
           &larr;
-          <a href="background.html" title="Previous document">Backgrounds</a>
+          <a href="util.html" title="Previous document">Utilities</a>
+        </li>
+        <li>
+          <a href="../examples/index.html" title="Next document">Examples</a>
+          &rarr;
         </li>
     </ul>
   </nav>
@@ -53,7 +60,7 @@
     <ul>
       <li><a href="../index.html">Home</a></li>
       <li>
-        <a href="index.html">Examples</a>
+        <a href="index.html">API</a>
       </li> 
     </ul>
   </nav>
@@ -64,38 +71,27 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="using-a-watermark">
-<h1>Using a watermark<a class="headerlink" href="#using-a-watermark" title="Permalink to this headline">¶</a></h1>
-<p>A watermark is an image displayed behind the drawing. It is centered at all
-times (panning doesn&#8217;t affect it).</p>
-<div class="literally watermark"><canvas></canvas></div>
+  <div class="section" id="localization">
+<h1>Localization<a class="headerlink" href="#localization" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="LC.localize">
+<tt class="descclassname">LC.</tt><tt class="descname">localize</tt><big>(</big><em>strings</em><big>)</big><a class="headerlink" href="#LC.localize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>strings</strong> &#8211; Mapping of strings from en_US to another locale</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Defines localized strings for all LiterallyCanvas instances. This must be
+called before <a class="reference internal" href="initializing.html#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a>. Any omitted strings will fall back to the
+en_US versions.</p>
+</dd></dl>
 
-<script>
-  $(document).ready(function() {
-    var watermarkImage = new Image();
-    watermarkImage.src = '/_static/sample_image.png';
-    $('.literally.watermark').literallycanvas({
-      backgroundColor: 'whiteSmoke',
-      imageURLPrefix: '/_static/lib/img',
-      watermarkImage: watermarkImage
-    });
-  });
-</script>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally watermark&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
-
-<span class="nt">&lt;script&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-<span class="hll">    <span class="kd">var</span> <span class="nx">watermarkImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
-</span><span class="hll">    <span class="nx">watermarkImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/_static/sample_image.png&#39;</span><span class="p">;</span>
-</span>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally.watermark&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
-      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;whiteSmoke&#39;</span><span class="p">,</span>
-      <span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/_static/lib/img&#39;</span><span class="p">,</span>
-<span class="hll">      <span class="nx">watermarkImage</span><span class="o">:</span> <span class="nx">watermarkImage</span>
-</span>    <span class="p">});</span>
-  <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
-</pre></div>
-</div>
 </div>
 
 
@@ -104,8 +100,8 @@ times (panning doesn&#8217;t affect it).</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper"><p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3.tar.gz">
-		Download v0.3
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0.tar.gz">
+		Download v0.4.0
 	</a>
 </p>
 <p>
@@ -117,7 +113,7 @@ times (panning doesn&#8217;t affect it).</p>
 
 <p>
   Help us improve Literally Canvas on
-	<a href="http://github.com/literallycanvas/literallycanvas">Github</a>.
+	<a href="http://github.com/literallycanvas/literallycanvas">GitHub</a>.
 </p>
 <form class="search" action="../search.html" method="get">
   <input type="text" name="q"
@@ -135,7 +131,11 @@ times (panning doesn&#8217;t affect it).</p>
     <ul>
         <li>
           &larr;
-          <a href="background.html" title="Previous document">Backgrounds</a>
+          <a href="util.html" title="Previous document">Utilities</a>
+        </li>
+        <li>
+          <a href="../examples/index.html" title="Next document">Examples</a>
+          &rarr;
         </li>
     </ul>
   </nav>
@@ -143,12 +143,12 @@ times (panning doesn&#8217;t affect it).</p>
     <ul>
       <li><a href="../index.html">Home</a></li>
       <li>
-        <a href="index.html">Examples</a>
+        <a href="index.html">API</a>
       </li> 
     </ul>
   </nav>
   </div>
-  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+  <footer id="pagefooter">&copy; 2012-2014 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
       1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">

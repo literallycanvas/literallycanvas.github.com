@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installing &mdash; Literally Canvas v0.3 documentation</title>
+    <title>Installing &mdash; Literally Canvas v0.4.0 documentation</title>
     
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,13 +23,15 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.3 documentation" href="index.html" />
-    <link rel="next" title="API" href="api.html" />
-    <link rel="prev" title="About" href="index.html" />
+    <link rel="top" title="Literally Canvas v0.4.0 documentation" href="index.html" />
+    <link rel="next" title="API" href="api/index.html" />
+    <link rel="prev" title="Literally Canvas" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="_static/lib/css/literally.css" type="text/css" />
+      <link rel="stylesheet" href="_static/lib/css/literallycanvas.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="_static/lib/js/ie_customevent.js" type="text/javascript"></script>
     <script src="_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="_static/lib/js/literallycanvas.jquery.js" type="text/javascript"></script>
@@ -45,10 +47,10 @@
     <ul>
         <li>
           &larr;
-          <a href="index.html" title="Previous document">About</a>
+          <a href="index.html" title="Previous document">Literally Canvas</a>
         </li>
         <li>
-          <a href="api.html" title="Next document">API</a>
+          <a href="api/index.html" title="Next document">API</a>
           &rarr;
         </li>
     </ul>
@@ -77,50 +79,51 @@
 <div class="highlight-sh"><div class="highlight"><pre>bower install literallycanvas
 </pre></div>
 </div>
-<p>Don&#8217;t try to use <tt class="docutils literal"><span class="pre">bower</span></tt> with the <tt class="docutils literal"><span class="pre">literallycanvas/master</span></tt> branch. It won&#8217;t
-work. The repo used by the registry is up to date.</p>
-</div>
-<div class="section" id="include-the-assets">
-<h2>Include the assets<a class="headerlink" href="#include-the-assets" title="Permalink to this headline">¶</a></h2>
-<p>The Literally Canvas distribution includes several files.</p>
-<p><tt class="docutils literal"><span class="pre">css/literally.css</span></tt> includes styles necessary to render the canvas and
-toolbar.</p>
-<p><tt class="docutils literal"><span class="pre">img/</span></tt> contains the toolbar images.</p>
-<p><tt class="docutils literal"><span class="pre">js/literally.jquery[.min].js</span></tt> is the Javascript file you need to use
-the jQuery plugin. The other Javascript files only contain the code for the
-internals.</p>
-<p>Ultimately, you just need to do this:</p>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/static/css/literally.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
-
-<span class="c">&lt;!-- jQuery should already be available --&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/static/js/literallycanvas.jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
-</div>
-<p>and pass a value for the <tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt> parameter to
-<a class="reference internal" href="api.html#_S_.literallycanvas" title="$.literallycanvas"><tt class="xref js js-func docutils literal"><span class="pre">$.literallycanvas()</span></tt></a>.</p>
-</div>
-<div class="section" id="write-code">
-<h2>Write code<a class="headerlink" href="#write-code" title="Permalink to this headline">¶</a></h2>
-<p>Here is the suggested markup:</p>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
-</pre></div>
-</div>
-<p>Literally Canvas will create the <tt class="docutils literal"><span class="pre">&lt;canvas&gt;</span></tt> if it doesn&#8217;t exist, but you can
-see why we prefer the above markup.</p>
-<p>You need to give the container <tt class="docutils literal"><span class="pre">&lt;div&gt;</span></tt> a size by styling it with CSS.
-Otherwise your canvas will have a height of zero.</p>
-<div class="highlight-css"><div class="highlight"><pre><span class="nc">.literally</span> <span class="p">{</span>
-    <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>   <span class="c">/* fill container width */</span>
-    <span class="k">height</span><span class="o">:</span> <span class="m">500px</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You should <strong>not</strong> set the size by styling <tt class="docutils literal"><span class="pre">&lt;canvas&gt;</span></tt>.</p>
+<p class="last">Don&#8217;t try to use <tt class="docutils literal"><span class="pre">bower</span></tt> with the <tt class="docutils literal"><span class="pre">literallycanvas/master</span></tt> branch. It
+won&#8217;t work. The repo used by the registry is up to date.</p>
 </div>
-<p>Finally, instantiate Literally Canvas:</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/static/img&#39;</span><span class="p">});</span>
+</div>
+<div class="section" id="include-the-assets-and-write-the-code">
+<h2>Include the assets and write the code<a class="headerlink" href="#include-the-assets-and-write-the-code" title="Permalink to this headline">¶</a></h2>
+<p>The Literally Canvas distribution includes several files. You can put them wherever you want.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">img/</span></tt>: Images for the GUI. You&#8217;ll pass the absolute URL to this directory
+as the <tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt> option.</li>
+<li><tt class="docutils literal"><span class="pre">css/literallycanvas.css</span></tt>: Required stylesheet.</li>
+<li><tt class="docutils literal"><span class="pre">js/literallycanvas[.min].js</span></tt>: The magic.</li>
+</ul>
+<p>Here&#8217;s a basic working setup. Each part is required.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="c">&lt;!-- stylesheet --&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/static/css/literallycanvas.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- dependency: React.js --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+    <span class="c">&lt;!-- Literally Canvas --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/static/js/literallycanvas.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- where the widget goes. you can do CSS to it. --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+    <span class="c">&lt;!-- kick it off --&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="c1">// Look ma, no jQuery!</span>
+        <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;literally&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">{</span><span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/static/img&#39;</span><span class="p">}</span>
+        <span class="p">);</span>
+
+        <span class="cm">/* or if you just love jQuery,</span>
+<span class="cm">            $(&#39;.literally&#39;).literallycanvas({imageURLPrefix: &#39;/static/img&#39;})</span>
+<span class="cm">        */</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -136,14 +139,13 @@ Otherwise your canvas will have a height of zero.</p>
   <ul>
 <li><a class="reference internal" href="#">Installing</a><ul>
 <li><a class="reference internal" href="#get-the-assets">Get the assets</a></li>
-<li><a class="reference internal" href="#include-the-assets">Include the assets</a></li>
-<li><a class="reference internal" href="#write-code">Write code</a></li>
+<li><a class="reference internal" href="#include-the-assets-and-write-the-code">Include the assets and write the code</a></li>
 </ul>
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3.tar.gz">
-		Download v0.3
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0.tar.gz">
+		Download v0.4.0
 	</a>
 </p>
 <p>
@@ -155,7 +157,7 @@ Otherwise your canvas will have a height of zero.</p>
 
 <p>
   Help us improve Literally Canvas on
-	<a href="http://github.com/literallycanvas/literallycanvas">Github</a>.
+	<a href="http://github.com/literallycanvas/literallycanvas">GitHub</a>.
 </p>
 <form class="search" action="search.html" method="get">
   <input type="text" name="q"
@@ -173,10 +175,10 @@ Otherwise your canvas will have a height of zero.</p>
     <ul>
         <li>
           &larr;
-          <a href="index.html" title="Previous document">About</a>
+          <a href="index.html" title="Previous document">Literally Canvas</a>
         </li>
         <li>
-          <a href="api.html" title="Next document">API</a>
+          <a href="api/index.html" title="Next document">API</a>
           &rarr;
         </li>
     </ul>
@@ -187,7 +189,7 @@ Otherwise your canvas will have a height of zero.</p>
     </ul>
   </nav>
   </div>
-  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+  <footer id="pagefooter">&copy; 2012-2014 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
       1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">

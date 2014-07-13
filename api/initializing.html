@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Initializing &amp; Options &mdash; Literally Canvas v0.4.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Literally Canvas v0.4.0 documentation" href="../index.html" />
+    <link rel="up" title="API" href="index.html" />
+    <link rel="next" title="The LiterallyCanvas object" href="LiterallyCanvas.html" />
+    <link rel="prev" title="API" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/ie_customevent.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/literallycanvas.jquery.js" type="text/javascript"></script>
+    <script src="../_static/docs.js" type="text/javascript"></script>
+  </head>
+  <body>
+  <header id="pageheader"><h1><a href="../index.html ">
+    <span class="title-word-1">Literally</span>
+    <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
+  </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">API</a>
+        </li>
+        <li>
+          <a href="LiterallyCanvas.html" title="Next document">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li>
+        <a href="index.html">API</a>
+      </li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="initializing-options">
+<h1>Initializing &amp; Options<a class="headerlink" href="#initializing-options" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="changes-since-v0-3">
+<h2>Changes since v0.3<a class="headerlink" href="#changes-since-v0-3" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><em>backgroundShapes</em> and <em>watermarkImage</em> are no longer affected by the eraser.</p>
+</li>
+<li><p class="first">The <em>preserveCanvasContents</em> option is gone. If you want to use the contents
+of an existing canvas element as the background of a drawing, do this:</p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span class="nx">backgroundImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+<span class="nx">backgroundImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas.my-canvas&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toDataURL</span><span class="p">();</span>
+<span class="nx">backgroundShape</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span>
+  <span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">image</span><span class="o">:</span> <span class="nx">backgroundImage</span><span class="p">}));</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">backgroundShapes</span><span class="o">:</span> <span class="p">[</span><span class="nx">backgroundShape</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Tools are defined by the new <em>tools</em> option, which replaces the old
+<em>toolClasses</em> and takes a different list of arguments.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="initializing-normally">
+<h2>Initializing normally<a class="headerlink" href="#initializing-normally" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span><span class="nx">option</span><span class="o">:</span> <span class="nx">value</span><span class="p">})</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="LC.init">
+<tt class="descclassname">LC.</tt><tt class="descname">init</tt><big>(</big><em>element</em>, <em>options={}</em><big>)</big><a class="headerlink" href="#LC.init" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Options</strong></p>
+<dl class="docutils" id="opt-imageurlprefix">
+<dt><tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt></dt>
+<dd><p class="first">Location of Literally Canvas&#8217;s <tt class="docutils literal"><span class="pre">img</span></tt> folder, without a trailing
+slash. Defaults to <tt class="docutils literal"><span class="pre">lib/img</span></tt>.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You probably need to set this, either by passing it as an option, or
+by calling <a class="reference internal" href="index.html#LC.setDefaultImageURLPrefix" title="LC.setDefaultImageURLPrefix"><tt class="xref js js-func docutils literal"><span class="pre">LC.setDefaultImageURLPrefix()</span></tt></a>.</p>
+</div>
+</dd>
+</dl>
+<dl class="docutils" id="opt-imagesize">
+<dt><tt class="docutils literal"><span class="pre">imageSize</span></tt></dt>
+<dd><p class="first">An object with keys <tt class="docutils literal"><span class="pre">width</span></tt> and <tt class="docutils literal"><span class="pre">height</span></tt>. If either value is falsey,
+that dimension will be infinite. For example:</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="c1">// 500 pixels wide, infinitely tall canvas</span>
+<span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span><span class="nx">imageSize</span><span class="o">:</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="kc">null</span><span class="p">}})</span>
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">primaryColor</span></tt></dt>
+<dd>Starting stroke color. Defaults to <tt class="docutils literal"><span class="pre">'#000'</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">secondaryColor</span></tt></dt>
+<dd>Starting fill color. Defaults to <tt class="docutils literal"><span class="pre">'#fff'</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">backgroundColor</span></tt></dt>
+<dd>Starting background color. Defaults to <tt class="docutils literal"><span class="pre">'transparent'</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">backgroundShapes</span></tt></dt>
+<dd>List of shapes to display under all other shapes. They will not be
+affected by the Clear button, <tt class="xref js js-func docutils literal"><span class="pre">loadSnapshot()</span></tt>,
+or the eraser tool.</dd>
+<dt><tt class="docutils literal"><span class="pre">keyboardShortcuts</span></tt></dt>
+<dd>Enable panning with the arrow keys. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">tools</span></tt></dt>
+<dd><p class="first">A list of tools to enable. The default value is:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pencil</span><span class="p">,</span>
+  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eraser</span><span class="p">,</span>
+  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Line</span><span class="p">,</span>
+  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">,</span>
+  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Text</span><span class="p">,</span>
+  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pan</span><span class="p">,</span>
+  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eyedropper</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>If you write your own tool, you can append it to the list above and
+pass the whole list as the value of <tt class="docutils literal"><span class="pre">tools</span></tt>.</p>
+<p>If you need to disable a tool (such as pan), you can remove it from the
+list above and pass the remainder as the value of <tt class="docutils literal"><span class="pre">tools</span></tt>.</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// disable panning</span>
+    <span class="nx">keyboardShortcuts</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">tools</span><span class="o">:</span> <span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pencil</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eraser</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Line</span><span class="p">,</span>
+      <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Text</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eyedropper</span><span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">watermarkImage</span></tt></dt>
+<dd><p class="first">An image to display behind the drawing. The image will be centered.
+It will not pan with the drawing.</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/static/img/watermark.png&#39;</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">watermarkImage</span><span class="o">:</span> <span class="nx">img</span><span class="p">});</span>
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">watermarkScale</span></tt></dt>
+<dd><p class="first">Scale at which to render the watermark.</p>
+<p class="last">If you want to support retina displays, you should use a double-size
+watermark image and set <em>watermarkScale</em> to
+<tt class="docutils literal"><span class="pre">1/window.devicePixelRatio</span></tt>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="initializing-with-jquery">
+<h2>Initializing with jQuery<a class="headerlink" href="#initializing-with-jquery" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The jQuery form takes the same options as <a class="reference internal" href="#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a>, but it
+returns the list of matched elements instead of a
+<a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> object. That means if you want to attach event
+handlers or otherwise use the functionality of
+<a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a>, you need to use the <em>onInit</em> callback.</p>
+<dl class="function">
+<dt id="_S_.literallycanvas">
+<tt class="descclassname">$.</tt><tt class="descname">literallycanvas</tt><big>(</big><em>options</em><big>)</big><a class="headerlink" href="#_S_.literallycanvas" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">jQuery element list</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>onInit</strong> (function(<a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a>)) &#8211; <p>A function to be called as soon as Literally Canvas is initialized.
+This is where you set up event handlers, programmatically add shapes, or
+otherwise integrate with your application.</p>
+<p>Here&#8217;s a quick example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
+  <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The drawing was changed.&quot;</span><span class="p">);</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="translating-the-examples-to-jquery-form">
+<h3>Translating the examples to jQuery form<a class="headerlink" href="#translating-the-examples-to-jquery-form" title="Permalink to this headline">¶</a></h3>
+<p>Examples will often use the return value of <a class="reference internal" href="#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a>, a
+<a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> object.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The drawing was changed.&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>If you initialize Literally Canvas with the jQuery plugin, you won&#8217;t get the
+<tt class="docutils literal"><span class="pre">lc</span></tt> value back. Instead, you need to use the <em>onInit</em> callback,
+which gets that same value as its argument:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
+  <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The drawing was changed.&quot;</span><span class="p">);</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Alternatively, you can just use jQuery to get the first argument to
+<a class="reference internal" href="#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a>, like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;selector&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nx">options</span><span class="p">);</span>
+<span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The drawing was changed.&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Initializing &amp; Options</a><ul>
+<li><a class="reference internal" href="#changes-since-v0-3">Changes since v0.3</a></li>
+<li><a class="reference internal" href="#initializing-normally">Initializing normally</a></li>
+<li><a class="reference internal" href="#initializing-with-jquery">Initializing with jQuery</a><ul>
+<li><a class="reference internal" href="#translating-the-examples-to-jquery-form">Translating the examples to jQuery form</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0.tar.gz">
+		Download v0.4.0
+	</a>
+</p>
+<p>
+  Send a message to
+  <br><a href="mailto:literallycanvas@librelist.com">
+    literallycanvas@librelist.com</a><br>
+  to join our mailing list.
+</p>
+
+<p>
+  Help us improve Literally Canvas on
+	<a href="http://github.com/literallycanvas/literallycanvas">GitHub</a>.
+</p>
+<form class="search" action="../search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">API</a>
+        </li>
+        <li>
+          <a href="LiterallyCanvas.html" title="Next document">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li>
+        <a href="index.html">API</a>
+      </li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2012-2014 Literally Canvas contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.2b3
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36534121-1', 'literallycanvas.com');
+      ga('send', 'pageview');
+    </script>
+  
+  </body>
+</html>

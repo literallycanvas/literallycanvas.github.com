@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Uploading to Imgur &mdash; Literally Canvas v0.3 documentation</title>
+    <title>Uploading to Imgur &mdash; Literally Canvas v0.4.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,14 +23,15 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.3 documentation" href="../index.html" />
+    <link rel="top" title="Literally Canvas v0.4.0 documentation" href="../index.html" />
     <link rel="up" title="Examples" href="index.html" />
-    <link rel="next" title="Adding images" href="adding_images.html" />
-    <link rel="prev" title="Exporting to PNG" href="export.html" />
+    <link rel="prev" title="Exporting images" href="export.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/lib/css/literally.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/ie_customevent.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.jquery.js" type="text/javascript"></script>
@@ -46,11 +47,7 @@
     <ul>
         <li>
           &larr;
-          <a href="export.html" title="Previous document">Exporting to PNG</a>
-        </li>
-        <li>
-          <a href="adding_images.html" title="Next document">Adding images</a>
-          &rarr;
+          <a href="export.html" title="Previous document">Exporting images</a>
         </li>
     </ul>
   </nav>
@@ -71,82 +68,84 @@
             
   <div class="section" id="uploading-to-imgur">
 <h1>Uploading to Imgur<a class="headerlink" href="#uploading-to-imgur" title="Permalink to this headline">¶</a></h1>
-<p>The &#8220;Upload to Imgur&#8221; button will anonymously upload the contents of the canvas
-to Imgur and redirect you to its page.</p>
-<div class="literally imgur"><canvas></canvas></div>
+<p>This example demonstrates how you might integrate Literally Canvas with a
+service like Imgur. The &#8220;Upload to Imgur&#8221; button will anonymously upload the
+contents of the canvas to Imgur and redirect you to its page.</p>
+<p>Note that unless you set a background color in the color picker, the exported
+image will have a transparent background, which will be drawn against a dark
+background on Imgur&#8217;s site.</p>
+<div class="literally imgur"></div>
 
 <form class="imgur-submit">
     <input type="submit" data-action="upload-to-imgur" value="Upload to Imgur">
 </form>
 
 <script>
-  $('.literally.imgur').literallycanvas({
-    backgroundColor: 'whiteSmoke',
-    imageURLPrefix: '/_static/lib/img',
-    onInit: function(lc) {
+  $(document).ready(function(){
+    var lc = LC.init(document.getElementsByClassName('literally imgur')[0]);
+    $('[data-action=upload-to-imgur]').click(function(e) {
+      e.preventDefault();
 
-      $('[data-action=upload-to-imgur]').click(function(e) {
-        e.preventDefault();
-        $('.imgur-submit').html('Uploading...')
-        // this is all bog standard Imgur API; only LC-specific thing is the
-        // image data argument
-        $.ajax({
-          url: 'https://api.imgur.com/3/image',
-          type: 'POST',
-          headers: {
-            // Your application gets an imgurClientId from Imgur
-            Authorization: 'Client-ID ' + imgurClientId,
-            Accept: 'application/json'
-          },
-          data: {
-            image:  lc.canvasForExport().toDataURL().split(',')[1],
-            type: 'base64'
-          },
-          success: function(result) {
-            window.location = 'https://imgur.com/gallery/' + result.data.id;
-          },
-        });
-      })
+      $('.imgur-submit').html('Uploading...')
 
-    }
+      // this is all standard Imgur API; only LC-specific thing is the image
+      // data argument;
+      $.ajax({
+        url: 'https://api.imgur.com/3/image',
+        type: 'POST',
+        headers: {
+          // Your application gets an imgurClientId from Imgur
+          Authorization: 'Client-ID ' + imgurClientId,
+          Accept: 'application/json'
+        },
+        data: {
+          // convert the image data to base64
+          image:  lc.canvasForExport().toDataURL().split(',')[1],
+          type: 'base64'
+        },
+        success: function(result) {
+          var url = 'https://imgur.com/gallery/' + result.data.id;
+          $('.imgur-submit').html("<a href='" + url + "'>" + url + "</a>");
+        },
+      });
+    });
   });
 </script>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally imgur&quot;</span><span class="nt">&gt;&lt;canvas&gt;&lt;/canvas&gt;&lt;/div&gt;</span>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally imgur&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
 
 <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;imgur-submit&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">data-action=</span><span class="s">&quot;upload-to-imgur&quot;</span> <span class="na">value=</span><span class="s">&quot;Upload to Imgur&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/form&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally.imgur&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span>
-    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;whiteSmoke&#39;</span><span class="p">,</span>
-    <span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/_static/lib/img&#39;</span><span class="p">,</span>
-    <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;literally imgur&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-action=upload-to-imgur]&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
 
-      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[data-action=upload-to-imgur]&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.imgur-submit&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;Uploading...&#39;</span><span class="p">)</span>
-        <span class="c1">// this is all bog standard Imgur API; only LC-specific thing is the</span>
-        <span class="c1">// image data argument</span>
-<span class="hll">        <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-</span><span class="hll">          <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;https://api.imgur.com/3/image&#39;</span><span class="p">,</span>
-</span><span class="hll">          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
-</span><span class="hll">          <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
-</span><span class="hll">            <span class="c1">// Your application gets an imgurClientId from Imgur</span>
-</span><span class="hll">            <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Client-ID &#39;</span> <span class="o">+</span> <span class="nx">imgurClientId</span><span class="p">,</span>
-</span><span class="hll">            <span class="nx">Accept</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
-</span><span class="hll">          <span class="p">},</span>
-</span><span class="hll">          <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
-</span><span class="hll">            <span class="nx">image</span><span class="o">:</span>  <span class="nx">lc</span><span class="p">.</span><span class="nx">canvasForExport</span><span class="p">().</span><span class="nx">toDataURL</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
-</span><span class="hll">            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;base64&#39;</span>
-</span><span class="hll">          <span class="p">},</span>
-</span><span class="hll">          <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="hll">            <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s1">&#39;https://imgur.com/gallery/&#39;</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
-</span><span class="hll">          <span class="p">},</span>
-</span><span class="hll">        <span class="p">});</span>
-</span>      <span class="p">})</span>
-
-    <span class="p">}</span>
+<span class="hll">      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.imgur-submit&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;Uploading...&#39;</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll">      <span class="c1">// this is all standard Imgur API; only LC-specific thing is the image</span>
+</span><span class="hll">      <span class="c1">// data argument;</span>
+</span><span class="hll">      <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</span><span class="hll">        <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;https://api.imgur.com/3/image&#39;</span><span class="p">,</span>
+</span><span class="hll">        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+</span><span class="hll">        <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+</span><span class="hll">          <span class="c1">// Your application gets an imgurClientId from Imgur</span>
+</span><span class="hll">          <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Client-ID &#39;</span> <span class="o">+</span> <span class="nx">imgurClientId</span><span class="p">,</span>
+</span><span class="hll">          <span class="nx">Accept</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
+</span><span class="hll">        <span class="p">},</span>
+</span><span class="hll">        <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span><span class="hll">          <span class="c1">// convert the image data to base64</span>
+</span><span class="hll">          <span class="nx">image</span><span class="o">:</span>  <span class="nx">lc</span><span class="p">.</span><span class="nx">canvasForExport</span><span class="p">().</span><span class="nx">toDataURL</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
+</span><span class="hll">          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;base64&#39;</span>
+</span><span class="hll">        <span class="p">},</span>
+</span><span class="hll">        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">          <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://imgur.com/gallery/&#39;</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span><span class="hll">          <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.imgur-submit&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&lt;a href=&#39;&quot;</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s2">&quot;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s2">&quot;&lt;/a&gt;&quot;</span><span class="p">);</span>
+</span><span class="hll">        <span class="p">},</span>
+</span><span class="hll">      <span class="p">});</span>
+</span>    <span class="p">});</span>
   <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
@@ -159,8 +158,8 @@ to Imgur and redirect you to its page.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper"><p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.3.tar.gz">
-		Download v0.3
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0.tar.gz">
+		Download v0.4.0
 	</a>
 </p>
 <p>
@@ -172,7 +171,7 @@ to Imgur and redirect you to its page.</p>
 
 <p>
   Help us improve Literally Canvas on
-	<a href="http://github.com/literallycanvas/literallycanvas">Github</a>.
+	<a href="http://github.com/literallycanvas/literallycanvas">GitHub</a>.
 </p>
 <form class="search" action="../search.html" method="get">
   <input type="text" name="q"
@@ -190,11 +189,7 @@ to Imgur and redirect you to its page.</p>
     <ul>
         <li>
           &larr;
-          <a href="export.html" title="Previous document">Exporting to PNG</a>
-        </li>
-        <li>
-          <a href="adding_images.html" title="Next document">Adding images</a>
-          &rarr;
+          <a href="export.html" title="Previous document">Exporting images</a>
         </li>
     </ul>
   </nav>
@@ -207,7 +202,7 @@ to Imgur and redirect you to its page.</p>
     </ul>
   </nav>
   </div>
-  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+  <footer id="pagefooter">&copy; 2012-2014 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
       1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
