@@ -1,15 +1,11 @@
-<div class="literally images"><canvas></canvas></div>
+<div class="literally images-in-drawing"></div>
 
 <script>
   $(document).ready(function() {
-    $('.literally.images').literallycanvas({
-      backgroundColor: 'whiteSmoke',
-      imageURLPrefix: '/_static/lib/img',
-      onInit: function(lc) {
-        var backgroundImage = new Image()
-        backgroundImage.src = '/_static/sample_image.png';
-        lc.saveShape(new LC.ImageShape(0, 0, backgroundImage));
-      }
-    });
+    var lc = LC.init(
+      document.getElementsByClassName('literally images-in-drawing')[0]);
+    var newImage = new Image()
+    newImage.src = '/_static/sample_image.png';
+    lc.saveShape(LC.createShape('Image', {x: 10, y: 10, image: newImage}));
   });
 </script>

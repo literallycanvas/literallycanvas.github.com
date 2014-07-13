@@ -1,28 +1,34 @@
-About
-=====
+Literally Canvas
+================
 
 Literally Canvas is an extensible, open source (BSD-licensed), HTML5 drawing
-widget. It depends on jQuery.
+widget. Its only dependency is `React.js`_.
 
-You can draw, erase, set the color with the eyedropper, undo, redo, pan, and
-zoom. A semi-stable API allows you to add your own tools. It works great on
-mobile devices.
-
-It's easy to get a data URL for upload to a site like Imgur or load/save a
-user's drawing.
+.. _React.js: http://facebook.github.io/react/
 
 .. raw:: html
 
-    <div class="literally index"><canvas></canvas></div>
+    <div class="literally index"></div>
 
     <script>
       $(document).ready(function() {
         $('.literally.index').literallycanvas({
-          backgroundColor: 'whiteSmoke',
-          imageURLPrefix: '/_static/lib/img'
+          backgroundColor: 'whiteSmoke'
         });
       });
     </script>
+
+Literally Canvas's major features include:
+
+* Basic drawing tools
+* An API to add more drawing tools
+* Panning and zooming
+* Constant-size or infinite canvases
+* Background images/shapes and watermarks
+* Retina support
+* Saving and loading JSON
+* Events
+* Exporting drawings to PNG
 
 If you would like to support Literally Canvas's development or provide extra
 incentive to implement your favorite feature request, consider donating at
@@ -32,7 +38,7 @@ incentive to implement your favorite feature request, consider donating at
     :maxdepth: 3
 
     installing.rst
-    api.rst
+    api/index.rst
     examples/index.rst
 
 Why?
@@ -42,17 +48,14 @@ If you look at :ref:`related-projects` at the bottom of the page, you can see
 that this isn't the only HTML5 drawing tool on the block. However, it is unique
 in several ways:
 
-* **It's open source.** Other drawing tools seem to be almost exclusively
-  provided by businesses whose core feature is their drawing tool or
-  freelancers who want you to pay them to adapt their work to your use case.
+* **It's open source.** It's developed by the community for many purposes and
+  is free to use and extend.
 
 * **It's a widget, not an application.** Literally Canvas is intended to live
-  inside your application in the way that works best for you. It doesn't take
-  over your screen. It doesn't (intentionally) gobble up events. It tries to
-  keep its UI to a minimum.
+  inside your application in the way that works best for you.
 
-* **It wants to be extended.** We've tried to design it with extensibility in
-  mind. We hope to improve the tool API in future releases.
+* **It wants to be extended.** There is a public API for adding new shapes and
+  tools.
 
 * **It's fast and looks good.** Literally Canvas is optimized to work with
   complex drawings, and it smooths lines naturally to avoid the unsightly line
@@ -69,8 +72,8 @@ Browser compatibility
 =========== ==============================
 Chrome      Awesome
 Safari      Awesome
-iOS         Zoom is buggy
-Firefox     23+ [#f1]_
+iOS         Awesome (FastClick helps [#f1]_)
+Firefox     4+
 Opera       ??
 Android     ??
 IE          10+ (Requires polyfill [#f2]_)
@@ -78,24 +81,15 @@ IE          10+ (Requires polyfill [#f2]_)
 
 .. rubric:: Footnotes
 
-.. [#f1] Works in previous versions, but the brush size slider will render
-         as a text field.
+.. [#f1] iOS delays click events so that it can detect gestures. To disable
+         this behavior and get those events immediately, use `FastClick`_.
+
 .. [#f2] IE doesn't support the ``CustomEvent`` constructor. Use
          `Mozilla's polyfill`_ to get Literally Canvas to run in IE.
 
 .. _Mozilla's Polyfill: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
 
-.. raw:: html
-
-  <br>
-
-.. image:: _static/browserstack.png
-
-`Browserstack`_ has generously donated resources to ensure that Literally
-Canvas works in as many environments as possible. If you care about your app's
-compatibility, you should check it out.
-
-.. _Browserstack: http://browserstack.com
+.. _FastClick: https://github.com/ftlabs/fastclick
 
 Contributing
 ============
@@ -109,6 +103,18 @@ Just head on over to `GitHub`_ and get started.
 Literally Canvas is developed by volunteers for fun. If missing features or
 compatibility are serious issues for you, consider that the solution to your
 problem might be to help us write the code.
+
+
+Thanks to BrowserStack
+======================
+
+.. image:: _static/browserstack.png
+
+`BrowserStack`_ has generously donated resources to ensure that Literally
+Canvas works in as many environments as possible. If you care about your app's
+compatibility, you should check it out.
+
+.. _Browserstack: http://browserstack.com
 
 .. _related-projects:
 

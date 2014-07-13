@@ -16,65 +16,52 @@ You can just `download the tarball`_. Or use Bower:
 
     bower install literallycanvas
 
-Don't try to use ``bower`` with the ``literallycanvas/master`` branch. It won't
-work. The repo used by the registry is up to date.
+.. note::
+    Don't try to use ``bower`` with the ``literallycanvas/master`` branch. It
+    won't work. The repo used by the registry is up to date.
 
 .. _download the tarball: https://github.com/literallycanvas/literallycanvas/archive/master.tar.gz
 
-Include the assets
-------------------
+Include the assets and write the code
+-------------------------------------
 
-The Literally Canvas distribution includes several files.
+The Literally Canvas distribution includes several files. You can put them wherever you want.
 
-``css/literally.css`` includes styles necessary to render the canvas and
-toolbar.
+* ``img/``: Images for the GUI. You'll pass the absolute URL to this directory
+  as the ``imageURLPrefix`` option.
+* ``css/literallycanvas.css``: Required stylesheet.
+* ``js/literallycanvas[.min].js``: The magic.
 
-``img/`` contains the toolbar images.
-
-``js/literally.jquery[.min].js`` is the Javascript file you need to use
-the jQuery plugin. The other Javascript files only contain the code for the
-internals.
-
-Ultimately, you just need to do this:
+Here's a basic working setup. Each part is required.
 
 .. code-block:: html
 
-    <link href="/static/css/literally.css" rel="stylesheet">
+    <html>
+      <head>
+        <!-- stylesheet -->
+        <link href="/static/css/literallycanvas.css" rel="stylesheet">
 
-    <!-- jQuery should already be available -->
-    <script src="/static/js/literallycanvas.jquery.js"></script>
+        <!-- dependency: React.js -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js"></script>
 
-and pass a value for the ``imageURLPrefix`` parameter to
-:js:func:`$.literallycanvas`.
+        <!-- Literally Canvas -->
+        <script src="/static/js/literallycanvas.js"></script>
+      </head>
+      <body>
+        <!-- where the widget goes. you can do CSS to it. -->
+        <div class="literally"></div>
 
-Write code
-----------
+        <!-- kick it off -->
+        <script>
+            // Look ma, no jQuery!
+            LC.init(
+                document.getElementsByClassName('literally')[0],
+                {imageURLPrefix: '/static/img'}
+            );
 
-Here is the suggested markup:
-
-.. code-block:: html
-
-    <div class="literally"><canvas></canvas></div>
-
-Literally Canvas will create the ``<canvas>`` if it doesn't exist, but you can
-see why we prefer the above markup.
-
-You need to give the container ``<div>`` a size by styling it with CSS.
-Otherwise your canvas will have a height of zero.
-
-.. code-block:: css
-
-    .literally {
-        width: 100%;   /* fill container width */
-        height: 500px;
-    }
-
-.. note::
-
-    You should **not** set the size by styling ``<canvas>``.
-
-Finally, instantiate Literally Canvas:
-
-.. code-block:: javascript
-
-    $('.literally').literallycanvas({imageURLPrefix: '/static/img'});
+            /* or if you just love jQuery,
+                $('.literally').literallycanvas({imageURLPrefix: '/static/img'})
+            */
+        </script>
+      </body>
+    </html>

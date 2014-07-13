@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+import os
 from better import better_theme_path
+
+READ_THE_DOCS = os.environ.get('READTHEDOCS', None) == 'True'
 
 needs_sphinx = '1.0'
 
@@ -18,10 +21,10 @@ pygments_style = 'sphinx'
 project = u'Literally Canvas'
 copyright = u'2012-2013 Literally Canvas contributors'
 # The short X.Y version. Can refer to in docs with |version|.
-version = '0.3'
+version = '0.4'
 # The full version, including alpha/beta/rc tags.
 # Can refer to in docs with |release|.
-release = '0.3'
+release = '0.4-rc1'
 #language = None
 
 
@@ -32,9 +35,11 @@ html_theme_options = {
     'cssfiles': [
         'http://fonts.googleapis.com/css?family=Finger+Paint',
         '_static/style.css',
-        '_static/lib/css/literally.css',
+        '_static/lib/css/literallycanvas.css',
     ],
     'scriptfiles': [
+        "//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js",
+        "_static/lib/js/fastclick.js",
         "_static/lib/js/ie_customevent.js",
         "_static/lib/js/literallycanvas.js",
         "_static/lib/js/literallycanvas.jquery.js",
@@ -54,8 +59,9 @@ html_title = "%(project)s v%(release)s documentation" % {
     'project': project, 'release': release}
 html_short_title = "Home"
 
-html_theme_options['ga_ua'] = 'UA-36534121-1'
-html_theme_options['ga_domain'] = 'literallycanvas.com'
+if not READ_THE_DOCS:
+    html_theme_options['ga_ua'] = 'UA-36534121-1'
+    html_theme_options['ga_domain'] = 'literallycanvas.com'
 
 # Necessary for best search results
 html_show_sourcelink = True
