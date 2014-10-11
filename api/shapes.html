@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Shapes &mdash; Literally Canvas v0.4.0 documentation</title>
+    <title>Shapes &mdash; Literally Canvas v0.4.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.4.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.0 documentation" href="../index.html" />
+    <link rel="top" title="Literally Canvas v0.4.1 documentation" href="../index.html" />
     <link rel="up" title="API" href="index.html" />
     <link rel="next" title="Creating Tools" href="tools.html" />
     <link rel="prev" title="Events" href="events.html" />
@@ -158,13 +158,15 @@ programmatically. All shapes are created through the
 
 <span class="target" id="shape-linepath"></span><dl class="function">
 <dt>
-<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'LinePath'</em>, <em>{points}</em><big>)</big></dt>
+<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'LinePath'</em>, <em>{points</em>, <em>interpolate}</em><big>)</big></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>points</strong> &#8211; List of <a class="reference internal" href="#shape-point"><em>Point</em></a> objects</li>
+<li><strong>smooth</strong> &#8211; If <tt class="docutils literal"><span class="pre">true</span></tt>, the given points will be smoothed to look more
+natural. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</li>
 </ul>
 </td>
 </tr>
@@ -174,13 +176,15 @@ programmatically. All shapes are created through the
 
 <span class="target" id="shape-erasedlinepath"></span><dl class="function">
 <dt>
-<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'ErasedLinePath'</em>, <em>{points}</em><big>)</big></dt>
+<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'ErasedLinePath'</em>, <em>{points</em>, <em>interpolate}</em><big>)</big></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>points</strong> &#8211; List of <a class="reference internal" href="#shape-point"><em>Point</em></a> objects</li>
+<li><strong>smooth</strong> &#8211; If <tt class="docutils literal"><span class="pre">true</span></tt>, the given points will be smoothed to look more
+natural. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</li>
 </ul>
 </td>
 </tr>
@@ -324,17 +328,10 @@ information. Instead, you can use these functions to save and load shapes:</p>
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0.tar.gz">
-		Download v0.4.0 (npm/source)
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.1.tar.gz">
+		Download v0.4.1
 	</a>
 </p>
-
-<p>
-  <a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.0-bower.tar.gz">
-    Download v0.4.0 (bower/bare js)
-  </a>
-</p>
-
 <p>
   Send a message to
   <br><a href="mailto:literallycanvas@librelist.com">

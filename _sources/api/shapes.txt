@@ -49,15 +49,19 @@ Creating shapes
 
 .. _shape-LinePath:
 
-.. js:function:: LC.createShape('LinePath', {points})
+.. js:function:: LC.createShape('LinePath', {points, interpolate})
 
   :param points: List of :ref:`Point <shape-Point>` objects
+  :param smooth: If ``true``, the given points will be smoothed to look more
+                 natural. Defaults to ``true``.
 
 .. _shape-ErasedLinePath:
 
-.. js:function:: LC.createShape('ErasedLinePath', {points})
+.. js:function:: LC.createShape('ErasedLinePath', {points, interpolate})
 
   :param points: List of :ref:`Point <shape-Point>` objects
+  :param smooth: If ``true``, the given points will be smoothed to look more
+                 natural. Defaults to ``true``.
 
 .. _shape-Point:
 

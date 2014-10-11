@@ -48,6 +48,9 @@ Exporting images
   Returns the complete drawing rendered to a canvas, regardless of what the
   view is panned/zoomed to. Available options:
 
+  ``includeWatermark``
+    If ``true``, render the watermark behind the drawing.
+
   ``rect``
     A dict ``{x, y, width, height}`` specifying which part of the image to
     draw, in drawing coordinates (before scaling). Defaults to the bounding
