@@ -185,3 +185,17 @@ Getting information
 .. js:function:: getPixel(x, y)
 
   Get the color of the given drawing-space pixel as a CSS color string.
+  
+Setting the tool
+^^^^^^^^^^^^^^^^
+
+.. js:function:: setTool(toolInstance)
+
+  Sets the current tool to `toolInstance`, which should be an instance of an
+  `LC.tools.Tool` subclass.
+
+  For example:
+
+  .. code-block:: javascript
+
+    lc.setTool(new LC.tools.Eraser())
