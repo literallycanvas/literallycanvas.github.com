@@ -39,4 +39,6 @@ singlehtml: rm-crud
 
 deploy: clean html
 	cp CNAME $(BUILDDIR)/html/CNAME
+	cp README_build.md $(BUILDDIR)/html/README.md
+	git fetch origin
 	ghp-import -n -p -r origin -b master $(BUILDDIR)/html

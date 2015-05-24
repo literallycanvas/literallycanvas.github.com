@@ -21,10 +21,10 @@ pygments_style = 'sphinx'
 project = u'Literally Canvas'
 copyright = u'2012-2013 Literally Canvas contributors'
 # The short X.Y version. Can refer to in docs with |version|.
-version = '0.4.1'
+version = '0.4.2'
 # The full version, including alpha/beta/rc tags.
 # Can refer to in docs with |release|.
-release = '0.4.1'
+release = '0.4.2'
 #language = None
 
 
@@ -42,7 +42,6 @@ html_theme_options = {
         "_static/lib/js/fastclick.js",
         "_static/lib/js/ie_customevent.js",
         "_static/lib/js/literallycanvas.js",
-        "_static/lib/js/literallycanvas.jquery.js",
         '_static/docs.js',
     ]
 }
