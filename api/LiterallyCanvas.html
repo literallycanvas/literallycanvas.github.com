@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>The LiterallyCanvas object &mdash; Literally Canvas v0.4.2 documentation</title>
+    <title>The LiterallyCanvas object &mdash; Literally Canvas v0.4.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.2',
+        VERSION:     '0.4.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.2 documentation" href="../index.html" />
+    <link rel="top" title="Literally Canvas v0.4.3 documentation" href="../index.html" />
     <link rel="up" title="API" href="index.html" />
     <link rel="next" title="Events" href="events.html" />
     <link rel="prev" title="Initializing &amp; Options" href="initializing.html" />
@@ -33,7 +33,6 @@
       <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
-    <script src="../_static/lib/js/ie_customevent.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
   </head>
@@ -161,6 +160,24 @@ full resolution. Defaults to <tt class="docutils literal"><span class="pre">1</s
 scale before rendering. This is probably what you want, since the image
 will be the same size as what the user sees on their screen, due to being
 scaled back up by the web browser. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="getSVGString">
+<tt class="descname">getSVGString</tt><big>(</big><em>{options}</em><big>)</big><a class="headerlink" href="#getSVGString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the drawing as an SVG string that can be inserted into the DOM or
+downloaded.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The eraser tool does not affect SVG output.</p>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">rect</span></tt></dt>
+<dd>A dict <tt class="docutils literal"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></tt> specifying which part of the image to
+draw, in drawing coordinates. Defaults to the bounding
+box of all shapes. If you don&#8217;t specify a <tt class="docutils literal"><span class="pre">rect</span></tt> and there are no
+shapes in the drawing, <a class="reference internal" href="#getSVGString" title="getSVGString"><tt class="xref js js-func docutils literal"><span class="pre">getSVGString()</span></tt></a> will return <tt class="docutils literal"><span class="pre">undefined</span></tt>.</dd>
 </dl>
 </dd></dl>
 
@@ -317,6 +334,13 @@ is still creating it.</p>
 <dd><p>Redo the last thing to be undone.</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="setShapesInProgress">
+<tt class="descname">setShapesInProgress</tt><big>(</big><em>shapes</em><big>)</big><a class="headerlink" href="#setShapesInProgress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Declare a list of shapes that are drawn to the canvas but aren&#8217;t yet part of
+the drawing. Tools should use this to show shapes in progress.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="getting-information">
 <h3>Getting information<a class="headerlink" href="#getting-information" title="Permalink to this headline">¶</a></h3>
@@ -360,8 +384,8 @@ color.</p>
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.2.tar.gz">
-		Download v0.4.2
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.3.tar.gz">
+		Download v0.4.3
 	</a>
 </p>
 <p>
@@ -408,7 +432,7 @@ color.</p>
     </ul>
   </nav>
   </div>
-  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+  <footer id="pagefooter">&copy; 2012-2015 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
       1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">

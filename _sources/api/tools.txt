@@ -65,6 +65,15 @@ and get back something that works.
       # save the shape as part of the drawing
       lc.saveShape(@currentShape)
 
+    # lifecycle: tool was just activated
+    didBecomeActive: (lc) ->
+      # subscribe to events here
+
+    # lifecycle: tool is being deactivated
+    willBecomeInactive: (lc) ->
+      # unsubscribe from events here
+
+
   # now expose our custom tool to the user
   LC.init(element, {tools: [
     LC.tools.Pencil,

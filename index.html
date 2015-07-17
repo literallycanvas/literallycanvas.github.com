@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Literally Canvas &mdash; Literally Canvas v0.4.2 documentation</title>
+    <title>Literally Canvas &mdash; Literally Canvas v0.4.3 documentation</title>
     
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.2',
+        VERSION:     '0.4.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.2 documentation" href="#" />
+    <link rel="top" title="Literally Canvas v0.4.3 documentation" href="#" />
     <link rel="next" title="Installing" href="installing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
@@ -31,7 +31,6 @@
       <link rel="stylesheet" href="_static/lib/css/literallycanvas.css" type="text/css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
     <script src="_static/lib/js/fastclick.js" type="text/javascript"></script>
-    <script src="_static/lib/js/ie_customevent.js" type="text/javascript"></script>
     <script src="_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="_static/docs.js" type="text/javascript"></script>
   </head>
@@ -82,12 +81,12 @@ widget. Its only dependency is <a class="reference external" href="http://facebo
 <li>Background images/shapes and watermarks</li>
 <li>Retina support</li>
 <li>Saving and loading JSON</li>
+<li>Exporting drawings to PNG and SVG</li>
 <li>Events</li>
-<li>Exporting drawings to PNG</li>
 </ul>
-<p>If you would like to support Literally Canvas&#8217;s development or provide extra
-incentive to implement your favorite feature request, consider donating at
-<a class="reference external" href="https://www.gittip.com/irskep/">gittip.com/irskep</a>.</p>
+<p>You can donate to Literally Canvas&#8217;s development on <a class="reference external" href="https://gratipay.com/~irskep/">Gratipay</a> or post a
+bounty on a GitHub issue on <a class="reference external" href="https://www.bountysource.com/teams/literallycanvas/issues">Bountysource</a>. Spontaneous improvements are rare
+otherwise, though they do happen.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a><ul>
@@ -143,6 +142,7 @@ incentive to implement your favorite feature request, consider donating at
 <li class="toctree-l2"><a class="reference internal" href="examples/export.html">Exporting images</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="examples/export.html#exporting-the-bounding-rect-of-all-shapes">Exporting the bounding rect of all shapes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="examples/export.html#exporting-a-specific-rectangle">Exporting a specific rectangle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/export.html#exporting-to-svg">Exporting to SVG</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="examples/imgur.html">Uploading to Imgur</a></li>
@@ -167,37 +167,43 @@ tools.</li>
 complex drawings, and it smooths lines naturally to avoid the unsightly line
 angles often seen in simplistic drawing programs.</li>
 </ul>
-<p>Literally Canvas was created in part to replace the object drawing tool in
-<a class="reference external" href="http://playbuildy.com">Buildy</a>. We hope you&#8217;re inspired to use it to make new things of your own!</p>
 </div>
 <div class="section" id="browser-compatibility">
 <h1>Browser compatibility<a class="headerlink" href="#browser-compatibility" title="Permalink to this headline">¶</a></h1>
 <table border="1" class="docutils">
 <colgroup>
-<col width="26%" />
-<col width="74%" />
+<col width="23%" />
+<col width="6%" />
+<col width="70%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>Chrome</td>
-<td>Awesome</td>
+<td>√</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td>Safari</td>
-<td>Awesome</td>
+<td>√</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td>iOS</td>
-<td>Awesome (FastClick helps <a class="footnote-reference" href="#f1" id="id1">[1]</a>)</td>
+<td>√</td>
+<td>FastClick helps <a class="footnote-reference" href="#f1" id="id1">[1]</a></td>
 </tr>
-<tr class="row-even"><td>Firefox</td>
-<td>4+</td>
+<tr class="row-even"><td>Firefox 4+</td>
+<td>√</td>
+<td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Opera</td>
+<tr class="row-odd"><td>IE 10+</td>
+<td>√</td>
+<td>Line dashes only supported in 11+</td>
+</tr>
+<tr class="row-even"><td>Opera</td>
 <td>??</td>
+<td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>Android</td>
+<tr class="row-odd"><td>Android</td>
 <td>??</td>
-</tr>
-<tr class="row-odd"><td>IE</td>
-<td>10+ (Requires polyfill <a class="footnote-reference" href="#f2" id="id2">[2]</a>)</td>
+<td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -207,13 +213,6 @@ angles often seen in simplistic drawing programs.</li>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>iOS delays click events so that it can detect gestures. To disable
 this behavior and get those events immediately, use <a class="reference external" href="https://github.com/ftlabs/fastclick">FastClick</a>.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="f2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>IE doesn&#8217;t support the <tt class="docutils literal"><span class="pre">CustomEvent</span></tt> constructor. Use
-<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill">Mozilla&#8217;s polyfill</a> to get Literally Canvas to run in IE.</td></tr>
 </tbody>
 </table>
 </div>
@@ -234,7 +233,7 @@ Canvas works in as many environments as possible. If you care about your app&#82
 compatibility, you should check it out.</p>
 </div>
 <div class="section" id="related-projects">
-<span id="id3"></span><h1>Related projects<a class="headerlink" href="#related-projects" title="Permalink to this headline">¶</a></h1>
+<span id="id2"></span><h1>Related projects<a class="headerlink" href="#related-projects" title="Permalink to this headline">¶</a></h1>
 <p>The web has only recently arrived at the point where this sort of project is
 feasible to implement without Flash, but there are several other projects with
 similar features. If Literally Canvas isn&#8217;t quite what you&#8217;re looking for, we
@@ -276,8 +275,8 @@ Learn a bit about how to do these things yourself!</li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.2.tar.gz">
-		Download v0.4.2
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.3.tar.gz">
+		Download v0.4.3
 	</a>
 </p>
 <p>
@@ -317,7 +316,7 @@ Learn a bit about how to do these things yourself!</li>
     </ul>
   </nav>
   </div>
-  <footer id="pagefooter">&copy; 2012-2013 Literally Canvas contributors.
+  <footer id="pagefooter">&copy; 2012-2015 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
       1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
