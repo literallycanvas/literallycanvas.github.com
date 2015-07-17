@@ -27,12 +27,16 @@ Literally Canvas's major features include:
 * Background images/shapes and watermarks
 * Retina support
 * Saving and loading JSON
+* Exporting drawings to PNG and SVG
 * Events
-* Exporting drawings to PNG
 
-If you would like to support Literally Canvas's development or provide extra
-incentive to implement your favorite feature request, consider donating at
-`gittip.com/irskep <https://www.gittip.com/irskep/>`_.
+You can donate to Literally Canvas's development on `Gratipay`_ or post a
+bounty on a GitHub issue on `Bountysource`_. Spontaneous improvements are rare
+otherwise, though they do happen.
+
+.. _Gratipay: https://gratipay.com/~irskep/
+
+.. _Bountysource: https://www.bountysource.com/teams/literallycanvas/issues
 
 .. toctree::
     :maxdepth: 3
@@ -61,33 +65,23 @@ in several ways:
   complex drawings, and it smooths lines naturally to avoid the unsightly line
   angles often seen in simplistic drawing programs.
 
-Literally Canvas was created in part to replace the object drawing tool in
-`Buildy`_. We hope you're inspired to use it to make new things of your own!
-
-.. _Buildy: http://playbuildy.com
-
 Browser compatibility
 =====================
 
-=========== ==============================
-Chrome      Awesome
-Safari      Awesome
-iOS         Awesome (FastClick helps [#f1]_)
-Firefox     4+
+=========== === =================================
+Chrome      √
+Safari      √
+iOS         √   FastClick helps [#f1]_
+Firefox 4+  √
+IE 10+      √   Line dashes only supported in 11+
 Opera       ??
 Android     ??
-IE          10+ (Requires polyfill [#f2]_)
-=========== ==============================
+=========== === =================================
 
 .. rubric:: Footnotes
 
 .. [#f1] iOS delays click events so that it can detect gestures. To disable
          this behavior and get those events immediately, use `FastClick`_.
-
-.. [#f2] IE doesn't support the ``CustomEvent`` constructor. Use
-         `Mozilla's polyfill`_ to get Literally Canvas to run in IE.
-
-.. _Mozilla's Polyfill: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
 
 .. _FastClick: https://github.com/ftlabs/fastclick
 

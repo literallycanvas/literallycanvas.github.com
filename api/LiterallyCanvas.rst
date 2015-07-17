@@ -67,6 +67,19 @@ Exporting images
     will be the same size as what the user sees on their screen, due to being
     scaled back up by the web browser. Defaults to ``true``.
 
+.. js:function:: getSVGString({options})
+
+  Returns the drawing as an SVG string that can be inserted into the DOM or
+  downloaded.
+
+  .. warning:: The eraser tool does not affect SVG output.
+
+  ``rect``
+    A dict ``{x, y, width, height}`` specifying which part of the image to
+    draw, in drawing coordinates. Defaults to the bounding
+    box of all shapes. If you don't specify a ``rect`` and there are no
+    shapes in the drawing, :js:func:`getSVGString` will return ``undefined``.
+
 .. js:function:: canvasForExport()
 
   .. deprecated:: 0.4
@@ -173,6 +186,11 @@ Changing the drawing
 .. js:function:: redo()
 
   Redo the last thing to be undone.
+
+.. js:function:: setShapesInProgress(shapes)
+
+  Declare a list of shapes that are drawn to the canvas but aren't yet part of
+  the drawing. Tools should use this to show shapes in progress.
 
 Getting information
 ^^^^^^^^^^^^^^^^^^^

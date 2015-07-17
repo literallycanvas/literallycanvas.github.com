@@ -1,0 +1,16 @@
+<div class="literally export-svg"></div>
+
+<form class="controls export-svg">
+  <input type="submit" data-action="export-as-svg" value="Export as SVG">
+</form>
+
+<script>
+  $(document).ready(function() {
+    var lc = LC.init(document.getElementsByClassName('literally export-svg')[0]);
+    $('.controls.export-svg [data-action=export-as-svg]').click(function(e) {
+      e.preventDefault();
+      var svgString = lc.getSVGString();
+      window.open("data:image/svg+xml;base64," + btoa(svgString));
+    });
+  });
+</script>

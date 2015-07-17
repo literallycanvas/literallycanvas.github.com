@@ -30,3 +30,13 @@ This is probably what you want to do if your image bounds are not infinite.
 .. literalinclude:: _export_bounded.html
     :language: html
     :emphasize-lines: 9-12,15,20
+
+Exporting to SVG
+----------------
+
+.. raw:: html
+    :file: _export_svg.html
+
+.. literalinclude:: _export_svg.html
+    :language: html
+    :emphasize-lines: 12

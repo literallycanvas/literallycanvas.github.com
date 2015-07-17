@@ -609,11 +609,14 @@ module.exports = LiterallyCanvas = (function() {
       opts.rect = this.getContentBounds();
     }
     _ref1 = opts.rect, x = _ref1.x, y = _ref1.y, width = _ref1.width, height = _ref1.height;
-    return "<svg width='" + width + "' height='" + height + "' viewBox='0 0 " + width + " " + height + "'> <rect width=" + width + " height=" + height + " x=0 y=0 fill='" + this.colors.background + "' /> <g transform='translate(" + (-x) + ", " + (-y) + ")'> " + (this.backgroundShapes.map(function(s) {
+    if (!(opts.rect.width && opts.rect.height)) {
+      return;
+    }
+    return ("<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "' viewBox='0 0 " + width + " " + height + "'> <rect width='" + width + "' height='" + height + "' x='0' y='0' fill='" + this.colors.background + "' /> <g transform='translate(" + (-x) + ", " + (-y) + ")'> " + (this.backgroundShapes.map(function(s) {
       return s.toSVG();
     }).join('')) + " " + (this.shapes.map(function(s) {
       return s.toSVG();
-    }).join('')) + " </g> </svg>";
+    }).join('')) + " </g> </svg>").replace(/(\r\n|\n|\r)/gm, "");
   };
 
   LiterallyCanvas.prototype.loadSnapshot = function(snapshot) {
@@ -1569,7 +1572,7 @@ defineShape('Image', {
     });
   },
   toSVG: function() {
-    return "<image x=" + this.x + " y=" + this.y + " width=" + this.image.naturalWidth + " height=" + this.image.naturalHeight + " xlink:href=" + this.image.src + " />";
+    return "<image x='" + this.x + "' y='" + this.y + "' width='" + this.image.naturalWidth + "' height='" + this.image.naturalHeight + "' xlink:href=" + this.image.src + " />";
   }
 });
 
@@ -1616,7 +1619,7 @@ defineShape('Rectangle', {
     return createShape('Rectangle', data);
   },
   toSVG: function() {
-    return "<rect x=" + this.x + " y=" + this.y + " width=" + this.width + " height=" + this.height + " stroke='" + this.strokeColor + "' fill='" + this.fillColor + "' stroke-width=" + this.strokeWidth + " />";
+    return "<rect x='" + this.x + "' y='" + this.y + "' width='" + this.width + "' height='" + this.height + "' stroke='" + this.strokeColor + "' fill='" + this.fillColor + "' stroke-width='" + this.strokeWidth + "' />";
   }
 });
 
@@ -1680,7 +1683,7 @@ defineShape('Ellipse', {
     halfHeight = Math.floor(this.height / 2);
     centerX = this.x + halfWidth;
     centerY = this.y + halfHeight;
-    return "<ellipse cx=" + centerX + " cy=" + centerY + " rx=" + halfWidth + " ry=" + halfHeight + " stroke='" + this.strokeColor + "' fill='" + this.fillColor + "' stroke-width=" + this.strokeWidth + " />";
+    return "<ellipse cx='" + centerX + "' cy='" + centerY + "' rx='" + halfWidth + "' ry='" + halfHeight + "' stroke='" + this.strokeColor + "' fill='" + this.fillColor + "' stroke-width='" + this.strokeWidth + "' />";
   }
 });
 
@@ -1758,7 +1761,7 @@ defineShape('Line', {
     if (this.endCapShapes[1]) {
       capString += lineEndCapShapes[this.endCapShapes[1]].svg(this.x2, this.y2, Math.atan2(this.y2 - this.y1, this.x2 - this.x1), arrowWidth, this.color);
     }
-    return "<g> <line x1=" + this.x1 + " y1=" + this.y1 + " x2=" + this.x2 + " y2=" + this.y2 + " " + dashString + " stroke-linecap='" + this.capStyle + "' stroke='" + this.color + "'stroke-width=" + this.strokeWidth + " /> " + capString + " <g>";
+    return "<g> <line x1='" + this.x1 + "' y1='" + this.y1 + "' x2='" + this.x2 + "' y2='" + this.y2 + "' " + dashString + " stroke-linecap='" + this.capStyle + "' stroke='" + this.color + "'stroke-width='" + this.strokeWidth + "' /> " + capString + " <g>";
   }
 });
 
@@ -1901,7 +1904,7 @@ linePathFuncs = {
   toSVG: function() {
     return "<polyline fill='none' points='" + (this.smoothedPoints.map(function(p) {
       return "" + p.x + "," + p.y;
-    }).join(' ')) + "' stroke='" + this.points[0].color + "' stroke-width=" + this.points[0].size + " />";
+    }).join(' ')) + "' stroke='" + this.points[0].color + "' stroke-width='" + this.points[0].size + "' />";
   },
   draw: function(ctx) {
     return this.drawPoints(ctx, this.smoothedPoints);
