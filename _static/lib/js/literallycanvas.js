@@ -2870,7 +2870,7 @@ ColorWell = React.createClass({
     var div, label, _ref;
     _ref = React.DOM, div = _ref.div, label = _ref.label;
     return div({
-      className: 'toolbar-button color-well-label',
+      className: 'toolbar-button color-well-label fat-button',
       onMouseLeave: this.closePicker,
       onClick: this.togglePicker
     }, label({
@@ -3210,7 +3210,7 @@ createUndoRedoButtonComponent = function(undoOrRedo) {
     },
     mixins: [createSetStateOnEventMixin('drawingChange')],
     render: function() {
-      var className, div, imageURLPrefix, img, lc, onClick, title, _ref, _ref1;
+      var className, div, imageURLPrefix, img, lc, onClick, src, style, title, _ref, _ref1;
       _ref = React.DOM, div = _ref.div, img = _ref.img;
       _ref1 = this.props, lc = _ref1.lc, imageURLPrefix = _ref1.imageURLPrefix;
       title = undoOrRedo === 'undo' ? 'Undo' : 'Redo';
@@ -3233,13 +3233,16 @@ createUndoRedoButtonComponent = function(undoOrRedo) {
             };
         }
       }).call(this);
+      src = "" + imageURLPrefix + "/" + undoOrRedo + ".png";
+      style = {
+        backgroundImage: "url(" + src + ")"
+      };
       return div({
         className: className,
         onClick: onClick,
-        title: title
-      }, img({
-        src: "" + imageURLPrefix + "/" + undoOrRedo + ".png"
-      }));
+        title: title,
+        style: style
+      });
     }
   });
 };
@@ -3289,7 +3292,7 @@ createZoomButtonComponent = function(inOrOut) {
     },
     mixins: [createSetStateOnEventMixin('zoom')],
     render: function() {
-      var className, div, imageURLPrefix, img, lc, onClick, title, _ref, _ref1;
+      var className, div, imageURLPrefix, img, lc, onClick, src, style, title, _ref, _ref1;
       _ref = React.DOM, div = _ref.div, img = _ref.img;
       _ref1 = this.props, lc = _ref1.lc, imageURLPrefix = _ref1.imageURLPrefix;
       title = inOrOut === 'in' ? 'Zoom in' : 'Zoom out';
@@ -3312,13 +3315,16 @@ createZoomButtonComponent = function(inOrOut) {
             };
         }
       }).call(this);
+      src = "" + imageURLPrefix + "/zoom-" + inOrOut + ".png";
+      style = {
+        backgroundImage: "url(" + src + ")"
+      };
       return div({
         className: className,
         onClick: onClick,
-        title: title
-      }, img({
-        src: "" + imageURLPrefix + "/zoom-" + inOrOut + ".png"
-      }));
+        title: title,
+        style: style
+      });
     }
   });
 };
@@ -3385,7 +3391,7 @@ createToolButton = function(_arg) {
       }
     },
     render: function() {
-      var className, div, imageURLPrefix, img, isSelected, onSelect, _ref, _ref1;
+      var className, div, imageURLPrefix, img, isSelected, onSelect, src, _ref, _ref1;
       _ref = React.DOM, div = _ref.div, img = _ref.img;
       _ref1 = this.props, imageURLPrefix = _ref1.imageURLPrefix, isSelected = _ref1.isSelected, onSelect = _ref1.onSelect;
       className = React.addons.classSet({
@@ -3394,16 +3400,17 @@ createToolButton = function(_arg) {
         'thin-button': true,
         'selected': isSelected
       });
+      src = "" + imageURLPrefix + "/" + imageName + ".png";
       return div({
         className: className,
+        style: {
+          'backgroundImage': "url(" + src + ")"
+        },
         onClick: (function() {
           return onSelect(tool);
         }),
         title: displayName
-      }, img({
-        className: 'lc-tool-icon',
-        src: "" + imageURLPrefix + "/" + imageName + ".png"
-      }));
+      });
     }
   });
 };
