@@ -529,7 +529,7 @@ module.exports = LiterallyCanvas = (function() {
   };
 
   LiterallyCanvas.prototype.getContentBounds = function() {
-    return util.getBoundingRect(this.shapes.map(function(s) {
+    return util.getBoundingRect((this.shapes.concat(this.backgroundShapes)).map(function(s) {
       return s.getBoundingRect();
     }), this.width === INFINITE ? 0 : this.width, this.height === INFINITE ? 0 : this.height);
   };
@@ -1542,7 +1542,7 @@ defineShape('Image', {
   draw: function(ctx, retryCallback) {
     if (this.image.width) {
       return ctx.drawImage(this.image, this.x, this.y);
-    } else {
+    } else if (retryCallback) {
       return this.image.onload = retryCallback;
     }
   },
@@ -1572,7 +1572,7 @@ defineShape('Image', {
     });
   },
   toSVG: function() {
-    return "<image x='" + this.x + "' y='" + this.y + "' width='" + this.image.naturalWidth + "' height='" + this.image.naturalHeight + "' xlink:href=" + this.image.src + " />";
+    return "<image x='" + this.x + "' y='" + this.y + "' width='" + this.image.naturalWidth + "' height='" + this.image.naturalHeight + "' xlink:href='" + this.image.src + "' />";
   }
 });
 
@@ -1785,7 +1785,7 @@ _doAllPointsShareStyle = function(points) {
 };
 
 _createLinePathFromData = function(shapeName, data) {
-  var pointData, points, x, y;
+  var pointData, points, smoothedPoints, x, y;
   points = null;
   if (data.points) {
     points = (function() {
@@ -1819,11 +1819,34 @@ _createLinePathFromData = function(shapeName, data) {
       return _results;
     })();
   }
+  smoothedPoints = null;
+  if (data.smoothedPointCoordinatePairs) {
+    smoothedPoints = (function() {
+      var _i, _len, _ref, _ref1, _results;
+      _ref = data.smoothedPointCoordinatePairs;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        _ref1 = _ref[_i], x = _ref1[0], y = _ref1[1];
+        _results.push(JSONToShape({
+          className: 'Point',
+          data: {
+            x: x,
+            y: y,
+            size: data.pointSize,
+            color: data.pointColor,
+            smooth: data.smooth
+          }
+        }));
+      }
+      return _results;
+    })();
+  }
   if (!points[0]) {
     return null;
   }
   return createShape(shapeName, {
     points: points,
+    smoothedPoints: smoothedPoints,
     order: data.order,
     tailSize: data.tailSize,
     smooth: data.smooth
@@ -1842,13 +1865,18 @@ linePathFuncs = {
     this.smooth = 'smooth' in args ? args.smooth : true;
     this.segmentSize = Math.pow(2, this.order);
     this.sampleSize = this.tailSize + 1;
-    this.points = [];
-    _results = [];
-    for (_i = 0, _len = points.length; _i < _len; _i++) {
-      point = points[_i];
-      _results.push(this.addPoint(point));
+    if (args.smoothedPoints) {
+      this.points = args.points;
+      return this.smoothedPoints = args.smoothedPoints;
+    } else {
+      this.points = [];
+      _results = [];
+      for (_i = 0, _len = points.length; _i < _len; _i++) {
+        point = points[_i];
+        _results.push(this.addPoint(point));
+      }
+      return _results;
     }
-    return _results;
   },
   getBoundingRect: function() {
     return util.getBoundingRect(this.points.map(function(p) {
@@ -1870,6 +1898,16 @@ linePathFuncs = {
         pointCoordinatePairs: (function() {
           var _i, _len, _ref, _results;
           _ref = this.points;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            point = _ref[_i];
+            _results.push([point.x, point.y]);
+          }
+          return _results;
+        }).call(this),
+        smoothedPointCoordinatePairs: (function() {
+          var _i, _len, _ref, _results;
+          _ref = this.smoothedPoints;
           _results = [];
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             point = _ref[_i];
@@ -1922,7 +1960,8 @@ linePathFuncs = {
   addPoint: function(point) {
     this.points.push(point);
     if (!this.smooth) {
-      return this.smoothedPoints = this.points;
+      this.smoothedPoints = this.points;
+      return;
     }
     if (!this.smoothedPoints || this.points.length < this.sampleSize) {
       return this.smoothedPoints = bspline(this.points, this.order);
