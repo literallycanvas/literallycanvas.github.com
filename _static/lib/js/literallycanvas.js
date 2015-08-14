@@ -2768,7 +2768,7 @@ if (!CanvasRenderingContext2D.prototype.setLineDash) {
 }
 module.exports = null;
 },{}],16:[function(_dereq_,module,exports){
-var LiterallyCanvas, baseTools, canvasRenderer, defaultImageURLPrefix, defineOptionsStyle, init, initReact, localize, registerJQueryPlugin, setDefaultImageURLPrefix, shapes, svgRenderer, tools, util;
+var LiterallyCanvas, baseTools, canvasRenderer, conversion, defaultImageURLPrefix, defaultTools, defineOptionsStyle, init, initReact, localize, registerJQueryPlugin, setDefaultImageURLPrefix, shapes, svgRenderer, tools, util;
 
 _dereq_('./ie_customevent');
 
@@ -2798,6 +2798,22 @@ _dereq_('./optionsStyles/null');
 
 defineOptionsStyle = _dereq_('./optionsStyles/optionsStyles').defineOptionsStyle;
 
+conversion = {
+  snapshotToShapes: function(snapshot) {
+    var shape, _i, _len, _ref, _results;
+    _ref = snapshot.shapes;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      shape = _ref[_i];
+      _results.push(shapes.JSONToShape(shape));
+    }
+    return _results;
+  },
+  snapshotJSONToShapes: function(json) {
+    return conversion.snapshotToShapes(JSON.parse(json));
+  }
+};
+
 baseTools = _dereq_('./tools/base');
 
 tools = {
@@ -2813,6 +2829,8 @@ tools = {
   Tool: baseTools.Tool,
   ToolWithStroke: baseTools.ToolWithStroke
 };
+
+defaultTools = [tools.Pencil, tools.Eraser, tools.Line, tools.Rectangle, tools.Ellipse, tools.Text, tools.Polygon, tools.Pan, tools.Eyedropper];
 
 defaultImageURLPrefix = 'lib/img';
 
@@ -2868,7 +2886,7 @@ init = function(el, opts) {
     opts.zoomStep = 0.2;
   }
   if (!('tools' in opts)) {
-    opts.tools = [tools.Pencil, tools.Eraser, tools.Line, tools.Rectangle, tools.Ellipse, tools.Text, tools.Polygon, tools.Pan, tools.Eyedropper];
+    opts.tools = defaultTools;
   }
 
   /* henceforth, all pre-existing DOM children shall be destroyed */
@@ -2932,6 +2950,7 @@ module.exports = {
   tools: tools,
   defineOptionsStyle: defineOptionsStyle,
   setDefaultImageURLPrefix: setDefaultImageURLPrefix,
+  defaultTools: defaultTools,
   defineShape: shapes.defineShape,
   createShape: shapes.createShape,
   JSONToShape: shapes.JSONToShape,
@@ -2943,6 +2962,8 @@ module.exports = {
   defineSVGRenderer: svgRenderer.defineSVGRenderer,
   renderShapeToSVG: svgRenderer.renderShapeToSVG,
   renderShapesToSVG: util.renderShapesToSVG,
+  snapshotToShapes: conversion.snapshotToShapes,
+  snapshotJSONToShapes: conversion.snapshotJSONToShapes,
   localize: localize
 };
 
@@ -3308,9 +3329,9 @@ ColorWell = React.createClass({
         margin: 1
       }
     }, div({
-      className: 'color-well-checker'
+      className: 'color-well-checker color-well-checker-top-left'
     }), div({
-      className: 'color-well-checker',
+      className: 'color-well-checker color-well-checker-bottom-right',
       style: {
         left: '50%',
         top: '50%'
