@@ -10,7 +10,7 @@ Installing
 Get the assets
 --------------
 
-You can just `download the tarball`_. Or use Bower:
+You can just |link-pre|\ |version|\ |link-post|. Or use Bower:
 
 .. code-block:: sh
 
@@ -20,7 +20,13 @@ You can just `download the tarball`_. Or use Bower:
     Don't try to use ``bower`` with the ``literallycanvas/master`` branch. It
     won't work. The repo used by the registry is up to date.
 
-.. _download the tarball: https://github.com/literallycanvas/literallycanvas/archive/master.tar.gz
+.. |link-pre| raw:: html
+
+    <a href="https://github.com/literallycanvas/literallycanvas/archive/v
+
+.. |link-post| raw:: html
+
+    .tar.gz">download the tarball</a>
 
 Include the assets and write the code
 -------------------------------------
