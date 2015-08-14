@@ -104,6 +104,16 @@ Initializing normally
         watermark image and set *watermarkScale* to
         ``1/window.devicePixelRatio``.
 
+    ``zoomMax``
+        Maximum zoom value. Defaults to 4.0.
+
+    ``zoomMin``
+        Minimum zoom value. Defaults to 0.2.
+
+    ``zoomStep``
+        Amount by which the zoom in/out buttons change the zoom level. Defaults
+        to 0.2.
+
 
 Initializing with jQuery
 ------------------------
