@@ -38,7 +38,7 @@ html_theme_options = {
         '_static/lib/css/literallycanvas.css',
     ],
     'scriptfiles': [
-        "//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js",
+        "//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js",
         "_static/lib/js/fastclick.js",
         "_static/lib/js/literallycanvas.js",
         '_static/docs.js',

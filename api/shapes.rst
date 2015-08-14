@@ -76,12 +76,112 @@ Creating shapes
   :ref:`ErasedLinePath <shape-ErasedLinePath>`. It can't currently be
   drawn.
 
+Shapes and JSON
+---------------
+
+Each shape has a JSON representation so that you can save and load drawings.
+But just calling :js:func:`shape.toJSON` won't give you a value that you can
+decode later; Literally Canvas wraps these values in containers with additional
+information. Instead, you can use these functions to save and load shapes:
+
+.. js:function:: LC.shapeToJSON(shape)
+
+  :returns: JSON-encoded string representing *shape*
+
+.. js:function:: LC.JSONToShape(jsonEncodedString)
+
+  :returns: Shape instance constructed from *jsonEncodedString*
+
+If you've saved a snapshot with :js:func:`LC.getSnapshot()` or
+:js:func:`LC.getSnapshotJSON()`, you can convert that to a list of deserialized
+shape objects with these functions:
+
+.. js:function:: LC.snapshotToShapes(snapshot)
+.. js:function:: LC.snapshotJSONToShapes(snapshotJSON)
+
+Rendering shapes outside of an interactive session
+--------------------------------------------------
+
+.. js:function:: LC.renderShapesToCanvas(shapes, bounds, scale=1, canvas=null)
+
+  Draws the given shapes to the given canvas. Creates a new canvas if none is
+  provided. Returns the canvas containing the rendered shapes.
+
+  :param shapes: List of shapes
+
+  :param bounds:
+      A dict ``{x, y, width, height}`` specifying which part of the image to
+      draw, in drawing coordinates (before scaling).
+
+  :param scale:
+      Amount by which to scale the image output. Shapes will be rendered at
+      full resolution. Defaults to ``1``.
+
+  :param canvas:
+      Canvas object on which to render the shapes. If ``null``, a new canvas
+      will be created with the size specified by *bounds*.
+
+  This function can be used to render a snapshot to an image without
+  instantiating a :js:class:`LiterallyCanvas` object like this:
+
+  .. code-block:: javascript
+
+    var snapshotJSON = localStorage['saved-snapshot'];
+    var canvas = LC.renderShapesToCanvas(
+      LC.snapshotJSONToShapes(snapshotJSON),
+      {x: 0, y: 0, width: 100, height: 100});
+    // Now you can pull out the image using a data URL:
+    var dataURL = canvas.toDataURL();
+    // Or pull out the bytes using the canvas API.
+
+.. js:function:: LC.renderShapesToSVG(shapes, bounds, backgroundColor)
+
+  Converts the list of shapes to an SVG string.
+
+  :param shapes: List of shapes
+
+  :param bounds:
+      A dict ``{x, y, width, height}`` specifying which part of the image to
+      draw, in drawing coordinates.
+
+  :param backgroundColor:
+      SVG color to draw behind the shapes.
+
+  This function can be used to render a snapshot to SVG without
+  instantiating a :js:class:`LiterallyCanvas` object like this:
+
+  .. code-block:: javascript
+
+    var snapshotJSON = localStorage['saved-snapshot'];
+    var svgString = LC.renderShapesToSVG(
+      LC.snapshotJSONToShapes(snapshotJSON),
+      {x: 0, y: 0, width: 100, height: 100},
+      'transparent');
+
+
 Defining shapes
 ---------------
 
 If you want to make your own tool, or do some custom canvas rendering as the
 background of your drawing, you'll need to define a shape. Then you can create
 it using the :js:func:`LC.createShape` function.
+
+.. js:function:: LC.defineShape(name, methods)
+
+.. js:function:: LC.defineCanvasRenderer(name, drawShape)
+
+  :param name: Name of the shape
+
+  :param drawShape:
+      A function that takes ``(canvasContext, shape)`` and
+      renders the shape to the context.
+
+.. js:function:: LC.defineSVGRenderer(name, shapeToSVGString)
+
+  :param name: Name of the shape
+
+  :param shapeToSVGString:
+      A function that returns an SVG string representing the given shape.
 
 .. code-block:: javascript
 
@@ -95,10 +195,6 @@ it using the :js:func:`LC.createShape` function.
 
     /* you can add arbitrary methods */
     doStuff: function() {},
-
-    /* use ctx to draw stuff */
-    draw: function(ctx) {
-    },
 
     /* provide a bounding rectangle so getImage() can figure out the image
        bounds (semi-optional) */
@@ -119,29 +215,24 @@ it using the :js:func:`LC.createShape` function.
     }
   });
 
-  /* use it as a background */
+  /* Define canvas and SVG renderers */
+
+  LC.defineCanvasRenderer('MyAwesomeShape', function(ctx, shape) {
+    ctx.renderStuff();
+  })
+
+  // You can skip this step if you never export to SVG
+  LC.defineSVGRenderer('MyAwesomeShape', function(shape) {
+    return "<BestShapeEver />";
+  })
+
+  /* you can use it as a background */
   var lc = LC.init(element, {
     backgroundShapes: [LC.createShape('MyAwesomeShape', {x: 0, y: 0})]
   });
 
-  /* add it as part of the drawing */
+  /* you can add it as part of the drawing */
   lc.saveShape(LC.createShape('MyAwesomeShape', {x: 100, y: 100}))
-
-Shapes and JSON
----------------
-
-Each shape has a JSON representation so that you can save and load drawings.
-But just calling :js:func:`shape.toJSON` won't give you a value that you can
-decode later; Literally Canvas wraps these values in containers with additional
-information. Instead, you can use these functions to save and load shapes:
-
-.. js:function:: LC.shapeToJSON(shape)
-
-  :returns: JSON-encoded string representing *shape*
-
-.. js:function:: LC.JSONToShape(jsonEncodedString)
-
-  :returns: Shape instance constructed from *jsonEncodedString*
 
 Adding shapes to drawings programmatically
 ------------------------------------------

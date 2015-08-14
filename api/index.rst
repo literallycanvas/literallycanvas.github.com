@@ -39,8 +39,11 @@ Summary
 * :js:class:`LiterallyCanvas`
 * :js:func:`LC.createShape`
 * :js:func:`LC.defineShape`
-* :js:func:`LC.shapeToJSON`
 * :js:func:`LC.JSONToShape`
+* :js:func:`LC.renderShapesToCanvas`
+* :js:func:`LC.renderShapesToSVG`
+* :js:func:`LC.snapshotJSONToShapes`
+* :js:func:`LC.snapshotToShapes`
 * :js:func:`LC.defineOptionsStyle`
 * :js:func:`LC.registerJQueryPlugin`
 * :js:func:`LC.setDefaultImageURLPrefix`

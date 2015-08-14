@@ -48,7 +48,7 @@ Here's a basic working setup. Each part is required.
         <link href="/static/css/literallycanvas.css" rel="stylesheet">
 
         <!-- dependency: React.js -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
 
         <!-- Literally Canvas -->
         <script src="/static/js/literallycanvas.js"></script>

@@ -387,7 +387,8 @@ module.exports = LiterallyCanvas = (function() {
                 _results = [];
                 for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
                   shape = _ref1[_i];
-                  _results.push(renderShapeToContext(_this.ctx, shape, _this.bufferCtx, {
+                  _results.push(renderShapeToContext(_this.ctx, shape, {
+                    bufferCtx: _this.bufferCtx,
                     shouldOnlyDrawLatest: true
                   }));
                 }
@@ -425,7 +426,8 @@ module.exports = LiterallyCanvas = (function() {
     return this.clipped(((function(_this) {
       return function() {
         return _this.transformed((function() {
-          return renderShapeToContext(_this.ctx, shape, _this.bufferCtx, {
+          return renderShapeToContext(_this.ctx, shape, {
+            bufferCtx: _this.bufferCtx,
             shouldOnlyDrawLatest: true
           });
         }), _this.ctx, _this.bufferCtx);
@@ -1115,6 +1117,7 @@ defineCanvasRenderer = function(shapeName, drawFunc, drawLatestFunc) {
 noop = function() {};
 
 renderShapeToContext = function(ctx, shape, opts) {
+  var bufferCtx;
   if (opts == null) {
     opts = {};
   }
@@ -1124,12 +1127,15 @@ renderShapeToContext = function(ctx, shape, opts) {
   if (opts.retryCallback == null) {
     opts.retryCallback = noop;
   }
-  opts.shouldOnlyDrawLatest = false;
+  if (opts.shouldOnlyDrawLatest == null) {
+    opts.shouldOnlyDrawLatest = false;
+  }
   if (opts.bufferCtx == null) {
     opts.bufferCtx = null;
   }
+  bufferCtx = opts.bufferCtx;
   if (renderers[shape.className]) {
-    if (opts.shouldOnlyDrawLatest && renderers[shape.className].drawLatest) {
+    if (opts.shouldOnlyDrawLatest && renderers[shape.className].drawLatestFunc) {
       return renderers[shape.className].drawLatestFunc(ctx, bufferCtx, shape, opts.retryCallback);
     } else {
       return renderers[shape.className].drawFunc(ctx, shape, opts.retryCallback);
@@ -1293,13 +1299,15 @@ drawLinePath = function(ctx, shape) {
 
 drawLinePathLatest = function(ctx, bufferCtx, shape) {
   var drawEnd, drawStart, segmentStart;
-  _drawRawLinePath(ctx, shape.tail ? shape.tail : shape.smoothedPoints);
   if (shape.tail) {
     segmentStart = shape.smoothedPoints.length - shape.segmentSize * shape.tailSize;
     drawStart = segmentStart < shape.segmentSize * 2 ? 0 : segmentStart;
     drawEnd = segmentStart + shape.segmentSize + 1;
     _drawRawLinePath(bufferCtx, shape.smoothedPoints.slice(drawStart, drawEnd));
-    return ctx.stroke();
+    return bufferCtx.stroke();
+  } else {
+    _drawRawLinePath(bufferCtx, shape.smoothedPoints);
+    return bufferCtx.stroke();
   }
 };
 
@@ -2931,6 +2939,7 @@ module.exports = {
   defineCanvasRenderer: canvasRenderer.defineCanvasRenderer,
   renderShapeToContext: canvasRenderer.renderShapeToContext,
   renderShapeToCanvas: canvasRenderer.renderShapeToCanvas,
+  renderShapesToCanvas: util.renderShapesToCanvas,
   defineSVGRenderer: svgRenderer.defineSVGRenderer,
   renderShapeToSVG: svgRenderer.renderShapeToSVG,
   renderShapesToSVG: util.renderShapesToSVG,

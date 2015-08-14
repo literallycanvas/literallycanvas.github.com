@@ -1,24 +1,6 @@
 Initializing & Options
 ======================
 
-Changes since v0.3
-------------------
-
-* *backgroundShapes* and *watermarkImage* are no longer affected by the eraser.
-* The *preserveCanvasContents* option is gone. If you want to use the contents
-  of an existing canvas element as the background of a drawing, do this:
-
-    .. code-block:: javascript
-
-        backgroundImage = new Image();
-        backgroundImage.src = $('canvas.my-canvas').get(0).toDataURL();
-        backgroundShape = LC.createShape(
-          'Image', {x: 0, y: 0, image: backgroundImage}));
-        $('.literally').literallycanvas({backgroundShapes: [backgroundShape]});
-
-* Tools are defined by the new *tools* option, which replaces the old
-  *toolClasses* and takes a different list of arguments.
-
 Initializing normally
 ---------------------
 
@@ -69,6 +51,10 @@ Initializing normally
     ``keyboardShortcuts``
         Enable panning with the arrow keys. Defaults to ``true``.
 
+    ``toolbarPosition``
+        If ``'top'``, the toolbar will be at the top. Otherwise, it will be
+        at the bottom.
+
     ``tools``
         A list of tools to enable. The default value is:
 
@@ -80,6 +66,7 @@ Initializing normally
               LC.tools.Line,
               LC.tools.Rectangle,
               LC.tools.Text,
+              LC.tools.Polygon,
               LC.tools.Pan,
               LC.tools.Eyedropper
             ]
@@ -189,3 +176,21 @@ Alternatively, you can just use jQuery to get the first argument to
   lc.on('drawingChange', function() {
     console.log("The drawing was changed.");
   });
+
+Breaking changes since v0.3
+---------------------------
+
+* *backgroundShapes* and *watermarkImage* are no longer affected by the eraser.
+* The *preserveCanvasContents* option is gone. If you want to use the contents
+  of an existing canvas element as the background of a drawing, do this:
+
+    .. code-block:: javascript
+
+        backgroundImage = new Image();
+        backgroundImage.src = $('canvas.my-canvas').get(0).toDataURL();
+        backgroundShape = LC.createShape(
+          'Image', {x: 0, y: 0, image: backgroundImage}));
+        $('.literally').literallycanvas({backgroundShapes: [backgroundShape]});
+
+* Tools are defined by the new *tools* option, which replaces the old
+  *toolClasses* and takes a different list of arguments.

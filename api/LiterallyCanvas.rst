@@ -167,14 +167,6 @@ Changing the drawing
   :param colorName: ``'background'``, ``'primary'``, or ``'secondary'``
   :param colorValue: Any CSS color
 
-.. js:function:: update(shape)
-
-  .. warning:: This function has a bad name. Fix it.
-
-  Render *shape* on top of the current drawing without permanently adding it
-  to the drawing. This method is used by tools to show a shape while the user
-  is still creating it.
-
 .. js:function:: clear()
 
   Remove all shapes from the drawing.
@@ -191,6 +183,15 @@ Changing the drawing
 
   Declare a list of shapes that are drawn to the canvas but aren't yet part of
   the drawing. Tools should use this to show shapes in progress.
+
+.. js:function:: drawShapeInProgress(shape)
+
+  Draws the given shape to a buffer without clearing or redrawing anything
+  beneath it. If the shape's renderer supports it, only render the most
+  recently changed part of the shape.
+
+  This is most useful as an efficient way to draw line paths that the user is
+  currently drawing.
 
 Getting information
 ^^^^^^^^^^^^^^^^^^^
