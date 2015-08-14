@@ -44,6 +44,7 @@ Summary
 * :js:func:`LC.renderShapesToSVG`
 * :js:func:`LC.snapshotJSONToShapes`
 * :js:func:`LC.snapshotToShapes`
+* :js:func:`LC.defaultTools`
 * :js:func:`LC.defineOptionsStyle`
 * :js:func:`LC.registerJQueryPlugin`
 * :js:func:`LC.setDefaultImageURLPrefix`

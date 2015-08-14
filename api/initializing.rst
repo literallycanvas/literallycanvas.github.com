@@ -56,7 +56,8 @@ Initializing normally
         at the bottom.
 
     ``tools``
-        A list of tools to enable. The default value is:
+        A list of tools to enable. The default value, accessible at
+        ``LC.defaultTools``, is:
 
         .. code-block:: javascript
 
