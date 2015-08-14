@@ -126,6 +126,7 @@ Here's the same tool implemented using the normal API.
     var self = this;
 
     return {
+      usesSimpleAPI: false,  // DO NOT FORGET THIS!!!
       name: 'MyTool',
       iconName: 'line',
       strokeWidth: 2,
