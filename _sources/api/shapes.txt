@@ -12,11 +12,10 @@ Creating shapes
 
 .. _shape-Image:
 
-.. js:function:: LC.createShape('Image', {x, y, image, scale})
+.. js:function:: LC.createShape('Image', {x, y, image})
 
   :param x/y: Upper left corner position
   :param image: A DOM `Image` object
-  :param scale: Scale at which to render the image
 
 .. _shape-Rectangle:
 
