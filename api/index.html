@@ -30,7 +30,7 @@
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
       <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js" type="text/javascript"></script>
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
@@ -70,9 +70,9 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="initializing.html">Initializing &amp; Options</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="initializing.html#changes-since-v0-3">Changes since v0.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="initializing.html#initializing-normally">Initializing normally</a></li>
 <li class="toctree-l2"><a class="reference internal" href="initializing.html#initializing-with-jquery">Initializing with jQuery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initializing.html#breaking-changes-since-v0-3">Breaking changes since v0.3</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="LiterallyCanvas.html">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a><ul>
@@ -85,17 +85,20 @@
 <li class="toctree-l2"><a class="reference internal" href="events.html#drawing-changes">Drawing changes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events.html#tool-state">Tool state</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events.html#view-changes">View changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html#pointer">Pointer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="shapes.html">Shapes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="shapes.html#creating-shapes">Creating shapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shapes.html#defining-shapes">Defining shapes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shapes.html#shapes-and-json">Shapes and JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapes.html#rendering-shapes-outside-of-an-interactive-session">Rendering shapes outside of an interactive session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapes.html#defining-shapes">Defining shapes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shapes.html#adding-shapes-to-drawings-programmatically">Adding shapes to drawings programmatically</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Creating Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#defining-a-tool">Defining a tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#simple-api">Simple API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#normal-api">Normal API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tools.html#options-styles">Options styles</a></li>
 </ul>
 </li>
@@ -140,9 +143,13 @@ Literally Canvas (like, for example, this documentation).</p>
 <li><a class="reference internal" href="initializing.html#_S_.literallycanvas" title="$.literallycanvas"><tt class="xref js js-func docutils literal"><span class="pre">$.literallycanvas()</span></tt></a></li>
 <li><a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a></li>
 <li><a class="reference internal" href="shapes.html#LC.createShape" title="LC.createShape"><tt class="xref js js-func docutils literal"><span class="pre">LC.createShape()</span></tt></a></li>
-<li><tt class="xref js js-func docutils literal"><span class="pre">LC.defineShape()</span></tt></li>
-<li><a class="reference internal" href="shapes.html#LC.shapeToJSON" title="LC.shapeToJSON"><tt class="xref js js-func docutils literal"><span class="pre">LC.shapeToJSON()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.defineShape" title="LC.defineShape"><tt class="xref js js-func docutils literal"><span class="pre">LC.defineShape()</span></tt></a></li>
 <li><a class="reference internal" href="shapes.html#LC.JSONToShape" title="LC.JSONToShape"><tt class="xref js js-func docutils literal"><span class="pre">LC.JSONToShape()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.renderShapesToCanvas" title="LC.renderShapesToCanvas"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderShapesToCanvas()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.renderShapesToSVG" title="LC.renderShapesToSVG"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderShapesToSVG()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.snapshotJSONToShapes" title="LC.snapshotJSONToShapes"><tt class="xref js js-func docutils literal"><span class="pre">LC.snapshotJSONToShapes()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.snapshotToShapes" title="LC.snapshotToShapes"><tt class="xref js js-func docutils literal"><span class="pre">LC.snapshotToShapes()</span></tt></a></li>
+<li><tt class="xref js js-func docutils literal"><span class="pre">LC.defaultTools()</span></tt></li>
 <li><a class="reference internal" href="tools.html#LC.defineOptionsStyle" title="LC.defineOptionsStyle"><tt class="xref js js-func docutils literal"><span class="pre">LC.defineOptionsStyle()</span></tt></a></li>
 <li><a class="reference internal" href="#LC.registerJQueryPlugin" title="LC.registerJQueryPlugin"><tt class="xref js js-func docutils literal"><span class="pre">LC.registerJQueryPlugin()</span></tt></a></li>
 <li><a class="reference internal" href="#LC.setDefaultImageURLPrefix" title="LC.setDefaultImageURLPrefix"><tt class="xref js js-func docutils literal"><span class="pre">LC.setDefaultImageURLPrefix()</span></tt></a></li>

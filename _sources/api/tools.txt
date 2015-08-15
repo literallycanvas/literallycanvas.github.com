@@ -1,93 +1,184 @@
 Creating Tools
 ==============
 
-Literally Canvas tools are defined using an oversimplified api [#f1]_. Each
-tool defines an icon, an "options style," and three *lifecycle methods* to
-start, continue, and end an operation.
-
-If this section is not clear enough, please file and issue on GitHub and we
-will try to improve it.
-
 .. note::
 
-  If your method of adding tools is to fork the project, **please don't**.
-  If you need custom tools for your particular application, you can do that
-  without changing Literally Canvas's source code. That is the entire purpose
-  of this API.
+  If your method of adding tools is to fork the project or edit the generated
+  JS, **please don't**. If you need custom tools for your particular
+  application, you can do that without changing Literally Canvas's source code.
+  That is the entire purpose of this API.
 
   If you want to *contribute* a tool to the project, then by all means, clone
   the repository and send us a pull request.
 
-.. rubric:: Footnotes
+Literally Canvas has two APIs for creating tools: a *simple* API (old style)
+and a *normal* API (new style).
 
-.. [#f1] A more powerful tool API is a high-priority goal for the next major
-         release.
+For both APIs, a tool is an object with a specific set of keys.
 
-Defining a tool
----------------
+``name``
+    Unique identifier for the tool.
 
-Literally Canvas is developed in CoffeeScript, and all of our internal examples
-use CoffeeScript, so this example will be in CoffeeScript. We will add
-documentation in JavaScript if there is sufficient demand. (As usual, please
-express demand via GitHub issues.)
+``iconName``
+    Name of the image to be used in the toolbar for this tool, not including
+    the extension. The full URL of the image will be
+    ``{imageURLPrefix}/{iconName}.png``.
 
-Plain JavaScript should work just fine as long as we can call ``new Tool()``
-and get back something that works.
+``optionsStyle``
+    Which toolbar to show while this tool is active. There is a crappy API
+    available to add new possibilities. The built-in values are:
 
-.. code-block:: coffeescript
+    ``null`` or ``'null'``
+      Show nothing.
 
-  # reimplementation of the built-in line tool
-  class MyLine
-    name: 'MyLine'
-    iconName: 'line'  # imageURLPrefix/line.png is the full URL
+    ``'stroke-width'``
+      Show a stroke width picker and set the tool's ``strokeWidth`` property.
 
-    # strokeWidth is a magic property; see 'Options styles' section below
-    constructor: -> @strokeWidth = 5
-    optionsStyle: 'stroke-width'
+    ``'font'``
+      Set the tool's ``font`` property to a canvas-compatible font string.
 
-    # lifecycle: mouse is down
-    begin: (x, y, lc) ->
-      # make the shape we will be working with, in this case a line
-      @currentShape = LC.createShape('Line', {
-        x1: x, y1: y, x2: x, y2: y, @strokeWidth,
-        color: lc.getColor('primary')})
+.. code-block:: javascript
 
-    # lifecycle: mouse is dragging
-    continue: (x, y, lc) ->
-      # update the shape based on latest state (just set the other end)
-      @currentShape.x2 = x
-      @currentShape.y2 = y
-      # render the shape to the canvas without adding it to the drawing
-      lc.update(@currentShape)
+  var MyTool = function() {
+    var self = this;
 
-    # lifecycle: mouse was released
-    end: (x, y, lc) ->
-      # save the shape as part of the drawing
-      lc.saveShape(@currentShape)
+    return {
+      name: 'MyTool',
+      iconName: 'line',
 
-    # lifecycle: tool was just activated
-    didBecomeActive: (lc) ->
-      # subscribe to events here
+      optionsStyle: 'stroke-width',
+      strokeWidth: 2,
+      // ...more to follow
+    }
+  };
 
-    # lifecycle: tool is being deactivated
-    willBecomeInactive: (lc) ->
-      # unsubscribe from events here
+  LC.init(el, {
+    // Add me to the toolbar
+    tools: LC.defaultTools.concat([MyTool])
+  });
 
+Simple API
+----------
 
-  # now expose our custom tool to the user
-  LC.init(element, {tools: [
-    LC.tools.Pencil,
-    LC.tools.Eraser,
-    LC.tools.MyLine,  # here it is!
-    LC.tools.Rectangle,
-    LC.tools.Text,
-    LC.tools.Pan,
-    LC.tools.Eyedropper
-  ]})
+To implement a tool using the "simple" API, you just need to implement three
+*lifecycle methods*: ``begin``, ``continue``, and ``end``. 
 
-Tools can call any method on the given :js:class:`LiterallyCanvas`. Usually
-you'll be drawing and adding shapes, but you can also set colors, pan, zoom,
-trigger events, and more.
+Here's an alternate version of the line tool.
+
+.. note::
+
+  This code block hasn't been tested, so you might have to file a bug report
+  and get it fixed.
+
+.. code-block:: javascript
+
+  var MyTool = function() {
+    var self = this;
+
+    return {
+      name: 'MyTool',
+      iconName: 'line',
+      strokeWidth: 2,
+      optionsStyle: 'stroke-width',
+
+      begin: function(x, y, lc) {
+        self.currentShape = LC.createShape('Line', {
+          x1: x, y1: y, x2: x, y2: y,
+          self.strokeWidth, color: lc.getColor('primary')});
+      },
+
+      continue: function(x, y, lc) {
+        self.currentShape.x2 = x;
+        self.currentShape.y2 = y;
+        lc.setShapesInProgress([self.currentShape]);
+      },
+
+      end: function(x, y, lc) {
+        self.currentShape.x2 = x;
+        self.currentShape.y2 = y;
+        lc.setShapesInProgress([]);
+        lc.saveShape(self.currentShape);
+      }
+    }
+  };
+
+  LC.init(el, {
+    // Add me to the toolbar
+    tools: LC.defaultTools.concat([MyTool])
+  });
+
+Normal API
+----------
+
+If you want more sophisticated behavior than just touch-drag-release, you can
+attach event handlers and listen to pointer events and do anything you like.
+
+Here's the same tool implemented using the normal API.
+
+.. note::
+
+  This code block hasn't been tested, so you might have to file a bug report
+  and get it fixed.
+
+.. code-block:: javascript
+
+  var MyTool = function() {
+    var self = this;
+
+    return {
+      usesSimpleAPI: false,  // DO NOT FORGET THIS!!!
+      name: 'MyTool',
+      iconName: 'line',
+      strokeWidth: 2,
+      optionsStyle: 'stroke-width',
+
+      didBecomeActive: function(lc) {
+        var onPointerDown = function(pt) {
+          self.currentShape = LC.createShape('Line', {
+            x1: pt.x, y1: pt.y, x2: pt.x, y2: pt.y,
+            self.strokeWidth, color: lc.getColor('primary')});
+        };
+
+        var onPointerDrag = function(pt) {
+          self.currentShape.x2 = pt.x;
+          self.currentShape.y2 = pt.y;
+          lc.setShapesInProgress([self.currentShape]);
+        };
+
+        var onPointerUp = function(pt) {
+          self.currentShape.x2 = pt.x;
+          self.currentShape.y2 = pt.y;
+          lc.setShapesInProgress([]);
+          lc.saveShape(self.currentShape);
+        };
+
+        var onPointerMove = function(pt) {
+          console.log("Mouse moved to", pt);
+        };
+
+        // lc.on() returns a function that unsubscribes us. capture it.
+        self.unsubscribeFuncs = [
+          lc.on('pointerdown', onPointerDown),
+          lc.on('pointerdrag', onPointerDrag),
+          lc.on('pointerup', onPointerUp),
+          lc.on('pointermove', onPointerMove)
+        ];
+      },
+
+      willBecomeInactive: function(lc) {
+        // call all the unsubscribe functions
+        self.unsubscribeFuncs.map(function(f) { f() });
+      }
+  };
+
+  LC.init(el, {
+    // Add me to the toolbar
+    tools: LC.defaultTools.concat([MyTool])
+  });
+
+Tools can call any method on the given :js:class:`LiterallyCanvas` object.
+Usually you'll be drawing and adding shapes, but you can also set colors, pan,
+zoom, trigger events, and more.
 
 Options styles
 --------------

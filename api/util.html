@@ -31,7 +31,7 @@
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
       <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js" type="text/javascript"></script>
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
@@ -166,23 +166,10 @@ for environments with <tt class="docutils literal"><span class="pre">devicePixel
 <dl class="function">
 <dt id="LC.util.renderShapes">
 <tt class="descclassname">LC.util.</tt><tt class="descname">renderShapes</tt><big>(</big><em>shapes</em>, <em>bounds</em>, <em>scale=1</em>, <em>canvas=null</em><big>)</big><a class="headerlink" href="#LC.util.renderShapes" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
-<li><strong>shapes</strong> &#8211; List of shapes</li>
-<li><strong>bounds</strong> &#8211; A dict <tt class="docutils literal"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></tt> specifying which part of the image to
-draw, in drawing coordinates (before scaling).</li>
-<li><strong>scale</strong> &#8211; Amount by which to scale the image output. Shapes will be rendered at
-full resolution. Defaults to <tt class="docutils literal"><span class="pre">1</span></tt>.</li>
-<li><strong>canvas</strong> &#8211; Canvas object on which to render the shapes. If <tt class="docutils literal"><span class="pre">null</span></tt>, a new canvas
-will be created with the size specified by <em>bounds</em>.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
+<dd><div class="deprecated">
+<p><span>Deprecated since version 0.4.5.</span></p>
+</div>
+<p>Duplicate of <a class="reference internal" href="shapes.html#LC.renderShapesToCanvas" title="LC.renderShapesToCanvas"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderShapesToCanvas()</span></tt></a></p>
 </dd></dl>
 
 </div>

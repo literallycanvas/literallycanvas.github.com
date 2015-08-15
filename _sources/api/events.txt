@@ -98,3 +98,18 @@ View changes
 ``repaint`` *({layerKey})*
   The *layerKey* layer has just been repainted. The actual value of *layerKey*
   is not stable, but interpreting it won't kill you.
+
+Pointer
+-------
+
+``pointerdown`` *({x, y})*
+  The mouse button has just pressed down or a touch has begun.
+
+``pointerup`` *({x, y})*
+  The mouse button has just released or a touch has ended.
+
+``pointermove`` *({x, y})*
+  The mouse moved while the mouse button was not pressed.
+
+``pointerdrag`` *({x, y})*
+  The mouse moved while the mouse button was pressed, or a touch moved.

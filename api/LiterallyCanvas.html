@@ -31,7 +31,7 @@
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
       <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js" type="text/javascript"></script>
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
@@ -305,18 +305,6 @@ information.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="update">
-<tt class="descname">update</tt><big>(</big><em>shape</em><big>)</big><a class="headerlink" href="#update" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This function has a bad name. Fix it.</p>
-</div>
-<p>Render <em>shape</em> on top of the current drawing without permanently adding it
-to the drawing. This method is used by tools to show a shape while the user
-is still creating it.</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="clear">
 <tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#clear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove all shapes from the drawing.</p>
@@ -339,6 +327,16 @@ is still creating it.</p>
 <tt class="descname">setShapesInProgress</tt><big>(</big><em>shapes</em><big>)</big><a class="headerlink" href="#setShapesInProgress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Declare a list of shapes that are drawn to the canvas but aren&#8217;t yet part of
 the drawing. Tools should use this to show shapes in progress.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drawShapeInProgress">
+<tt class="descname">drawShapeInProgress</tt><big>(</big><em>shape</em><big>)</big><a class="headerlink" href="#drawShapeInProgress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws the given shape to a buffer without clearing or redrawing anything
+beneath it. If the shape&#8217;s renderer supports it, only render the most
+recently changed part of the shape.</p>
+<p>This is most useful as an efficient way to draw line paths that the user is
+currently drawing.</p>
 </dd></dl>
 
 </div>

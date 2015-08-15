@@ -49,16 +49,6 @@ Utilities
 
 .. js:function:: LC.util.renderShapes(shapes, bounds, scale=1, canvas=null)
 
-  :param shapes: List of shapes
+  .. deprecated:: 0.4.5
 
-  :param bounds:
-      A dict ``{x, y, width, height}`` specifying which part of the image to
-      draw, in drawing coordinates (before scaling).
-
-  :param scale:
-      Amount by which to scale the image output. Shapes will be rendered at
-      full resolution. Defaults to ``1``.
-
-  :param canvas:
-      Canvas object on which to render the shapes. If ``null``, a new canvas
-      will be created with the size specified by *bounds*.
+  Duplicate of :js:func:`LC.renderShapesToCanvas`

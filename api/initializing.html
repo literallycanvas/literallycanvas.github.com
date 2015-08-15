@@ -31,7 +31,7 @@
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
       <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js" type="text/javascript"></script>
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
@@ -71,28 +71,6 @@
             
   <div class="section" id="initializing-options">
 <h1>Initializing &amp; Options<a class="headerlink" href="#initializing-options" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="changes-since-v0-3">
-<h2>Changes since v0.3<a class="headerlink" href="#changes-since-v0-3" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first"><em>backgroundShapes</em> and <em>watermarkImage</em> are no longer affected by the eraser.</p>
-</li>
-<li><p class="first">The <em>preserveCanvasContents</em> option is gone. If you want to use the contents
-of an existing canvas element as the background of a drawing, do this:</p>
-<blockquote>
-<div><div class="highlight-javascript"><div class="highlight"><pre><span class="nx">backgroundImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
-<span class="nx">backgroundImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas.my-canvas&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toDataURL</span><span class="p">();</span>
-<span class="nx">backgroundShape</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span>
-  <span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">image</span><span class="o">:</span> <span class="nx">backgroundImage</span><span class="p">}));</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">backgroundShapes</span><span class="o">:</span> <span class="p">[</span><span class="nx">backgroundShape</span><span class="p">]});</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p class="first">Tools are defined by the new <em>tools</em> option, which replaces the old
-<em>toolClasses</em> and takes a different list of arguments.</p>
-</li>
-</ul>
-</div>
 <div class="section" id="initializing-normally">
 <h2>Initializing normally<a class="headerlink" href="#initializing-normally" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span><span class="nx">option</span><span class="o">:</span> <span class="nx">value</span><span class="p">})</span>
@@ -134,14 +112,19 @@ affected by the Clear button, <tt class="xref js js-func docutils literal"><span
 or the eraser tool.</dd>
 <dt><tt class="docutils literal"><span class="pre">keyboardShortcuts</span></tt></dt>
 <dd>Enable panning with the arrow keys. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">toolbarPosition</span></tt></dt>
+<dd>If <tt class="docutils literal"><span class="pre">'top'</span></tt>, the toolbar will be at the top. Otherwise, it will be
+at the bottom.</dd>
 <dt><tt class="docutils literal"><span class="pre">tools</span></tt></dt>
-<dd><p class="first">A list of tools to enable. The default value is:</p>
+<dd><p class="first">A list of tools to enable. The default value, accessible at
+<tt class="docutils literal"><span class="pre">LC.defaultTools</span></tt>, is:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pencil</span><span class="p">,</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eraser</span><span class="p">,</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Line</span><span class="p">,</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">,</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Text</span><span class="p">,</span>
+  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">,</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pan</span><span class="p">,</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eyedropper</span>
 <span class="p">]</span>
@@ -175,6 +158,13 @@ It will not pan with the drawing.</p>
 watermark image and set <em>watermarkScale</em> to
 <tt class="docutils literal"><span class="pre">1/window.devicePixelRatio</span></tt>.</p>
 </dd>
+<dt><tt class="docutils literal"><span class="pre">zoomMax</span></tt></dt>
+<dd>Maximum zoom value. Defaults to 4.0.</dd>
+<dt><tt class="docutils literal"><span class="pre">zoomMin</span></tt></dt>
+<dd>Minimum zoom value. Defaults to 0.2.</dd>
+<dt><tt class="docutils literal"><span class="pre">zoomStep</span></tt></dt>
+<dd>Amount by which the zoom in/out buttons change the zoom level. Defaults
+to 0.2.</dd>
 </dl>
 </dd></dl>
 
@@ -253,6 +243,28 @@ which gets that same value as its argument:</p>
 </div>
 </div>
 </div>
+<div class="section" id="breaking-changes-since-v0-3">
+<h2>Breaking changes since v0.3<a class="headerlink" href="#breaking-changes-since-v0-3" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><em>backgroundShapes</em> and <em>watermarkImage</em> are no longer affected by the eraser.</p>
+</li>
+<li><p class="first">The <em>preserveCanvasContents</em> option is gone. If you want to use the contents
+of an existing canvas element as the background of a drawing, do this:</p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span class="nx">backgroundImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+<span class="nx">backgroundImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas.my-canvas&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toDataURL</span><span class="p">();</span>
+<span class="nx">backgroundShape</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span>
+  <span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">image</span><span class="o">:</span> <span class="nx">backgroundImage</span><span class="p">}));</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">backgroundShapes</span><span class="o">:</span> <span class="p">[</span><span class="nx">backgroundShape</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Tools are defined by the new <em>tools</em> option, which replaces the old
+<em>toolClasses</em> and takes a different list of arguments.</p>
+</li>
+</ul>
+</div>
 </div>
 
 
@@ -264,12 +276,12 @@ which gets that same value as its argument:</p>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Initializing &amp; Options</a><ul>
-<li><a class="reference internal" href="#changes-since-v0-3">Changes since v0.3</a></li>
 <li><a class="reference internal" href="#initializing-normally">Initializing normally</a></li>
 <li><a class="reference internal" href="#initializing-with-jquery">Initializing with jQuery</a><ul>
 <li><a class="reference internal" href="#translating-the-examples-to-jquery-form">Translating the examples to jQuery form</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#breaking-changes-since-v0-3">Breaking changes since v0.3</a></li>
 </ul>
 </li>
 </ul>

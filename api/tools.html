@@ -31,7 +31,7 @@
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
       <link rel="stylesheet" href="../_static/style.css" type="text/css" />
       <link rel="stylesheet" href="../_static/lib/css/literallycanvas.css" type="text/css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js" type="text/javascript"></script>
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
@@ -71,89 +71,172 @@
             
   <div class="section" id="creating-tools">
 <h1>Creating Tools<a class="headerlink" href="#creating-tools" title="Permalink to this headline">¶</a></h1>
-<p>Literally Canvas tools are defined using an oversimplified api <a class="footnote-reference" href="#f1" id="id1">[1]</a>. Each
-tool defines an icon, an &#8220;options style,&#8221; and three <em>lifecycle methods</em> to
-start, continue, and end an operation.</p>
-<p>If this section is not clear enough, please file and issue on GitHub and we
-will try to improve it.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>If your method of adding tools is to fork the project, <strong>please don&#8217;t</strong>.
-If you need custom tools for your particular application, you can do that
-without changing Literally Canvas&#8217;s source code. That is the entire purpose
-of this API.</p>
+<p>If your method of adding tools is to fork the project or edit the generated
+JS, <strong>please don&#8217;t</strong>. If you need custom tools for your particular
+application, you can do that without changing Literally Canvas&#8217;s source code.
+That is the entire purpose of this API.</p>
 <p class="last">If you want to <em>contribute</em> a tool to the project, then by all means, clone
 the repository and send us a pull request.</p>
 </div>
-<p class="rubric">Footnotes</p>
-<table class="docutils footnote" frame="void" id="f1" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>A more powerful tool API is a high-priority goal for the next major
-release.</td></tr>
-</tbody>
-</table>
-<div class="section" id="defining-a-tool">
-<h2>Defining a tool<a class="headerlink" href="#defining-a-tool" title="Permalink to this headline">¶</a></h2>
-<p>Literally Canvas is developed in CoffeeScript, and all of our internal examples
-use CoffeeScript, so this example will be in CoffeeScript. We will add
-documentation in JavaScript if there is sufficient demand. (As usual, please
-express demand via GitHub issues.)</p>
-<p>Plain JavaScript should work just fine as long as we can call <tt class="docutils literal"><span class="pre">new</span> <span class="pre">Tool()</span></tt>
-and get back something that works.</p>
-<div class="highlight-coffeescript"><div class="highlight"><pre><span class="c1"># reimplementation of the built-in line tool</span>
-<span class="k">class</span> <span class="nx">MyLine</span>
-  <span class="nv">name: </span><span class="s">&#39;MyLine&#39;</span>
-  <span class="nv">iconName: </span><span class="s">&#39;line&#39;</span>  <span class="c1"># imageURLPrefix/line.png is the full URL</span>
+<p>Literally Canvas has two APIs for creating tools: a <em>simple</em> API (old style)
+and a <em>normal</em> API (new style).</p>
+<p>For both APIs, a tool is an object with a specific set of keys.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">name</span></tt></dt>
+<dd>Unique identifier for the tool.</dd>
+<dt><tt class="docutils literal"><span class="pre">iconName</span></tt></dt>
+<dd>Name of the image to be used in the toolbar for this tool, not including
+the extension. The full URL of the image will be
+<tt class="docutils literal"><span class="pre">{imageURLPrefix}/{iconName}.png</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">optionsStyle</span></tt></dt>
+<dd><p class="first">Which toolbar to show while this tool is active. There is a crappy API
+available to add new possibilities. The built-in values are:</p>
+<dl class="last docutils">
+<dt><tt class="docutils literal"><span class="pre">null</span></tt> or <tt class="docutils literal"><span class="pre">'null'</span></tt></dt>
+<dd>Show nothing.</dd>
+<dt><tt class="docutils literal"><span class="pre">'stroke-width'</span></tt></dt>
+<dd>Show a stroke width picker and set the tool&#8217;s <tt class="docutils literal"><span class="pre">strokeWidth</span></tt> property.</dd>
+<dt><tt class="docutils literal"><span class="pre">'font'</span></tt></dt>
+<dd>Set the tool&#8217;s <tt class="docutils literal"><span class="pre">font</span></tt> property to a canvas-compatible font string.</dd>
+</dl>
+</dd>
+</dl>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
-  <span class="c1"># strokeWidth is a magic property; see &#39;Options styles&#39; section below</span>
-  <span class="nv">constructor: </span><span class="nf">-&gt;</span> <span class="vi">@strokeWidth = </span><span class="mi">5</span>
-  <span class="nv">optionsStyle: </span><span class="s">&#39;stroke-width&#39;</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;MyTool&#39;</span><span class="p">,</span>
+    <span class="nx">iconName</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
 
-  <span class="c1"># lifecycle: mouse is down</span>
-  <span class="nv">begin: </span><span class="nf">(x, y, lc) -&gt;</span>
-    <span class="c1"># make the shape we will be working with, in this case a line</span>
-    <span class="vi">@currentShape = </span><span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="s">&#39;Line&#39;</span><span class="p">,</span> <span class="p">{</span>
-      <span class="nv">x1: </span><span class="nx">x</span><span class="p">,</span> <span class="nv">y1: </span><span class="nx">y</span><span class="p">,</span> <span class="nv">x2: </span><span class="nx">x</span><span class="p">,</span> <span class="nv">y2: </span><span class="nx">y</span><span class="p">,</span> <span class="nx">@strokeWidth</span><span class="p">,</span>
-      <span class="nv">color: </span><span class="nx">lc</span><span class="p">.</span><span class="nx">getColor</span><span class="p">(</span><span class="s">&#39;primary&#39;</span><span class="p">)})</span>
+    <span class="nx">optionsStyle</span><span class="o">:</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">,</span>
+    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// ...more to follow</span>
+  <span class="p">}</span>
+<span class="p">};</span>
 
-  <span class="c1"># lifecycle: mouse is dragging</span>
-  <span class="k">continue</span><span class="o">:</span> <span class="nf">(x, y, lc) -&gt;</span>
-    <span class="c1"># update the shape based on latest state (just set the other end)</span>
-    <span class="vi">@currentShape.x2 = </span><span class="nx">x</span>
-    <span class="vi">@currentShape.y2 = </span><span class="nx">y</span>
-    <span class="c1"># render the shape to the canvas without adding it to the drawing</span>
-    <span class="nx">lc</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">@currentShape</span><span class="p">)</span>
-
-  <span class="c1"># lifecycle: mouse was released</span>
-  <span class="nv">end: </span><span class="nf">(x, y, lc) -&gt;</span>
-    <span class="c1"># save the shape as part of the drawing</span>
-    <span class="nx">lc</span><span class="p">.</span><span class="nx">saveShape</span><span class="p">(</span><span class="nx">@currentShape</span><span class="p">)</span>
-
-  <span class="c1"># lifecycle: tool was just activated</span>
-  <span class="nv">didBecomeActive: </span><span class="nf">(lc) -&gt;</span>
-    <span class="c1"># subscribe to events here</span>
-
-  <span class="c1"># lifecycle: tool is being deactivated</span>
-  <span class="nv">willBecomeInactive: </span><span class="nf">(lc) -&gt;</span>
-    <span class="c1"># unsubscribe from events here</span>
-
-
-<span class="c1"># now expose our custom tool to the user</span>
-<span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span><span class="nv">tools: </span><span class="p">[</span>
-  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pencil</span><span class="p">,</span>
-  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eraser</span><span class="p">,</span>
-  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">MyLine</span><span class="p">,</span>  <span class="c1"># here it is!</span>
-  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">,</span>
-  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Text</span><span class="p">,</span>
-  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pan</span><span class="p">,</span>
-  <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eyedropper</span>
-<span class="p">]})</span>
+<span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// Add me to the toolbar</span>
+  <span class="nx">tools</span><span class="o">:</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">defaultTools</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span><span class="nx">MyTool</span><span class="p">])</span>
+<span class="p">});</span>
 </pre></div>
 </div>
-<p>Tools can call any method on the given <a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a>. Usually
-you&#8217;ll be drawing and adding shapes, but you can also set colors, pan, zoom,
-trigger events, and more.</p>
+<div class="section" id="simple-api">
+<h2>Simple API<a class="headerlink" href="#simple-api" title="Permalink to this headline">¶</a></h2>
+<p>To implement a tool using the &#8220;simple&#8221; API, you just need to implement three
+<em>lifecycle methods</em>: <tt class="docutils literal"><span class="pre">begin</span></tt>, <tt class="docutils literal"><span class="pre">continue</span></tt>, and <tt class="docutils literal"><span class="pre">end</span></tt>.</p>
+<p>Here&#8217;s an alternate version of the line tool.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This code block hasn&#8217;t been tested, so you might have to file a bug report
+and get it fixed.</p>
+</div>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;MyTool&#39;</span><span class="p">,</span>
+    <span class="nx">iconName</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
+    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">optionsStyle</span><span class="o">:</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">,</span>
+
+    <span class="nx">begin</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="s1">&#39;Line&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">x1</span><span class="o">:</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y1</span><span class="o">:</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">x2</span><span class="o">:</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y2</span><span class="o">:</span> <span class="nx">y</span><span class="p">,</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">strokeWidth</span><span class="p">,</span> <span class="nx">color</span><span class="o">:</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getColor</span><span class="p">(</span><span class="s1">&#39;primary&#39;</span><span class="p">)});</span>
+    <span class="p">},</span>
+
+    <span class="k">continue</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">y2</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+      <span class="nx">lc</span><span class="p">.</span><span class="nx">setShapesInProgress</span><span class="p">([</span><span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">]);</span>
+    <span class="p">},</span>
+
+    <span class="nx">end</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">y2</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+      <span class="nx">lc</span><span class="p">.</span><span class="nx">setShapesInProgress</span><span class="p">([]);</span>
+      <span class="nx">lc</span><span class="p">.</span><span class="nx">saveShape</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// Add me to the toolbar</span>
+  <span class="nx">tools</span><span class="o">:</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">defaultTools</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span><span class="nx">MyTool</span><span class="p">])</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="normal-api">
+<h2>Normal API<a class="headerlink" href="#normal-api" title="Permalink to this headline">¶</a></h2>
+<p>If you want more sophisticated behavior than just touch-drag-release, you can
+attach event handlers and listen to pointer events and do anything you like.</p>
+<p>Here&#8217;s the same tool implemented using the normal API.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This code block hasn&#8217;t been tested, so you might have to file a bug report
+and get it fixed.</p>
+</div>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">usesSimpleAPI</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>  <span class="c1">// DO NOT FORGET THIS!!!</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;MyTool&#39;</span><span class="p">,</span>
+    <span class="nx">iconName</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
+    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">optionsStyle</span><span class="o">:</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">,</span>
+
+    <span class="nx">didBecomeActive</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">onPointerDown</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pt</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="s1">&#39;Line&#39;</span><span class="p">,</span> <span class="p">{</span>
+          <span class="nx">x1</span><span class="o">:</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y1</span><span class="o">:</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">x2</span><span class="o">:</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y2</span><span class="o">:</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+          <span class="nx">self</span><span class="p">.</span><span class="nx">strokeWidth</span><span class="p">,</span> <span class="nx">color</span><span class="o">:</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getColor</span><span class="p">(</span><span class="s1">&#39;primary&#39;</span><span class="p">)});</span>
+      <span class="p">};</span>
+
+      <span class="kd">var</span> <span class="nx">onPointerDrag</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pt</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">y2</span> <span class="o">=</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">setShapesInProgress</span><span class="p">([</span><span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">]);</span>
+      <span class="p">};</span>
+
+      <span class="kd">var</span> <span class="nx">onPointerUp</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pt</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">y2</span> <span class="o">=</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">setShapesInProgress</span><span class="p">([]);</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">saveShape</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">);</span>
+      <span class="p">};</span>
+
+      <span class="kd">var</span> <span class="nx">onPointerMove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pt</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Mouse moved to&quot;</span><span class="p">,</span> <span class="nx">pt</span><span class="p">);</span>
+      <span class="p">};</span>
+
+      <span class="c1">// lc.on() returns a function that unsubscribes us. capture it.</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">unsubscribeFuncs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="nx">onPointerDown</span><span class="p">),</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdrag&#39;</span><span class="p">,</span> <span class="nx">onPointerDrag</span><span class="p">),</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="nx">onPointerUp</span><span class="p">),</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="nx">onPointerMove</span><span class="p">)</span>
+      <span class="p">];</span>
+    <span class="p">},</span>
+
+    <span class="nx">willBecomeInactive</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// call all the unsubscribe functions</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">unsubscribeFuncs</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span> <span class="nx">f</span><span class="p">()</span> <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// Add me to the toolbar</span>
+  <span class="nx">tools</span><span class="o">:</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">defaultTools</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span><span class="nx">MyTool</span><span class="p">])</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Tools can call any method on the given <a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> object.
+Usually you&#8217;ll be drawing and adding shapes, but you can also set colors, pan,
+zoom, trigger events, and more.</p>
 </div>
 <div class="section" id="options-styles">
 <h2>Options styles<a class="headerlink" href="#options-styles" title="Permalink to this headline">¶</a></h2>
@@ -208,7 +291,8 @@ generalized option style would helpful.</p>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Creating Tools</a><ul>
-<li><a class="reference internal" href="#defining-a-tool">Defining a tool</a></li>
+<li><a class="reference internal" href="#simple-api">Simple API</a></li>
+<li><a class="reference internal" href="#normal-api">Normal API</a></li>
 <li><a class="reference internal" href="#options-styles">Options styles</a></li>
 </ul>
 </li>
