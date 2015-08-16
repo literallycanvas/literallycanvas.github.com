@@ -2,7 +2,8 @@ Literally Canvas
 ================
 
 Literally Canvas is an extensible, open source (BSD-licensed), HTML5 drawing
-widget. Its only dependency is `React.js`_.
+widget. Its only dependency is `React.js`_. You can use it to embed drawing
+boards in web pages.
 
 .. _React.js: http://facebook.github.io/react/
 
