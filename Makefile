@@ -38,6 +38,7 @@ singlehtml: rm-crud
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
 
 deploy: clean html
+	cp googlebe81353f5272462b.html $(BUILDDIR)/html/googlebe81353f5272462b.html
 	cp CNAME $(BUILDDIR)/html/CNAME
 	cp README_build.md $(BUILDDIR)/html/README.md
 	git fetch origin
