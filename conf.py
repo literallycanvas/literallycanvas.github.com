@@ -53,7 +53,7 @@ html_sidebars = {
         'globaltoc.html', 'sidebarhelp.html', 'searchbox.html'],
 }
 
-html_title = "%(project)s v%(release)s docs - JS/Canvas drawing board - MS Paint in your web browser" % {
+html_title = "%(project)s v%(release)s docs - HTML5 drawing board - MS Paint in your web browser" % {
     'project': project, 'release': release}
 html_short_title = "Home"
 
