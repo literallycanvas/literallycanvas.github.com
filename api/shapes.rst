@@ -10,6 +10,8 @@ A "color" is a CSS color string.
 Creating shapes
 ---------------
 
+.. note:: This section might be out of date. Read the source.
+
 .. _shape-Image:
 
 .. js:function:: LC.createShape('Image', {x, y, image})
@@ -29,26 +31,41 @@ Creating shapes
 
 .. _shape-Line:
 
-.. js:function:: LC.createShape('Line', {x1, y1, x2, y2, strokeWidth, color})
+.. js:function:: LC.createShape('Line', {x1, y1, x2, y2, strokeWidth, color, capStyle, endCapShapes})
 
   :param x1/y1: One end of the line
   :param x2/y2: Other end of the line
   :param strokeWidth: Width of the line
   :param color: Color of the line
+  :param capStyle: Line cap style. Defaults to ``'round'``. Read the HTML
+                   ``<canvas>`` docs for other valid values.
+  :param endCapShapes: Two-item list ``[srcShapeId, destShapeId]``, where each
+                       value is ``'arrow'`` or ``null``.
+  :param dash: Value to be passed to ``ctx.setLineDash()`` when this line is
+               rendered.
 
 .. _shape-Text:
 
 .. js:function:: LC.createShape('Text', {x, y, text, color, font})
 
-  :param x/y: *Bottom* left corner position
+  :param x/y: Top left corner position
   :param text: String to render
   :param color: Text color
   :param font: Font settings string. The format is apprimately
-               ``[italic] [bold] fontSize fontName``.
+               ``"[italic] [bold] fontSize fontName"``.
+  :param forcedWidth: If ``null``, this shape's width is equal to the rendered
+                      width of the text. Otherwise, the text is wrapped to
+                      this width.
+  :param forcedHeight: Height the user has specified for this text box. Ignored
+                       when rendering; only used to show the dragging box while
+                       resizing.
+  :param v: Version of the text shape API this shape was created with.
+            Defaults to 1. Shapes from version 0 will be converted to version
+            1.
 
 .. _shape-LinePath:
 
-.. js:function:: LC.createShape('LinePath', {points, interpolate})
+.. js:function:: LC.createShape('LinePath', {points, smooth})
 
   :param points: List of :ref:`Point <shape-Point>` objects
   :param smooth: If ``true``, the given points will be smoothed to look more
@@ -62,6 +79,26 @@ Creating shapes
   :param smooth: If ``true``, the given points will be smoothed to look more
                  natural. Defaults to ``true``.
 
+.. _shape-Polygon:
+
+.. js:function:: LC.createShape('Polygon', {points, fillColor, strokeColor, strokeWidth, isClosed})
+
+  :param points: List of :ref:`Point <shape-Point>` objects
+  :param fillColor: Fill color
+  :param strokeColor: Stroke color
+  :param strokeWidth: Width of the line around the edge.
+  :param isClosed: If ``true``, draws a line between the first and last points.
+
+
+.. _shape-Ellipse:
+
+.. js:function:: LC.createShape('Ellipse', {x, y, width, height, strokeWidth, strokeColor, fillColor})
+
+  :param points: List of :ref:`Point <shape-Point>` objects
+  :param fillColor: Fill color
+  :param strokeColor: Stroke color
+  :param strokeWidth: Width of the line around the edge.
+
 .. _shape-Point:
 
 .. js:function:: LC.createShape('Point', {x, y, size, color})
@@ -74,6 +111,15 @@ Creating shapes
   :ref:`LinePath <shape-LinePath>` and
   :ref:`ErasedLinePath <shape-ErasedLinePath>`. It can't currently be
   drawn.
+
+.. _shape-SelectionBox:
+
+.. js:function:: LC.createShape('SelectionBox', {shape, backgroundColor})
+
+  .. note:: This shape is mostly for internal use.
+
+  :param shape: Shape to draw the box around
+  :param backgroundColor: Color to render behind the selection box
 
 Shapes and JSON
 ---------------
