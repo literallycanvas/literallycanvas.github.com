@@ -98,8 +98,8 @@ Just head on over to `GitHub`_ and get started.
 .. _GitHub: http://github.com/literallycanvas/literallycanvas
 
 Literally Canvas is developed by volunteers for fun. If missing features or
-compatibility are serious issues for you, consider that the solution to your
-problem might be to help us write the code.
+compatibility are serious issues for you, the solution to your problem might be
+to help us write the code.
 
 
 Thanks to BrowserStack
@@ -112,34 +112,3 @@ Canvas works in as many environments as possible. If you care about your app's
 compatibility, you should check it out.
 
 .. _Browserstack: http://browserstack.com
-
-.. _related-projects:
-
-Related projects
-================
-
-The web has only recently arrived at the point where this sort of project is
-feasible to implement without Flash, but there are several other projects with
-similar features. If Literally Canvas isn't quite what you're looking for, we
-encourage you to check them out and give them some love. All of them use
-
-* `drawingboard.js <http://leimi.github.io/drawingboard.js/>`_: Very similar
-  project, slightly different feature set.
-* `DeviantArt Muro <http://sta.sh/muro/>`_: Sophisticated, comprehensive
-  drawing
-* `Bomomo <http://bomomo.com/>`_: Whimsical doodling
-* `SketchPad <http://mudcu.be/sketchpad/>`_: Simple drawing
-* `sketchpad.io <http://sketchpad.io/>`_: Non-destructive, 2.0 version of
-  SketchPad
-* `Sketch.js <https://github.com/mudcube/Sketch.js>`_: Simplistic, open source
-  version of `sketchpad.io <http://sketchpad.io/>`_
-* `Sketch <http://hakim.se/experiments/html5/sketch/>`_: Cartoon-style sketches
-  with gallery
-* `Zwibbler <http://zwibbler.com/>`_: Vector graphics
-* `FigurePool <http://figurepool.com/editor>`_: SVG diagramming
-* `SVG-edit <http://svg-edit.googlecode.com/svn/trunk/editor/svg-editor.html>`_:
-  Open source SVG non-destructive drawing
-* `Method Draw <http://editor.method.ac/>`_: SVG non-destructive drawing, based
-  on SVG-edit
-* `Creating a Drawing App with HTML5 Canvas and Javascript <http://www.williammalone.com/articles/create-html5-canvas-javascript-drawing-app/>`_:
-  Learn a bit about how to do these things yourself!
