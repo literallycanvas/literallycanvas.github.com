@@ -48,5 +48,5 @@ Summary
 * :js:func:`LC.defineOptionsStyle`
 * :js:func:`LC.registerJQueryPlugin`
 * :js:func:`LC.setDefaultImageURLPrefix`
-* :doc:`LC.util <util>`
 * :js:func:`LC.localize`
+* :doc:`LC.util <util>`

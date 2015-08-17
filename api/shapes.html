@@ -77,6 +77,10 @@ programmatically. All shapes are created through the
 <p>A &#8220;color&#8221; is a CSS color string.</p>
 <div class="section" id="creating-shapes">
 <h2>Creating shapes<a class="headerlink" href="#creating-shapes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section might be out of date. Read the source.</p>
+</div>
 <span class="target" id="shape-image"></span><dl class="function">
 <dt id="LC.createShape">
 <tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'Image'</em>, <em>{x</em>, <em>y</em>, <em>image}</em><big>)</big><a class="headerlink" href="#LC.createShape" title="Permalink to this definition">¶</a></dt>
@@ -116,7 +120,7 @@ programmatically. All shapes are created through the
 
 <span class="target" id="shape-line"></span><dl class="function">
 <dt>
-<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'Line'</em>, <em>{x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em>, <em>strokeWidth</em>, <em>color}</em><big>)</big></dt>
+<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'Line'</em>, <em>{x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em>, <em>strokeWidth</em>, <em>color</em>, <em>capStyle</em>, <em>endCapShapes}</em><big>)</big></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -126,6 +130,12 @@ programmatically. All shapes are created through the
 <li><strong>x2/y2</strong> &#8211; Other end of the line</li>
 <li><strong>strokeWidth</strong> &#8211; Width of the line</li>
 <li><strong>color</strong> &#8211; Color of the line</li>
+<li><strong>capStyle</strong> &#8211; Line cap style. Defaults to <tt class="docutils literal"><span class="pre">'round'</span></tt>. Read the HTML
+<tt class="docutils literal"><span class="pre">&lt;canvas&gt;</span></tt> docs for other valid values.</li>
+<li><strong>endCapShapes</strong> &#8211; Two-item list <tt class="docutils literal"><span class="pre">[srcShapeId,</span> <span class="pre">destShapeId]</span></tt>, where each
+value is <tt class="docutils literal"><span class="pre">'arrow'</span></tt> or <tt class="docutils literal"><span class="pre">null</span></tt>.</li>
+<li><strong>dash</strong> &#8211; Value to be passed to <tt class="docutils literal"><span class="pre">ctx.setLineDash()</span></tt> when this line is
+rendered.</li>
 </ul>
 </td>
 </tr>
@@ -141,11 +151,20 @@ programmatically. All shapes are created through the
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x/y</strong> &#8211; <em>Bottom</em> left corner position</li>
+<li><strong>x/y</strong> &#8211; Top left corner position</li>
 <li><strong>text</strong> &#8211; String to render</li>
 <li><strong>color</strong> &#8211; Text color</li>
 <li><strong>font</strong> &#8211; Font settings string. The format is apprimately
-<tt class="docutils literal"><span class="pre">[italic]</span> <span class="pre">[bold]</span> <span class="pre">fontSize</span> <span class="pre">fontName</span></tt>.</li>
+<tt class="docutils literal"><span class="pre">&quot;[italic]</span> <span class="pre">[bold]</span> <span class="pre">fontSize</span> <span class="pre">fontName&quot;</span></tt>.</li>
+<li><strong>forcedWidth</strong> &#8211; If <tt class="docutils literal"><span class="pre">null</span></tt>, this shape&#8217;s width is equal to the rendered
+width of the text. Otherwise, the text is wrapped to
+this width.</li>
+<li><strong>forcedHeight</strong> &#8211; Height the user has specified for this text box. Ignored
+when rendering; only used to show the dragging box while
+resizing.</li>
+<li><strong>v</strong> &#8211; Version of the text shape API this shape was created with.
+Defaults to 1. Shapes from version 0 will be converted to version
+1.</li>
 </ul>
 </td>
 </tr>
@@ -155,7 +174,7 @@ programmatically. All shapes are created through the
 
 <span class="target" id="shape-linepath"></span><dl class="function">
 <dt>
-<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'LinePath'</em>, <em>{points</em>, <em>interpolate}</em><big>)</big></dt>
+<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'LinePath'</em>, <em>{points</em>, <em>smooth}</em><big>)</big></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -189,6 +208,45 @@ natural. Defaults to <tt class="docutils literal"><span class="pre">true</span><
 </table>
 </dd></dl>
 
+<span class="target" id="shape-polygon"></span><dl class="function">
+<dt>
+<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'Polygon'</em>, <em>{points</em>, <em>fillColor</em>, <em>strokeColor</em>, <em>strokeWidth</em>, <em>isClosed}</em><big>)</big></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>points</strong> &#8211; List of <a class="reference internal" href="#shape-point"><em>Point</em></a> objects</li>
+<li><strong>fillColor</strong> &#8211; Fill color</li>
+<li><strong>strokeColor</strong> &#8211; Stroke color</li>
+<li><strong>strokeWidth</strong> &#8211; Width of the line around the edge.</li>
+<li><strong>isClosed</strong> &#8211; If <tt class="docutils literal"><span class="pre">true</span></tt>, draws a line between the first and last points.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="shape-ellipse"></span><dl class="function">
+<dt>
+<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'Ellipse'</em>, <em>{x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>strokeWidth</em>, <em>strokeColor</em>, <em>fillColor}</em><big>)</big></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>points</strong> &#8211; List of <a class="reference internal" href="#shape-point"><em>Point</em></a> objects</li>
+<li><strong>fillColor</strong> &#8211; Fill color</li>
+<li><strong>strokeColor</strong> &#8211; Stroke color</li>
+<li><strong>strokeWidth</strong> &#8211; Width of the line around the edge.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <span class="target" id="shape-point"></span><dl class="function">
 <dt>
 <tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'Point'</em>, <em>{x</em>, <em>y</em>, <em>size</em>, <em>color}</em><big>)</big></dt>
@@ -209,6 +267,27 @@ natural. Defaults to <tt class="docutils literal"><span class="pre">true</span><
 <a class="reference internal" href="#shape-linepath"><em>LinePath</em></a> and
 <a class="reference internal" href="#shape-erasedlinepath"><em>ErasedLinePath</em></a>. It can&#8217;t currently be
 drawn.</p>
+</dd></dl>
+
+<span class="target" id="shape-selectionbox"></span><dl class="function">
+<dt>
+<tt class="descclassname">LC.</tt><tt class="descname">createShape</tt><big>(</big><em>'SelectionBox'</em>, <em>{shape</em>, <em>backgroundColor}</em><big>)</big></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This shape is mostly for internal use.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shape</strong> &#8211; Shape to draw the box around</li>
+<li><strong>backgroundColor</strong> &#8211; Color to render behind the selection box</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
