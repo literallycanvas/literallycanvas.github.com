@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Events &mdash; Literally Canvas v0.4.7 docs - HTML5 drawing board - MS Paint in your web browser</title>
+    <title>Events &mdash; Literally Canvas v0.4.8 docs - HTML5 drawing board - MS Paint in your web browser</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.7',
+        VERSION:     '0.4.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.7 docs - HTML5 drawing board - MS Paint in your web browser" href="../index.html" />
+    <link rel="top" title="Literally Canvas v0.4.8 docs - HTML5 drawing board - MS Paint in your web browser" href="../index.html" />
     <link rel="up" title="API" href="index.html" />
     <link rel="next" title="Shapes" href="shapes.html" />
     <link rel="prev" title="The LiterallyCanvas object" href="LiterallyCanvas.html" />
@@ -156,14 +156,20 @@ is not stable, but interpreting it won&#8217;t kill you.</dd>
 </div>
 <div class="section" id="pointer">
 <h2>Pointer<a class="headerlink" href="#pointer" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These didn&#8217;t have the <tt class="docutils literal"><span class="pre">lc-</span></tt> prefix from v.4.5-0.4.7, until someone realized
+they conflict with Internet Explorer&#8217;s one-browser-wonder pointer events
+standard.</p>
+</div>
 <dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">pointerdown</span></tt> <em>({x, y})</em></dt>
+<dt><tt class="docutils literal"><span class="pre">lc-pointerdown</span></tt> <em>({x, y})</em></dt>
 <dd>The mouse button has just pressed down or a touch has begun.</dd>
-<dt><tt class="docutils literal"><span class="pre">pointerup</span></tt> <em>({x, y})</em></dt>
+<dt><tt class="docutils literal"><span class="pre">lc-pointerup</span></tt> <em>({x, y})</em></dt>
 <dd>The mouse button has just released or a touch has ended.</dd>
-<dt><tt class="docutils literal"><span class="pre">pointermove</span></tt> <em>({x, y})</em></dt>
+<dt><tt class="docutils literal"><span class="pre">lc-pointermove</span></tt> <em>({x, y})</em></dt>
 <dd>The mouse moved while the mouse button was not pressed.</dd>
-<dt><tt class="docutils literal"><span class="pre">pointerdrag</span></tt> <em>({x, y})</em></dt>
+<dt><tt class="docutils literal"><span class="pre">lc-pointerdrag</span></tt> <em>({x, y})</em></dt>
 <dd>The mouse moved while the mouse button was pressed, or a touch moved.</dd>
 </dl>
 </div>
@@ -187,8 +193,8 @@ is not stable, but interpreting it won&#8217;t kill you.</dd>
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.7.tar.gz">
-		Download v0.4.7
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.8.tar.gz">
+		Download v0.4.8
 	</a>
 </p>
 <p>
