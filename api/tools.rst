@@ -137,12 +137,15 @@ Here's the same tool implemented using the normal API.
           self.currentShape = LC.createShape('Line', {
             x1: pt.x, y1: pt.y, x2: pt.x, y2: pt.y,
             self.strokeWidth, color: lc.getColor('primary')});
+          lc.setShapesInProgress([self.currentShape]);
+          lc.repaintLayer('main');
         };
 
         var onPointerDrag = function(pt) {
           self.currentShape.x2 = pt.x;
           self.currentShape.y2 = pt.y;
           lc.setShapesInProgress([self.currentShape]);
+          lc.repaintLayer('main');
         };
 
         var onPointerUp = function(pt) {
@@ -158,10 +161,10 @@ Here's the same tool implemented using the normal API.
 
         // lc.on() returns a function that unsubscribes us. capture it.
         self.unsubscribeFuncs = [
-          lc.on('pointerdown', onPointerDown),
-          lc.on('pointerdrag', onPointerDrag),
-          lc.on('pointerup', onPointerUp),
-          lc.on('pointermove', onPointerMove)
+          lc.on('lc-pointerdown', onPointerDown),
+          lc.on('lc-pointerdrag', onPointerDrag),
+          lc.on('lc-pointerup', onPointerUp),
+          lc.on('lc-pointermove', onPointerMove)
         ];
       },
 
@@ -169,6 +172,7 @@ Here's the same tool implemented using the normal API.
         // call all the unsubscribe functions
         self.unsubscribeFuncs.map(function(f) { f() });
       }
+    }
   };
 
   LC.init(el, {
