@@ -194,12 +194,15 @@ and get it fixed.</p>
         <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="s1">&#39;Line&#39;</span><span class="p">,</span> <span class="p">{</span>
           <span class="nx">x1</span><span class="o">:</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y1</span><span class="o">:</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">x2</span><span class="o">:</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y2</span><span class="o">:</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
           <span class="nx">self</span><span class="p">.</span><span class="nx">strokeWidth</span><span class="p">,</span> <span class="nx">color</span><span class="o">:</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getColor</span><span class="p">(</span><span class="s1">&#39;primary&#39;</span><span class="p">)});</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">setShapesInProgress</span><span class="p">([</span><span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">]);</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">repaintLayer</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">);</span>
       <span class="p">};</span>
 
       <span class="kd">var</span> <span class="nx">onPointerDrag</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pt</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
         <span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">.</span><span class="nx">y2</span> <span class="o">=</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
         <span class="nx">lc</span><span class="p">.</span><span class="nx">setShapesInProgress</span><span class="p">([</span><span class="nx">self</span><span class="p">.</span><span class="nx">currentShape</span><span class="p">]);</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">repaintLayer</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">);</span>
       <span class="p">};</span>
 
       <span class="kd">var</span> <span class="nx">onPointerUp</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pt</span><span class="p">)</span> <span class="p">{</span>
@@ -215,10 +218,10 @@ and get it fixed.</p>
 
       <span class="c1">// lc.on() returns a function that unsubscribes us. capture it.</span>
       <span class="nx">self</span><span class="p">.</span><span class="nx">unsubscribeFuncs</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="nx">onPointerDown</span><span class="p">),</span>
-        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdrag&#39;</span><span class="p">,</span> <span class="nx">onPointerDrag</span><span class="p">),</span>
-        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="nx">onPointerUp</span><span class="p">),</span>
-        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="nx">onPointerMove</span><span class="p">)</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;lc-pointerdown&#39;</span><span class="p">,</span> <span class="nx">onPointerDown</span><span class="p">),</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;lc-pointerdrag&#39;</span><span class="p">,</span> <span class="nx">onPointerDrag</span><span class="p">),</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;lc-pointerup&#39;</span><span class="p">,</span> <span class="nx">onPointerUp</span><span class="p">),</span>
+        <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;lc-pointermove&#39;</span><span class="p">,</span> <span class="nx">onPointerMove</span><span class="p">)</span>
       <span class="p">];</span>
     <span class="p">},</span>
 
@@ -226,6 +229,7 @@ and get it fixed.</p>
       <span class="c1">// call all the unsubscribe functions</span>
       <span class="nx">self</span><span class="p">.</span><span class="nx">unsubscribeFuncs</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span> <span class="nx">f</span><span class="p">()</span> <span class="p">});</span>
     <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="p">{</span>
