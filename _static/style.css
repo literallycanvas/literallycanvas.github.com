@@ -60,3 +60,7 @@ body {
   background-color: #ffe4e4;
   border: 1px solid #f66;
 }
+
+code {
+  font-size: 14px;
+}

@@ -73,15 +73,26 @@ Drawing changes
 Tool state
 ----------
 
-Three types events are fired during the lifecycle of a tool operation. Each
-tool has a different set of properties, but the tools are passed as arguments
-to the event handler.
-
 ``drawStart`` *({tool})*
+
+  .. deprecated:: 0.4.9
+
+  This event only fires for tools that use the "simple" version of the tool
+  API. It will go away in version 0.5.
 
 ``drawContinue`` *({tool})*
 
+  .. deprecated:: 0.4.9
+
+  This event only fires for tools that use the "simple" version of the tool
+  API. It will go away in version 0.5.
+
 ``drawEnd`` *({tool})*
+
+  .. deprecated:: 0.4.9
+
+  This event only fires for tools that use the "simple" version of the tool
+  API. It will go away in version 0.5.
 
 ``toolChange`` *({tool})*
   The given tool has just been made active.

@@ -6,6 +6,7 @@ API
 
   initializing.rst
   LiterallyCanvas.rst
+  rendering_snapshots.rst
   events.rst
   shapes.rst
   tools.rst
@@ -31,6 +32,10 @@ Uncategorized functions
   This function is useful when you're making a web site with many instances of
   Literally Canvas (like, for example, this documentation).
 
+.. js:function:: LC.defaultTools()
+
+  Returns the array of default tools.
+
 Summary
 -------
 
@@ -42,7 +47,9 @@ Summary
 * :js:func:`LC.JSONToShape`
 * :js:func:`LC.renderShapesToCanvas`
 * :js:func:`LC.renderShapesToSVG`
-* :js:func:`LC.snapshotJSONToShapes`
+* :js:func:`LC.renderSnapshotToImage`
+* :js:func:`LC.renderSnapshotToSVG`
+* :js:func:`LC.snapshotJSONToShapes` (deprecated)
 * :js:func:`LC.snapshotToShapes`
 * :js:func:`LC.defaultTools`
 * :js:func:`LC.defineOptionsStyle`

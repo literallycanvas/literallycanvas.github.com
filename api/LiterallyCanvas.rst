@@ -11,55 +11,87 @@ about getting a reference to this object.
   :param options: Dictionary of options. See :doc:`initializing` for possible
                   values.
 
-Changes since v0.3
-------------------
+.. note::
 
-The :js:class:`LiterallyCanvas` object no longer uses a single canvas to
-render. Instead, it keeps multiple canvases inside a container element.
+    As of v0.4, the :js:class:`LiterallyCanvas` object no longer uses a single
+    canvas to render. Instead, it keeps multiple canvases inside a container
+    element.
 
-Methods
--------
+.. js:attribute:: opts
+
+    A copy of the options passed to :js:func:`LC.init`. For example, if you
+    were to implement your own tool that used a stroke width, you'd want to
+    set your initial value to ``lc.opts.defaultStrokeWidth``.
 
 Saving and loading
-^^^^^^^^^^^^^^^^^^
+------------------
 
-.. js:function:: loadSnapshotJSON(snapshot)
+.. js:function:: getSnapshot(keys=['shapes', 'imageSize', 'colors', 'position', 'scale', 'backgroundShapes'])
 
-  :param snapshot: a JSON-encoded string
+  :param keys: Whitelist of state to save
 
-  Load a drawing.
+  :returns: a snapshot object
+
+  .. versionadded:: 0.4.9
+
+  Returns the state of the drawing as a JSON-encodable object. This currently
+  includes the shapes, background shapes, colors, image size, pan position,
+  and scale. If you don't want to restore all of those things, you may pass
+  **keys** to specify exactly what you want.
+
+  To get a snapshot that matches version 0.4.8's format, which is a strict
+  subset of 0.4.9+'s, you can do this::
+
+      lc.getSnapshot(['shapes', 'colors'])
+
+  The snapshot format is stable across versions.
+
+
+.. js:function:: loadSnapshot(snapshot)
+
+  :param snapshot: a snapshot object
+
+  .. versionadded:: 0.4.9
+
+  Replace the current state with whatever is in **snapshot**.
+
 
 .. js:function:: getSnapshotJSON()
 
   :returns: a JSON-encoded string
 
-  Get the current drawing as JSON. Consider its output opaque except when used
-  as an argument to :js:func:`loadSnapshotJSON`. You may assume that drawings
-  saved with an older version of Literally Canvas will work with a newer one.
+  .. deprecated:: 0.4.9
 
-  If you need the serialization format to be public, file an issue on GitHub
-  and explain your use case.
+      Use ``JSON.stringify(lc.getSnapshot())`` instead.
+
+  Alias for ``JSON.stringify(lc.getSnapshot())``.
+
+  This will continue to work until version 0.6.
+
+
+.. js:function:: loadSnapshotJSON(snapshotJSON)
+
+  :param snapshotJSON: a JSON-encoded string
+
+  .. deprecated:: 0.4.9
+
+      Use ``lc.loadSnapshot(JSON.parse(snapshotJSON))`` instead.
+
+  Alias for ``lc.loadSnapshot(JSON.parse(snapshotJSON))``\.
+
+  This will continue to work until version 0.6.
 
 Exporting images
-^^^^^^^^^^^^^^^^
+----------------
 
 .. js:function:: getImage(options)
 
   Returns the complete drawing rendered to a canvas, regardless of what the
-  view is panned/zoomed to. Available options:
+  view is panned/zoomed to. This method has the same options as
+  :js:func:`LC.renderSnapshotToImage`, as well as:
 
   ``includeWatermark``
     If ``true``, render the watermark behind the drawing.
-
-  ``rect``
-    A dict ``{x, y, width, height}`` specifying which part of the image to
-    draw, in drawing coordinates (before scaling). Defaults to the bounding
-    box of all shapes. If you don't specify a ``rect`` and there are no
-    shapes in the drawing, :js:func:`getImage` will return ``undefined``.
-
-  ``scale``
-    Amount by which to scale the image output. Shapes will be rendered at
-    full resolution. Defaults to ``1``.
 
   ``scaleDownRetina``
     If ``true``, compensate for ``window.devicePixelRatio`` by adjusting the
@@ -72,13 +104,7 @@ Exporting images
   Returns the drawing as an SVG string that can be inserted into the DOM or
   downloaded.
 
-  .. warning:: The eraser tool does not affect SVG output.
-
-  ``rect``
-    A dict ``{x, y, width, height}`` specifying which part of the image to
-    draw, in drawing coordinates. Defaults to the bounding
-    box of all shapes. If you don't specify a ``rect`` and there are no
-    shapes in the drawing, :js:func:`getSVGString` will return ``undefined``.
+  This method has the same options as :js:func:`LC.renderSnapshotToSVG`.
 
 .. js:function:: canvasForExport()
 
@@ -100,7 +126,7 @@ Exporting images
 .. _event_subscription:
 
 Event subscription
-^^^^^^^^^^^^^^^^^^
+------------------
 
 .. code-block:: javascript
 
@@ -120,7 +146,7 @@ Event subscription
 
 
 Controlling the view
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 .. js:function:: setPan(x, y)
 
@@ -145,7 +171,7 @@ Controlling the view
   as :ref:`imageSize <opt-imageSize>`.
 
 Changing the drawing
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 .. js:function:: saveShape(shape, triggerSaveShapeEvent, previousShapeId)
 
@@ -194,7 +220,7 @@ Changing the drawing
   currently drawing.
 
 Getting information
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 .. js:function:: getColor(colorName)
 
@@ -204,3 +230,10 @@ Getting information
 .. js:function:: getPixel(x, y)
 
   Get the color of the given drawing-space pixel as a CSS color string.
+
+Teardown
+--------
+
+.. js:function:: teardown()
+
+  Completely remove this instance of Literally Canvas from the web page.

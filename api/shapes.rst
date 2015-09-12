@@ -19,6 +19,12 @@ Creating shapes
   :param x/y: Upper left corner position
   :param image: A DOM `Image` object
 
+  .. note::
+
+    If you'd like to add an ``image.onload`` callback, **do not assign it
+    directly!** This will break several things. Instead, use
+    :js:func:`LC.util.addImageOnload`.
+
 .. _shape-Rectangle:
 
 .. js:function:: LC.createShape('Rectangle', {x, y, width, height, strokeWidth, strokeColor, fillColor})

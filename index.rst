@@ -51,10 +51,6 @@ otherwise, though they do happen.
 Why?
 ====
 
-If you look at :ref:`related-projects` at the bottom of the page, you can see
-that this isn't the only HTML5 drawing tool on the block. However, it is unique
-in several ways:
-
 * **It's open source.** It's developed by the community for many purposes and
   is free to use and extend.
 
