@@ -84,7 +84,7 @@ Initializing normally
 
     ``tools``
         A list of tools to enable. The default value, accessible at
-        ``LC.defaultTools``, is:
+        :js:attr:`LC.defaultTools`, is:
 
         .. code-block:: javascript
 

@@ -32,9 +32,9 @@ Uncategorized functions
   This function is useful when you're making a web site with many instances of
   Literally Canvas (like, for example, this documentation).
 
-.. js:function:: LC.defaultTools()
+.. js:attribute:: LC.defaultTools()
 
-  Returns the array of default tools.
+  The array of default tools.
 
 Summary
 -------
@@ -51,7 +51,7 @@ Summary
 * :js:func:`LC.renderSnapshotToSVG`
 * :js:func:`LC.snapshotJSONToShapes` (deprecated)
 * :js:func:`LC.snapshotToShapes`
-* :js:func:`LC.defaultTools`
+* :js:attr:`LC.defaultTools`
 * :js:func:`LC.defineOptionsStyle`
 * :js:func:`LC.registerJQueryPlugin`
 * :js:func:`LC.setDefaultImageURLPrefix`
