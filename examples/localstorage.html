@@ -84,10 +84,10 @@ when the user refreshes the page, the drawing persists.</p>
       document.getElementsByClassName('literally localstorage')[0]);
     var localStorageKey = 'drawing'
     if (localStorage.getItem(localStorageKey)) {
-      lc.loadSnapshotJSON(localStorage.getItem(localStorageKey));
+      lc.loadSnapshot(JSON.parse(localStorage.getItem(localStorageKey)));
     }
     lc.on('drawingChange', function() {
-      localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
+      localStorage.setItem(localStorageKey, JSON.stringify(lc.getSnapshot()));
     });
   });
 </script>
@@ -99,10 +99,10 @@ when the user refreshes the page, the drawing persists.</p>
       <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;literally localstorage&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="hll">    <span class="kd">var</span> <span class="nx">localStorageKey</span> <span class="o">=</span> <span class="s1">&#39;drawing&#39;</span>
 </span><span class="hll">    <span class="k">if</span> <span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">))</span> <span class="p">{</span>
-</span><span class="hll">      <span class="nx">lc</span><span class="p">.</span><span class="nx">loadSnapshotJSON</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">));</span>
+</span><span class="hll">      <span class="nx">lc</span><span class="p">.</span><span class="nx">loadSnapshot</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">)));</span>
 </span><span class="hll">    <span class="p">}</span>
 </span><span class="hll">    <span class="nx">lc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drawingChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class="hll">      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">,</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getSnapshotJSON</span><span class="p">());</span>
+</span><span class="hll">      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">lc</span><span class="p">.</span><span class="nx">getSnapshot</span><span class="p">()));</span>
 </span><span class="hll">    <span class="p">});</span>
 </span>  <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
