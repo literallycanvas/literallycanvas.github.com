@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Creating Tools &mdash; Literally Canvas v0.4.8 docs - HTML5 drawing board - MS Paint in your web browser</title>
+    <title>Creating Tools &mdash; Literally Canvas v0.4.9 docs - HTML5 drawing board - MS Paint in your web browser</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.8',
+        VERSION:     '0.4.9',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.8 docs - HTML5 drawing board - MS Paint in your web browser" href="../index.html" />
+    <link rel="top" title="Literally Canvas v0.4.9 docs - HTML5 drawing board - MS Paint in your web browser" href="../index.html" />
     <link rel="up" title="API" href="index.html" />
     <link rel="next" title="Utilities" href="util.html" />
     <link rel="prev" title="Shapes" href="shapes.html" />
@@ -36,7 +36,7 @@
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
   </head>
-  <body>
+  <body role="document">
   <header id="pageheader"><h1><a href="../index.html ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -67,7 +67,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="creating-tools">
 <h1>Creating Tools<a class="headerlink" href="#creating-tools" title="Permalink to this headline">¶</a></h1>
@@ -84,26 +84,26 @@ the repository and send us a pull request.</p>
 and a <em>normal</em> API (new style).</p>
 <p>For both APIs, a tool is an object with a specific set of keys.</p>
 <dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">name</span></tt></dt>
+<dt><code class="docutils literal"><span class="pre">name</span></code></dt>
 <dd>Unique identifier for the tool.</dd>
-<dt><tt class="docutils literal"><span class="pre">iconName</span></tt></dt>
+<dt><code class="docutils literal"><span class="pre">iconName</span></code></dt>
 <dd>Name of the image to be used in the toolbar for this tool, not including
 the extension. The full URL of the image will be
-<tt class="docutils literal"><span class="pre">{imageURLPrefix}/{iconName}.png</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">optionsStyle</span></tt></dt>
+<code class="docutils literal"><span class="pre">{imageURLPrefix}/{iconName}.png</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">optionsStyle</span></code></dt>
 <dd><p class="first">Which toolbar to show while this tool is active. There is a crappy API
 available to add new possibilities. The built-in values are:</p>
 <dl class="last docutils">
-<dt><tt class="docutils literal"><span class="pre">null</span></tt> or <tt class="docutils literal"><span class="pre">'null'</span></tt></dt>
+<dt><code class="docutils literal"><span class="pre">null</span></code> or <code class="docutils literal"><span class="pre">'null'</span></code></dt>
 <dd>Show nothing.</dd>
-<dt><tt class="docutils literal"><span class="pre">'stroke-width'</span></tt></dt>
-<dd>Show a stroke width picker and set the tool&#8217;s <tt class="docutils literal"><span class="pre">strokeWidth</span></tt> property.</dd>
-<dt><tt class="docutils literal"><span class="pre">'font'</span></tt></dt>
-<dd>Set the tool&#8217;s <tt class="docutils literal"><span class="pre">font</span></tt> property to a canvas-compatible font string.</dd>
+<dt><code class="docutils literal"><span class="pre">'stroke-width'</span></code></dt>
+<dd>Show a stroke width picker and set the tool&#8217;s <code class="docutils literal"><span class="pre">strokeWidth</span></code> property.</dd>
+<dt><code class="docutils literal"><span class="pre">'font'</span></code></dt>
+<dd>Set the tool&#8217;s <code class="docutils literal"><span class="pre">font</span></code> property to a canvas-compatible font string.</dd>
 </dl>
 </dd>
 </dl>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// take lc as constructor arg</span>
   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
   <span class="k">return</span> <span class="p">{</span>
@@ -111,7 +111,7 @@ available to add new possibilities. The built-in values are:</p>
     <span class="nx">iconName</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
 
     <span class="nx">optionsStyle</span><span class="o">:</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">,</span>
-    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">opts</span><span class="p">.</span><span class="nx">defaultStrokeWidth</span><span class="p">,</span>
     <span class="c1">// ...more to follow</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -125,20 +125,20 @@ available to add new possibilities. The built-in values are:</p>
 <div class="section" id="simple-api">
 <h2>Simple API<a class="headerlink" href="#simple-api" title="Permalink to this headline">¶</a></h2>
 <p>To implement a tool using the &#8220;simple&#8221; API, you just need to implement three
-<em>lifecycle methods</em>: <tt class="docutils literal"><span class="pre">begin</span></tt>, <tt class="docutils literal"><span class="pre">continue</span></tt>, and <tt class="docutils literal"><span class="pre">end</span></tt>.</p>
+<em>lifecycle methods</em>: <code class="docutils literal"><span class="pre">begin</span></code>, <code class="docutils literal"><span class="pre">continue</span></code>, and <code class="docutils literal"><span class="pre">end</span></code>.</p>
 <p>Here&#8217;s an alternate version of the line tool.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This code block hasn&#8217;t been tested, so you might have to file a bug report
 and get it fixed.</p>
 </div>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// take lc as constructor arg</span>
   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
   <span class="k">return</span> <span class="p">{</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;MyTool&#39;</span><span class="p">,</span>
     <span class="nx">iconName</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
-    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">opts</span><span class="p">.</span><span class="nx">defaultStrokeWidth</span><span class="p">,</span>
     <span class="nx">optionsStyle</span><span class="o">:</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">,</span>
 
     <span class="nx">begin</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
@@ -174,19 +174,14 @@ and get it fixed.</p>
 <p>If you want more sophisticated behavior than just touch-drag-release, you can
 attach event handlers and listen to pointer events and do anything you like.</p>
 <p>Here&#8217;s the same tool implemented using the normal API.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This code block hasn&#8217;t been tested, so you might have to file a bug report
-and get it fixed.</p>
-</div>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">MyTool</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// take lc as constructor arg</span>
   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
   <span class="k">return</span> <span class="p">{</span>
     <span class="nx">usesSimpleAPI</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>  <span class="c1">// DO NOT FORGET THIS!!!</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;MyTool&#39;</span><span class="p">,</span>
     <span class="nx">iconName</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
-    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">strokeWidth</span><span class="o">:</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">opts</span><span class="p">.</span><span class="nx">defaultStrokeWidth</span><span class="p">,</span>
     <span class="nx">optionsStyle</span><span class="o">:</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">,</span>
 
     <span class="nx">didBecomeActive</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lc</span><span class="p">)</span> <span class="p">{</span>
@@ -238,9 +233,12 @@ and get it fixed.</p>
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>Tools can call any method on the given <a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> object.
+<p>Tools can call any method on the given <a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><code class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></code></a> object.
 Usually you&#8217;ll be drawing and adding shapes, but you can also set colors, pan,
-zoom, trigger events, and more.</p>
+zoom, trigger events, and more. If you&#8217;re feeling adventurous, you can add
+new DOM nodes to <code class="docutils literal"><span class="pre">lc.containerEl</span></code> with on-screen UI, like the text and
+polygon tools do. Just make sure you clean up when your tool is deactivated!</p>
+<p>There may eventually be a better API for adding UI to tools.</p>
 </div>
 <div class="section" id="options-styles">
 <h2>Options styles<a class="headerlink" href="#options-styles" title="Permalink to this headline">¶</a></h2>
@@ -250,15 +248,15 @@ zoom, trigger events, and more.</p>
 minor changes to your custom tools in the future when we improve it.</p>
 </div>
 <p>When you activate a tool, the bottom toolbar changes to show the tool&#8217;s current
-state. The two built-in options styles are <tt class="docutils literal"><span class="pre">'stroke-width'</span></tt> and <tt class="docutils literal"><span class="pre">font</span></tt>.</p>
-<p>The <tt class="docutils literal"><span class="pre">stroke-width</span></tt> style will &#8220;magically&#8221; set <tt class="docutils literal"><span class="pre">tool.strokeWidth</span></tt> on the
+state. The two built-in options styles are <code class="docutils literal"><span class="pre">'stroke-width'</span></code> and <code class="docutils literal"><span class="pre">font</span></code>.</p>
+<p>The <code class="docutils literal"><span class="pre">stroke-width</span></code> style will &#8220;magically&#8221; set <code class="docutils literal"><span class="pre">tool.strokeWidth</span></code> on the
 active tool when the user clicks an option.</p>
-<p>The <tt class="docutils literal"><span class="pre">font</span></tt> style will set <tt class="docutils literal"><span class="pre">tool.text</span></tt> to the user-entered text, and
-<tt class="docutils literal"><span class="pre">tool.font</span></tt> to a canvas-compatible font string like <tt class="docutils literal"><span class="pre">italic</span> <span class="pre">18px</span> <span class="pre">Garamond</span></tt>.</p>
+<p>The <code class="docutils literal"><span class="pre">font</span></code> style will set <code class="docutils literal"><span class="pre">tool.text</span></code> to the user-entered text, and
+<code class="docutils literal"><span class="pre">tool.font</span></code> to a canvas-compatible font string like <code class="docutils literal"><span class="pre">italic</span> <span class="pre">18px</span> <span class="pre">Garamond</span></code>.</p>
 <p>To define your own options style, use this function:</p>
 <dl class="function">
 <dt id="LC.defineOptionsStyle">
-<tt class="descclassname">LC.</tt><tt class="descname">defineOptionsStyle</tt><big>(</big><em>identifier</em>, <em>ReactComponent</em><big>)</big><a class="headerlink" href="#LC.defineOptionsStyle" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">LC.</code><code class="descname">defineOptionsStyle</code><span class="sig-paren">(</span><em>identifier</em>, <em>ReactComponent</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.defineOptionsStyle" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -266,8 +264,8 @@ active tool when the user clicks an option.</p>
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>identifier</strong> &#8211; String used as the value of <cite>tool.optionsStyle</cite> to attach this options
 style to that tool.</li>
-<li><strong>ReactComponent</strong> &#8211; A React component taking the props <tt class="docutils literal"><span class="pre">lc</span></tt> and <tt class="docutils literal"><span class="pre">tool</span></tt>. <tt class="docutils literal"><span class="pre">lc</span></tt> is the
-<a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> instance, and <tt class="docutils literal"><span class="pre">tool</span></tt> is the tool instance.
+<li><strong>ReactComponent</strong> &#8211; A React component taking the props <code class="docutils literal"><span class="pre">lc</span></code> and <code class="docutils literal"><span class="pre">tool</span></code>. <code class="docutils literal"><span class="pre">lc</span></code> is the
+<a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><code class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></code></a> instance, and <code class="docutils literal"><span class="pre">tool</span></code> is the tool instance.
 This component will be inserted into the bottom toolbar.</li>
 </ul>
 </td>
@@ -276,8 +274,8 @@ This component will be inserted into the bottom toolbar.</li>
 </table>
 </dd></dl>
 
-<p>For examples, read the source files <tt class="docutils literal"><span class="pre">src/optionsStyles/stroke-width.coffee</span></tt>
-and <tt class="docutils literal"><span class="pre">src/optionsStyles/font.coffee</span></tt>. If you need additional assistance, and
+<p>For examples, read the source files <code class="docutils literal"><span class="pre">src/optionsStyles/stroke-width.coffee</span></code>
+and <code class="docutils literal"><span class="pre">src/optionsStyles/font.coffee</span></code>. If you need additional assistance, and
 <em>already understand React.js</em>, please ask the mailing list for help. Our
 response time is great.</p>
 <p>You should open GitHub issues if you would like specific UI or code
@@ -290,7 +288,7 @@ generalized option style would helpful.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -302,8 +300,8 @@ generalized option style would helpful.</p>
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.8.tar.gz">
-		Download v0.4.8
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.9.tar.gz">
+		Download v0.4.9
 	</a>
 </p>
 <p>
@@ -352,7 +350,7 @@ generalized option style would helpful.</p>
   </div>
   <footer id="pagefooter">&copy; 2012-2015 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.2b3
+      1.3.1
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 
