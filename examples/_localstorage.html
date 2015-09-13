@@ -6,10 +6,10 @@
       document.getElementsByClassName('literally localstorage')[0]);
     var localStorageKey = 'drawing'
     if (localStorage.getItem(localStorageKey)) {
-      lc.loadSnapshotJSON(localStorage.getItem(localStorageKey));
+      lc.loadSnapshot(JSON.parse(localStorage.getItem(localStorageKey)));
     }
     lc.on('drawingChange', function() {
-      localStorage.setItem(localStorageKey, lc.getSnapshotJSON());
+      localStorage.setItem(localStorageKey, JSON.stringify(lc.getSnapshot()));
     });
   });
 </script>
