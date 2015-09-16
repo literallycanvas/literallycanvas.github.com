@@ -118,7 +118,7 @@ Initializing normally
         A list of possible stroke widths. Defaults to
         ``[1, 2, 5, 10, 20, 30]``.
 
-    ``defaultStrokeWidths``
+    ``defaultStrokeWidth``
         Default stroke width for all shapes. Defaults to ``5``.
 
     ``watermarkImage``
