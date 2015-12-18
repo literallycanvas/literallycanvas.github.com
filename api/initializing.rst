@@ -48,16 +48,43 @@ Initializing normally
         affected by the Clear button, :js:func:`loadSnapshot`,
         or the eraser tool.
 
+    ``snapshot``
+        Snapshot to load immediately. If the snapshot contains values for
+        image size, colors, or background shapes, the values in the snapshot
+        will override the values passed as options.
+
+        Snapshots are created with :js:func:`getSnapshot` and loaded after
+        initialization with :js:func:`loadSnapshot`.
+
     ``keyboardShortcuts``
         Enable panning with the arrow keys. Defaults to ``true``.
 
+        .. deprecated:: 0.4.9
+
+        You can replicate this option with a tiny bit of code:
+
+        .. code-block:: javascript
+
+          document.addEventListener('keydown', function(e) {
+            if (e.keyCode == 37) lc.pan(-10, 0);
+            if (e.keyCode == 38) lc.pan(0, -10);
+            if (e.keyCode == 39) lc.pan(10, 0);
+            if (e.keyCode == 40) lc.pan(0, 10);
+            if (e.keyCode >= 37 && e.keyCode <= 40) {
+              e.preventDefault(); // prevents keyboard page scrolling!
+              lc.repaintAllLayers();
+            }
+          });
+
     ``toolbarPosition``
-        If ``'top'``, the toolbar will be at the top. Otherwise, it will be
-        at the bottom.
+
+        * ``'bottom'`` (default)
+        * ``'top'``
+        * ``'hidden'``
 
     ``tools``
         A list of tools to enable. The default value, accessible at
-        ``LC.defaultTools``, is:
+        :js:attr:`LC.defaultTools`, is:
 
         .. code-block:: javascript
 
@@ -86,6 +113,13 @@ Initializing normally
                 tools: [LC.tools.Pencil, LC.tools.Eraser, LC.tools.Line,
                   LC.tools.Rectangle, LC.tools.Text, LC.tools.Eyedropper]
             });
+
+    ``strokeWidths``
+        A list of possible stroke widths. Defaults to
+        ``[1, 2, 5, 10, 20, 30]``.
+
+    ``defaultStrokeWidth``
+        Default stroke width for all shapes. Defaults to ``5``.
 
     ``watermarkImage``
         An image to display behind the drawing. The image will be centered.

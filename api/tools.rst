@@ -39,7 +39,7 @@ For both APIs, a tool is an object with a specific set of keys.
 
 .. code-block:: javascript
 
-  var MyTool = function() {
+  var MyTool = function(lc) {  // take lc as constructor arg
     var self = this;
 
     return {
@@ -47,7 +47,7 @@ For both APIs, a tool is an object with a specific set of keys.
       iconName: 'line',
 
       optionsStyle: 'stroke-width',
-      strokeWidth: 2,
+      strokeWidth: lc.opts.defaultStrokeWidth,
       // ...more to follow
     }
   };
@@ -72,13 +72,13 @@ Here's an alternate version of the line tool.
 
 .. code-block:: javascript
 
-  var MyTool = function() {
+  var MyTool = function(lc) {  // take lc as constructor arg
     var self = this;
 
     return {
       name: 'MyTool',
       iconName: 'line',
-      strokeWidth: 2,
+      strokeWidth: lc.opts.defaultStrokeWidth,
       optionsStyle: 'stroke-width',
 
       begin: function(x, y, lc) {
@@ -115,21 +115,16 @@ attach event handlers and listen to pointer events and do anything you like.
 
 Here's the same tool implemented using the normal API.
 
-.. note::
-
-  This code block hasn't been tested, so you might have to file a bug report
-  and get it fixed.
-
 .. code-block:: javascript
 
-  var MyTool = function() {
+  var MyTool = function(lc) {  // take lc as constructor arg
     var self = this;
 
     return {
       usesSimpleAPI: false,  // DO NOT FORGET THIS!!!
       name: 'MyTool',
       iconName: 'line',
-      strokeWidth: 2,
+      strokeWidth: lc.opts.defaultStrokeWidth,
       optionsStyle: 'stroke-width',
 
       didBecomeActive: function(lc) {
@@ -137,12 +132,15 @@ Here's the same tool implemented using the normal API.
           self.currentShape = LC.createShape('Line', {
             x1: pt.x, y1: pt.y, x2: pt.x, y2: pt.y,
             self.strokeWidth, color: lc.getColor('primary')});
+          lc.setShapesInProgress([self.currentShape]);
+          lc.repaintLayer('main');
         };
 
         var onPointerDrag = function(pt) {
           self.currentShape.x2 = pt.x;
           self.currentShape.y2 = pt.y;
           lc.setShapesInProgress([self.currentShape]);
+          lc.repaintLayer('main');
         };
 
         var onPointerUp = function(pt) {
@@ -158,10 +156,10 @@ Here's the same tool implemented using the normal API.
 
         // lc.on() returns a function that unsubscribes us. capture it.
         self.unsubscribeFuncs = [
-          lc.on('pointerdown', onPointerDown),
-          lc.on('pointerdrag', onPointerDrag),
-          lc.on('pointerup', onPointerUp),
-          lc.on('pointermove', onPointerMove)
+          lc.on('lc-pointerdown', onPointerDown),
+          lc.on('lc-pointerdrag', onPointerDrag),
+          lc.on('lc-pointerup', onPointerUp),
+          lc.on('lc-pointermove', onPointerMove)
         ];
       },
 
@@ -169,6 +167,7 @@ Here's the same tool implemented using the normal API.
         // call all the unsubscribe functions
         self.unsubscribeFuncs.map(function(f) { f() });
       }
+    }
   };
 
   LC.init(el, {
@@ -178,7 +177,11 @@ Here's the same tool implemented using the normal API.
 
 Tools can call any method on the given :js:class:`LiterallyCanvas` object.
 Usually you'll be drawing and adding shapes, but you can also set colors, pan,
-zoom, trigger events, and more.
+zoom, trigger events, and more. If you're feeling adventurous, you can add
+new DOM nodes to ``lc.containerEl`` with on-screen UI, like the text and
+polygon tools do. Just make sure you clean up when your tool is deactivated!
+
+There may eventually be a better API for adding UI to tools.
 
 Options styles
 --------------

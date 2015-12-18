@@ -1,6 +1,17 @@
 Utilities
 =========
 
+.. js:function:: LC.util.addImageOnload(image, callback)
+
+  .. versionadded: 0.4.9
+
+  Ensures **callback** is called when the image loads, without replacing any
+  existing callbacks.
+
+.. js:function:: LC.util.classSet({className: bool})
+
+  Replaces ``React.addons.classSet``.
+
 .. js:function:: LC.util.combineCanvases(a, b)
 
   :returns: A canvas containing *b* rendered on top of *a*, sized to contain

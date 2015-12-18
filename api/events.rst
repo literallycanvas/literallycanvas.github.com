@@ -73,15 +73,26 @@ Drawing changes
 Tool state
 ----------
 
-Three types events are fired during the lifecycle of a tool operation. Each
-tool has a different set of properties, but the tools are passed as arguments
-to the event handler.
-
 ``drawStart`` *({tool})*
+
+  .. deprecated:: 0.4.9
+
+  This event only fires for tools that use the "simple" version of the tool
+  API. It will go away in version 0.5.
 
 ``drawContinue`` *({tool})*
 
+  .. deprecated:: 0.4.9
+
+  This event only fires for tools that use the "simple" version of the tool
+  API. It will go away in version 0.5.
+
 ``drawEnd`` *({tool})*
+
+  .. deprecated:: 0.4.9
+
+  This event only fires for tools that use the "simple" version of the tool
+  API. It will go away in version 0.5.
 
 ``toolChange`` *({tool})*
   The given tool has just been made active.
@@ -102,14 +113,20 @@ View changes
 Pointer
 -------
 
-``pointerdown`` *({x, y})*
+.. note::
+
+  These didn't have the ``lc-`` prefix from v.4.5-0.4.7, until someone realized
+  they conflict with Internet Explorer's one-browser-wonder pointer events
+  standard.
+
+``lc-pointerdown`` *({x, y})*
   The mouse button has just pressed down or a touch has begun.
 
-``pointerup`` *({x, y})*
+``lc-pointerup`` *({x, y})*
   The mouse button has just released or a touch has ended.
 
-``pointermove`` *({x, y})*
+``lc-pointermove`` *({x, y})*
   The mouse moved while the mouse button was not pressed.
 
-``pointerdrag`` *({x, y})*
+``lc-pointerdrag`` *({x, y})*
   The mouse moved while the mouse button was pressed, or a touch moved.
