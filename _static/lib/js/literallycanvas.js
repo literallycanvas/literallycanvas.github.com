@@ -2780,14 +2780,20 @@ renderShapeToSVG = function(shape, opts) {
 };
 
 defineSVGRenderer('Rectangle', function(shape) {
-  var x, y;
-  x = shape.x;
-  y = shape.y;
+  var height, width, x, x1, x2, y, y1, y2;
+  x1 = shape.x;
+  y1 = shape.y;
+  x2 = shape.x + shape.width;
+  y2 = shape.y + shape.height;
+  x = Math.min(x1, x2);
+  y = Math.min(y1, y2);
+  width = Math.max(x1, x2) - x;
+  height = Math.max(y1, y2) - y;
   if (shape.strokeWidth % 2 !== 0) {
     x += 0.5;
     y += 0.5;
   }
-  return "<rect x='" + x + "' y='" + y + "' width='" + shape.width + "' height='" + shape.height + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
+  return "<rect x='" + x + "' y='" + y + "' width='" + width + "' height='" + height + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
 });
 
 defineSVGRenderer('SelectionBox', function(shape) {
@@ -2800,7 +2806,7 @@ defineSVGRenderer('Ellipse', function(shape) {
   halfHeight = Math.floor(shape.height / 2);
   centerX = shape.x + halfWidth;
   centerY = shape.y + halfHeight;
-  return "<ellipse cx='" + centerX + "' cy='" + centerY + "' rx='" + halfWidth + "' ry='" + halfHeight + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
+  return "<ellipse cx='" + centerX + "' cy='" + centerY + "' rx='" + (Math.abs(halfWidth)) + "' ry='" + (Math.abs(halfHeight)) + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
 });
 
 defineSVGRenderer('Image', function(shape) {
@@ -2828,7 +2834,7 @@ defineSVGRenderer('Line', function(shape) {
   if (shape.endCapShapes[1]) {
     capString += lineEndCapShapes[shape.endCapShapes[1]].svg(x2, y2, Math.atan2(y2 - y1, x2 - x1), arrowWidth, shape.color);
   }
-  return "<g> <line x1='" + x1 + "' y1='" + y1 + "' x2='" + x2 + "' y2='" + y2 + "' " + dashString + " stroke-linecap='" + shape.capStyle + "' stroke='" + shape.color + "'stroke-width='" + shape.strokeWidth + "' /> " + capString + " <g>";
+  return "<g> <line x1='" + x1 + "' y1='" + y1 + "' x2='" + x2 + "' y2='" + y2 + "' " + dashString + " stroke-linecap='" + shape.capStyle + "' stroke='" + shape.color + " 'stroke-width='" + shape.strokeWidth + "' /> " + capString + " </g>";
 });
 
 defineSVGRenderer('LinePath', function(shape) {
@@ -2836,7 +2842,7 @@ defineSVGRenderer('LinePath', function(shape) {
     var offset;
     offset = p.strokeWidth % 2 === 0 ? 0.0 : 0.5;
     return "" + (p.x + offset) + "," + (p.y + offset);
-  }).join(' ')) + "' stroke='" + shape.points[0].color + "' stroke-width='" + shape.points[0].size + "' />";
+  }).join(' ')) + "' stroke='" + shape.points[0].color + "' stroke-linecap='round' stroke-width='" + shape.points[0].size + "' />";
 });
 
 defineSVGRenderer('ErasedLinePath', function(shape) {
@@ -4315,15 +4321,21 @@ classSet = _dereq_('../core/util').classSet;
 
 module.exports = React.createClass({
   displayName: 'StrokeWidthPicker',
-  getState: function() {
+  getState: function(tool) {
+    if (tool == null) {
+      tool = this.props.tool;
+    }
     return {
-      strokeWidth: this.props.tool.strokeWidth
+      strokeWidth: tool.strokeWidth
     };
   },
   getInitialState: function() {
     return this.getState();
   },
-  mixins: [createSetStateOnEventMixin('toolChange')],
+  mixins: [createSetStateOnEventMixin('setStrokeWidth')],
+  componentWillReceiveProps: function(props) {
+    return this.setState(this.getState(props.tool));
+  },
   render: function() {
     var circle, div, li, strokeWidths, svg, ul, _ref;
     _ref = React.DOM, ul = _ref.ul, li = _ref.li, svg = _ref.svg, circle = _ref.circle, div = _ref.div;
@@ -4341,8 +4353,7 @@ module.exports = React.createClass({
         }, div({
           className: buttonClassName,
           onClick: function() {
-            _this.props.lc.trigger('setStrokeWidth', strokeWidth);
-            return _this.setState(_this.getState());
+            return _this.props.lc.trigger('setStrokeWidth', strokeWidth);
           }
         }, svg({
           width: buttonSize - 2,
