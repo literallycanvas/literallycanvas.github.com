@@ -35,7 +35,7 @@
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
   </head>
-  <body role="document">
+  <body>
   <header id="pageheader"><h1><a href="../index.html ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -63,7 +63,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body" role="main">
+          <div class="body">
             
   <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
@@ -75,7 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="initializing.html#breaking-changes-since-v0-3">Breaking changes since v0.3</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="LiterallyCanvas.html">The <code class="docutils literal"><span class="pre">LiterallyCanvas</span></code> object</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="LiterallyCanvas.html">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="LiterallyCanvas.html#saving-and-loading">Saving and loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LiterallyCanvas.html#exporting-images">Exporting images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LiterallyCanvas.html#event-subscription">Event subscription</a></li>
@@ -116,34 +116,34 @@
 <h2>Uncategorized functions<a class="headerlink" href="#uncategorized-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="LC.registerJQueryPlugin">
-<code class="descclassname">LC.</code><code class="descname">registerJQueryPlugin</code><span class="sig-paren">(</span><em>_$</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.registerJQueryPlugin" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">LC.</tt><tt class="descname">registerJQueryPlugin</tt><big>(</big><em>_$</em><big>)</big><a class="headerlink" href="#LC.registerJQueryPlugin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enable the jQuery plugin on the given instance of jQuery. You only need to
-call this if <code class="docutils literal"><span class="pre">window.$</span></code> does not exist or you want to use a different
-instance of <code class="docutils literal"><span class="pre">$</span></code>.</p>
+call this if <tt class="docutils literal"><span class="pre">window.$</span></tt> does not exist or you want to use a different
+instance of <tt class="docutils literal"><span class="pre">$</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="LC.setDefaultImageURLPrefix">
-<code class="descclassname">LC.</code><code class="descname">setDefaultImageURLPrefix</code><span class="sig-paren">(</span><em>defaultImageURLPrefix</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.setDefaultImageURLPrefix" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">LC.</tt><tt class="descname">setDefaultImageURLPrefix</tt><big>(</big><em>defaultImageURLPrefix</em><big>)</big><a class="headerlink" href="#LC.setDefaultImageURLPrefix" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
-<li><strong>defaultImageURLPrefix</strong> &#8211; Global default value of <a class="reference internal" href="initializing.html#opt-imageurlprefix"><span>imageURLPrefix</span></a>.</li>
+<li><strong>defaultImageURLPrefix</strong> &#8211; Global default value of <a class="reference internal" href="initializing.html#opt-imageurlprefix"><em>imageURLPrefix</em></a>.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>Set the global default value of <a class="reference internal" href="initializing.html#opt-imageurlprefix"><span>imageURLPrefix</span></a>.
+<p>Set the global default value of <a class="reference internal" href="initializing.html#opt-imageurlprefix"><em>imageURLPrefix</em></a>.
 This function is useful when you&#8217;re making a web site with many instances of
 Literally Canvas (like, for example, this documentation).</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="LC.defaultTools">
-<code class="descclassname">LC.</code><code class="descname">defaultTools</code><a class="headerlink" href="#LC.defaultTools" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">LC.</tt><tt class="descname">defaultTools</tt><a class="headerlink" href="#LC.defaultTools" title="Permalink to this definition">¶</a></dt>
 <dd><p>The array of default tools.</p>
 </dd></dl>
 
@@ -151,23 +151,23 @@ Literally Canvas (like, for example, this documentation).</p>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference internal" href="initializing.html#LC.init" title="LC.init"><code class="xref js js-func docutils literal"><span class="pre">LC.init()</span></code></a></li>
-<li><a class="reference internal" href="initializing.html#_S_.literallycanvas" title="$.literallycanvas"><code class="xref js js-func docutils literal"><span class="pre">$.literallycanvas()</span></code></a></li>
-<li><a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><code class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></code></a></li>
-<li><a class="reference internal" href="shapes.html#LC.createShape" title="LC.createShape"><code class="xref js js-func docutils literal"><span class="pre">LC.createShape()</span></code></a></li>
-<li><a class="reference internal" href="shapes.html#LC.defineShape" title="LC.defineShape"><code class="xref js js-func docutils literal"><span class="pre">LC.defineShape()</span></code></a></li>
-<li><a class="reference internal" href="shapes.html#LC.JSONToShape" title="LC.JSONToShape"><code class="xref js js-func docutils literal"><span class="pre">LC.JSONToShape()</span></code></a></li>
-<li><a class="reference internal" href="shapes.html#LC.renderShapesToCanvas" title="LC.renderShapesToCanvas"><code class="xref js js-func docutils literal"><span class="pre">LC.renderShapesToCanvas()</span></code></a></li>
-<li><a class="reference internal" href="shapes.html#LC.renderShapesToSVG" title="LC.renderShapesToSVG"><code class="xref js js-func docutils literal"><span class="pre">LC.renderShapesToSVG()</span></code></a></li>
-<li><a class="reference internal" href="rendering_snapshots.html#LC.renderSnapshotToImage" title="LC.renderSnapshotToImage"><code class="xref js js-func docutils literal"><span class="pre">LC.renderSnapshotToImage()</span></code></a></li>
-<li><a class="reference internal" href="rendering_snapshots.html#LC.renderSnapshotToSVG" title="LC.renderSnapshotToSVG"><code class="xref js js-func docutils literal"><span class="pre">LC.renderSnapshotToSVG()</span></code></a></li>
-<li><a class="reference internal" href="shapes.html#LC.snapshotJSONToShapes" title="LC.snapshotJSONToShapes"><code class="xref js js-func docutils literal"><span class="pre">LC.snapshotJSONToShapes()</span></code></a> (deprecated)</li>
-<li><a class="reference internal" href="shapes.html#LC.snapshotToShapes" title="LC.snapshotToShapes"><code class="xref js js-func docutils literal"><span class="pre">LC.snapshotToShapes()</span></code></a></li>
-<li><a class="reference internal" href="#LC.defaultTools" title="LC.defaultTools"><code class="xref js js-attr docutils literal"><span class="pre">LC.defaultTools</span></code></a></li>
-<li><a class="reference internal" href="tools.html#LC.defineOptionsStyle" title="LC.defineOptionsStyle"><code class="xref js js-func docutils literal"><span class="pre">LC.defineOptionsStyle()</span></code></a></li>
-<li><a class="reference internal" href="#LC.registerJQueryPlugin" title="LC.registerJQueryPlugin"><code class="xref js js-func docutils literal"><span class="pre">LC.registerJQueryPlugin()</span></code></a></li>
-<li><a class="reference internal" href="#LC.setDefaultImageURLPrefix" title="LC.setDefaultImageURLPrefix"><code class="xref js js-func docutils literal"><span class="pre">LC.setDefaultImageURLPrefix()</span></code></a></li>
-<li><a class="reference internal" href="localization.html#LC.localize" title="LC.localize"><code class="xref js js-func docutils literal"><span class="pre">LC.localize()</span></code></a></li>
+<li><a class="reference internal" href="initializing.html#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a></li>
+<li><a class="reference internal" href="initializing.html#_S_.literallycanvas" title="$.literallycanvas"><tt class="xref js js-func docutils literal"><span class="pre">$.literallycanvas()</span></tt></a></li>
+<li><a class="reference internal" href="LiterallyCanvas.html#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.createShape" title="LC.createShape"><tt class="xref js js-func docutils literal"><span class="pre">LC.createShape()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.defineShape" title="LC.defineShape"><tt class="xref js js-func docutils literal"><span class="pre">LC.defineShape()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.JSONToShape" title="LC.JSONToShape"><tt class="xref js js-func docutils literal"><span class="pre">LC.JSONToShape()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.renderShapesToCanvas" title="LC.renderShapesToCanvas"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderShapesToCanvas()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.renderShapesToSVG" title="LC.renderShapesToSVG"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderShapesToSVG()</span></tt></a></li>
+<li><a class="reference internal" href="rendering_snapshots.html#LC.renderSnapshotToImage" title="LC.renderSnapshotToImage"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderSnapshotToImage()</span></tt></a></li>
+<li><a class="reference internal" href="rendering_snapshots.html#LC.renderSnapshotToSVG" title="LC.renderSnapshotToSVG"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderSnapshotToSVG()</span></tt></a></li>
+<li><a class="reference internal" href="shapes.html#LC.snapshotJSONToShapes" title="LC.snapshotJSONToShapes"><tt class="xref js js-func docutils literal"><span class="pre">LC.snapshotJSONToShapes()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="shapes.html#LC.snapshotToShapes" title="LC.snapshotToShapes"><tt class="xref js js-func docutils literal"><span class="pre">LC.snapshotToShapes()</span></tt></a></li>
+<li><a class="reference internal" href="#LC.defaultTools" title="LC.defaultTools"><tt class="xref js js-attr docutils literal"><span class="pre">LC.defaultTools</span></tt></a></li>
+<li><a class="reference internal" href="tools.html#LC.defineOptionsStyle" title="LC.defineOptionsStyle"><tt class="xref js js-func docutils literal"><span class="pre">LC.defineOptionsStyle()</span></tt></a></li>
+<li><a class="reference internal" href="#LC.registerJQueryPlugin" title="LC.registerJQueryPlugin"><tt class="xref js js-func docutils literal"><span class="pre">LC.registerJQueryPlugin()</span></tt></a></li>
+<li><a class="reference internal" href="#LC.setDefaultImageURLPrefix" title="LC.setDefaultImageURLPrefix"><tt class="xref js js-func docutils literal"><span class="pre">LC.setDefaultImageURLPrefix()</span></tt></a></li>
+<li><a class="reference internal" href="localization.html#LC.localize" title="LC.localize"><tt class="xref js js-func docutils literal"><span class="pre">LC.localize()</span></tt></a></li>
 <li><a class="reference internal" href="util.html"><em>LC.util</em></a></li>
 </ul>
 </div>
@@ -177,7 +177,7 @@ Literally Canvas (like, for example, this documentation).</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -235,7 +235,7 @@ Literally Canvas (like, for example, this documentation).</p>
   </div>
   <footer id="pagefooter">&copy; 2012-2015 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.1
+      1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 
