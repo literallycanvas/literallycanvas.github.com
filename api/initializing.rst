@@ -121,6 +121,8 @@ Initializing normally
     ``defaultStrokeWidth``
         Default stroke width for all shapes. Defaults to ``5``.
 
+    .. _opt-watermarkImage:
+
     ``watermarkImage``
         An image to display behind the drawing. The image will be centered.
         It will not pan with the drawing.
@@ -185,6 +187,7 @@ handlers or otherwise use the functionality of
 
     :type onInit: function(:js:class:`LiterallyCanvas`)
 
+
 Translating the examples to jQuery form
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -221,6 +224,7 @@ Alternatively, you can just use jQuery to get the first argument to
   lc.on('drawingChange', function() {
     console.log("The drawing was changed.");
   });
+
 
 Breaking changes since v0.3
 ---------------------------

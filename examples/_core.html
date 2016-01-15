@@ -1,0 +1,50 @@
+<div class="literally core"></div>
+<div class="tools">
+  <a id="tool-pencil">pencil</a>
+  |
+  <a id="tool-eraser">eraser</a>
+</div>
+
+<!-- replace window.LC with core build version -->
+<script src="/_static/lib/js/literallycanvas-core.js"></script>
+
+<script>
+  $(document).ready(function(){
+    var lc = LC.init(document.getElementsByClassName('literally core')[0]);
+
+    <!-- custom UI example... -->
+    var tools = [
+      {
+        name: 'pencil',
+        el: document.getElementById('tool-pencil'),
+        tool: new LC.tools.Pencil(lc)
+      },
+      {
+        name: 'eraser',
+        el: document.getElementById('tool-eraser'),
+        tool: new LC.tools.Eraser(lc)
+      }
+    ];
+
+    var activateTool = function(t) {
+        lc.setTool(t.tool);
+
+        tools.forEach(function(t2) {
+          if (t == t2) {
+            t2.el.style.backgroundColor = 'yellow';
+          } else {
+            t2.el.style.backgroundColor = 'transparent';
+          }
+        });
+    }
+
+    tools.forEach(function(t) {
+      t.el.style.cursor = "pointer";
+      t.el.onclick = function(e) {
+        e.preventDefault();
+        activateTool(t);
+      };
+    });
+    activateTool(tools[0]);
+  });
+</script>

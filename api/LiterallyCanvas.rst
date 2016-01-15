@@ -19,10 +19,11 @@ about getting a reference to this object.
 
 .. js:attribute:: opts
 
-    A copy of the options passed to :js:func:`LC.init`. For example, if you
-    were to implement your own tool that used a stroke width, you'd want to
-    set your initial value to ``lc.opts.defaultStrokeWidth``.
-
+    A copy of the options passed to :js:func:`LC.init` with the defaults filled
+    in. For example, if you were to implement your own tool that used a stroke
+    width, you'd want to set your initial value to
+    ``lc.opts.defaultStrokeWidth``.
+    
 Saving and loading
 ------------------
 
@@ -218,6 +219,11 @@ Changing the drawing
 
   This is most useful as an efficient way to draw line paths that the user is
   currently drawing.
+
+.. js:function:: setWatermarkImage(image)
+
+  Set or replace the watermark image behind the drawing. See the
+  :ref:`watermarkImage <opt-watermarkImage>` option.
 
 Getting information
 -------------------

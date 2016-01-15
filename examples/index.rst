@@ -16,3 +16,4 @@ below them.
     localstorage.rst
     export.rst
     imgur.rst
+    core.rst
