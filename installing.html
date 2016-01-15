@@ -82,6 +82,10 @@
 <p class="last">Don&#8217;t try to use <tt class="docutils literal"><span class="pre">bower</span></tt> with the <tt class="docutils literal"><span class="pre">literallycanvas/master</span></tt> branch. It
 won&#8217;t work. The repo used by the registry is up to date.</p>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">NPM support is coming in version 0.4.12.</p>
+</div>
 </div>
 <div class="section" id="include-the-assets-and-write-the-code">
 <h2>Include the assets and write the code<a class="headerlink" href="#include-the-assets-and-write-the-code" title="Permalink to this headline">¶</a></h2>
@@ -118,12 +122,21 @@ as the <tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt>
 
         <span class="cm">/* or if you just love jQuery,</span>
 <span class="cm">            $(&#39;.literally&#39;).literallycanvas({imageURLPrefix: &#39;/static/img&#39;})</span>
+<span class="cm">            or</span>
+<span class="cm">            LC.init($(&#39;.literally&#39;).get(0), {imageURLPrefix: &#39;/static/img&#39;})</span>
 <span class="cm">        */</span>
     <span class="nt">&lt;/script&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="skipping-the-gui-and-the-react-dependency">
+<h2>Skipping the GUI and the React dependency<a class="headerlink" href="#skipping-the-gui-and-the-react-dependency" title="Permalink to this headline">¶</a></h2>
+<p>To use Literally Canvas with no GUI and no React dependency, you can use the
+<em class="dfn">core build</em>. It lives at <tt class="docutils literal"><span class="pre">/js/literallycanvas-core[.min].js</span></tt>. The
+core build works just like the normal build, but it doesn&#8217;t include any of the
+GUI code. Check out the <a class="reference internal" href="examples/core.html"><em>Using the Core Build</em></a> example for details.</p>
 </div>
 </div>
 
@@ -138,6 +151,7 @@ as the <tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt>
 <li><a class="reference internal" href="#">Installing</a><ul>
 <li><a class="reference internal" href="#get-the-assets">Get the assets</a></li>
 <li><a class="reference internal" href="#include-the-assets-and-write-the-code">Include the assets and write the code</a></li>
+<li><a class="reference internal" href="#skipping-the-gui-and-the-react-dependency">Skipping the GUI and the React dependency</a></li>
 </ul>
 </li>
 </ul>

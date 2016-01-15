@@ -101,9 +101,10 @@ element.</p>
 <dl class="attribute">
 <dt id="opts">
 <tt class="descname">opts</tt><a class="headerlink" href="#opts" title="Permalink to this definition">¶</a></dt>
-<dd><p>A copy of the options passed to <a class="reference internal" href="initializing.html#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a>. For example, if you
-were to implement your own tool that used a stroke width, you&#8217;d want to
-set your initial value to <tt class="docutils literal"><span class="pre">lc.opts.defaultStrokeWidth</span></tt>.</p>
+<dd><p>A copy of the options passed to <a class="reference internal" href="initializing.html#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a> with the defaults filled
+in. For example, if you were to implement your own tool that used a stroke
+width, you&#8217;d want to set your initial value to
+<tt class="docutils literal"><span class="pre">lc.opts.defaultStrokeWidth</span></tt>.</p>
 </dd></dl>
 
 <div class="section" id="saving-and-loading">
@@ -383,6 +384,13 @@ beneath it. If the shape&#8217;s renderer supports it, only render the most
 recently changed part of the shape.</p>
 <p>This is most useful as an efficient way to draw line paths that the user is
 currently drawing.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="setWatermarkImage">
+<tt class="descname">setWatermarkImage</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#setWatermarkImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or replace the watermark image behind the drawing. See the
+<a class="reference internal" href="initializing.html#opt-watermarkimage"><em>watermarkImage</em></a> option.</p>
 </dd></dl>
 
 </div>

@@ -20,6 +20,9 @@ You can just |link-pre|\ |version|\ |link-post|. Or use Bower:
     Don't try to use ``bower`` with the ``literallycanvas/master`` branch. It
     won't work. The repo used by the registry is up to date.
 
+.. note::
+    NPM support is coming in version 0.4.12.
+
 .. |link-pre| raw:: html
 
     <a href="https://github.com/literallycanvas/literallycanvas/archive/v
@@ -67,7 +70,17 @@ Here's a basic working setup. Each part is required.
 
             /* or if you just love jQuery,
                 $('.literally').literallycanvas({imageURLPrefix: '/static/img'})
+                or
+                LC.init($('.literally').get(0), {imageURLPrefix: '/static/img'})
             */
         </script>
       </body>
     </html>
+
+Skipping the GUI and the React dependency
+-----------------------------------------
+
+To use Literally Canvas with no GUI and no React dependency, you can use the
+:dfn:`core build`. It lives at ``/js/literallycanvas-core[.min].js``. The
+core build works just like the normal build, but it doesn't include any of the
+GUI code. Check out the :doc:`examples/core` example for details.

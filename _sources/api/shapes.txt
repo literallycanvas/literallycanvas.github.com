@@ -17,6 +17,7 @@ Creating shapes
 .. js:function:: LC.createShape('Image', {x, y, image})
 
   :param x/y: Upper left corner position
+  :param scale: Scale of the image. Defaults to 1.0.
   :param image: A DOM `Image` object
 
   .. note::
