@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installing &mdash; Literally Canvas v0.4.11 docs - HTML5 drawing board - MS Paint in your web browser</title>
+    <title>Installing &mdash; Literally Canvas v0.4.13 docs - HTML5 drawing board - MS Paint in your web browser</title>
     
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.11',
+        VERSION:     '0.4.13',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.11 docs - HTML5 drawing board - MS Paint in your web browser" href="index.html" />
+    <link rel="top" title="Literally Canvas v0.4.13 docs - HTML5 drawing board - MS Paint in your web browser" href="index.html" />
     <link rel="next" title="API" href="api/index.html" />
     <link rel="prev" title="Literally Canvas" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -71,21 +71,13 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Please <a class="reference external" href="http://github.com/literallycanvas/literallycanvas/issues/new">open a GitHub ticket</a> if we can improve this process.</p>
 </div>
-<div class="section" id="get-the-assets">
-<h2>Get the assets<a class="headerlink" href="#get-the-assets" title="Permalink to this headline">¶</a></h2>
-<p>You can just <a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.11.tar.gz">download the tarball</a>. Or use Bower:</p>
-<div class="highlight-sh"><div class="highlight"><pre>bower install literallycanvas
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Don&#8217;t try to use <tt class="docutils literal"><span class="pre">bower</span></tt> with the <tt class="docutils literal"><span class="pre">literallycanvas/master</span></tt> branch. It
-won&#8217;t work. The repo used by the registry is up to date.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">NPM support is coming in version 0.4.12.</p>
-</div>
+<div class="section" id="get-the-code-and-the-assets">
+<h2>Get the code and the assets<a class="headerlink" href="#get-the-code-and-the-assets" title="Permalink to this headline">¶</a></h2>
+<p>You can get the assets from the NPM package, or from
+<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.13.tar.gz">the tarball</a>.</p>
+<p>You can get the source from the tarball as well and include it as a standalone
+JS file, or you can install it from NPM as <tt class="docutils literal"><span class="pre">literallycanvas&#64;0.4.13</span></tt>.</p>
+<p><a class="reference external" href="https://github.com/literallycanvas/literallycanvas-demos">Here are several example installations you can use for reference.</a></p>
 </div>
 <div class="section" id="include-the-assets-and-write-the-code">
 <h2>Include the assets and write the code<a class="headerlink" href="#include-the-assets-and-write-the-code" title="Permalink to this headline">¶</a></h2>
@@ -96,6 +88,8 @@ as the <tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt>
 <li><tt class="docutils literal"><span class="pre">css/literallycanvas.css</span></tt>: Required stylesheet.</li>
 <li><tt class="docutils literal"><span class="pre">js/literallycanvas[.min].js</span></tt>: The magic.</li>
 </ul>
+<div class="section" id="classic-style">
+<h3>Classic Style<a class="headerlink" href="#classic-style" title="Permalink to this headline">¶</a></h3>
 <p>Here&#8217;s a basic working setup. Each part is required.</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
@@ -103,7 +97,8 @@ as the <tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt>
     <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/static/css/literallycanvas.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
 
     <span class="c">&lt;!-- dependency: React.js --&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 
     <span class="c">&lt;!-- Literally Canvas --&gt;</span>
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/static/js/literallycanvas.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -131,12 +126,45 @@ as the <tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt>
 </pre></div>
 </div>
 </div>
+<div class="section" id="react-js-style">
+<h3>React.js Style<a class="headerlink" href="#react-js-style" title="Permalink to this headline">¶</a></h3>
+<p>Literally Canvas can be used as a React component!</p>
+<div class="highlight-html"><pre>&lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- stylesheet --&gt;
+    &lt;link href=&quot;/static/css/literallycanvas.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+    &lt;!-- dependency: React.js --&gt;
+    &lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js&quot;&gt;&lt;/script&gt;
+
+    &lt;!-- Literally Canvas --&gt;
+    &lt;script src=&quot;/static/js/literallycanvas.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
+
+    &lt;script type=&quot;text/babel&quot;&gt;
+        ReactDOM.render(
+            &lt;div&gt;
+                &lt;LC.LiterallyCanvasReactComponent imageURLPrefix=&quot;/static/img&quot; /&gt;
+            &lt;/div&gt;,
+            document.getElementById(&#x27;root&#x27;));
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+</div>
+</div>
 <div class="section" id="skipping-the-gui-and-the-react-dependency">
 <h2>Skipping the GUI and the React dependency<a class="headerlink" href="#skipping-the-gui-and-the-react-dependency" title="Permalink to this headline">¶</a></h2>
 <p>To use Literally Canvas with no GUI and no React dependency, you can use the
 <em class="dfn">core build</em>. It lives at <tt class="docutils literal"><span class="pre">/js/literallycanvas-core[.min].js</span></tt>. The
 core build works just like the normal build, but it doesn&#8217;t include any of the
 GUI code. Check out the <a class="reference internal" href="examples/core.html"><em>Using the Core Build</em></a> example for details.</p>
+<p>Unfortunately, the core build is not yet available on NPM. There is no technical
+reason for this, it just hasn&#8217;t been contributed yet.</p>
 </div>
 </div>
 
@@ -149,15 +177,19 @@ GUI code. Check out the <a class="reference internal" href="examples/core.html">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installing</a><ul>
-<li><a class="reference internal" href="#get-the-assets">Get the assets</a></li>
-<li><a class="reference internal" href="#include-the-assets-and-write-the-code">Include the assets and write the code</a></li>
+<li><a class="reference internal" href="#get-the-code-and-the-assets">Get the code and the assets</a></li>
+<li><a class="reference internal" href="#include-the-assets-and-write-the-code">Include the assets and write the code</a><ul>
+<li><a class="reference internal" href="#classic-style">Classic Style</a></li>
+<li><a class="reference internal" href="#react-js-style">React.js Style</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#skipping-the-gui-and-the-react-dependency">Skipping the GUI and the React dependency</a></li>
 </ul>
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.11.tar.gz">
-		Download v0.4.11
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.13.tar.gz">
+		Download v0.4.13
 	</a>
 </p>
 <p>

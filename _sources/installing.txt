@@ -7,21 +7,16 @@ Installing
 
 .. _open a GitHub ticket: http://github.com/literallycanvas/literallycanvas/issues/new
 
-Get the assets
---------------
+Get the code and the assets
+---------------------------
 
-You can just |link-pre|\ |version|\ |link-post|. Or use Bower:
+You can get the assets from the NPM package, or from
+|link-pre|\ |version|\ |link-post|.
 
-.. code-block:: sh
+You can get the source from the tarball as well and include it as a standalone
+JS file, or you can install it from NPM as ``literallycanvas@0.4.13``.
 
-    bower install literallycanvas
-
-.. note::
-    Don't try to use ``bower`` with the ``literallycanvas/master`` branch. It
-    won't work. The repo used by the registry is up to date.
-
-.. note::
-    NPM support is coming in version 0.4.12.
+`Here are several example installations you can use for reference. <https://github.com/literallycanvas/literallycanvas-demos>`_
 
 .. |link-pre| raw:: html
 
@@ -29,7 +24,7 @@ You can just |link-pre|\ |version|\ |link-post|. Or use Bower:
 
 .. |link-post| raw:: html
 
-    .tar.gz">download the tarball</a>
+    .tar.gz">the tarball</a>
 
 Include the assets and write the code
 -------------------------------------
@@ -41,6 +36,9 @@ The Literally Canvas distribution includes several files. You can put them where
 * ``css/literallycanvas.css``: Required stylesheet.
 * ``js/literallycanvas[.min].js``: The magic.
 
+Classic Style
+~~~~~~~~~~~~~
+
 Here's a basic working setup. Each part is required.
 
 .. code-block:: html
@@ -51,7 +49,8 @@ Here's a basic working setup. Each part is required.
         <link href="/static/css/literallycanvas.css" rel="stylesheet">
 
         <!-- dependency: React.js -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
 
         <!-- Literally Canvas -->
         <script src="/static/js/literallycanvas.js"></script>
@@ -77,6 +76,39 @@ Here's a basic working setup. Each part is required.
       </body>
     </html>
 
+React.js Style
+~~~~~~~~~~~~~~
+
+Literally Canvas can be used as a React component!
+
+.. code-block:: html
+
+    <html>
+      <head>
+        <!-- stylesheet -->
+        <link href="/static/css/literallycanvas.css" rel="stylesheet">
+
+        <!-- dependency: React.js -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+        <!-- Literally Canvas -->
+        <script src="/static/js/literallycanvas.js"></script>
+      </head>
+      <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            ReactDOM.render(
+                <div>
+                    <LC.LiterallyCanvasReactComponent imageURLPrefix="/static/img" />
+                </div>,
+                document.getElementById('root'));
+        </script>
+      </body>
+    </html>
+
 Skipping the GUI and the React dependency
 -----------------------------------------
 
@@ -84,3 +116,6 @@ To use Literally Canvas with no GUI and no React dependency, you can use the
 :dfn:`core build`. It lives at ``/js/literallycanvas-core[.min].js``. The
 core build works just like the normal build, but it doesn't include any of the
 GUI code. Check out the :doc:`examples/core` example for details.
+
+Unfortunately, the core build is not yet available on NPM. There is no technical
+reason for this, it just hasn't been contributed yet.

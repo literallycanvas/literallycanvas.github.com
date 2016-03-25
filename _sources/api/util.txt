@@ -58,6 +58,12 @@ Utilities
   properties to the element's size multiplied by *scale*. (This is necessary
   for environments with ``devicePixelRatio != 1``.)
 
+.. js:function:: LC.util.getDefaultImageRect(shapeBoundingRects, explicitSize={width: 0, height: 0}, margin={top: 0, right: 0, bottom: 0, left: 0})
+  
+  Returns the effective bounds of the canvas. Mostly used as a convenient way
+  to limit the scope of a potentially infinite tool. (For example, a paint
+  bucket shouldn't fill infinite pixels.)
+
 .. js:function:: LC.util.renderShapes(shapes, bounds, scale=1, canvas=null)
 
   .. deprecated:: 0.4.5
