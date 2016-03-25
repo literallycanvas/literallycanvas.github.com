@@ -237,6 +237,12 @@ Getting information
 
   Get the color of the given drawing-space pixel as a CSS color string.
 
+.. js:function:: getDefaultImageRect(explicitSize={width: 0, height: 0}, margin={top: 0, right: 0, bottom: 0, left: 0})
+  
+  Returns the effective bounds of the canvas. Mostly used as a convenient way
+  to limit the scope of a potentially infinite tool. (For example, a paint
+  bucket shouldn't fill infinite pixels.)
+
 Teardown
 --------
 
