@@ -1,6 +1,12 @@
 Initializing & Options
 ======================
 
+.. note::
+
+  To change the height of the drawing, set a CSS height rule on the
+  element passed to ``LC.init()`` or the React component that contains
+  Literally Canvas.
+
 Initializing normally
 ---------------------
 
