@@ -57,13 +57,15 @@ Here's a basic working setup. Each part is required.
       </head>
       <body>
         <!-- where the widget goes. you can do CSS to it. -->
-        <div class="literally"></div>
+        <!-- note: as of 0.4.9, you cannot use 'literally' as the class name.
+             sorry about that. -->
+        <div class="my-drawing"></div>
 
         <!-- kick it off -->
         <script>
             // Look ma, no jQuery!
             LC.init(
-                document.getElementsByClassName('literally')[0],
+                document.getElementsByClassName('my-drawing')[0],
                 {imageURLPrefix: '/static/img'}
             );
 

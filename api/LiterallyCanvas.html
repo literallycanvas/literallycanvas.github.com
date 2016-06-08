@@ -36,7 +36,7 @@
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
   </head>
-  <body>
+  <body role="document">
   <header id="pageheader"><h1><a href="../index.html ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -67,16 +67,16 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="the-literallycanvas-object">
-<h1>The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object<a class="headerlink" href="#the-literallycanvas-object" title="Permalink to this headline">¶</a></h1>
+<h1>The <code class="docutils literal"><span class="pre">LiterallyCanvas</span></code> object<a class="headerlink" href="#the-literallycanvas-object" title="Permalink to this headline">¶</a></h1>
 <p>Once initialized, Literally Canvas is controlled and accessed through a
-<a class="reference internal" href="#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> object. See <a class="reference internal" href="initializing.html"><em>Initializing &amp; Options</em></a> for information
+<a class="reference internal" href="#LiterallyCanvas" title="LiterallyCanvas"><code class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></code></a> object. See <a class="reference internal" href="initializing.html"><em>Initializing &amp; Options</em></a> for information
 about getting a reference to this object.</p>
 <dl class="class">
 <dt id="LiterallyCanvas">
-<em class="property">class </em><tt class="descname">LiterallyCanvas</tt><big>(</big><em>containerElement</em>, <em>options</em><big>)</big><a class="headerlink" href="#LiterallyCanvas" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">LiterallyCanvas</code><span class="sig-paren">(</span><em>containerElement</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#LiterallyCanvas" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -94,24 +94,24 @@ values.</li>
 
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">As of v0.4, the <a class="reference internal" href="#LiterallyCanvas" title="LiterallyCanvas"><tt class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></tt></a> object no longer uses a single
+<p class="last">As of v0.4, the <a class="reference internal" href="#LiterallyCanvas" title="LiterallyCanvas"><code class="xref js js-class docutils literal"><span class="pre">LiterallyCanvas()</span></code></a> object no longer uses a single
 canvas to render. Instead, it keeps multiple canvases inside a container
 element.</p>
 </div>
 <dl class="attribute">
 <dt id="opts">
-<tt class="descname">opts</tt><a class="headerlink" href="#opts" title="Permalink to this definition">¶</a></dt>
-<dd><p>A copy of the options passed to <a class="reference internal" href="initializing.html#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a> with the defaults filled
+<code class="descname">opts</code><a class="headerlink" href="#opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>A copy of the options passed to <a class="reference internal" href="initializing.html#LC.init" title="LC.init"><code class="xref js js-func docutils literal"><span class="pre">LC.init()</span></code></a> with the defaults filled
 in. For example, if you were to implement your own tool that used a stroke
 width, you&#8217;d want to set your initial value to
-<tt class="docutils literal"><span class="pre">lc.opts.defaultStrokeWidth</span></tt>.</p>
+<code class="docutils literal"><span class="pre">lc.opts.defaultStrokeWidth</span></code>.</p>
 </dd></dl>
 
 <div class="section" id="saving-and-loading">
 <h2>Saving and loading<a class="headerlink" href="#saving-and-loading" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="getSnapshot">
-<tt class="descname">getSnapshot</tt><big>(</big><em>keys=['shapes', 'imageSize', 'colors', 'position', 'scale', 'backgroundShapes']</em><big>)</big><a class="headerlink" href="#getSnapshot" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getSnapshot</code><span class="sig-paren">(</span><em>keys=['shapes', 'imageSize', 'colors', 'position', 'scale', 'backgroundShapes']</em><span class="sig-paren">)</span><a class="headerlink" href="#getSnapshot" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -127,7 +127,7 @@ width, you&#8217;d want to set your initial value to
 </tbody>
 </table>
 <div class="versionadded">
-<p><span>New in version 0.4.9.</span></p>
+<p><span class="versionmodified">New in version 0.4.9.</span></p>
 </div>
 <p>Returns the state of the drawing as a JSON-encodable object. This currently
 includes the shapes, background shapes, colors, image size, pan position,
@@ -143,7 +143,7 @@ subset of 0.4.9+&#8217;s, you can do this:</p>
 
 <dl class="function">
 <dt id="loadSnapshot">
-<tt class="descname">loadSnapshot</tt><big>(</big><em>snapshot</em><big>)</big><a class="headerlink" href="#loadSnapshot" title="Permalink to this definition">¶</a></dt>
+<code class="descname">loadSnapshot</code><span class="sig-paren">(</span><em>snapshot</em><span class="sig-paren">)</span><a class="headerlink" href="#loadSnapshot" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -156,14 +156,14 @@ subset of 0.4.9+&#8217;s, you can do this:</p>
 </tbody>
 </table>
 <div class="versionadded">
-<p><span>New in version 0.4.9.</span></p>
+<p><span class="versionmodified">New in version 0.4.9.</span></p>
 </div>
 <p>Replace the current state with whatever is in <strong>snapshot</strong>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="getSnapshotJSON">
-<tt class="descname">getSnapshotJSON</tt><big>(</big><big>)</big><a class="headerlink" href="#getSnapshotJSON" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getSnapshotJSON</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#getSnapshotJSON" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -173,15 +173,15 @@ subset of 0.4.9+&#8217;s, you can do this:</p>
 </tbody>
 </table>
 <div class="deprecated">
-<p><span>Deprecated since version 0.4.9: </span>Use <tt class="docutils literal"><span class="pre">JSON.stringify(lc.getSnapshot())</span></tt> instead.</p>
+<p><span class="versionmodified">Deprecated since version 0.4.9: </span>Use <code class="docutils literal"><span class="pre">JSON.stringify(lc.getSnapshot())</span></code> instead.</p>
 </div>
-<p>Alias for <tt class="docutils literal"><span class="pre">JSON.stringify(lc.getSnapshot())</span></tt>.</p>
+<p>Alias for <code class="docutils literal"><span class="pre">JSON.stringify(lc.getSnapshot())</span></code>.</p>
 <p>This will continue to work until version 0.6.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="loadSnapshotJSON">
-<tt class="descname">loadSnapshotJSON</tt><big>(</big><em>snapshotJSON</em><big>)</big><a class="headerlink" href="#loadSnapshotJSON" title="Permalink to this definition">¶</a></dt>
+<code class="descname">loadSnapshotJSON</code><span class="sig-paren">(</span><em>snapshotJSON</em><span class="sig-paren">)</span><a class="headerlink" href="#loadSnapshotJSON" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -194,9 +194,9 @@ subset of 0.4.9+&#8217;s, you can do this:</p>
 </tbody>
 </table>
 <div class="deprecated">
-<p><span>Deprecated since version 0.4.9: </span>Use <tt class="docutils literal"><span class="pre">lc.loadSnapshot(JSON.parse(snapshotJSON))</span></tt> instead.</p>
+<p><span class="versionmodified">Deprecated since version 0.4.9: </span>Use <code class="docutils literal"><span class="pre">lc.loadSnapshot(JSON.parse(snapshotJSON))</span></code> instead.</p>
 </div>
-<p>Alias for <tt class="docutils literal"><span class="pre">lc.loadSnapshot(JSON.parse(snapshotJSON))</span></tt>.</p>
+<p>Alias for <code class="docutils literal"><span class="pre">lc.loadSnapshot(JSON.parse(snapshotJSON))</span></code>.</p>
 <p>This will continue to work until version 0.6.</p>
 </dd></dl>
 
@@ -205,43 +205,43 @@ subset of 0.4.9+&#8217;s, you can do this:</p>
 <h2>Exporting images<a class="headerlink" href="#exporting-images" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="getImage">
-<tt class="descname">getImage</tt><big>(</big><em>options</em><big>)</big><a class="headerlink" href="#getImage" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getImage</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#getImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the complete drawing rendered to a canvas, regardless of what the
 view is panned/zoomed to. This method has the same options as
-<a class="reference internal" href="rendering_snapshots.html#LC.renderSnapshotToImage" title="LC.renderSnapshotToImage"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderSnapshotToImage()</span></tt></a>, as well as:</p>
+<a class="reference internal" href="rendering_snapshots.html#LC.renderSnapshotToImage" title="LC.renderSnapshotToImage"><code class="xref js js-func docutils literal"><span class="pre">LC.renderSnapshotToImage()</span></code></a>, as well as:</p>
 <dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">includeWatermark</span></tt></dt>
-<dd>If <tt class="docutils literal"><span class="pre">true</span></tt>, render the watermark behind the drawing.</dd>
-<dt><tt class="docutils literal"><span class="pre">scaleDownRetina</span></tt></dt>
-<dd>If <tt class="docutils literal"><span class="pre">true</span></tt>, compensate for <tt class="docutils literal"><span class="pre">window.devicePixelRatio</span></tt> by adjusting the
+<dt><code class="docutils literal"><span class="pre">includeWatermark</span></code></dt>
+<dd>If <code class="docutils literal"><span class="pre">true</span></code>, render the watermark behind the drawing.</dd>
+<dt><code class="docutils literal"><span class="pre">scaleDownRetina</span></code></dt>
+<dd>If <code class="docutils literal"><span class="pre">true</span></code>, compensate for <code class="docutils literal"><span class="pre">window.devicePixelRatio</span></code> by adjusting the
 scale before rendering. This is probably what you want, since the image
 will be the same size as what the user sees on their screen, due to being
-scaled back up by the web browser. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+scaled back up by the web browser. Defaults to <code class="docutils literal"><span class="pre">true</span></code>.</dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="getSVGString">
-<tt class="descname">getSVGString</tt><big>(</big><em>{options}</em><big>)</big><a class="headerlink" href="#getSVGString" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getSVGString</code><span class="sig-paren">(</span><em>{options}</em><span class="sig-paren">)</span><a class="headerlink" href="#getSVGString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the drawing as an SVG string that can be inserted into the DOM or
 downloaded.</p>
-<p>This method has the same options as <a class="reference internal" href="rendering_snapshots.html#LC.renderSnapshotToSVG" title="LC.renderSnapshotToSVG"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderSnapshotToSVG()</span></tt></a>.</p>
+<p>This method has the same options as <a class="reference internal" href="rendering_snapshots.html#LC.renderSnapshotToSVG" title="LC.renderSnapshotToSVG"><code class="xref js js-func docutils literal"><span class="pre">LC.renderSnapshotToSVG()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="canvasForExport">
-<tt class="descname">canvasForExport</tt><big>(</big><big>)</big><a class="headerlink" href="#canvasForExport" title="Permalink to this definition">¶</a></dt>
+<code class="descname">canvasForExport</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#canvasForExport" title="Permalink to this definition">¶</a></dt>
 <dd><div class="deprecated">
-<p><span>Deprecated since version 0.4: </span>Use <a class="reference internal" href="#getImage" title="getImage"><tt class="xref js js-func docutils literal"><span class="pre">getImage()</span></tt></a> instead.</p>
+<p><span class="versionmodified">Deprecated since version 0.4: </span>Use <a class="reference internal" href="#getImage" title="getImage"><code class="xref js js-func docutils literal"><span class="pre">getImage()</span></code></a> instead.</p>
 </div>
 <p>Returns a canvas object with the current view.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="canvasWithBackground">
-<tt class="descname">canvasWithBackground</tt><big>(</big><em>canvasOrImage</em><big>)</big><a class="headerlink" href="#canvasWithBackground" title="Permalink to this definition">¶</a></dt>
+<code class="descname">canvasWithBackground</code><span class="sig-paren">(</span><em>canvasOrImage</em><span class="sig-paren">)</span><a class="headerlink" href="#canvasWithBackground" title="Permalink to this definition">¶</a></dt>
 <dd><div class="deprecated">
-<p><span>Deprecated since version 0.4: </span>Use <a class="reference internal" href="#getImage" title="getImage"><tt class="xref js js-func docutils literal"><span class="pre">getImage()</span></tt></a> instead.</p>
+<p><span class="versionmodified">Deprecated since version 0.4: </span>Use <a class="reference internal" href="#getImage" title="getImage"><code class="xref js js-func docutils literal"><span class="pre">getImage()</span></code></a> instead.</p>
 </div>
 <p>Returns a canvas object with the current view composited over a background
 image.</p>
@@ -258,7 +258,7 @@ image.</p>
 </div>
 <dl class="function">
 <dt id="on">
-<tt class="descname">on</tt><big>(</big><em>event</em>, <em>callback</em><big>)</big><a class="headerlink" href="#on" title="Permalink to this definition">¶</a></dt>
+<code class="descname">on</code><span class="sig-paren">(</span><em>event</em>, <em>callback</em><span class="sig-paren">)</span><a class="headerlink" href="#on" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -268,7 +268,7 @@ image.</p>
 </tbody>
 </table>
 <p>Attach an event handler to <em>event</em>. A common use case is to save the
-drawing when it is changed; see <a class="reference internal" href="../examples/localstorage.html#saving-and-loading"><em>Saving to Local Storage</em></a>.</p>
+drawing when it is changed; see <a class="reference internal" href="../examples/localstorage.html#saving-and-loading"><span>Saving to Local Storage</span></a>.</p>
 <p>See <a class="reference internal" href="events.html"><em>Events</em></a> for a list of events.</p>
 </dd></dl>
 
@@ -277,34 +277,34 @@ drawing when it is changed; see <a class="reference internal" href="../examples/
 <h2>Controlling the view<a class="headerlink" href="#controlling-the-view" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="setPan">
-<tt class="descname">setPan</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="headerlink" href="#setPan" title="Permalink to this definition">¶</a></dt>
+<code class="descname">setPan</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#setPan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move the view&#8217;s upper left corner to the given position in drawing space.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="setZoom">
-<tt class="descname">setZoom</tt><big>(</big><em>zoom</em><big>)</big><a class="headerlink" href="#setZoom" title="Permalink to this definition">¶</a></dt>
+<code class="descname">setZoom</code><span class="sig-paren">(</span><em>zoom</em><span class="sig-paren">)</span><a class="headerlink" href="#setZoom" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the view zoom to the given value.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pan">
-<tt class="descname">pan</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="headerlink" href="#pan" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pan</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#pan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move the view by the given amount relative to its current position in drawing
 space.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="zoom">
-<tt class="descname">zoom</tt><big>(</big><em>amount</em><big>)</big><a class="headerlink" href="#zoom" title="Permalink to this definition">¶</a></dt>
+<code class="descname">zoom</code><span class="sig-paren">(</span><em>amount</em><span class="sig-paren">)</span><a class="headerlink" href="#zoom" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the given amount to the zoom level.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="setImageSize">
-<tt class="descname">setImageSize</tt><big>(</big><em>width</em>, <em>height</em><big>)</big><a class="headerlink" href="#setImageSize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change the size of the image away from what was passed to <a class="reference internal" href="initializing.html#LC.init" title="LC.init"><tt class="xref js js-func docutils literal"><span class="pre">LC.init()</span></tt></a>
-as <a class="reference internal" href="initializing.html#opt-imagesize"><em>imageSize</em></a>.</p>
+<code class="descname">setImageSize</code><span class="sig-paren">(</span><em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="headerlink" href="#setImageSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the size of the image away from what was passed to <a class="reference internal" href="initializing.html#LC.init" title="LC.init"><code class="xref js js-func docutils literal"><span class="pre">LC.init()</span></code></a>
+as <a class="reference internal" href="initializing.html#opt-imagesize"><span>imageSize</span></a>.</p>
 </dd></dl>
 
 </div>
@@ -312,15 +312,15 @@ as <a class="reference internal" href="initializing.html#opt-imagesize"><em>imag
 <h2>Changing the drawing<a class="headerlink" href="#changing-the-drawing" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="saveShape">
-<tt class="descname">saveShape</tt><big>(</big><em>shape</em>, <em>triggerSaveShapeEvent</em>, <em>previousShapeId</em><big>)</big><a class="headerlink" href="#saveShape" title="Permalink to this definition">¶</a></dt>
+<code class="descname">saveShape</code><span class="sig-paren">(</span><em>shape</em>, <em>triggerSaveShapeEvent</em>, <em>previousShapeId</em><span class="sig-paren">)</span><a class="headerlink" href="#saveShape" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>shape</strong> &#8211; Shape to be added</li>
-<li><strong>triggerSaveShapeEvent</strong> &#8211; If <tt class="docutils literal"><span class="pre">true</span></tt>, trigger the <a class="reference internal" href="events.html#event-shapesave"><em>shapeSave</em></a> event.
-Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>. You may want to set this to <tt class="docutils literal"><span class="pre">false</span></tt> if you&#8217;re
+<li><strong>triggerSaveShapeEvent</strong> &#8211; If <code class="docutils literal"><span class="pre">true</span></code>, trigger the <a class="reference internal" href="events.html#event-shapesave"><span>shapeSave</span></a> event.
+Defaults to <code class="docutils literal"><span class="pre">true</span></code>. You may want to set this to <code class="docutils literal"><span class="pre">false</span></code> if you&#8217;re
 sending and receiving shapes to/from a remote drawing.</li>
 <li><strong>previousShapeId</strong> &#8211; ID of the shape just below the new one. Defaults to the most recently
 added shape.</li>
@@ -336,13 +336,13 @@ information.</p>
 
 <dl class="function">
 <dt id="setColor">
-<tt class="descname">setColor</tt><big>(</big><em>colorName</em>, <em>colorValue</em><big>)</big><a class="headerlink" href="#setColor" title="Permalink to this definition">¶</a></dt>
+<code class="descname">setColor</code><span class="sig-paren">(</span><em>colorName</em>, <em>colorValue</em><span class="sig-paren">)</span><a class="headerlink" href="#setColor" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
-<li><strong>colorName</strong> &#8211; <tt class="docutils literal"><span class="pre">'background'</span></tt>, <tt class="docutils literal"><span class="pre">'primary'</span></tt>, or <tt class="docutils literal"><span class="pre">'secondary'</span></tt></li>
+<li><strong>colorName</strong> &#8211; <code class="docutils literal"><span class="pre">'background'</span></code>, <code class="docutils literal"><span class="pre">'primary'</span></code>, or <code class="docutils literal"><span class="pre">'secondary'</span></code></li>
 <li><strong>colorValue</strong> &#8211; Any CSS color</li>
 </ul>
 </td>
@@ -353,32 +353,32 @@ information.</p>
 
 <dl class="function">
 <dt id="clear">
-<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#clear" title="Permalink to this definition">¶</a></dt>
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove all shapes from the drawing.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="undo">
-<tt class="descname">undo</tt><big>(</big><big>)</big><a class="headerlink" href="#undo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">undo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#undo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Undo the last drawing action.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="redo">
-<tt class="descname">redo</tt><big>(</big><big>)</big><a class="headerlink" href="#redo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">redo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#redo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Redo the last thing to be undone.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="setShapesInProgress">
-<tt class="descname">setShapesInProgress</tt><big>(</big><em>shapes</em><big>)</big><a class="headerlink" href="#setShapesInProgress" title="Permalink to this definition">¶</a></dt>
+<code class="descname">setShapesInProgress</code><span class="sig-paren">(</span><em>shapes</em><span class="sig-paren">)</span><a class="headerlink" href="#setShapesInProgress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Declare a list of shapes that are drawn to the canvas but aren&#8217;t yet part of
 the drawing. Tools should use this to show shapes in progress.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="drawShapeInProgress">
-<tt class="descname">drawShapeInProgress</tt><big>(</big><em>shape</em><big>)</big><a class="headerlink" href="#drawShapeInProgress" title="Permalink to this definition">¶</a></dt>
+<code class="descname">drawShapeInProgress</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="headerlink" href="#drawShapeInProgress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws the given shape to a buffer without clearing or redrawing anything
 beneath it. If the shape&#8217;s renderer supports it, only render the most
 recently changed part of the shape.</p>
@@ -388,9 +388,9 @@ currently drawing.</p>
 
 <dl class="function">
 <dt id="setWatermarkImage">
-<tt class="descname">setWatermarkImage</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#setWatermarkImage" title="Permalink to this definition">¶</a></dt>
+<code class="descname">setWatermarkImage</code><span class="sig-paren">(</span><em>image</em><span class="sig-paren">)</span><a class="headerlink" href="#setWatermarkImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set or replace the watermark image behind the drawing. See the
-<a class="reference internal" href="initializing.html#opt-watermarkimage"><em>watermarkImage</em></a> option.</p>
+<a class="reference internal" href="initializing.html#opt-watermarkimage"><span>watermarkImage</span></a> option.</p>
 </dd></dl>
 
 </div>
@@ -398,20 +398,20 @@ currently drawing.</p>
 <h2>Getting information<a class="headerlink" href="#getting-information" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="getColor">
-<tt class="descname">getColor</tt><big>(</big><em>colorName</em><big>)</big><a class="headerlink" href="#getColor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the value of the <tt class="docutils literal"><span class="pre">'primary'</span></tt>, <tt class="docutils literal"><span class="pre">'secondary'</span></tt>, or <tt class="docutils literal"><span class="pre">'background'</span></tt>
+<code class="descname">getColor</code><span class="sig-paren">(</span><em>colorName</em><span class="sig-paren">)</span><a class="headerlink" href="#getColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of the <code class="docutils literal"><span class="pre">'primary'</span></code>, <code class="docutils literal"><span class="pre">'secondary'</span></code>, or <code class="docutils literal"><span class="pre">'background'</span></code>
 color.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="getPixel">
-<tt class="descname">getPixel</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="headerlink" href="#getPixel" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getPixel</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#getPixel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the color of the given drawing-space pixel as a CSS color string.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="getDefaultImageRect">
-<tt class="descname">getDefaultImageRect</tt><big>(</big><em>explicitSize={width: 0</em>, <em>height: 0}</em>, <em>margin={top: 0</em>, <em>right: 0</em>, <em>bottom: 0</em>, <em>left: 0}</em><big>)</big><a class="headerlink" href="#getDefaultImageRect" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getDefaultImageRect</code><span class="sig-paren">(</span><em>explicitSize={width: 0</em>, <em>height: 0}</em>, <em>margin={top: 0</em>, <em>right: 0</em>, <em>bottom: 0</em>, <em>left: 0}</em><span class="sig-paren">)</span><a class="headerlink" href="#getDefaultImageRect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the effective bounds of the canvas. Mostly used as a convenient way
 to limit the scope of a potentially infinite tool. (For example, a paint
 bucket shouldn&#8217;t fill infinite pixels.)</p>
@@ -422,7 +422,7 @@ bucket shouldn&#8217;t fill infinite pixels.)</p>
 <h2>Teardown<a class="headerlink" href="#teardown" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt>
-<tt class="descname">teardown</tt><big>(</big><big>)</big></dt>
+<code class="descname">teardown</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
 <dd><p>Completely remove this instance of Literally Canvas from the web page.</p>
 </dd></dl>
 
@@ -433,11 +433,11 @@ bucket shouldn&#8217;t fill infinite pixels.)</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a><ul>
+<li><a class="reference internal" href="#">The <code class="docutils literal"><span class="pre">LiterallyCanvas</span></code> object</a><ul>
 <li><a class="reference internal" href="#saving-and-loading">Saving and loading</a></li>
 <li><a class="reference internal" href="#exporting-images">Exporting images</a></li>
 <li><a class="reference internal" href="#event-subscription">Event subscription</a></li>
@@ -499,7 +499,7 @@ bucket shouldn&#8217;t fill infinite pixels.)</p>
   </div>
   <footer id="pagefooter">&copy; 2012-2016 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.2b3
+      1.3.1
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 
