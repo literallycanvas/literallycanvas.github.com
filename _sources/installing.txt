@@ -33,7 +33,15 @@ The Literally Canvas distribution includes several files. You can put them where
 
 * ``img/``: Images for the GUI. You'll pass the absolute URL to this directory
   as the ``imageURLPrefix`` option.
+
+  .. note:: If you install from npm, you can copy the images from
+     ``node_modules/literallycanvas/lib/img/`` to your build directory.
+
 * ``css/literallycanvas.css``: Required stylesheet.
+
+  .. note:: If you install from npm, you can find this at
+     ``node_modules/literallycanvas/lib/css/literallycanvas.css``.
+
 * ``js/literallycanvas[.min].js``: The magic.
 
 Classic Style
@@ -63,17 +71,10 @@ Here's a basic working setup. Each part is required.
 
         <!-- kick it off -->
         <script>
-            // Look ma, no jQuery!
             LC.init(
                 document.getElementsByClassName('my-drawing')[0],
                 {imageURLPrefix: '/static/img'}
             );
-
-            /* or if you just love jQuery,
-                $('.literally').literallycanvas({imageURLPrefix: '/static/img'})
-                or
-                LC.init($('.literally').get(0), {imageURLPrefix: '/static/img'})
-            */
         </script>
       </body>
     </html>

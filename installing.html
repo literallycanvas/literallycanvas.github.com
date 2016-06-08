@@ -82,11 +82,24 @@ JS file, or you can install it from NPM as <code class="docutils literal"><span 
 <div class="section" id="include-the-assets-and-write-the-code">
 <h2>Include the assets and write the code<a class="headerlink" href="#include-the-assets-and-write-the-code" title="Permalink to this headline">¶</a></h2>
 <p>The Literally Canvas distribution includes several files. You can put them wherever you want.</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">img/</span></code>: Images for the GUI. You&#8217;ll pass the absolute URL to this directory
-as the <code class="docutils literal"><span class="pre">imageURLPrefix</span></code> option.</li>
-<li><code class="docutils literal"><span class="pre">css/literallycanvas.css</span></code>: Required stylesheet.</li>
-<li><code class="docutils literal"><span class="pre">js/literallycanvas[.min].js</span></code>: The magic.</li>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">img/</span></code>: Images for the GUI. You&#8217;ll pass the absolute URL to this directory
+as the <code class="docutils literal"><span class="pre">imageURLPrefix</span></code> option.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install from npm, you can copy the images from
+<code class="docutils literal"><span class="pre">node_modules/literallycanvas/lib/img/</span></code> to your build directory.</p>
+</div>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">css/literallycanvas.css</span></code>: Required stylesheet.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install from npm, you can find this at
+<code class="docutils literal"><span class="pre">node_modules/literallycanvas/lib/css/literallycanvas.css</span></code>.</p>
+</div>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">js/literallycanvas[.min].js</span></code>: The magic.</p>
+</li>
 </ul>
 <div class="section" id="classic-style">
 <h3>Classic Style<a class="headerlink" href="#classic-style" title="Permalink to this headline">¶</a></h3>
@@ -111,17 +124,10 @@ as the <code class="docutils literal"><span class="pre">imageURLPrefix</span></c
 
     <span class="c">&lt;!-- kick it off --&gt;</span>
     <span class="nt">&lt;script&gt;</span>
-        <span class="c1">// Look ma, no jQuery!</span>
         <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span>
             <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;my-drawing&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
             <span class="p">{</span><span class="nx">imageURLPrefix</span><span class="o">:</span> <span class="s1">&#39;/static/img&#39;</span><span class="p">}</span>
         <span class="p">);</span>
-
-        <span class="cm">/* or if you just love jQuery,</span>
-<span class="cm">            $(&#39;.literally&#39;).literallycanvas({imageURLPrefix: &#39;/static/img&#39;})</span>
-<span class="cm">            or</span>
-<span class="cm">            LC.init($(&#39;.literally&#39;).get(0), {imageURLPrefix: &#39;/static/img&#39;})</span>
-<span class="cm">        */</span>
     <span class="nt">&lt;/script&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
