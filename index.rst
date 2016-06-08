@@ -37,6 +37,11 @@ You can donate to Literally Canvas's development on `Gratipay`_ or post a
 bounty on a GitHub issue on `Bountysource`_. Spontaneous improvements are rare
 otherwise, though they do happen.
 
+.. note::
+
+    Our mailing list was down for several months. You'll need to re-subscribe
+    using one of the methods in the sidebar.
+
 .. _Gratipay: https://gratipay.com/~irskep/
 
 .. _Bountysource: https://www.bountysource.com/teams/literallycanvas/issues
