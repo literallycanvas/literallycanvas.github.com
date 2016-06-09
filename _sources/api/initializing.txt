@@ -18,6 +18,18 @@ Initializing normally
 
     **Options**
 
+    ``onInit``
+      Function to be called just after the ``LiterallyCanvas`` object is
+      configured and bound to an element. Used to do additional configuration
+      in situations where you don't immediately get this object, e.g. when
+      using the React component or the jQuery plugin.
+
+      Example using React::
+
+          <LiterallyCanvas onInit={function(lc) {
+            console.log("initialized with", lc);
+          })} />
+
     .. _opt-imageURLPrefix:
 
     ``imageURLPrefix``
@@ -155,81 +167,6 @@ Initializing normally
     ``zoomStep``
         Amount by which the zoom in/out buttons change the zoom level. Defaults
         to 0.2.
-
-
-Initializing with jQuery
-------------------------
-
-.. code-block:: javascript
-
-  $('.literally').literallycanvas(options);
-
-The jQuery form takes the same options as :js:func:`LC.init`, but it
-returns the list of matched elements instead of a
-:js:class:`LiterallyCanvas` object. That means if you want to attach event
-handlers or otherwise use the functionality of
-:js:class:`LiterallyCanvas`, you need to use the *onInit* callback.
-
-.. js:function:: $.literallycanvas(options)
-
-    :returns: jQuery element list
-
-    :param onInit:
-      A function to be called as soon as Literally Canvas is initialized.
-      This is where you set up event handlers, programmatically add shapes, or
-      otherwise integrate with your application.
-
-      Here's a quick example:
-
-      .. code-block:: javascript
-
-        $(element).literallycanvas({
-          onInit: function(lc) {
-            lc.on('drawingChange', function() {
-              console.log("The drawing was changed.");
-            })
-          }
-        });
-
-    :type onInit: function(:js:class:`LiterallyCanvas`)
-
-
-Translating the examples to jQuery form
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Examples will often use the return value of :js:func:`LC.init`, a
-:js:class:`LiterallyCanvas` object.
-
-.. code-block:: javascript
-
-  var lc = LC.init(element, options);
-  lc.on('drawingChange', function() {
-    console.log("The drawing was changed.");
-  });
-
-If you initialize Literally Canvas with the jQuery plugin, you won't get the
-``lc`` value back. Instead, you need to use the *onInit* callback,
-which gets that same value as its argument:
-
-.. code-block:: javascript
-
-  $(element).literallycanvas({
-    onInit: function(lc) {
-      lc.on('drawingChange', function() {
-        console.log("The drawing was changed.");
-      })
-    }
-  });
-
-Alternatively, you can just use jQuery to get the first argument to
-:js:func:`LC.init`, like this:
-
-.. code-block:: javascript
-
-  var lc = LC.init($('selector').get(0), options);
-  lc.on('drawingChange', function() {
-    console.log("The drawing was changed.");
-  });
 
 
 Breaking changes since v0.3

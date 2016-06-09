@@ -35,7 +35,7 @@
     <script src="_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="_static/docs.js" type="text/javascript"></script>
   </head>
-  <body role="document">
+  <body>
   <header id="pageheader"><h1><a href="index.html ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -63,7 +63,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body" role="main">
+          <div class="body">
             
   <div class="section" id="installing">
 <h1>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h1>
@@ -76,29 +76,29 @@
 <p>You can get the assets from the NPM package, or from
 <a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.14.tar.gz">the tarball</a>.</p>
 <p>You can get the source from the tarball as well and include it as a standalone
-JS file, or you can install it from NPM as <code class="docutils literal"><span class="pre">literallycanvas&#64;0.4.13</span></code>.</p>
+JS file, or you can install it from NPM as <tt class="docutils literal"><span class="pre">literallycanvas&#64;0.4.13</span></tt>.</p>
 <p><a class="reference external" href="https://github.com/literallycanvas/literallycanvas-demos">Here are several example installations you can use for reference.</a></p>
 </div>
 <div class="section" id="include-the-assets-and-write-the-code">
 <h2>Include the assets and write the code<a class="headerlink" href="#include-the-assets-and-write-the-code" title="Permalink to this headline">¶</a></h2>
 <p>The Literally Canvas distribution includes several files. You can put them wherever you want.</p>
 <ul>
-<li><p class="first"><code class="docutils literal"><span class="pre">img/</span></code>: Images for the GUI. You&#8217;ll pass the absolute URL to this directory
-as the <code class="docutils literal"><span class="pre">imageURLPrefix</span></code> option.</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">img/</span></tt>: Images for the GUI. You&#8217;ll pass the absolute URL to this directory
+as the <tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt> option.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you install from npm, you can copy the images from
-<code class="docutils literal"><span class="pre">node_modules/literallycanvas/lib/img/</span></code> to your build directory.</p>
+<tt class="docutils literal"><span class="pre">node_modules/literallycanvas/lib/img/</span></tt> to your build directory.</p>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">css/literallycanvas.css</span></code>: Required stylesheet.</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">css/literallycanvas.css</span></tt>: Required stylesheet.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you install from npm, you can find this at
-<code class="docutils literal"><span class="pre">node_modules/literallycanvas/lib/css/literallycanvas.css</span></code>.</p>
+<tt class="docutils literal"><span class="pre">node_modules/literallycanvas/lib/css/literallycanvas.css</span></tt>.</p>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">js/literallycanvas[.min].js</span></code>: The magic.</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">js/literallycanvas[.min].js</span></tt>: The magic.</p>
 </li>
 </ul>
 <div class="section" id="classic-style">
@@ -137,7 +137,7 @@ as the <code class="docutils literal"><span class="pre">imageURLPrefix</span></c
 <div class="section" id="react-js-style">
 <h3>React.js Style<a class="headerlink" href="#react-js-style" title="Permalink to this headline">¶</a></h3>
 <p>Literally Canvas can be used as a React component!</p>
-<div class="highlight-html"><div class="highlight"><pre>&lt;html&gt;
+<div class="highlight-html"><pre>&lt;html&gt;
   &lt;head&gt;
     &lt;!-- stylesheet --&gt;
     &lt;link href=&quot;/static/css/literallycanvas.css&quot; rel=&quot;stylesheet&quot;&gt;
@@ -158,18 +158,17 @@ as the <code class="docutils literal"><span class="pre">imageURLPrefix</span></c
             &lt;div&gt;
                 &lt;LC.LiterallyCanvasReactComponent imageURLPrefix=&quot;/static/img&quot; /&gt;
             &lt;/div&gt;,
-            document.getElementById(&#39;root&#39;));
+            document.getElementById(&#x27;root&#x27;));
     &lt;/script&gt;
   &lt;/body&gt;
-&lt;/html&gt;
-</pre></div>
+&lt;/html&gt;</pre>
 </div>
 </div>
 </div>
 <div class="section" id="skipping-the-gui-and-the-react-dependency">
 <h2>Skipping the GUI and the React dependency<a class="headerlink" href="#skipping-the-gui-and-the-react-dependency" title="Permalink to this headline">¶</a></h2>
 <p>To use Literally Canvas with no GUI and no React dependency, you can use the
-<em class="dfn">core build</em>. It lives at <code class="docutils literal"><span class="pre">/js/literallycanvas-core[.min].js</span></code>. The
+<em class="dfn">core build</em>. It lives at <tt class="docutils literal"><span class="pre">/js/literallycanvas-core[.min].js</span></tt>. The
 core build works just like the normal build, but it doesn&#8217;t include any of the
 GUI code. Check out the <a class="reference internal" href="examples/core.html"><em>Using the Core Build</em></a> example for details.</p>
 <p>Unfortunately, the core build is not yet available on NPM. There is no technical
@@ -181,7 +180,7 @@ reason for this, it just hasn&#8217;t been contributed yet.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
@@ -244,7 +243,7 @@ reason for this, it just hasn&#8217;t been contributed yet.</p>
   </div>
   <footer id="pagefooter">&copy; 2012-2016 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.3.1
+      1.2b3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

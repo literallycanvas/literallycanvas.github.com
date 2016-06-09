@@ -18,9 +18,10 @@ Uncategorized functions
 
 .. js:function:: LC.registerJQueryPlugin(_$)
 
-  Enable the jQuery plugin on the given instance of jQuery. You only need to
-  call this if ``window.$`` does not exist or you want to use a different
-  instance of ``$``.
+  .. deprecated:: 0.4.14
+
+  Enable the jQuery plugin on the given instance of jQuery. As of 0.4.14,
+  you'll need to do this for the jQuery plugin to work at all.
 
 .. js:function:: LC.setDefaultImageURLPrefix(defaultImageURLPrefix)
 
