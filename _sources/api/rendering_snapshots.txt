@@ -1,4 +1,4 @@
-Rendering shapshots
+Rendering snapshots
 ===================
 
 .. js:function:: LC.renderSnapshotToImage(snapshot, options)
