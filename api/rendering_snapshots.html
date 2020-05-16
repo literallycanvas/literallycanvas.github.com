@@ -1,30 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Rendering snapshots &mdash; Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser</title>
-    
+    <meta charset="utf-8" />
+    <title>Rendering snapshots &#8212; Literally Canvas v0.5.2 docs - HTML5 drawing board - MS Paint in your web browser</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.4.14',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser" href="../index.html" />
-    <link rel="up" title="API" href="index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Events" href="events.html" />
     <link rel="prev" title="The LiterallyCanvas object" href="LiterallyCanvas.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,8 +24,7 @@
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
-  </head>
-  <body>
+  </head><body>
   <header id="pageheader"><h1><a href="../index.html ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -46,7 +34,7 @@
     <ul>
         <li>
           &larr;
-          <a href="LiterallyCanvas.html" title="Previous document">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a>
+          <a href="LiterallyCanvas.html" title="Previous document">The <code class="docutils literal notranslate"><span class="pre">LiterallyCanvas</span></code> object</a>
         </li>
         <li>
           <a href="events.html" title="Next document">Events</a>
@@ -67,62 +55,62 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="rendering-snapshots">
 <h1>Rendering snapshots<a class="headerlink" href="#rendering-snapshots" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="js function">
 <dt id="LC.renderSnapshotToImage">
-<tt class="descclassname">LC.</tt><tt class="descname">renderSnapshotToImage</tt><big>(</big><em>snapshot</em>, <em>options</em><big>)</big><a class="headerlink" href="#LC.renderSnapshotToImage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">LC.</code><code class="sig-name descname">renderSnapshotToImage</code><span class="sig-paren">(</span><em class="sig-param">snapshot</em>, <em class="sig-param">options</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.renderSnapshotToImage" title="Permalink to this definition">¶</a></dt>
 <dd><div class="versionadded">
-<p><span>New in version 0.4.9.</span></p>
+<p><span class="versionmodified added">New in version 0.4.9.</span></p>
 </div>
 <p>Render the snapshot to a canvas. To turn the result into an image URL,
-call <tt class="docutils literal"><span class="pre">toDataURL()</span></tt> on the result.</p>
+call <code class="docutils literal notranslate"><span class="pre">toDataURL()</span></code> on the result.</p>
 <p><strong>Options</strong></p>
-<dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">rect</span></tt></dt>
-<dd>A dict <tt class="docutils literal"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></tt> specifying which part of the image to
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">rect</span></code></dt><dd><p>A dict <code class="docutils literal notranslate"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></code> specifying which part of the image to
 draw, in drawing coordinates (before scaling). Defaults to the bounding
-box of all shapes. If you don&#8217;t specify a <tt class="docutils literal"><span class="pre">rect</span></tt> and there are no
-shapes in the drawing, <a class="reference internal" href="LiterallyCanvas.html#getImage" title="getImage"><tt class="xref js js-func docutils literal"><span class="pre">getImage()</span></tt></a> will return <tt class="docutils literal"><span class="pre">undefined</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">margin</span></tt></dt>
-<dd>A dict <tt class="docutils literal"><span class="pre">{top,</span> <span class="pre">right,</span> <span class="pre">bottom,</span> <span class="pre">left}</span></tt> defaulting to <tt class="docutils literal"><span class="pre">null</span></tt>. If the
-image&#8217;s bounds are determined by the shapes&#8217; bounding rect (i.e. <tt class="docutils literal"><span class="pre">rect</span></tt>
-is not given), this dict determines the amount of space on each side.</dd>
-<dt><tt class="docutils literal"><span class="pre">scale</span></tt></dt>
-<dd>Amount by which to scale the image output. Shapes will be rendered at
-full resolution. Defaults to <tt class="docutils literal"><span class="pre">1</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">watermarkImage</span></tt></dt>
-<dd>Image to render in the center behind everything, unaffected by erasers.</dd>
-<dt><tt class="docutils literal"><span class="pre">watermarkScale</span></tt></dt>
-<dd>Scale of the watermark.</dd>
+box of all shapes. If you don’t specify a <code class="docutils literal notranslate"><span class="pre">rect</span></code> and there are no
+shapes in the drawing, <a class="reference internal" href="LiterallyCanvas.html#getImage" title="getImage"><code class="xref js js-func docutils literal notranslate"><span class="pre">getImage()</span></code></a> will return <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">margin</span></code></dt><dd><p>A dict <code class="docutils literal notranslate"><span class="pre">{top,</span> <span class="pre">right,</span> <span class="pre">bottom,</span> <span class="pre">left}</span></code> defaulting to <code class="docutils literal notranslate"><span class="pre">null</span></code>. If the
+image’s bounds are determined by the shapes’ bounding rect (i.e. <code class="docutils literal notranslate"><span class="pre">rect</span></code>
+is not given), this dict determines the amount of space on each side.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">scale</span></code></dt><dd><p>Amount by which to scale the image output. Shapes will be rendered at
+full resolution. Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">watermarkImage</span></code></dt><dd><p>Image to render in the center behind everything, unaffected by erasers.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">watermarkScale</span></code></dt><dd><p>Scale of the watermark.</p>
+</dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.renderSnapshotToSVG">
-<tt class="descclassname">LC.</tt><tt class="descname">renderSnapshotToSVG</tt><big>(</big><em>snapshot</em>, <em>options</em><big>)</big><a class="headerlink" href="#LC.renderSnapshotToSVG" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">LC.</code><code class="sig-name descname">renderSnapshotToSVG</code><span class="sig-paren">(</span><em class="sig-param">snapshot</em>, <em class="sig-param">options</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.renderSnapshotToSVG" title="Permalink to this definition">¶</a></dt>
 <dd><div class="versionadded">
-<p><span>New in version 0.4.9.</span></p>
+<p><span class="versionmodified added">New in version 0.4.9.</span></p>
 </div>
 <p>Render the snapshot to an SVG string that can be inserted into the DOM or
 downloaded.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">SVG export does not currently support watermarks, scale, or eraser shapes.</p>
+<p class="admonition-title">Warning</p>
+<p>SVG export does not currently support watermarks, scale, or eraser shapes.</p>
 </div>
 <p><strong>Options</strong></p>
-<dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">rect</span></tt></dt>
-<dd>A dict <tt class="docutils literal"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></tt> specifying which part of the image to
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">rect</span></code></dt><dd><p>A dict <code class="docutils literal notranslate"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></code> specifying which part of the image to
 draw, in drawing coordinates (before scaling). Defaults to the bounding
-box of all shapes. If you don&#8217;t specify a <tt class="docutils literal"><span class="pre">rect</span></tt> and there are no
-shapes in the drawing, <a class="reference internal" href="LiterallyCanvas.html#getImage" title="getImage"><tt class="xref js js-func docutils literal"><span class="pre">getImage()</span></tt></a> will return <tt class="docutils literal"><span class="pre">undefined</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">margin</span></tt></dt>
-<dd>A dict <tt class="docutils literal"><span class="pre">{top,</span> <span class="pre">right,</span> <span class="pre">bottom,</span> <span class="pre">left}</span></tt> defaulting to <tt class="docutils literal"><span class="pre">null</span></tt>. If the
-image&#8217;s bounds are determined by the shapes&#8217; bounding rect (i.e. <tt class="docutils literal"><span class="pre">rect</span></tt>
-is not given), this dict determines the amount of space on each side.</dd>
+box of all shapes. If you don’t specify a <code class="docutils literal notranslate"><span class="pre">rect</span></code> and there are no
+shapes in the drawing, <a class="reference internal" href="LiterallyCanvas.html#getImage" title="getImage"><code class="xref js js-func docutils literal notranslate"><span class="pre">getImage()</span></code></a> will return <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">margin</span></code></dt><dd><p>A dict <code class="docutils literal notranslate"><span class="pre">{top,</span> <span class="pre">right,</span> <span class="pre">bottom,</span> <span class="pre">left}</span></code> defaulting to <code class="docutils literal notranslate"><span class="pre">null</span></code>. If the
+image’s bounds are determined by the shapes’ bounding rect (i.e. <code class="docutils literal notranslate"><span class="pre">rect</span></code>
+is not given), this dict determines the amount of space on each side.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -132,10 +120,10 @@ is not given), this dict determines the amount of space on each side.</dd>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper"><p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.14.tar.gz">
-		Download v0.4.14
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.5.2.tar.gz">
+		Download v0.5.2
 	</a>
 </p>
 <p>
@@ -165,7 +153,7 @@ is not given), this dict determines the amount of space on each side.</dd>
     <ul>
         <li>
           &larr;
-          <a href="LiterallyCanvas.html" title="Previous document">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a>
+          <a href="LiterallyCanvas.html" title="Previous document">The <code class="docutils literal notranslate"><span class="pre">LiterallyCanvas</span></code> object</a>
         </li>
         <li>
           <a href="events.html" title="Next document">Events</a>
@@ -184,7 +172,7 @@ is not given), this dict determines the amount of space on each side.</dd>
   </div>
   <footer id="pagefooter">&copy; 2012-2016 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.2b3
+      3.0.3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

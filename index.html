@@ -1,29 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Literally Canvas &mdash; Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser</title>
-    
+    <meta charset="utf-8" />
+    <title>Literally Canvas &#8212; Literally Canvas v0.5.2 docs - HTML5 drawing board - MS Paint in your web browser</title>
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.4.14',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser" href="#" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installing" href="installing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Finger+Paint" type="text/css" />
@@ -33,8 +23,7 @@
     <script src="_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="_static/docs.js" type="text/javascript"></script>
-  </head>
-  <body>
+  </head><body>
   <header id="pageheader"><h1><a href="# ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -58,15 +47,20 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="literally-canvas">
 <h1>Literally Canvas<a class="headerlink" href="#literally-canvas" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Looking for a multiuser whiteboard? Check out <a class="reference external" href="https://browserboard.com">Browserboard</a>.</p>
+</div>
 <p>Literally Canvas is an extensible, open source (BSD-licensed), HTML5 drawing
 widget. Its only dependency is <a class="reference external" href="http://facebook.github.io/react/">React.js</a>. You can use it to embed drawing
-boards in web pages. It&#8217;s kind of like an extensible MS Paint in JavaScript.
+boards in web pages. It’s kind of like an extensible MS Paint in JavaScript.
 Users can sketch drawings and you can do what you like with the results.
 comes with an easy-to-use jQuery plugin.</p>
+<p>Literally Canvas is not actively maintained.</p>
 <div class="my-drawing"></div>
 
 <script>
@@ -75,24 +69,24 @@ comes with an easy-to-use jQuery plugin.</p>
       backgroundColor: 'whiteSmoke'
     });
   });
-</script><p>Literally Canvas&#8217;s major features include:</p>
+</script><p>Literally Canvas’s major features include:</p>
 <ul class="simple">
-<li>Basic drawing tools</li>
-<li>An API to add more drawing tools</li>
-<li>Panning and zooming</li>
-<li>Constant-size or infinite canvases</li>
-<li>Background images/shapes and watermarks</li>
-<li>Retina support</li>
-<li>Saving and loading JSON</li>
-<li>Exporting drawings to PNG and SVG</li>
-<li>Events</li>
+<li><p>Basic drawing tools</p></li>
+<li><p>An API to add more drawing tools</p></li>
+<li><p>Panning and zooming</p></li>
+<li><p>Constant-size or infinite canvases</p></li>
+<li><p>Background images/shapes and watermarks</p></li>
+<li><p>Retina support</p></li>
+<li><p>Saving and loading JSON</p></li>
+<li><p>Exporting drawings to PNG and SVG</p></li>
+<li><p>Events</p></li>
 </ul>
-<p>You can donate to Literally Canvas&#8217;s development on <a class="reference external" href="https://gratipay.com/~irskep/">Gratipay</a> or post a
+<p>You can donate to Literally Canvas’s development on <a class="reference external" href="https://gratipay.com/~irskep/">Gratipay</a> or post a
 bounty on a GitHub issue on <a class="reference external" href="https://www.bountysource.com/teams/literallycanvas/issues">Bountysource</a>. Spontaneous improvements are rare
 otherwise, though they do happen.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Our mailing list was down for several months. You&#8217;ll need to re-subscribe
+<p class="admonition-title">Note</p>
+<p>Our mailing list was down for several months. You’ll need to re-subscribe
 using one of the methods in the sidebar.</p>
 </div>
 <div class="toctree-wrapper compound">
@@ -113,7 +107,7 @@ using one of the methods in the sidebar.</p>
 <li class="toctree-l3"><a class="reference internal" href="api/initializing.html#breaking-changes-since-v0-3">Breaking changes since v0.3</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/LiterallyCanvas.html">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/LiterallyCanvas.html">The <code class="docutils literal notranslate"><span class="pre">LiterallyCanvas</span></code> object</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/LiterallyCanvas.html#saving-and-loading">Saving and loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/LiterallyCanvas.html#exporting-images">Exporting images</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/LiterallyCanvas.html#event-subscription">Event subscription</a></li>
@@ -176,64 +170,63 @@ using one of the methods in the sidebar.</p>
 <div class="section" id="why">
 <h1>Why?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><strong>It&#8217;s open source.</strong> It&#8217;s developed by the community for many purposes and
-is free to use and extend.</li>
-<li><strong>It&#8217;s a widget, not an application.</strong> Literally Canvas is intended to live
-inside your application in the way that works best for you.</li>
-<li><strong>It wants to be extended.</strong> There is a public API for adding new shapes and
-tools.</li>
-<li><strong>It&#8217;s fast and looks good.</strong> Literally Canvas is optimized to work with
+<li><p><strong>It’s open source.</strong> It’s developed by the community for many purposes and
+is free to use and extend.</p></li>
+<li><p><strong>It’s a widget, not an application.</strong> Literally Canvas is intended to live
+inside your application in the way that works best for you.</p></li>
+<li><p><strong>It wants to be extended.</strong> There is a public API for adding new shapes and
+tools.</p></li>
+<li><p><strong>It’s fast and looks good.</strong> Literally Canvas is optimized to work with
 complex drawings, and it smooths lines naturally to avoid the unsightly line
-angles often seen in simplistic drawing programs.</li>
+angles often seen in simplistic drawing programs.</p></li>
 </ul>
 </div>
 <div class="section" id="browser-compatibility">
 <h1>Browser compatibility<a class="headerlink" href="#browser-compatibility" title="Permalink to this headline">¶</a></h1>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="23%" />
-<col width="6%" />
-<col width="70%" />
+<col style="width: 23%" />
+<col style="width: 6%" />
+<col style="width: 70%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>Chrome</td>
-<td>√</td>
-<td>&nbsp;</td>
+<tbody>
+<tr class="row-odd"><td><p>Chrome</p></td>
+<td><p>√</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>Safari</td>
-<td>√</td>
-<td>&nbsp;</td>
+<tr class="row-even"><td><p>Safari</p></td>
+<td><p>√</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>iOS</td>
-<td>√</td>
-<td>FastClick helps <a class="footnote-reference" href="#f1" id="id1">[1]</a></td>
+<tr class="row-odd"><td><p>iOS</p></td>
+<td><p>√</p></td>
+<td><p>FastClick helps <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p></td>
 </tr>
-<tr class="row-even"><td>Firefox 4+</td>
-<td>√</td>
-<td>&nbsp;</td>
+<tr class="row-even"><td><p>Firefox 4+</p></td>
+<td><p>√</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>IE 10+</td>
-<td>√</td>
-<td>Line dashes only supported in 11+</td>
+<tr class="row-odd"><td><p>IE 10+</p></td>
+<td><p>√</p></td>
+<td><p>Line dashes only supported in 11+</p></td>
 </tr>
-<tr class="row-even"><td>Opera</td>
-<td>??</td>
-<td>&nbsp;</td>
+<tr class="row-even"><td><p>Opera</p></td>
+<td><p>??</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>Android</td>
-<td>??</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td><p>Android</p></td>
+<td><p>??</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Footnotes</p>
-<table class="docutils footnote" frame="void" id="f1" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>iOS delays click events so that it can detect gestures. To disable
-this behavior and get those events immediately, use <a class="reference external" href="https://github.com/ftlabs/fastclick">FastClick</a>.</td></tr>
-</tbody>
-</table>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>iOS delays click events so that it can detect gestures. To disable
+this behavior and get those events immediately, use <a class="reference external" href="https://github.com/ftlabs/fastclick">FastClick</a>.</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="contributing">
 <h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
@@ -248,7 +241,7 @@ to help us write the code.</p>
 <h1>Thanks to BrowserStack<a class="headerlink" href="#thanks-to-browserstack" title="Permalink to this headline">¶</a></h1>
 <img alt="_images/browserstack.png" src="_images/browserstack.png" />
 <p><a class="reference external" href="http://browserstack.com">BrowserStack</a> has generously donated resources to ensure that Literally
-Canvas works in as many environments as possible. If you care about your app&#8217;s
+Canvas works in as many environments as possible. If you care about your app’s
 compatibility, you should check it out.</p>
 </div>
 
@@ -256,17 +249,17 @@ compatibility, you should check it out.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h3><a href="#">Table Of Contents</a></h3>
+<h3><a href="#">Table of Contents</a></h3>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.14.tar.gz">
-		Download v0.4.14
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.5.2.tar.gz">
+		Download v0.5.2
 	</a>
 </p>
 <p>
@@ -308,7 +301,7 @@ compatibility, you should check it out.</p>
   </div>
   <footer id="pagefooter">&copy; 2012-2016 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.2b3
+      3.0.3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

@@ -1,30 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Utilities &mdash; Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser</title>
-    
+    <meta charset="utf-8" />
+    <title>Utilities &#8212; Literally Canvas v0.5.2 docs - HTML5 drawing board - MS Paint in your web browser</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.4.14',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser" href="../index.html" />
-    <link rel="up" title="API" href="index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Localization" href="localization.html" />
     <link rel="prev" title="Creating Tools" href="tools.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,8 +24,7 @@
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
-  </head>
-  <body>
+  </head><body>
   <header id="pageheader"><h1><a href="../index.html ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -67,130 +55,113 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="utilities">
 <h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.addImageOnload">
-<tt class="descclassname">LC.util.</tt><tt class="descname">addImageOnload</tt><big>(</big><em>image</em>, <em>callback</em><big>)</big><a class="headerlink" href="#LC.util.addImageOnload" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">addImageOnload</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.addImageOnload" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ensures <strong>callback</strong> is called when the image loads, without replacing any
 existing callbacks.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.classSet">
-<tt class="descclassname">LC.util.</tt><tt class="descname">classSet</tt><big>(</big><em>{className: bool}</em><big>)</big><a class="headerlink" href="#LC.util.classSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Replaces <tt class="docutils literal"><span class="pre">React.addons.classSet</span></tt>.</p>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">classSet</code><span class="sig-paren">(</span><em class="sig-param">{className: bool}</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.classSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces <code class="docutils literal notranslate"><span class="pre">React.addons.classSet</span></code>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.combineCanvases">
-<tt class="descclassname">LC.util.</tt><tt class="descname">combineCanvases</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#LC.util.combineCanvases" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A canvas containing <em>b</em> rendered on top of <em>a</em>, sized to contain
-both <em>a</em> and <em>b</em>.[]</td>
-</tr>
-</tbody>
-</table>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">combineCanvases</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.combineCanvases" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A canvas containing <em>b</em> rendered on top of <em>a</em>, sized to contain
+both <em>a</em> and <em>b</em>.[]</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.getBackingScale">
-<tt class="descclassname">LC.util.</tt><tt class="descname">getBackingScale</tt><big>(</big><big>)</big><a class="headerlink" href="#LC.util.getBackingScale" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">window.devicePixelRatio</span></tt> if it exists and is greater than 1;
-otherwise, returns 1.</td>
-</tr>
-</tbody>
-</table>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">getBackingScale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.getBackingScale" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">window.devicePixelRatio</span></code> if it exists and is greater than 1;
+otherwise, returns 1.</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.getBoundingRect">
-<tt class="descclassname">LC.util.</tt><tt class="descname">getBoundingRect</tt><big>(</big><em>rects</em><big>)</big><a class="headerlink" href="#LC.util.getBoundingRect" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first simple">
-<li><strong>rects</strong> &#8211; List of dicts with keys <tt class="docutils literal"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></tt>.</li>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">getBoundingRect</code><span class="sig-paren">(</span><em class="sig-param">rects</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.getBoundingRect" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rects</strong> – List of dicts with keys <code class="docutils literal notranslate"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></code>.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The smallest rectangle that contains the given rectangles, in the
-form <tt class="docutils literal"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></tt>.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The smallest rectangle that contains the given rectangles, in the
+form <code class="docutils literal notranslate"><span class="pre">{x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height}</span></code>.</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.getGUID">
-<tt class="descclassname">LC.util.</tt><tt class="descname">getGUID</tt><big>(</big><big>)</big><a class="headerlink" href="#LC.util.getGUID" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a globally unique ID string</td>
-</tr>
-</tbody>
-</table>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">getGUID</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.getGUID" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a globally unique ID string</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.last">
-<tt class="descclassname">LC.util.</tt><tt class="descname">last</tt><big>(</big><em>array</em>, <em>n=null</em><big>)</big><a class="headerlink" href="#LC.util.last" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">last</code><span class="sig-paren">(</span><em class="sig-param">array</em>, <em class="sig-param">n=null</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.last" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the last element of an array. Pass <em>n</em> to get a list of the last <em>n</em>
 elements.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.matchElementSize">
-<tt class="descclassname">LC.util.</tt><tt class="descname">matchElementSize</tt><big>(</big><em>elementToMatch</em>, <em>elementsToResize</em>, <em>scale</em>, <em>callback=null</em><big>)</big><a class="headerlink" href="#LC.util.matchElementSize" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
-<li><strong>elementToMatch</strong> &#8211; DOM element whose size should be matched by <em>elementsToResize</em></li>
-<li><strong>elementsToResize</strong> &#8211; Array of DOM elements to update</li>
-<li><strong>scale</strong> &#8211; Amount to scale <tt class="docutils literal"><span class="pre">width</span></tt> and <tt class="docutils literal"><span class="pre">height</span></tt> attributes if one of
-<em>elementsToResize</em> is a canvas element</li>
-<li><strong>callback</strong> &#8211; Function to be called after each resize event</li>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">matchElementSize</code><span class="sig-paren">(</span><em class="sig-param">elementToMatch</em>, <em class="sig-param">elementsToResize</em>, <em class="sig-param">scale</em>, <em class="sig-param">callback=null</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.matchElementSize" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elementToMatch</strong> – DOM element whose size should be matched by <em>elementsToResize</em></p></li>
+<li><p><strong>elementsToResize</strong> – Array of DOM elements to update</p></li>
+<li><p><strong>scale</strong> – Amount to scale <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code> attributes if one of
+<em>elementsToResize</em> is a canvas element</p></li>
+<li><p><strong>callback</strong> – Function to be called after each resize event</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p>Keep <em>elementsToResize</em> the same size as <em>elementToMatch</em>. If one of
-<em>elementsToResize</em> is a <tt class="docutils literal"><span class="pre">&lt;canvas&gt;</span></tt>, set its <tt class="docutils literal"><span class="pre">width</span></tt> and <tt class="docutils literal"><span class="pre">height</span></tt>
-properties to the element&#8217;s size multiplied by <em>scale</em>. (This is necessary
-for environments with <tt class="docutils literal"><span class="pre">devicePixelRatio</span> <span class="pre">!=</span> <span class="pre">1</span></tt>.)</p>
+<em>elementsToResize</em> is a <code class="docutils literal notranslate"><span class="pre">&lt;canvas&gt;</span></code>, set its <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code>
+properties to the element’s size multiplied by <em>scale</em>. (This is necessary
+for environments with <code class="docutils literal notranslate"><span class="pre">devicePixelRatio</span> <span class="pre">!=</span> <span class="pre">1</span></code>.)</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.getDefaultImageRect">
-<tt class="descclassname">LC.util.</tt><tt class="descname">getDefaultImageRect</tt><big>(</big><em>shapeBoundingRects</em>, <em>explicitSize={width: 0</em>, <em>height: 0}</em>, <em>margin={top: 0</em>, <em>right: 0</em>, <em>bottom: 0</em>, <em>left: 0}</em><big>)</big><a class="headerlink" href="#LC.util.getDefaultImageRect" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">getDefaultImageRect</code><span class="sig-paren">(</span><em class="sig-param">shapeBoundingRects</em>, <em class="sig-param">explicitSize={width: 0</em>, <em class="sig-param">height: 0}</em>, <em class="sig-param">margin={top: 0</em>, <em class="sig-param">right: 0</em>, <em class="sig-param">bottom: 0</em>, <em class="sig-param">left: 0}</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.getDefaultImageRect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the effective bounds of the canvas. Mostly used as a convenient way
 to limit the scope of a potentially infinite tool. (For example, a paint
-bucket shouldn&#8217;t fill infinite pixels.)</p>
+bucket shouldn’t fill infinite pixels.)</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="js function">
 <dt id="LC.util.renderShapes">
-<tt class="descclassname">LC.util.</tt><tt class="descname">renderShapes</tt><big>(</big><em>shapes</em>, <em>bounds</em>, <em>scale=1</em>, <em>canvas=null</em><big>)</big><a class="headerlink" href="#LC.util.renderShapes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">LC.util.</code><code class="sig-name descname">renderShapes</code><span class="sig-paren">(</span><em class="sig-param">shapes</em>, <em class="sig-param">bounds</em>, <em class="sig-param">scale=1</em>, <em class="sig-param">canvas=null</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.util.renderShapes" title="Permalink to this definition">¶</a></dt>
 <dd><div class="deprecated">
-<p><span>Deprecated since version 0.4.5.</span></p>
+<p><span class="versionmodified deprecated">Deprecated since version 0.4.5.</span></p>
 </div>
-<p>Duplicate of <a class="reference internal" href="shapes.html#LC.renderShapesToCanvas" title="LC.renderShapesToCanvas"><tt class="xref js js-func docutils literal"><span class="pre">LC.renderShapesToCanvas()</span></tt></a></p>
+<p>Duplicate of <a class="reference internal" href="shapes.html#LC.renderShapesToCanvas" title="LC.renderShapesToCanvas"><code class="xref js js-func docutils literal notranslate"><span class="pre">LC.renderShapesToCanvas()</span></code></a></p>
 </dd></dl>
 
 </div>
@@ -199,10 +170,10 @@ bucket shouldn&#8217;t fill infinite pixels.)</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper"><p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.14.tar.gz">
-		Download v0.4.14
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.5.2.tar.gz">
+		Download v0.5.2
 	</a>
 </p>
 <p>
@@ -251,7 +222,7 @@ bucket shouldn&#8217;t fill infinite pixels.)</p>
   </div>
   <footer id="pagefooter">&copy; 2012-2016 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.2b3
+      3.0.3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

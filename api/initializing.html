@@ -1,30 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Initializing &amp; Options &mdash; Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser</title>
-    
+    <meta charset="utf-8" />
+    <title>Initializing &amp; Options &#8212; Literally Canvas v0.5.2 docs - HTML5 drawing board - MS Paint in your web browser</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.4.14',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser" href="../index.html" />
-    <link rel="up" title="API" href="index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The LiterallyCanvas object" href="LiterallyCanvas.html" />
     <link rel="prev" title="API" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,8 +24,7 @@
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
-  </head>
-  <body>
+  </head><body>
   <header id="pageheader"><h1><a href="../index.html ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -49,7 +37,7 @@
           <a href="index.html" title="Previous document">API</a>
         </li>
         <li>
-          <a href="LiterallyCanvas.html" title="Next document">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a>
+          <a href="LiterallyCanvas.html" title="Next document">The <code class="docutils literal notranslate"><span class="pre">LiterallyCanvas</span></code> object</a>
           &rarr;
         </li>
     </ul>
@@ -67,82 +55,78 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="initializing-options">
 <h1>Initializing &amp; Options<a class="headerlink" href="#initializing-options" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">To change the height of the drawing, set a CSS height rule on the
-element passed to <tt class="docutils literal"><span class="pre">LC.init()</span></tt> or the React component that contains
+<p class="admonition-title">Note</p>
+<p>To change the height of the drawing, set a CSS height rule on the
+element passed to <code class="docutils literal notranslate"><span class="pre">LC.init()</span></code> or the React component that contains
 Literally Canvas.</p>
 </div>
 <div class="section" id="initializing-normally">
 <h2>Initializing normally<a class="headerlink" href="#initializing-normally" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span><span class="nx">option</span><span class="o">:</span> <span class="nx">value</span><span class="p">})</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span><span class="nx">option</span><span class="o">:</span> <span class="nx">value</span><span class="p">})</span>
 </pre></div>
 </div>
-<dl class="function">
+<dl class="js function">
 <dt id="LC.init">
-<tt class="descclassname">LC.</tt><tt class="descname">init</tt><big>(</big><em>element</em>, <em>options={}</em><big>)</big><a class="headerlink" href="#LC.init" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">LC.</code><code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param">element</em>, <em class="sig-param">options={}</em><span class="sig-paren">)</span><a class="headerlink" href="#LC.init" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Options</strong></p>
-<dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">onInit</span></tt></dt>
-<dd><p class="first">Function to be called just after the <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object is
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">onInit</span></code></dt><dd><p>Function to be called just after the <code class="docutils literal notranslate"><span class="pre">LiterallyCanvas</span></code> object is
 configured and bound to an element. Used to do additional configuration
-in situations where you don&#8217;t immediately get this object, e.g. when
+in situations where you don’t immediately get this object, e.g. when
 using the React component or the jQuery plugin.</p>
 <p>Example using React:</p>
-<div class="last highlight-python"><pre>&lt;LiterallyCanvas onInit={function(lc) {
-  console.log(&quot;initialized with&quot;, lc);
-})} /&gt;</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">LiterallyCanvas</span> <span class="n">onInit</span><span class="o">=</span><span class="p">{</span><span class="n">function</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;initialized with&quot;</span><span class="p">,</span> <span class="n">lc</span><span class="p">);</span>
+<span class="p">})}</span> <span class="o">/&gt;</span>
+</pre></div>
 </div>
 </dd>
 </dl>
-<dl class="docutils" id="opt-imageurlprefix">
-<dt><tt class="docutils literal"><span class="pre">imageURLPrefix</span></tt></dt>
-<dd><p class="first">Location of Literally Canvas&#8217;s <tt class="docutils literal"><span class="pre">img</span></tt> folder, without a trailing
-slash. Defaults to <tt class="docutils literal"><span class="pre">lib/img</span></tt>.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You probably need to set this, either by passing it as an option, or
-by calling <a class="reference internal" href="index.html#LC.setDefaultImageURLPrefix" title="LC.setDefaultImageURLPrefix"><tt class="xref js js-func docutils literal"><span class="pre">LC.setDefaultImageURLPrefix()</span></tt></a>.</p>
+<dl id="opt-imageurlprefix">
+<dt><code class="docutils literal notranslate"><span class="pre">imageURLPrefix</span></code></dt><dd><p>Location of Literally Canvas’s <code class="docutils literal notranslate"><span class="pre">img</span></code> folder, without a trailing
+slash. Defaults to <code class="docutils literal notranslate"><span class="pre">lib/img</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You probably need to set this, either by passing it as an option, or
+by calling <a class="reference internal" href="index.html#LC.setDefaultImageURLPrefix" title="LC.setDefaultImageURLPrefix"><code class="xref js js-func docutils literal notranslate"><span class="pre">LC.setDefaultImageURLPrefix()</span></code></a>.</p>
 </div>
 </dd>
 </dl>
-<dl class="docutils" id="opt-imagesize">
-<dt><tt class="docutils literal"><span class="pre">imageSize</span></tt></dt>
-<dd><p class="first">An object with keys <tt class="docutils literal"><span class="pre">width</span></tt> and <tt class="docutils literal"><span class="pre">height</span></tt>. If either value is falsey,
+<dl id="opt-imagesize">
+<dt><code class="docutils literal notranslate"><span class="pre">imageSize</span></code></dt><dd><p>An object with keys <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code>. If either value is falsey,
 that dimension will be infinite. For example:</p>
-<div class="last highlight-javascript"><div class="highlight"><pre><span class="c1">// 500 pixels wide, infinitely tall canvas</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// 500 pixels wide, infinitely tall canvas</span>
 <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span><span class="nx">imageSize</span><span class="o">:</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="kc">null</span><span class="p">}})</span>
 </pre></div>
 </div>
 </dd>
-<dt><tt class="docutils literal"><span class="pre">primaryColor</span></tt></dt>
-<dd>Starting stroke color. Defaults to <tt class="docutils literal"><span class="pre">'#000'</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">secondaryColor</span></tt></dt>
-<dd>Starting fill color. Defaults to <tt class="docutils literal"><span class="pre">'#fff'</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">backgroundColor</span></tt></dt>
-<dd>Starting background color. Defaults to <tt class="docutils literal"><span class="pre">'transparent'</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">backgroundShapes</span></tt></dt>
-<dd>List of shapes to display under all other shapes. They will not be
-affected by the Clear button, <a class="reference internal" href="LiterallyCanvas.html#loadSnapshot" title="loadSnapshot"><tt class="xref js js-func docutils literal"><span class="pre">loadSnapshot()</span></tt></a>,
-or the eraser tool.</dd>
-<dt><tt class="docutils literal"><span class="pre">snapshot</span></tt></dt>
-<dd><p class="first">Snapshot to load immediately. If the snapshot contains values for
+<dt><code class="docutils literal notranslate"><span class="pre">primaryColor</span></code></dt><dd><p>Starting stroke color. Defaults to <code class="docutils literal notranslate"><span class="pre">'#000'</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">secondaryColor</span></code></dt><dd><p>Starting fill color. Defaults to <code class="docutils literal notranslate"><span class="pre">'#fff'</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">backgroundColor</span></code></dt><dd><p>Starting background color. Defaults to <code class="docutils literal notranslate"><span class="pre">'transparent'</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">backgroundShapes</span></code></dt><dd><p>List of shapes to display under all other shapes. They will not be
+affected by the Clear button, <a class="reference internal" href="LiterallyCanvas.html#loadSnapshot" title="loadSnapshot"><code class="xref js js-func docutils literal notranslate"><span class="pre">loadSnapshot()</span></code></a>,
+or the eraser tool.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">snapshot</span></code></dt><dd><p>Snapshot to load immediately. If the snapshot contains values for
 image size, colors, or background shapes, the values in the snapshot
 will override the values passed as options.</p>
-<p class="last">Snapshots are created with <a class="reference internal" href="LiterallyCanvas.html#getSnapshot" title="getSnapshot"><tt class="xref js js-func docutils literal"><span class="pre">getSnapshot()</span></tt></a> and loaded after
-initialization with <a class="reference internal" href="LiterallyCanvas.html#loadSnapshot" title="loadSnapshot"><tt class="xref js js-func docutils literal"><span class="pre">loadSnapshot()</span></tt></a>.</p>
+<p>Snapshots are created with <a class="reference internal" href="LiterallyCanvas.html#getSnapshot" title="getSnapshot"><code class="xref js js-func docutils literal notranslate"><span class="pre">getSnapshot()</span></code></a> and loaded after
+initialization with <a class="reference internal" href="LiterallyCanvas.html#loadSnapshot" title="loadSnapshot"><code class="xref js js-func docutils literal notranslate"><span class="pre">loadSnapshot()</span></code></a>.</p>
 </dd>
-<dt><tt class="docutils literal"><span class="pre">keyboardShortcuts</span></tt></dt>
-<dd><p class="first">Enable panning with the arrow keys. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">keyboardShortcuts</span></code></dt><dd><p>Enable panning with the arrow keys. Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
 <div class="deprecated">
-<p><span>Deprecated since version 0.4.9.</span></p>
+<p><span class="versionmodified deprecated">Deprecated since version 0.4.9.</span></p>
 </div>
 <p>You can replicate this option with a tiny bit of code:</p>
-<div class="last highlight-javascript"><div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">37</span><span class="p">)</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">pan</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">38</span><span class="p">)</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">pan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">);</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">39</span><span class="p">)</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">pan</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
@@ -156,19 +140,18 @@ initialization with <a class="reference internal" href="LiterallyCanvas.html#loa
 </div>
 </dd>
 </dl>
-<p><tt class="docutils literal"><span class="pre">toolbarPosition</span></tt></p>
+<p><code class="docutils literal notranslate"><span class="pre">toolbarPosition</span></code></p>
 <blockquote>
 <div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">'bottom'</span></tt> (default)</li>
-<li><tt class="docutils literal"><span class="pre">'top'</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">'hidden'</span></tt></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'bottom'</span></code> (default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'top'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'hidden'</span></code></p></li>
 </ul>
 </div></blockquote>
-<dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">tools</span></tt></dt>
-<dd><p class="first">A list of tools to enable. The default value, accessible at
-<a class="reference internal" href="index.html#LC.defaultTools" title="LC.defaultTools"><tt class="xref js js-attr docutils literal"><span class="pre">LC.defaultTools</span></tt></a>, is:</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">tools</span></code></dt><dd><p>A list of tools to enable. The default value, accessible at
+<a class="reference internal" href="index.html#LC.defaultTools" title="LC.defaultTools"><code class="xref js js-attr docutils literal notranslate"><span class="pre">LC.defaultTools</span></code></a>, is:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pencil</span><span class="p">,</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eraser</span><span class="p">,</span>
   <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Line</span><span class="p">,</span>
@@ -181,10 +164,10 @@ initialization with <a class="reference internal" href="LiterallyCanvas.html#loa
 </pre></div>
 </div>
 <p>If you write your own tool, you can append it to the list above and
-pass the whole list as the value of <tt class="docutils literal"><span class="pre">tools</span></tt>.</p>
+pass the whole list as the value of <code class="docutils literal notranslate"><span class="pre">tools</span></code>.</p>
 <p>If you need to disable a tool (such as pan), you can remove it from the
-list above and pass the remainder as the value of <tt class="docutils literal"><span class="pre">tools</span></tt>.</p>
-<div class="last highlight-javascript"><div class="highlight"><pre><span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span>
+list above and pass the remainder as the value of <code class="docutils literal notranslate"><span class="pre">tools</span></code>.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// disable panning</span>
     <span class="nx">keyboardShortcuts</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">tools</span><span class="o">:</span> <span class="p">[</span><span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Pencil</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Eraser</span><span class="p">,</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">Line</span><span class="p">,</span>
@@ -193,35 +176,33 @@ list above and pass the remainder as the value of <tt class="docutils literal"><
 </pre></div>
 </div>
 </dd>
-<dt><tt class="docutils literal"><span class="pre">strokeWidths</span></tt></dt>
-<dd>A list of possible stroke widths. Defaults to
-<tt class="docutils literal"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">5,</span> <span class="pre">10,</span> <span class="pre">20,</span> <span class="pre">30]</span></tt>.</dd>
-<dt><tt class="docutils literal"><span class="pre">defaultStrokeWidth</span></tt></dt>
-<dd>Default stroke width for all shapes. Defaults to <tt class="docutils literal"><span class="pre">5</span></tt>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">strokeWidths</span></code></dt><dd><p>A list of possible stroke widths. Defaults to
+<code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">5,</span> <span class="pre">10,</span> <span class="pre">20,</span> <span class="pre">30]</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">defaultStrokeWidth</span></code></dt><dd><p>Default stroke width for all shapes. Defaults to <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
+</dd>
 </dl>
-<dl class="docutils" id="opt-watermarkimage">
-<dt><tt class="docutils literal"><span class="pre">watermarkImage</span></tt></dt>
-<dd><p class="first">An image to display behind the drawing. The image will be centered.
+<dl id="opt-watermarkimage">
+<dt><code class="docutils literal notranslate"><span class="pre">watermarkImage</span></code></dt><dd><p>An image to display behind the drawing. The image will be centered.
 It will not pan with the drawing.</p>
-<div class="last highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
 <span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/static/img/watermark.png&#39;</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.literally&#39;</span><span class="p">).</span><span class="nx">literallycanvas</span><span class="p">({</span><span class="nx">watermarkImage</span><span class="o">:</span> <span class="nx">img</span><span class="p">});</span>
 </pre></div>
 </div>
 </dd>
-<dt><tt class="docutils literal"><span class="pre">watermarkScale</span></tt></dt>
-<dd><p class="first">Scale at which to render the watermark.</p>
-<p class="last">If you want to support retina displays, you should use a double-size
+<dt><code class="docutils literal notranslate"><span class="pre">watermarkScale</span></code></dt><dd><p>Scale at which to render the watermark.</p>
+<p>If you want to support retina displays, you should use a double-size
 watermark image and set <em>watermarkScale</em> to
-<tt class="docutils literal"><span class="pre">1/window.devicePixelRatio</span></tt>.</p>
+<code class="docutils literal notranslate"><span class="pre">1/window.devicePixelRatio</span></code>.</p>
 </dd>
-<dt><tt class="docutils literal"><span class="pre">zoomMax</span></tt></dt>
-<dd>Maximum zoom value. Defaults to 4.0.</dd>
-<dt><tt class="docutils literal"><span class="pre">zoomMin</span></tt></dt>
-<dd>Minimum zoom value. Defaults to 0.2.</dd>
-<dt><tt class="docutils literal"><span class="pre">zoomStep</span></tt></dt>
-<dd>Amount by which the zoom in/out buttons change the zoom level. Defaults
-to 0.2.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zoomMax</span></code></dt><dd><p>Maximum zoom value. Defaults to 4.0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zoomMin</span></code></dt><dd><p>Minimum zoom value. Defaults to 0.2.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zoomStep</span></code></dt><dd><p>Amount by which the zoom in/out buttons change the zoom level. Defaults
+to 0.2.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -229,12 +210,11 @@ to 0.2.</dd>
 <div class="section" id="breaking-changes-since-v0-3">
 <h2>Breaking changes since v0.3<a class="headerlink" href="#breaking-changes-since-v0-3" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first"><em>backgroundShapes</em> and <em>watermarkImage</em> are no longer affected by the eraser.</p>
-</li>
-<li><p class="first">The <em>preserveCanvasContents</em> option is gone. If you want to use the contents
+<li><p><em>backgroundShapes</em> and <em>watermarkImage</em> are no longer affected by the eraser.</p></li>
+<li><p>The <em>preserveCanvasContents</em> option is gone. If you want to use the contents
 of an existing canvas element as the background of a drawing, do this:</p>
 <blockquote>
-<div><div class="highlight-javascript"><div class="highlight"><pre><span class="nx">backgroundImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+<div><div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">backgroundImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
 <span class="nx">backgroundImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas.my-canvas&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toDataURL</span><span class="p">();</span>
 <span class="nx">backgroundShape</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span>
   <span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">image</span><span class="o">:</span> <span class="nx">backgroundImage</span><span class="p">}));</span>
@@ -243,9 +223,8 @@ of an existing canvas element as the background of a drawing, do this:</p>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Tools are defined by the new <em>tools</em> option, which replaces the old
-<em>toolClasses</em> and takes a different list of arguments.</p>
-</li>
+<li><p>Tools are defined by the new <em>tools</em> option, which replaces the old
+<em>toolClasses</em> and takes a different list of arguments.</p></li>
 </ul>
 </div>
 </div>
@@ -254,9 +233,9 @@ of an existing canvas element as the background of a drawing, do this:</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Initializing &amp; Options</a><ul>
 <li><a class="reference internal" href="#initializing-normally">Initializing normally</a></li>
@@ -265,8 +244,8 @@ of an existing canvas element as the background of a drawing, do this:</p>
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.14.tar.gz">
-		Download v0.4.14
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.5.2.tar.gz">
+		Download v0.5.2
 	</a>
 </p>
 <p>
@@ -299,7 +278,7 @@ of an existing canvas element as the background of a drawing, do this:</p>
           <a href="index.html" title="Previous document">API</a>
         </li>
         <li>
-          <a href="LiterallyCanvas.html" title="Next document">The <tt class="docutils literal"><span class="pre">LiterallyCanvas</span></tt> object</a>
+          <a href="LiterallyCanvas.html" title="Next document">The <code class="docutils literal notranslate"><span class="pre">LiterallyCanvas</span></code> object</a>
           &rarr;
         </li>
     </ul>
@@ -315,7 +294,7 @@ of an existing canvas element as the background of a drawing, do this:</p>
   </div>
   <footer id="pagefooter">&copy; 2012-2016 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.2b3
+      3.0.3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 

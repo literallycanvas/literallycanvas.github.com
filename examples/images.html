@@ -1,30 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Images &mdash; Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser</title>
-    
+    <meta charset="utf-8" />
+    <title>Images &#8212; Literally Canvas v0.5.2 docs - HTML5 drawing board - MS Paint in your web browser</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.4.14',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Literally Canvas v0.4.14 docs - HTML5 drawing board - MS Paint in your web browser" href="../index.html" />
-    <link rel="up" title="Examples" href="index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Saving to Local Storage" href="localstorage.html" />
     <link rel="prev" title="Examples" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,8 +24,7 @@
     <script src="../_static/lib/js/fastclick.js" type="text/javascript"></script>
     <script src="../_static/lib/js/literallycanvas.js" type="text/javascript"></script>
     <script src="../_static/docs.js" type="text/javascript"></script>
-  </head>
-  <body>
+  </head><body>
   <header id="pageheader"><h1><a href="../index.html ">
     <span class="title-word-1">Literally</span>
     <span class="title-word-2">&ldquo;Canvas&rdquo;</span>
@@ -67,17 +55,17 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="images">
 <h1>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h1>
-<p>You may want to refer to the <a class="reference internal" href="../api/shapes.html"><em>shape API</em></a> for specifics
+<p>You may want to refer to the <a class="reference internal" href="../api/shapes.html"><span class="doc">shape API</span></a> for specifics
 about creating shapes, including images.</p>
 <div class="section" id="as-the-background">
 <h2>As the background<a class="headerlink" href="#as-the-background" title="Permalink to this headline">¶</a></h2>
 <p>You can specify a list of <em>background shapes</em> when you initialize Literally
 Canvas. Background shapes are not affected by the eraser,
-<a class="reference internal" href="../api/LiterallyCanvas.html#loadSnapshotJSON" title="loadSnapshotJSON"><tt class="xref js js-func docutils literal"><span class="pre">loadSnapshotJSON()</span></tt></a>, or clearing the canvas.</p>
+<a class="reference internal" href="../api/LiterallyCanvas.html#loadSnapshotJSON" title="loadSnapshotJSON"><code class="xref js js-func docutils literal notranslate"><span class="pre">loadSnapshotJSON()</span></code></a>, or clearing the canvas.</p>
 <div class="literally backgrounds"></div>
 
 <script>
@@ -109,9 +97,9 @@ Canvas. Background shapes are not affected by the eraser,
     });
   });
 </script>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally backgrounds&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;literally backgrounds&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-<span class="nt">&lt;script&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 <span class="hll">    <span class="kd">var</span> <span class="nx">backgroundImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">()</span>
 </span><span class="hll">    <span class="nx">backgroundImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/_static/sample_image.png&#39;</span><span class="p">;</span>
@@ -139,14 +127,14 @@ Canvas. Background shapes are not affected by the eraser,
       <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">localStorageKey</span><span class="p">,</span> <span class="nx">lc</span><span class="p">.</span><span class="nx">getSnapshotJSON</span><span class="p">());</span>
     <span class="p">});</span>
   <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="as-the-watermark">
 <h2>As the watermark<a class="headerlink" href="#as-the-watermark" title="Permalink to this headline">¶</a></h2>
 <p>The <em>watermark image</em> is a special image that is like a background shape,
-except it doesn&#8217;t pan with the drawing and is centered at all times. It allows
+except it doesn’t pan with the drawing and is centered at all times. It allows
 you to add branding to your drawing widget.</p>
 <div class="literally watermark"></div>
 
@@ -162,9 +150,9 @@ you to add branding to your drawing widget.</p>
       });
   });
 </script>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally watermark&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;literally watermark&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-<span class="nt">&lt;script&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 <span class="hll">    <span class="kd">var</span> <span class="nx">watermarkImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
 </span><span class="hll">    <span class="nx">watermarkImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/_static/watermark.png&#39;</span><span class="p">;</span>
@@ -175,7 +163,7 @@ you to add branding to your drawing widget.</p>
 </span><span class="hll">        <span class="nx">watermarkScale</span><span class="o">:</span> <span class="mf">0.5</span>  <span class="c1">// you can scale it</span>
 </span>      <span class="p">});</span>
   <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -194,9 +182,9 @@ them programmatically.</p>
     lc.saveShape(LC.createShape('Image', {x: 10, y: 10, image: newImage}));
   });
 </script>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;literally images-in-drawing&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;literally images-in-drawing&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-<span class="nt">&lt;script&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">LC</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span>
       <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;literally images-in-drawing&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
@@ -204,7 +192,7 @@ them programmatically.</p>
 </span><span class="hll">    <span class="nx">newImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;/_static/sample_image.png&#39;</span><span class="p">;</span>
 </span><span class="hll">    <span class="nx">lc</span><span class="p">.</span><span class="nx">saveShape</span><span class="p">(</span><span class="nx">LC</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="s1">&#39;Image&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">image</span><span class="o">:</span> <span class="nx">newImage</span><span class="p">}));</span>
 </span>  <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -214,9 +202,9 @@ them programmatically.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Images</a><ul>
 <li><a class="reference internal" href="#as-the-background">As the background</a></li>
@@ -226,8 +214,8 @@ them programmatically.</p>
 </li>
 </ul>
 <p>
-	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.4.14.tar.gz">
-		Download v0.4.14
+	<a href="https://github.com/literallycanvas/literallycanvas/archive/v0.5.2.tar.gz">
+		Download v0.5.2
 	</a>
 </p>
 <p>
@@ -276,7 +264,7 @@ them programmatically.</p>
   </div>
   <footer id="pagefooter">&copy; 2012-2016 Literally Canvas contributors.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.2b3
+      3.0.3
         with the <a href="http://github.com/irskep/sphinx-better-theme">
           better</a> theme.
 
