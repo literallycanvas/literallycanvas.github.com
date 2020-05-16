@@ -14,7 +14,7 @@ You can get the assets from the NPM package, or from
 |link-pre|\ |version|\ |link-post|.
 
 You can get the source from the tarball as well and include it as a standalone
-JS file, or you can install it from NPM as ``literallycanvas@0.4.13``.
+JS file, or you can install it from NPM as ``literallycanvas@0.5.2``.
 
 `Here are several example installations you can use for reference. <https://github.com/literallycanvas/literallycanvas-demos>`_
 

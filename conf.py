@@ -21,10 +21,10 @@ pygments_style = 'sphinx'
 project = u'Literally Canvas'
 copyright = u'2012-2016 Literally Canvas contributors'
 # The short X.Y version. Can refer to in docs with |version|.
-version = '0.4.14'
+version = '0.5.2'
 # The full version, including alpha/beta/rc tags.
 # Can refer to in docs with |release|.
-release = '0.4.14'
+release = '0.5.2'
 #language = None
 
 
