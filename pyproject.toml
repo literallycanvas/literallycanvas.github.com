@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "literallycanvas.github.com"
+version = "0.1.0"
+description = ""
+authors = ["Steve Landey <steve@steveasleep.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+sphinx = "^3.0.3"
+ghp-import = "^0.5.5"
+sphinx-better-theme = "^0.1.5"
+pygments = "^2.6.1"
+markupsafe = "^1.1.1"
+pytz = "^2020.1"
+snowballstemmer = "^2.0.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
